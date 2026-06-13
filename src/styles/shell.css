@@ -1,0 +1,283 @@
+/* ====================================================================
+   React app shell overrides — adapts the prototype's multi-screen demo
+   markup to a single-screen-at-a-time router, plus a11y + theming.
+   Loaded AFTER legacy.css so these rules win.
+   ==================================================================== */
+
+/* The prototype centred a fixed device frame for demo purposes. Keep that on
+   desktop, but use dynamic viewport units so mobile browser chrome is handled. */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+
+.phone-frame {
+  height: 844px;
+  max-height: 100dvh;
+}
+
+@media (max-width: 500px) {
+  .phone-frame {
+    height: 100dvh;
+  }
+}
+
+/* In the demo, only one .screen had .active and others were translated off
+   screen. The router mounts exactly one screen, so neutralise the enter
+   transform and give it a gentle fade-in. */
+.screen-container > .screen.active {
+  position: absolute;
+  inset: 0;
+  transform: none;
+  opacity: 1;
+  animation: screen-enter 0.28s ease both;
+}
+
+@keyframes screen-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Demo-only chrome that the React app never renders — hidden defensively. */
+.design-badge,
+.screen-selector {
+  display: none !important;
+}
+
+/* Make the whole card / option / nav surfaces feel tappable in the real app. */
+button {
+  font-family: inherit;
+}
+.subject-card,
+.lesson-node.current,
+.daily-challenge,
+.shop-item,
+.answer-option,
+.nav-item,
+.deck-card,
+.mode-card,
+.game-card,
+.theme-card {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Generic clickable helper used by interactive wrappers. */
+.is-clickable {
+  cursor: pointer;
+}
+.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Toast / sync indicator */
+.sync-pill {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  background: rgba(44, 44, 84, 0.92);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+  animation: screen-enter 0.2s ease both;
+}
+.sync-pill i {
+  font-size: 11px;
+}
+.sync-pill.spin i {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Toast stack for purchases / rewards */
+.toast-stack {
+  position: absolute;
+  bottom: 96px;
+  left: 16px;
+  right: 16px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  background: var(--color-bg-dark);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 12px 16px;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: screen-enter 0.25s ease both;
+}
+.toast .toast-emoji {
+  font-size: 20px;
+}
+.toast.success {
+  background: linear-gradient(135deg, var(--color-accent-mint), var(--color-accent-green));
+}
+.toast.error {
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-accent-pink));
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--color-text-secondary);
+}
+.empty-state .empty-emoji {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+/* Modal scrim for confirmations (purchase, parent gate, level up) */
+.modal-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 44, 84, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 400;
+  animation: screen-enter 0.2s ease both;
+}
+.modal-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-2xl);
+  padding: 24px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.modal-card h3 {
+  font-size: var(--font-size-lg);
+  margin-bottom: 8px;
+}
+.modal-card p {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+  margin-bottom: 20px;
+}
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+.modal-actions button {
+  flex: 1;
+}
+
+/* PIN pad for parent gate */
+.pin-display {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 16px 0 24px;
+}
+.pin-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+}
+.pin-dot.filled {
+  background: var(--color-primary);
+}
+.pin-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.pin-key {
+  aspect-ratio: 1.6;
+  border: none;
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+.pin-key:active {
+  background: var(--color-border);
+}
+
+/* Respect reduced motion globally (WCAG / spec section 8.1) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ====================================================================
+   Theme variants — applied via data-theme on .phone-frame.
+   Default (no attribute) keeps the spec's purple palette.
+   ==================================================================== */
+.phone-frame[data-theme='ocean'] {
+  --color-primary: #2e86de;
+  --color-primary-light: #54a0ff;
+  --color-primary-dark: #1b4f9c;
+  --color-bg: #f0f8ff;
+}
+.phone-frame[data-theme='forest'] {
+  --color-primary: #10ac84;
+  --color-primary-light: #1dd1a1;
+  --color-primary-dark: #0a7a5e;
+  --color-bg: #f0fff8;
+}
+.phone-frame[data-theme='sunset'] {
+  --color-primary: #ee5a24;
+  --color-primary-light: #ff9f43;
+  --color-primary-dark: #c0392b;
+  --color-bg: #fff6f0;
+}
+.phone-frame[data-theme='candy'] {
+  --color-primary: #ff6b81;
+  --color-primary-light: #ff9ff3;
+  --color-primary-dark: #d63060;
+  --color-bg: #fff0f6;
+}
+.phone-frame[data-theme='midnight'] {
+  --color-primary: #5f27cd;
+  --color-primary-light: #a29bfe;
+  --color-primary-dark: #341f97;
+  --color-bg: #1e1e2f;
+  --color-bg-card: #2c2c54;
+  --color-text-primary: #f5f5ff;
+  --color-text-secondary: #b8b8d0;
+  --color-border: #3a3a5e;
+}

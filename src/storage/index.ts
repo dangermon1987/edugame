@@ -1,0 +1,8 @@
+export * from './types'
+export { LocalStoragePersistence } from './LocalStoragePersistence'
+export { MemoryPersistence } from './MemoryPersistence'
+export { GoogleDrivePersistence } from './GoogleDrivePersistence'
+export type { DriveClient } from './GoogleDrivePersistence'
+export { RestApiPersistence } from './RestApiPersistence'
+export { SyncEngine } from './SyncEngine'
+export type { SyncEngineOptions } from './SyncEngine'

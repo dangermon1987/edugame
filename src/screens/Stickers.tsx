@@ -1,0 +1,86 @@
+import { useState } from 'react'
+import { useStore } from '@/state/store'
+import { StatusBar } from '@/components/StatusBar'
+import { SectionHeader } from '@/components/ui'
+import { STICKERS, RARITY_LABEL, type StickerRarity } from '@/content/stickers'
+
+export function Stickers() {
+  const owned = useStore((s) => s.user.stickers)
+  const [filter, setFilter] = useState<StickerRarity | 'all'>('all')
+
+  const ownedCount = owned.length
+  const shinyCount = STICKERS.filter((s) => owned.includes(s.id) && s.rarity === 'shiny').length
+
+  const collections = Array.from(new Set(STICKERS.map((s) => s.collection)))
+  const visible = (rarity: StickerRarity) => filter === 'all' || filter === rarity
+
+  return (
+    <div id="screen-stickers">
+      <div className="sticker-header">
+        <StatusBar />
+        <div className="sticker-title-row">
+          <h1>My Stickers</h1>
+        </div>
+        <div className="sticker-count-row">
+          <div className="sticker-count-tag">📋 {ownedCount}/{STICKERS.length} collected</div>
+          <div className="sticker-count-tag">✨ {shinyCount} shiny</div>
+        </div>
+      </div>
+
+      <div className="rarity-tabs">
+        <button className={`rarity-tab${filter === 'all' ? ' active' : ''}`} onClick={() => setFilter('all')}>
+          All
+        </button>
+        {(Object.keys(RARITY_LABEL) as StickerRarity[]).map((r) => (
+          <button key={r} className={`rarity-tab${filter === r ? ' active' : ''}`} onClick={() => setFilter(r)}>
+            {RARITY_LABEL[r]}
+          </button>
+        ))}
+      </div>
+
+      <div className="completion-card">
+        <div className="completion-header">
+          <h4>Total Collection</h4>
+          <span>
+            {ownedCount}/{STICKERS.length}
+          </span>
+        </div>
+        <div className="completion-bar">
+          <div className="completion-fill" style={{ width: `${Math.round((ownedCount / STICKERS.length) * 100)}%` }} />
+        </div>
+        <div className="completion-detail">
+          <span>{Math.round((ownedCount / STICKERS.length) * 100)}% complete</span>
+          <span>Earn stickers by playing!</span>
+        </div>
+      </div>
+
+      {collections.map((col) => {
+        const items = STICKERS.filter((s) => s.collection === col && visible(s.rarity))
+        if (items.length === 0) return null
+        const colOwned = STICKERS.filter((s) => s.collection === col && owned.includes(s.id)).length
+        const colTotal = STICKERS.filter((s) => s.collection === col).length
+        return (
+          <div key={col}>
+            <SectionHeader title={col} action={<a>{colOwned}/{colTotal}</a>} />
+            <div className="sticker-grid">
+              {items.map((s) => {
+                const has = owned.includes(s.id)
+                return (
+                  <div className={`sticker-slot${has ? '' : ' empty'}`} key={s.id}>
+                    <div className={`sticker-icon ${has ? 'collected' : 'empty'}${has && s.rarity === 'shiny' ? ' shiny' : ''}`}>
+                      {has && s.rarity === 'shiny' && <span className="sticker-rarity">✨</span>}
+                      {has ? s.emoji : '❓'}
+                    </div>
+                    <div className="sticker-name">{has ? s.name : '???'}</div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )
+      })}
+
+      <div className="bottom-spacer" />
+    </div>
+  )
+}
