@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>EduQuest — Flashcards & Compete Mode UI Design</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN SYSTEM — TOKENS & FOUNDATIONS
+   (Identical to existing EduQuest design system)
+   ============================================================ */
+:root {
+  --color-primary: #6C5CE7;
+  --color-primary-light: #A29BFE;
+  --color-primary-dark: #4834D4;
+  --color-secondary: #FF6B6B;
+  --color-secondary-light: #FF8E8E;
+  --color-accent-yellow: #FECA57;
+  --color-accent-green: #00D2D3;
+  --color-accent-orange: #FF9F43;
+  --color-accent-pink: #FF6B81;
+  --color-accent-blue: #54A0FF;
+  --color-accent-mint: #1DD1A1;
+
+  --color-bg: #F8F7FF;
+  --color-bg-card: #FFFFFF;
+  --color-bg-dark: #2C2C54;
+  --color-text-primary: #2D3436;
+  --color-text-secondary: #636E72;
+  --color-text-muted: #B2BEC3;
+  --color-text-white: #FFFFFF;
+  --color-border: #E8E6F0;
+
+  --color-english: #6C5CE7;
+  --color-math: #FF6B6B;
+  --color-science: #00D2D3;
+  --color-art: #FF9F43;
+  --color-music: #FF6B81;
+  --color-coding: #54A0FF;
+
+  --color-gold: #FFD700;
+  --color-gem: #A29BFE;
+  --color-xp: #1DD1A1;
+  --color-streak: #FF9F43;
+
+  --font-display: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-size-xs: 0.7rem;
+  --font-size-sm: 0.8rem;
+  --font-size-base: 0.95rem;
+  --font-size-md: 1.1rem;
+  --font-size-lg: 1.35rem;
+  --font-size-xl: 1.75rem;
+  --font-size-2xl: 2.25rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 50%;
+
+  --shadow-sm: 0 2px 8px rgba(108,92,231,0.08);
+  --shadow-md: 0 4px 16px rgba(108,92,231,0.12);
+  --shadow-lg: 0 8px 32px rgba(108,92,231,0.16);
+  --shadow-glow: 0 0 20px rgba(108,92,231,0.3);
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: #E8E6F0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  color: var(--color-text-primary);
+}
+
+.phone-frame {
+  width: 390px;
+  height: 844px;
+  background: var(--color-bg);
+  border-radius: 40px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 0 0 2px rgba(255,255,255,0.1);
+  border: 8px solid #1a1a2e;
+}
+
+.screen-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  background: var(--color-bg);
+  opacity: 0;
+  transform: translateX(100%);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.screen::-webkit-scrollbar { display: none; }
+.screen.active {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 2;
+}
+
+/* Status bar */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: inherit;
+}
+.status-bar .time { font-weight: 700; }
+.status-bar .icons { display: flex; gap: 5px; align-items: center; }
+
+/* Section header (reused) */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin: 20px 0 12px;
+}
+.section-header h2 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+.section-header a {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Back button (reused) */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 12px 0 8px;
+  border: none;
+  background: none;
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-body);
+}
+
+/* Primary button (reused) */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: var(--radius-xl);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  width: 100%;
+  box-shadow: 0 4px 16px rgba(108,92,231,0.3);
+  font-family: var(--font-body);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(108,92,231,0.4); }
+
+.bottom-spacer { height: 90px; }
+
+/* ============================================================
+   BOTTOM NAVIGATION
+   ============================================================ */
+.bottom-nav {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 0 24px;
+  z-index: 100;
+  border-top: 1px solid var(--color-border);
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-item i {
+  font-size: 20px;
+  color: var(--color-text-muted);
+  transition: var(--transition-fast);
+}
+.nav-item span {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: var(--transition-fast);
+}
+.nav-item.active i { color: var(--color-primary); }
+.nav-item.active span { color: var(--color-primary); }
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  width: 24px;
+  height: 3px;
+  background: var(--color-primary);
+  border-radius: 0 0 3px 3px;
+}
+
+/* ============================================================
+   SCREEN 1: FLASHCARD HUB (Deck Browser)
+   ============================================================ */
+.flash-hub-header {
+  background: linear-gradient(135deg, var(--color-accent-blue) 0%, #3D7FDB 100%);
+  padding: 0 20px 24px;
+  border-radius: 0 0 28px 28px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.flash-hub-header::after {
+  content: '';
+  position: absolute;
+  top: -50%; right: -30%;
+  width: 200px; height: 200px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+}
+.flash-hub-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0 10px;
+}
+.flash-hub-title-row h1 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
+}
+.flash-hub-stats {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+.flash-hub-stat {
+  background: rgba(255,255,255,0.18);
+  padding: 6px 14px;
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Subject filter tabs */
+.subject-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 20px;
+  margin: 16px 0;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.subject-tabs::-webkit-scrollbar { display: none; }
+.subject-tab {
+  padding: 8px 18px;
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+  cursor: pointer;
+  background: #F0EEF8;
+  color: var(--color-text-secondary);
+  border: none;
+  transition: var(--transition-fast);
+  font-family: var(--font-body);
+}
+.subject-tab.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Daily review card */
+.daily-review-card {
+  margin: 0 20px 16px;
+  background: linear-gradient(135deg, #FFF5E6, #FFECCC);
+  border-radius: var(--radius-xl);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid rgba(255,159,67,0.2);
+  cursor: pointer;
+  transition: var(--transition-bounce);
+}
+.daily-review-card:hover { transform: scale(1.02); }
+.daily-review-icon {
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, var(--color-accent-orange), var(--color-secondary));
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+.daily-review-info { flex: 1; }
+.daily-review-info h3 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+}
+.daily-review-info p {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+.daily-review-badge {
+  background: var(--color-accent-orange);
+  color: white;
+  padding: 6px 14px;
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Deck grid */
+.deck-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 20px;
+}
+.deck-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  padding: 18px 16px;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+.deck-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.deck-card:active { transform: scale(0.97); }
+.deck-emoji {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.deck-card h3 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 4px;
+}
+.deck-card p {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: 10px;
+}
+.deck-progress {
+  height: 6px;
+  background: #F0EEF8;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.deck-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+.deck-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+.deck-badge {
+  position: absolute;
+  top: 10px; right: 10px;
+  font-size: 9px;
+  padding: 2px 8px;
+  border-radius: var(--radius-xl);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+}
+.badge-mastered { background: #E0FFF5; color: var(--color-accent-mint); }
+.badge-new { background: #EDE7FF; color: var(--color-primary); }
+
+/* ============================================================
+   SCREEN 2: FLASHCARD STUDY VIEW
+   ============================================================ */
+.study-screen {
+  background: linear-gradient(180deg, var(--color-accent-blue) 0%, #3D7FDB 35%, var(--color-bg) 35%);
+}
+.study-header {
+  padding: 8px 20px 20px;
+  color: white;
+}
+.study-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+.study-close {
+  width: 36px; height: 36px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: var(--radius-full);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.study-progress-wrapper {
+  flex: 1;
+  margin: 0 14px;
+}
+.study-progress-track {
+  height: 10px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.study-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent-yellow), var(--color-accent-orange));
+  border-radius: 5px;
+  width: 60%;
+  transition: width 0.5s ease;
+}
+.study-count {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+}
+.study-stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 8px;
+}
+.study-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Flashcard flip container */
+.flashcard-body {
+  padding: 0 20px;
+  margin-top: -10px;
+}
+.flashcard-container {
+  perspective: 1000px;
+  width: 100%;
+  height: 340px;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard-container.flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.flashcard-front {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.flashcard-back {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  text-align: center;
+}
+.card-media {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(135deg, #EDE7FF, #F6F3FF);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.card-media .media-icon {
+  font-size: 72px;
+}
+.card-media .play-overlay {
+  position: absolute;
+  bottom: 10px; right: 10px;
+  width: 36px; height: 36px;
+  background: rgba(0,0,0,0.5);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+}
+.card-prompt-tag {
+  display: inline-block;
+  background: #EDE7FF;
+  color: var(--color-primary);
+  padding: 4px 14px;
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.card-prompt {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}
+.card-tap-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.back-answer {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-black);
+  margin-bottom: 12px;
+}
+.back-definition {
+  font-size: var(--font-size-base);
+  opacity: 0.9;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.back-example {
+  background: rgba(255,255,255,0.15);
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  opacity: 0.85;
+  width: 100%;
+}
+
+/* Swipe action buttons */
+.swipe-actions {
+  display: flex;
+  gap: 16px;
+  padding: 0 20px;
+  margin-bottom: 16px;
+}
+.swipe-btn {
+  flex: 1;
+  padding: 16px;
+  border-radius: var(--radius-xl);
+  border: none;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+}
+.swipe-btn:hover { transform: translateY(-2px); }
+.swipe-btn.learning {
+  background: #FFF2E5;
+  color: var(--color-accent-orange);
+  border: 2px solid var(--color-accent-orange);
+}
+.swipe-btn.got-it {
+  background: #E0FFF5;
+  color: var(--color-accent-mint);
+  border: 2px solid var(--color-accent-mint);
+}
+
+/* Session result at bottom of study */
+.session-mini-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 12px 20px;
+}
+.session-mini-stat {
+  text-align: center;
+}
+.session-mini-stat .stat-val {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-black);
+  color: var(--color-primary);
+}
+.session-mini-stat .stat-lbl {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* ============================================================
+   SCREEN 3: FLASHCARD SESSION RESULTS
+   ============================================================ */
+.results-screen {
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+}
+.results-celebration {
+  text-align: center;
+  padding: 40px 20px 24px;
+}
+.results-emoji { font-size: 72px; margin-bottom: 12px; }
+.results-celebration h1 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+.results-celebration p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+}
+
+.results-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+.result-stat-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 16px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+}
+.result-stat-card .stat-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+.result-stat-card .stat-value {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-black);
+}
+.result-stat-card .stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.results-rewards {
+  margin: 0 20px;
+  background: linear-gradient(135deg, var(--color-primary), #8B7CF7);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+}
+.results-rewards h3 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 12px;
+  text-align: center;
+}
+.rewards-row {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+.reward-item {
+  text-align: center;
+}
+.reward-item .icon { font-size: 28px; }
+.reward-item .value {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-black);
+}
+.reward-item .label {
+  font-size: var(--font-size-xs);
+  opacity: 0.8;
+}
+
+.results-mastery {
+  margin: 0 20px 20px;
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+}
+.mastery-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+.mastery-row:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+.mastery-dot {
+  width: 10px; height: 10px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+.mastery-label {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+.mastery-count {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+}
+
+.results-actions {
+  padding: 0 20px;
+}
+.btn-secondary {
+  background: white;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  padding: 14px 32px;
+  border-radius: var(--radius-xl);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  width: 100%;
+  margin-top: 10px;
+  font-family: var(--font-body);
+}
+.btn-secondary:hover { background: #F6F3FF; }
+
+/* ============================================================
+   SCREEN 4: COMPETE MODE LOBBY
+   ============================================================ */
+.compete-header {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, #E55757 100%);
+  padding: 0 20px 24px;
+  border-radius: 0 0 28px 28px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.compete-header::after {
+  content: '⚔️';
+  position: absolute;
+  top: 10px; right: 20px;
+  font-size: 80px;
+  opacity: 0.12;
+}
+.compete-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0 6px;
+}
+.compete-title-row h1 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
+}
+.compete-subtitle {
+  font-size: var(--font-size-sm);
+  opacity: 0.85;
+  margin-bottom: 12px;
+}
+.compete-record {
+  display: flex;
+  gap: 10px;
+}
+.compete-record-item {
+  background: rgba(255,255,255,0.18);
+  padding: 6px 14px;
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Mode selector cards */
+.mode-cards {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mode-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  box-shadow: var(--shadow-sm);
+  border: 2px solid var(--color-border);
+}
+.mode-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.mode-card.selected {
+  border-color: var(--color-secondary);
+  background: #FFF5F5;
+}
+.mode-icon {
+  width: 56px; height: 56px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+.mode-info h3 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 2px;
+}
+.mode-info p {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+.mode-arrow {
+  color: var(--color-text-muted);
+  font-size: 16px;
+  margin-left: auto;
+}
+
+/* Subject picker for compete */
+.compete-subject-row {
+  display: flex;
+  gap: 10px;
+  padding: 0 20px;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.compete-subject-row::-webkit-scrollbar { display: none; }
+.compete-subject-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-radius: var(--radius-xl);
+  background: white;
+  border: 2px solid var(--color-border);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  min-width: 72px;
+  box-shadow: var(--shadow-sm);
+}
+.compete-subject-chip.selected {
+  border-color: var(--color-secondary);
+  background: #FFF5F5;
+}
+.compete-subject-chip .chip-emoji { font-size: 24px; }
+.compete-subject-chip .chip-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+}
+
+/* Start match button area */
+.compete-start-area {
+  padding: 0 20px;
+  margin-top: 20px;
+}
+
+/* ============================================================
+   SCREEN 5: MATCHMAKING
+   ============================================================ */
+.matchmaking-screen {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, #E55757 40%, var(--color-bg) 40%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.matchmaking-content {
+  padding: 60px 20px 20px;
+  text-align: center;
+  color: white;
+  width: 100%;
+}
+.matchmaking-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
+  margin-bottom: 8px;
+}
+.matchmaking-sub {
+  font-size: var(--font-size-sm);
+  opacity: 0.85;
+  margin-bottom: 32px;
+}
+
+.players-preview {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+  margin-top: -20px;
+}
+.player-slot {
+  text-align: center;
+  width: 72px;
+}
+.player-slot-avatar {
+  width: 60px; height: 60px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  margin: 0 auto 6px;
+  box-shadow: var(--shadow-md);
+  border: 3px solid white;
+  position: relative;
+}
+.player-slot-avatar.you {
+  border-color: var(--color-accent-yellow);
+}
+.player-slot-avatar.bot {
+  background: linear-gradient(135deg, #F0EEF8, #E8E6F0);
+}
+.player-slot-avatar.searching {
+  background: #F0EEF8;
+  animation: pulse-search 1.5s ease-in-out infinite;
+}
+@keyframes pulse-search {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+.player-slot-name {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+.player-slot-tag {
+  font-size: 8px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: var(--radius-xl);
+  display: inline-block;
+  margin-top: 2px;
+}
+.tag-you { background: #EDE7FF; color: var(--color-primary); }
+.tag-bot { background: #E0F8F8; color: var(--color-accent-green); }
+.tag-player { background: #FFE8E8; color: var(--color-secondary); }
+
+.matchmaking-countdown {
+  margin: 28px 20px 0;
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.countdown-spinner {
+  width: 64px; height: 64px;
+  border: 4px solid #F0EEF8;
+  border-top: 4px solid var(--color-secondary);
+  border-radius: var(--radius-full);
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.countdown-text {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+.countdown-sub {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================
+   SCREEN 6: LIVE COMPETITION
+   ============================================================ */
+.live-screen {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, #E55757 30%, var(--color-bg) 30%);
+}
+.live-header {
+  padding: 8px 20px 16px;
+  color: white;
+}
+.live-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+.live-timer {
+  background: rgba(255,255,255,0.2);
+  padding: 6px 16px;
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-black);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.live-q-num {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Live scoreboard */
+.live-scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 20px;
+  margin-bottom: 16px;
+}
+.live-player {
+  flex: 1;
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 10px 6px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid transparent;
+  transition: var(--transition-fast);
+  position: relative;
+}
+.live-player.you-playing {
+  border-color: var(--color-primary);
+  background: #F6F3FF;
+}
+.live-player.leading {
+  border-color: var(--color-accent-yellow);
+}
+.live-player-avatar {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin: 0 auto 4px;
+}
+.live-player-name {
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.live-player-score {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-black);
+  color: var(--color-primary);
+  margin-top: 2px;
+}
+.live-player-pos {
+  position: absolute;
+  top: -6px; left: -6px;
+  width: 20px; height: 20px;
+  border-radius: var(--radius-full);
+  font-size: 9px;
+  font-weight: var(--font-weight-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* Question area */
+.live-question {
+  margin: 0 20px;
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  margin-bottom: 16px;
+}
+.live-question-tag {
+  display: inline-block;
+  background: #FFE8E8;
+  color: var(--color-secondary);
+  padding: 4px 14px;
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.live-question-text {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.4;
+}
+
+/* Answer grid for compete */
+.compete-answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0 20px;
+}
+.compete-answer {
+  background: white;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 16px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+}
+.compete-answer:hover {
+  border-color: var(--color-primary-light);
+  background: #F9F7FF;
+}
+.compete-answer.ca-selected {
+  border-color: var(--color-primary);
+  background: #F0ECFF;
+}
+.compete-answer.ca-correct {
+  border-color: var(--color-accent-mint);
+  background: #E8FFF5;
+  animation: correct-pop 0.5s ease;
+}
+@keyframes correct-pop {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+.compete-answer.ca-wrong {
+  border-color: var(--color-secondary);
+  background: #FFF0F0;
+}
+.compete-answer .answer-badge {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 4px;
+  opacity: 0.6;
+}
+
+/* Power-up bar */
+.powerup-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 20px 0;
+}
+.powerup-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 14px;
+  border-radius: var(--radius-lg);
+  background: white;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  box-shadow: var(--shadow-sm);
+}
+.powerup-btn:hover { transform: scale(1.05); }
+.powerup-btn .pu-icon { font-size: 20px; }
+.powerup-btn .pu-label {
+  font-size: 9px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+}
+.powerup-btn .pu-count {
+  font-size: 8px;
+  font-weight: var(--font-weight-black);
+  background: var(--color-primary);
+  color: white;
+  padding: 1px 6px;
+  border-radius: var(--radius-xl);
+}
+
+/* ============================================================
+   SCREEN 7: COMPETITION RESULTS / PODIUM
+   ============================================================ */
+.podium-screen {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, #E55757 50%, var(--color-bg) 50%);
+}
+.podium-header {
+  text-align: center;
+  padding: 40px 20px 0;
+  color: white;
+}
+.podium-header h1 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
+  margin-bottom: 4px;
+}
+.podium-header p {
+  font-size: var(--font-size-sm);
+  opacity: 0.85;
+}
+
+/* Podium */
+.podium-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 24px 30px 0;
+}
+.podium-place {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.podium-avatar-wrap {
+  position: relative;
+  margin-bottom: 8px;
+}
+.podium-avatar {
+  width: 52px; height: 52px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  border: 3px solid white;
+  box-shadow: var(--shadow-md);
+}
+.podium-crown {
+  position: absolute;
+  top: -14px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+}
+.podium-name {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  margin-bottom: 4px;
+}
+.podium-score {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-black);
+  color: rgba(255,255,255,0.9);
+}
+.podium-block {
+  width: 80px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 8px;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
+  color: white;
+  margin-top: 8px;
+}
+.podium-block.first {
+  height: 100px;
+  background: linear-gradient(180deg, var(--color-accent-yellow), #E8B800);
+}
+.podium-block.second {
+  height: 72px;
+  background: linear-gradient(180deg, #C0C0C0, #A0A0A0);
+}
+.podium-block.third {
+  height: 52px;
+  background: linear-gradient(180deg, #CD7F32, #B06B28);
+}
+
+/* Results detail card */
+.podium-results-card {
+  margin: -8px 20px 0;
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  z-index: 5;
+}
+.podium-your-result {
+  text-align: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 16px;
+}
+.podium-your-place {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+}
+.podium-your-place strong {
+  color: var(--color-accent-yellow);
+  font-size: var(--font-size-lg);
+}
+.podium-rewards-row {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 16px;
+}
+.podium-reward {
+  text-align: center;
+}
+.podium-reward .pr-icon { font-size: 24px; }
+.podium-reward .pr-val {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
+}
+.podium-reward .pr-lbl {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Final standings list */
+.standings-list {
+  margin-bottom: 16px;
+}
+.standing-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+.standing-item:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+.standing-rank {
+  width: 24px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-black);
+  text-align: center;
+}
+.standing-avatar {
+  width: 32px; height: 32px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.standing-name {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+.standing-score {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+.standing-accuracy {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  width: 40px;
+  text-align: right;
+}
+
+.podium-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.btn-compete {
+  background: linear-gradient(135deg, var(--color-secondary), #E55757);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: var(--radius-xl);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  width: 100%;
+  box-shadow: 0 4px 16px rgba(255,107,107,0.3);
+  font-family: var(--font-body);
+}
+
+/* ============================================================
+   CONFETTI (reused)
+   ============================================================ */
+.confetti-container {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 200;
+  overflow: hidden;
+}
+.confetti {
+  position: absolute;
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  animation: confetti-fall 3s ease-in-out forwards;
+}
+@keyframes confetti-fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(800px) rotate(720deg); opacity: 0; }
+}
+
+/* ============================================================
+   DESIGN SPEC BADGE
+   ============================================================ */
+.design-badge {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: white;
+  padding: 12px 20px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  max-width: 280px;
+}
+.design-badge h3 {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+.design-badge p {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+/* Screen selector */
+.screen-selector {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 6px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  display: flex;
+  gap: 4px;
+}
+.screen-tab {
+  padding: 8px 12px;
+  border-radius: var(--radius-lg);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: none;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+  font-family: var(--font-body);
+}
+.screen-tab.active {
+  background: var(--color-primary);
+  color: white;
+}
+.screen-tab:hover:not(.active) {
+  background: #F0EEF8;
+}
+
+/* Tab group labels */
+.tab-group-label {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-muted);
+  padding: 6px 4px 2px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.tab-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--color-border);
+  margin: 0 2px;
+}
+
+/* Mobile responsive */
+@media (max-width: 500px) {
+  body { padding: 0; }
+  .phone-frame {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+  .design-badge { display: none; }
+  .screen-selector {
+    bottom: 0;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    width: 100%;
+    justify-content: center;
+    overflow-x: auto;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Design label -->
+<div class="design-badge">
+  <h3>EduQuest — New Modules</h3>
+  <p>Flashcards Module & Compete Mode — Interactive prototype with 7 new screens</p>
+</div>
+
+<!-- Phone frame -->
+<div class="phone-frame">
+  <div class="screen-container">
+
+    <!-- =========================================
+         SCREEN 1: FLASHCARD HUB (Deck Browser)
+         ========================================= -->
+    <div class="screen active" id="screen-flash-hub">
+      <div class="flash-hub-header">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="icons">
+            <i class="fas fa-signal" style="font-size:11px"></i>
+            <i class="fas fa-wifi" style="font-size:11px"></i>
+            <i class="fas fa-battery-full" style="font-size:11px"></i>
+          </div>
+        </div>
+        <div class="flash-hub-title-row">
+          <h1>Flashcards</h1>
+        </div>
+        <div class="flash-hub-stats">
+          <div class="flash-hub-stat">📇 48 cards</div>
+          <div class="flash-hub-stat">🧠 32 mastered</div>
+          <div class="flash-hub-stat">🔥 5 streak</div>
+        </div>
+      </div>
+
+      <!-- Daily review -->
+      <div style="padding-top:16px">
+        <div class="daily-review-card" onclick="navigateTo('screen-flash-study')">
+          <div class="daily-review-icon">🧠</div>
+          <div class="daily-review-info">
+            <h3>Daily Review</h3>
+            <p>12 cards due for review today</p>
+          </div>
+          <div class="daily-review-badge">12 DUE</div>
+        </div>
+      </div>
+
+      <!-- Subject tabs -->
+      <div class="subject-tabs">
+        <button class="subject-tab active">All</button>
+        <button class="subject-tab">📚 English</button>
+        <button class="subject-tab">🔢 Math</button>
+        <button class="subject-tab">🔬 Science</button>
+        <button class="subject-tab">🎨 Art</button>
+      </div>
+
+      <!-- Deck grid -->
+      <div class="section-header" style="margin-top:8px">
+        <h2>My Decks</h2>
+        <a href="#">Sort by</a>
+      </div>
+      <div class="deck-grid">
+        <div class="deck-card" onclick="navigateTo('screen-flash-study')">
+          <span class="deck-badge badge-mastered">MASTERED</span>
+          <div class="deck-emoji" style="background:#EDE7FF;color:var(--color-english)">📖</div>
+          <h3>Sight Words</h3>
+          <p>50 common words</p>
+          <div class="deck-progress"><div class="deck-progress-fill" style="width:100%;background:linear-gradient(90deg,var(--color-accent-mint),#48DBDB)"></div></div>
+          <div class="deck-meta"><span>50 cards</span><span style="color:var(--color-accent-mint)">100%</span></div>
+        </div>
+
+        <div class="deck-card" onclick="navigateTo('screen-flash-study')">
+          <div class="deck-emoji" style="background:#EDE7FF;color:var(--color-english)">🔤</div>
+          <h3>Vocabulary</h3>
+          <p>Adjectives & verbs</p>
+          <div class="deck-progress"><div class="deck-progress-fill" style="width:68%;background:linear-gradient(90deg,var(--color-english),var(--color-primary-light))"></div></div>
+          <div class="deck-meta"><span>30 cards</span><span>68%</span></div>
+        </div>
+
+        <div class="deck-card" onclick="navigateTo('screen-flash-study')">
+          <div class="deck-emoji" style="background:#FFE8E8;color:var(--color-math)">➕</div>
+          <h3>Addition Facts</h3>
+          <p>Sums to 20</p>
+          <div class="deck-progress"><div class="deck-progress-fill" style="width:45%;background:linear-gradient(90deg,var(--color-math),var(--color-secondary-light))"></div></div>
+          <div class="deck-meta"><span>40 cards</span><span>45%</span></div>
+        </div>
+
+        <div class="deck-card" onclick="navigateTo('screen-flash-study')">
+          <span class="deck-badge badge-new">NEW</span>
+          <div class="deck-emoji" style="background:#E0F8F8;color:var(--color-science)">🐾</div>
+          <h3>Animal Facts</h3>
+          <p>Habitats & diets</p>
+          <div class="deck-progress"><div class="deck-progress-fill" style="width:12%;background:linear-gradient(90deg,var(--color-science),#48DBDB)"></div></div>
+          <div class="deck-meta"><span>24 cards</span><span>12%</span></div>
+        </div>
+
+        <div class="deck-card" onclick="navigateTo('screen-flash-study')">
+          <div class="deck-emoji" style="background:#FFF2E5;color:var(--color-art)">🎨</div>
+          <h3>Color Mixing</h3>
+          <p>Primary & secondary</p>
+          <div class="deck-progress"><div class="deck-progress-fill" style="width:80%;background:linear-gradient(90deg,var(--color-art),var(--color-accent-yellow))"></div></div>
+          <div class="deck-meta"><span>16 cards</span><span>80%</span></div>
+        </div>
+
+        <div class="deck-card" onclick="navigateTo('screen-flash-study')">
+          <div class="deck-emoji" style="background:#FFE8E8;color:var(--color-math)">📐</div>
+          <h3>Shapes</h3>
+          <p>2D & 3D shapes</p>
+          <div class="deck-progress"><div class="deck-progress-fill" style="width:55%;background:linear-gradient(90deg,var(--color-math),var(--color-secondary-light))"></div></div>
+          <div class="deck-meta"><span>20 cards</span><span>55%</span></div>
+        </div>
+      </div>
+
+      <div class="bottom-spacer"></div>
+    </div>
+
+    <!-- =========================================
+         SCREEN 2: FLASHCARD STUDY VIEW
+         ========================================= -->
+    <div class="screen study-screen" id="screen-flash-study">
+      <div class="study-header">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="icons">
+            <i class="fas fa-signal" style="font-size:11px"></i>
+            <i class="fas fa-wifi" style="font-size:11px"></i>
+            <i class="fas fa-battery-full" style="font-size:11px"></i>
+          </div>
+        </div>
+        <div class="study-top-bar">
+          <button class="study-close" onclick="navigateTo('screen-flash-hub')"><i class="fas fa-times"></i></button>
+          <div class="study-progress-wrapper">
+            <div class="study-progress-track">
+              <div class="study-progress-fill"></div>
+            </div>
+          </div>
+          <span class="study-count">6/10</span>
+        </div>
+        <div class="study-stats-bar">
+          <div class="study-stat" style="color:var(--color-accent-mint)">✅ 4 Got it</div>
+          <div class="study-stat" style="color:var(--color-accent-orange)">🔄 2 Learning</div>
+        </div>
+      </div>
+
+      <div class="flashcard-body">
+        <!-- Flashcard with flip -->
+        <div class="flashcard-container" id="flashcard1" onclick="toggleFlip('flashcard1')">
+          <div class="flashcard-inner">
+            <!-- FRONT: Image + Prompt -->
+            <div class="flashcard-front">
+              <div class="card-media">
+                <span class="media-icon">🦁</span>
+                <div class="play-overlay"><i class="fas fa-play"></i></div>
+              </div>
+              <div class="card-prompt-tag">English · Vocabulary</div>
+              <div class="card-prompt">What is this animal called?</div>
+              <div class="card-tap-hint"><i class="fas fa-hand-pointer"></i> Tap to flip</div>
+            </div>
+            <!-- BACK: Answer + Details -->
+            <div class="flashcard-back">
+              <div class="back-answer">Lion</div>
+              <div class="back-definition">A large wild cat with a mane, known as the "King of the Jungle"</div>
+              <div class="back-example">"The lion roared loudly across the savanna."</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Swipe action buttons -->
+        <div class="swipe-actions">
+          <button class="swipe-btn learning" onclick="cardAction('learning')">
+            <i class="fas fa-rotate-right"></i> Still Learning
+          </button>
+          <button class="swipe-btn got-it" onclick="cardAction('gotit')">
+            <i class="fas fa-check"></i> Got It!
+          </button>
+        </div>
+
+        <!-- Mini session stats -->
+        <div class="session-mini-stats">
+          <div class="session-mini-stat">
+            <div class="stat-val">🪙 +75</div>
+            <div class="stat-lbl">Coins earned</div>
+          </div>
+          <div class="session-mini-stat">
+            <div class="stat-val">⭐ +30</div>
+            <div class="stat-lbl">XP earned</div>
+          </div>
+          <div class="session-mini-stat">
+            <div class="stat-val">🔥 x2</div>
+            <div class="stat-lbl">Combo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-spacer"></div>
+    </div>
+
+    <!-- =========================================
+         SCREEN 3: FLASHCARD SESSION RESULTS
+         ========================================= -->
+    <div class="screen results-screen" id="screen-flash-results">
+      <div class="status-bar" style="background:var(--color-bg)">
+        <span class="time" style="color:var(--color-text-primary)">9:41</span>
+        <div class="icons">
+          <i class="fas fa-signal" style="font-size:11px;color:var(--color-text-primary)"></i>
+          <i class="fas fa-wifi" style="font-size:11px;color:var(--color-text-primary)"></i>
+          <i class="fas fa-battery-full" style="font-size:11px;color:var(--color-text-primary)"></i>
+        </div>
+      </div>
+
+      <div class="results-celebration">
+        <div class="results-emoji">🎉</div>
+        <h1>Great Session!</h1>
+        <p>You reviewed 10 flashcards</p>
+      </div>
+
+      <div class="results-stats-grid">
+        <div class="result-stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value" style="color:var(--color-accent-mint)">8</div>
+          <div class="stat-label">Got It</div>
+        </div>
+        <div class="result-stat-card">
+          <div class="stat-icon">🔄</div>
+          <div class="stat-value" style="color:var(--color-accent-orange)">2</div>
+          <div class="stat-label">Still Learning</div>
+        </div>
+        <div class="result-stat-card">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-value" style="color:var(--color-primary)">80%</div>
+          <div class="stat-label">Accuracy</div>
+        </div>
+        <div class="result-stat-card">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-value" style="color:var(--color-accent-yellow)">x3</div>
+          <div class="stat-label">Best Combo</div>
+        </div>
+      </div>
+
+      <!-- Rewards earned -->
+      <div class="results-rewards">
+        <h3>Rewards Earned</h3>
+        <div class="rewards-row">
+          <div class="reward-item">
+            <div class="icon">🪙</div>
+            <div class="value">+150</div>
+            <div class="label">Coins</div>
+          </div>
+          <div class="reward-item">
+            <div class="icon">⭐</div>
+            <div class="value">+80</div>
+            <div class="label">XP</div>
+          </div>
+          <div class="reward-item">
+            <div class="icon">💎</div>
+            <div class="value">+3</div>
+            <div class="label">Gems</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mastery breakdown -->
+      <div class="section-header" style="margin-top:0">
+        <h2>Card Mastery</h2>
+      </div>
+      <div class="results-mastery">
+        <div class="mastery-row">
+          <div class="mastery-dot" style="background:var(--color-accent-mint)"></div>
+          <div class="mastery-label">Mastered</div>
+          <div class="mastery-count">32 cards</div>
+        </div>
+        <div class="mastery-row">
+          <div class="mastery-dot" style="background:var(--color-primary)"></div>
+          <div class="mastery-label">Learning</div>
+          <div class="mastery-count">10 cards</div>
+        </div>
+        <div class="mastery-row">
+          <div class="mastery-dot" style="background:var(--color-accent-orange)"></div>
+          <div class="mastery-label">Needs Review</div>
+          <div class="mastery-count">6 cards</div>
+        </div>
+      </div>
+
+      <div class="results-actions">
+        <button class="btn-primary" onclick="navigateTo('screen-flash-study')">Review Missed Cards</button>
+        <button class="btn-secondary" onclick="navigateTo('screen-flash-hub')">Back to Decks</button>
+      </div>
+
+      <div class="bottom-spacer"></div>
+    </div>
+
+    <!-- =========================================
+         SCREEN 4: COMPETE MODE LOBBY
+         ========================================= -->
+    <div class="screen" id="screen-compete-lobby">
+      <div class="compete-header">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="icons">
+            <i class="fas fa-signal" style="font-size:11px"></i>
+            <i class="fas fa-wifi" style="font-size:11px"></i>
+            <i class="fas fa-battery-full" style="font-size:11px"></i>
+          </div>
+        </div>
+        <div class="compete-title-row">
+          <h1>Compete!</h1>
+        </div>
+        <div class="compete-subtitle">Race to answer fastest & win big rewards</div>
+        <div class="compete-record">
+          <div class="compete-record-item">🏆 12 Wins</div>
+          <div class="compete-record-item">🥈 5 2nd</div>
+          <div class="compete-record-item">🔥 3 streak</div>
+        </div>
+      </div>
+
+      <!-- Game mode selection -->
+      <div class="section-header">
+        <h2>Choose Mode</h2>
+      </div>
+      <div class="mode-cards">
+        <div class="mode-card selected" onclick="selectMode(this)">
+          <div class="mode-icon" style="background:#E0F8F8">🤖</div>
+          <div class="mode-info">
+            <h3>vs AI Bots</h3>
+            <p>Practice against smart AI opponents. 3 difficulty levels.</p>
+          </div>
+          <i class="fas fa-chevron-right mode-arrow"></i>
+        </div>
+        <div class="mode-card" onclick="selectMode(this)">
+          <div class="mode-icon" style="background:#FFE8E8">👥</div>
+          <div class="mode-info">
+            <h3>vs Real Players</h3>
+            <p>Compete with kids your age around the world!</p>
+          </div>
+          <i class="fas fa-chevron-right mode-arrow"></i>
+        </div>
+        <div class="mode-card" onclick="selectMode(this)">
+          <div class="mode-icon" style="background:#EDE7FF">🎭</div>
+          <div class="mode-info">
+            <h3>Mixed Match</h3>
+            <p>Play with a mix of real players and AI bots</p>
+          </div>
+          <i class="fas fa-chevron-right mode-arrow"></i>
+        </div>
+      </div>
+
+      <!-- Subject picker -->
+      <div class="section-header">
+        <h2>Pick Subject</h2>
+      </div>
+      <div class="compete-subject-row">
+        <div class="compete-subject-chip selected" onclick="selectSubject(this)">
+          <span class="chip-emoji">📚</span>
+          <span class="chip-label">English</span>
+        </div>
+        <div class="compete-subject-chip" onclick="selectSubject(this)">
+          <span class="chip-emoji">🔢</span>
+          <span class="chip-label">Math</span>
+        </div>
+        <div class="compete-subject-chip" onclick="selectSubject(this)">
+          <span class="chip-emoji">🔬</span>
+          <span class="chip-label">Science</span>
+        </div>
+        <div class="compete-subject-chip" onclick="selectSubject(this)">
+          <span class="chip-emoji">🎨</span>
+          <span class="chip-label">Art</span>
+        </div>
+        <div class="compete-subject-chip" onclick="selectSubject(this)">
+          <span class="chip-emoji">🎵</span>
+          <span class="chip-label">Music</span>
+        </div>
+      </div>
+
+      <!-- Start match -->
+      <div class="compete-start-area">
+        <button class="btn-compete" onclick="navigateTo('screen-matchmaking')">
+          <i class="fas fa-bolt"></i> Find Match
+        </button>
+      </div>
+
+      <div class="bottom-spacer"></div>
+    </div>
+
+    <!-- =========================================
+         SCREEN 5: MATCHMAKING
+         ========================================= -->
+    <div class="screen matchmaking-screen" id="screen-matchmaking">
+      <div class="status-bar" style="background:transparent">
+        <span class="time">9:41</span>
+        <div class="icons">
+          <i class="fas fa-signal" style="font-size:11px"></i>
+          <i class="fas fa-wifi" style="font-size:11px"></i>
+          <i class="fas fa-battery-full" style="font-size:11px"></i>
+        </div>
+      </div>
+
+      <div class="matchmaking-content">
+        <div class="matchmaking-title">Finding Opponents...</div>
+        <div class="matchmaking-sub">English · vs AI Bots</div>
+      </div>
+
+      <div class="players-preview">
+        <div class="player-slot">
+          <div class="player-slot-avatar you" style="background:linear-gradient(135deg,var(--color-accent-yellow),var(--color-accent-orange))">🦊</div>
+          <div class="player-slot-name">Alex</div>
+          <span class="player-slot-tag tag-you">YOU</span>
+        </div>
+        <div class="player-slot">
+          <div class="player-slot-avatar bot" style="background:linear-gradient(135deg,#E0F8F8,#B8F0F0)">🐸</div>
+          <div class="player-slot-name">QuizFrog</div>
+          <span class="player-slot-tag tag-bot">BOT</span>
+        </div>
+        <div class="player-slot">
+          <div class="player-slot-avatar bot" style="background:linear-gradient(135deg,#FFE8E8,#FFD0D0)">🦉</div>
+          <div class="player-slot-name">Wise Owl</div>
+          <span class="player-slot-tag tag-bot">BOT</span>
+        </div>
+        <div class="player-slot">
+          <div class="player-slot-avatar searching">
+            <i class="fas fa-question" style="color:var(--color-text-muted);font-size:20px"></i>
+          </div>
+          <div class="player-slot-name">Searching...</div>
+        </div>
+      </div>
+
+      <div class="matchmaking-countdown" onclick="navigateTo('screen-compete-live')">
+        <div class="countdown-spinner"></div>
+        <div class="countdown-text">Match starting in 3...</div>
+        <div class="countdown-sub">Tap to start now</div>
+      </div>
+
+      <div class="bottom-spacer"></div>
+    </div>
+
+    <!-- =========================================
+         SCREEN 6: LIVE COMPETITION
+         ========================================= -->
+    <div class="screen live-screen" id="screen-compete-live">
+      <div class="live-header">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="icons">
+            <i class="fas fa-signal" style="font-size:11px"></i>
+            <i class="fas fa-wifi" style="font-size:11px"></i>
+            <i class="fas fa-battery-full" style="font-size:11px"></i>
+          </div>
+        </div>
+        <div class="live-top-bar">
+          <span class="live-q-num">Q 4/10</span>
+          <div class="live-timer">
+            <i class="fas fa-clock"></i> 0:12
+          </div>
+          <span class="live-q-num" style="color:var(--color-accent-yellow)">🔥 x2</span>
+        </div>
+      </div>
+
+      <!-- Live scoreboard -->
+      <div class="live-scoreboard">
+        <div class="live-player you-playing">
+          <div class="live-player-pos" style="background:var(--color-accent-yellow)">1</div>
+          <div class="live-player-avatar" style="background:linear-gradient(135deg,var(--color-accent-yellow),var(--color-accent-orange))">🦊</div>
+          <div class="live-player-name">Alex</div>
+          <div class="live-player-score">350</div>
+        </div>
+        <div class="live-player">
+          <div class="live-player-pos" style="background:#C0C0C0">2</div>
+          <div class="live-player-avatar" style="background:#E0F8F8">🐸</div>
+          <div class="live-player-name">QuizFrog</div>
+          <div class="live-player-score">300</div>
+        </div>
+        <div class="live-player">
+          <div class="live-player-pos" style="background:#CD7F32">3</div>
+          <div class="live-player-avatar" style="background:#FFE8E8">🦉</div>
+          <div class="live-player-name">Wise Owl</div>
+          <div class="live-player-score">275</div>
+        </div>
+        <div class="live-player">
+          <div class="live-player-pos" style="background:var(--color-text-muted)">4</div>
+          <div class="live-player-avatar" style="background:#EDE7FF">🐰</div>
+          <div class="live-player-name">BunnyBop</div>
+          <div class="live-player-score">200</div>
+        </div>
+      </div>
+
+      <!-- Question -->
+      <div class="live-question">
+        <div class="live-question-tag">English · Vocabulary</div>
+        <div class="live-question-text">Which word is the <strong>opposite</strong> of "happy"?</div>
+      </div>
+
+      <!-- 2x2 Answer grid -->
+      <div class="compete-answers">
+        <div class="compete-answer" onclick="competeSelect(this, false)">
+          <span class="answer-badge">A</span>
+          Excited
+        </div>
+        <div class="compete-answer" onclick="competeSelect(this, true)">
+          <span class="answer-badge">B</span>
+          Sad
+        </div>
+        <div class="compete-answer" onclick="competeSelect(this, false)">
+          <span class="answer-badge">C</span>
+          Funny
+        </div>
+        <div class="compete-answer" onclick="competeSelect(this, false)">
+          <span class="answer-badge">D</span>
+          Brave
+        </div>
+      </div>
+
+      <!-- Power-ups -->
+      <div class="powerup-bar">
+        <div class="powerup-btn">
+          <span class="pu-icon">🧊</span>
+          <span class="pu-label">Freeze</span>
+          <span class="pu-count">2</span>
+        </div>
+        <div class="powerup-btn">
+          <span class="pu-icon">⏭️</span>
+          <span class="pu-label">Skip</span>
+          <span class="pu-count">1</span>
+        </div>
+        <div class="powerup-btn">
+          <span class="pu-icon">2️⃣</span>
+          <span class="pu-label">Double</span>
+          <span class="pu-count">1</span>
+        </div>
+      </div>
+
+      <div class="bottom-spacer"></div>
+    </div>
+
+    <!-- =========================================
+         SCREEN 7: COMPETITION RESULTS / PODIUM
+         ========================================= -->
+    <div class="screen podium-screen" id="screen-compete-results">
+      <div class="status-bar" style="background:transparent">
+        <span class="time">9:41</span>
+        <div class="icons">
+          <i class="fas fa-signal" style="font-size:11px"></i>
+          <i class="fas fa-wifi" style="font-size:11px"></i>
+          <i class="fas fa-battery-full" style="font-size:11px"></i>
+        </div>
+      </div>
+
+      <div class="podium-header">
+        <h1>Match Complete!</h1>
+        <p>English · vs AI Bots</p>
+      </div>
+
+      <!-- Podium -->
+      <div class="podium-container">
+        <!-- 2nd place -->
+        <div class="podium-place">
+          <div class="podium-avatar-wrap">
+            <div class="podium-avatar" style="background:#E0F8F8">🐸</div>
+          </div>
+          <div class="podium-name">QuizFrog</div>
+          <div class="podium-score">720 pts</div>
+          <div class="podium-block second">2</div>
+        </div>
+        <!-- 1st place -->
+        <div class="podium-place">
+          <div class="podium-avatar-wrap">
+            <div class="podium-crown">👑</div>
+            <div class="podium-avatar" style="background:linear-gradient(135deg,var(--color-accent-yellow),var(--color-accent-orange))">🦊</div>
+          </div>
+          <div class="podium-name">Alex (You!)</div>
+          <div class="podium-score">850 pts</div>
+          <div class="podium-block first">1</div>
+        </div>
+        <!-- 3rd place -->
+        <div class="podium-place">
+          <div class="podium-avatar-wrap">
+            <div class="podium-avatar" style="background:#FFE8E8">🦉</div>
+          </div>
+          <div class="podium-name">Wise Owl</div>
+          <div class="podium-score">680 pts</div>
+          <div class="podium-block third">3</div>
+        </div>
+      </div>
+
+      <!-- Results detail -->
+      <div class="podium-results-card">
+        <div class="podium-your-result">
+          <div class="podium-your-place">You placed <strong>1st!</strong></div>
+        </div>
+
+        <div class="podium-rewards-row">
+          <div class="podium-reward">
+            <div class="pr-icon">🪙</div>
+            <div class="pr-val">+200</div>
+            <div class="pr-lbl">Coins</div>
+          </div>
+          <div class="podium-reward">
+            <div class="pr-icon">⭐</div>
+            <div class="pr-val">+200</div>
+            <div class="pr-lbl">XP</div>
+          </div>
+          <div class="podium-reward">
+            <div class="pr-icon">💎</div>
+            <div class="pr-val">+5</div>
+            <div class="pr-lbl">Gems</div>
+          </div>
+        </div>
+
+        <!-- Final standings -->
+        <div class="standings-list">
+          <div class="standing-item">
+            <div class="standing-rank" style="color:var(--color-gold)">👑</div>
+            <div class="standing-avatar" style="background:linear-gradient(135deg,var(--color-accent-yellow),var(--color-accent-orange))">🦊</div>
+            <div class="standing-name">Alex (You)</div>
+            <div class="standing-score">850</div>
+            <div class="standing-accuracy">9/10</div>
+          </div>
+          <div class="standing-item">
+            <div class="standing-rank" style="color:#C0C0C0">🥈</div>
+            <div class="standing-avatar" style="background:#E0F8F8">🐸</div>
+            <div class="standing-name">QuizFrog</div>
+            <div class="standing-score">720</div>
+            <div class="standing-accuracy">8/10</div>
+          </div>
+          <div class="standing-item">
+            <div class="standing-rank" style="color:#CD7F32">🥉</div>
+            <div class="standing-avatar" style="background:#FFE8E8">🦉</div>
+            <div class="standing-name">Wise Owl</div>
+            <div class="standing-score">680</div>
+            <div class="standing-accuracy">7/10</div>
+          </div>
+          <div class="standing-item">
+            <div class="standing-rank">4</div>
+            <div class="standing-avatar" style="background:#EDE7FF">🐰</div>
+            <div class="standing-name">BunnyBop</div>
+            <div class="standing-score">510</div>
+            <div class="standing-accuracy">5/10</div>
+          </div>
+        </div>
+
+        <div class="podium-actions">
+          <button class="btn-compete" onclick="navigateTo('screen-compete-lobby')">Play Again</button>
+          <button class="btn-secondary" onclick="navigateTo('screen-flash-hub')">Back to Home</button>
+        </div>
+      </div>
+
+      <div class="bottom-spacer" style="height:120px"></div>
+    </div>
+
+  </div><!-- /screen-container -->
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="navigateTo('screen-flash-hub')" data-screen="screen-flash-hub">
+      <i class="fas fa-clone"></i>
+      <span>Cards</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('screen-compete-lobby')" data-screen="screen-compete-lobby">
+      <i class="fas fa-trophy"></i>
+      <span>Compete</span>
+    </div>
+  </div>
+</div><!-- /phone-frame -->
+
+<!-- Screen selector (outside phone) -->
+<div class="screen-selector">
+  <span class="tab-group-label">FLASHCARDS</span>
+  <button class="screen-tab active" onclick="navigateTo('screen-flash-hub')">Hub</button>
+  <button class="screen-tab" onclick="navigateTo('screen-flash-study')">Study</button>
+  <button class="screen-tab" onclick="navigateTo('screen-flash-results')">Results</button>
+  <div class="tab-divider"></div>
+  <span class="tab-group-label">COMPETE</span>
+  <button class="screen-tab" onclick="navigateTo('screen-compete-lobby')">Lobby</button>
+  <button class="screen-tab" onclick="navigateTo('screen-matchmaking')">Match</button>
+  <button class="screen-tab" onclick="navigateTo('screen-compete-live')">Live</button>
+  <button class="screen-tab" onclick="navigateTo('screen-compete-results')">Podium</button>
+</div>
+
+<script>
+// Screen IDs mapped to tab indices
+const screenMap = {
+  'screen-flash-hub': 0,
+  'screen-flash-study': 1,
+  'screen-flash-results': 2,
+  'screen-compete-lobby': 3,
+  'screen-matchmaking': 4,
+  'screen-compete-live': 5,
+  'screen-compete-results': 6
+};
+
+function navigateTo(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+
+  // Update bottom nav
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navItem = document.querySelector(`.nav-item[data-screen="${screenId}"]`);
+  if (navItem) navItem.classList.add('active');
+
+  // Update screen selector tabs
+  const tabs = document.querySelectorAll('.screen-tab');
+  const idx = screenMap[screenId];
+  tabs.forEach((t, i) => t.classList.toggle('active', i === idx));
+
+  // Trigger confetti on podium/results screens
+  if (screenId === 'screen-compete-results' || screenId === 'screen-flash-results') {
+    setTimeout(() => createConfetti(screenId), 300);
+  }
+}
+
+// Flashcard flip
+function toggleFlip(cardId) {
+  document.getElementById(cardId).classList.toggle('flipped');
+}
+
+// Card action (learning/got-it)
+function cardAction(type) {
+  const card = document.getElementById('flashcard1');
+  if (card.classList.contains('flipped')) {
+    card.classList.remove('flipped');
+  }
+  // In a real app, this would advance to the next card
+  if (type === 'gotit') {
+    // Brief green flash
+    card.style.boxShadow = '0 0 30px rgba(29,209,161,0.4)';
+    setTimeout(() => card.style.boxShadow = '', 500);
+  } else {
+    card.style.boxShadow = '0 0 30px rgba(255,159,67,0.4)';
+    setTimeout(() => card.style.boxShadow = '', 500);
+  }
+}
+
+// Mode selection
+function selectMode(el) {
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// Subject chip selection
+function selectSubject(el) {
+  document.querySelectorAll('.compete-subject-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// Subject tab selection
+document.querySelectorAll('.subject-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.subject-tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Compete answer selection
+function competeSelect(el, isCorrect) {
+  document.querySelectorAll('.compete-answer').forEach(a => {
+    a.classList.remove('ca-selected', 'ca-correct', 'ca-wrong');
+  });
+  if (isCorrect) {
+    el.classList.add('ca-correct');
+    setTimeout(() => navigateTo('screen-compete-results'), 1200);
+  } else {
+    el.classList.add('ca-wrong');
+    // Highlight correct answer
+    document.querySelectorAll('.compete-answer')[1].classList.add('ca-correct');
+  }
+}
+
+// Confetti
+function createConfetti(screenId) {
+  const container = document.getElementById(screenId);
+  const confettiContainer = document.createElement('div');
+  confettiContainer.className = 'confetti-container';
+  const colors = ['#6C5CE7', '#FF6B6B', '#FECA57', '#00D2D3', '#FF9F43', '#FF6B81', '#54A0FF', '#1DD1A1'];
+  for (let i = 0; i < 40; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    confetti.style.left = Math.random() * 100 + '%';
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+    confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+    confettiContainer.appendChild(confetti);
+  }
+  container.appendChild(confettiContainer);
+  setTimeout(() => confettiContainer.remove(), 4000);
+}
+</script>
+</body>
+</html>

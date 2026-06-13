@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>EduQuest — Theme Settings UI Design</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN SYSTEM — TOKENS (Identical to EduQuest)
+   ============================================================ */
+:root {
+  --color-primary: #6C5CE7;
+  --color-primary-light: #A29BFE;
+  --color-primary-dark: #4834D4;
+  --color-secondary: #FF6B6B;
+  --color-secondary-light: #FF8E8E;
+  --color-accent-yellow: #FECA57;
+  --color-accent-green: #00D2D3;
+  --color-accent-orange: #FF9F43;
+  --color-accent-pink: #FF6B81;
+  --color-accent-blue: #54A0FF;
+  --color-accent-mint: #1DD1A1;
+  --color-bg: #F8F7FF;
+  --color-bg-card: #FFFFFF;
+  --color-bg-dark: #2C2C54;
+  --color-text-primary: #2D3436;
+  --color-text-secondary: #636E72;
+  --color-text-muted: #B2BEC3;
+  --color-text-white: #FFFFFF;
+  --color-border: #E8E6F0;
+  --color-english: #6C5CE7;
+  --color-math: #FF6B6B;
+  --color-science: #00D2D3;
+  --color-art: #FF9F43;
+  --color-music: #FF6B81;
+  --color-coding: #54A0FF;
+  --color-gold: #FFD700;
+  --color-gem: #A29BFE;
+  --color-xp: #1DD1A1;
+  --color-streak: #FF9F43;
+  --font-display: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-size-xs: 0.7rem;
+  --font-size-sm: 0.8rem;
+  --font-size-base: 0.95rem;
+  --font-size-md: 1.1rem;
+  --font-size-lg: 1.35rem;
+  --font-size-xl: 1.75rem;
+  --font-size-2xl: 2.25rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 50%;
+  --shadow-sm: 0 2px 8px rgba(108,92,231,0.08);
+  --shadow-md: 0 4px 16px rgba(108,92,231,0.12);
+  --shadow-lg: 0 8px 32px rgba(108,92,231,0.16);
+  --shadow-glow: 0 0 20px rgba(108,92,231,0.3);
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: #E8E6F0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  color: var(--color-text-primary);
+}
+
+/* Phone frame */
+.phone-frame {
+  width: 390px;
+  height: 844px;
+  background: var(--color-bg);
+  border-radius: 40px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 0 0 2px rgba(255,255,255,0.1);
+  border: 8px solid #1a1a2e;
+}
+.screen-container { width: 100%; height: 100%; position: relative; overflow: hidden; }
+.screen {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  overflow-y: auto; overflow-x: hidden;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  background: var(--color-bg);
+  opacity: 0; transform: translateX(100%);
+  -ms-overflow-style: none; scrollbar-width: none;
+}
+.screen::-webkit-scrollbar { display: none; }
+.screen.active { opacity: 1; transform: translateX(0); z-index: 2; }
+
+/* Status bar */
+.status-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 24px 4px; font-size: 12px; font-weight: 600;
+  position: sticky; top: 0; z-index: 10; background: inherit;
+}
+.status-bar .time { font-weight: 700; }
+.status-bar .icons { display: flex; gap: 5px; align-items: center; }
+
+/* Shared components */
+.section-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 20px; margin: 20px 0 12px;
+}
+.section-header h2 { font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); }
+.section-header a { font-size: var(--font-size-sm); color: var(--color-primary); text-decoration: none; font-weight: var(--font-weight-semibold); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: white; border: none; padding: 14px 32px; border-radius: var(--radius-xl);
+  font-weight: var(--font-weight-bold); font-size: var(--font-size-base);
+  cursor: pointer; transition: var(--transition-bounce); width: 100%;
+  box-shadow: 0 4px 16px rgba(108,92,231,0.3); font-family: var(--font-body);
+}
+.btn-primary:hover { transform: translateY(-2px); }
+
+.btn-secondary {
+  background: white; color: var(--color-primary); border: 2px solid var(--color-primary);
+  padding: 14px 32px; border-radius: var(--radius-xl); font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base); cursor: pointer; transition: var(--transition-bounce);
+  width: 100%; font-family: var(--font-body);
+}
+
+.bottom-spacer { height: 90px; }
+
+/* Bottom nav */
+.bottom-nav {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+  display: flex; justify-content: space-around; align-items: center;
+  padding: 8px 0 24px; z-index: 100; border-top: 1px solid var(--color-border);
+}
+.nav-item {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  cursor: pointer; padding: 4px 12px; border-radius: var(--radius-md);
+  transition: var(--transition-fast); position: relative;
+}
+.nav-item i { font-size: 20px; color: var(--color-text-muted); transition: var(--transition-fast); }
+.nav-item span { font-size: 10px; font-weight: 600; color: var(--color-text-muted); transition: var(--transition-fast); }
+.nav-item.active i { color: var(--color-primary); }
+.nav-item.active span { color: var(--color-primary); }
+.nav-item.active::before {
+  content: ''; position: absolute; top: -8px; width: 24px; height: 3px;
+  background: var(--color-primary); border-radius: 0 0 3px 3px;
+}
+
+/* ============================================================
+   SCREEN 1: THEME SETTINGS HUB
+   ============================================================ */
+.theme-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  padding: 0 20px 24px; border-radius: 0 0 28px 28px;
+  color: white; position: relative; overflow: hidden;
+}
+.theme-header::after {
+  content: ''; position: absolute; top: -50%; right: -30%;
+  width: 200px; height: 200px; background: rgba(255,255,255,0.06); border-radius: 50%;
+}
+.theme-header::before {
+  content: ''; position: absolute; bottom: -30%; left: -20%;
+  width: 160px; height: 160px; background: rgba(255,255,255,0.04); border-radius: 50%;
+}
+.theme-title-row {
+  display: flex; justify-content: space-between; align-items: center; padding: 12px 0 6px;
+}
+.theme-title-row h1 { font-size: var(--font-size-xl); font-weight: var(--font-weight-black); display: flex; align-items: center; gap: 10px; }
+.theme-title-row h1 i { font-size: 1.3rem; }
+.currency-bar {
+  display: flex; gap: 12px; margin-top: 8px;
+}
+.currency-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.18); padding: 6px 14px;
+  border-radius: var(--radius-xl); font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+.currency-pill i { font-size: 14px; }
+
+/* Current theme card */
+.current-theme-card {
+  margin: 16px 20px 0; background: var(--color-bg-card); border-radius: var(--radius-xl);
+  padding: 16px; box-shadow: var(--shadow-sm); border: 2px solid var(--color-primary);
+  display: flex; align-items: center; gap: 14px; position: relative; overflow: hidden;
+}
+.current-theme-card::after {
+  content: 'ACTIVE'; position: absolute; top: 10px; right: -24px;
+  background: var(--color-primary); color: white; font-size: 8px; font-weight: 800;
+  padding: 3px 30px; transform: rotate(35deg); letter-spacing: 1px;
+}
+.current-theme-icon {
+  width: 48px; height: 48px; border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+}
+.current-theme-info { flex: 1; }
+.current-theme-info h3 { font-size: var(--font-size-base); font-weight: var(--font-weight-bold); color: var(--color-text-primary); }
+.current-theme-info p { font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: 2px; }
+.current-theme-swatches {
+  display: flex; gap: 4px; margin-top: 6px;
+}
+.mini-swatch {
+  width: 16px; height: 16px; border-radius: var(--radius-full);
+  border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+/* Theme grid */
+.theme-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  padding: 0 20px;
+}
+.theme-card {
+  background: var(--color-bg-card); border-radius: var(--radius-xl);
+  padding: 14px; box-shadow: var(--shadow-sm); border: 2px solid var(--color-border);
+  cursor: pointer; transition: var(--transition-bounce); position: relative;
+  overflow: hidden;
+}
+.theme-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.theme-card.active-theme {
+  border-color: var(--color-primary); box-shadow: var(--shadow-glow);
+}
+.theme-card.locked { opacity: 0.85; }
+.theme-card.locked::after {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,0.1);
+  pointer-events: none;
+}
+
+.theme-card-preview {
+  width: 100%; height: 70px; border-radius: var(--radius-md);
+  margin-bottom: 10px; position: relative; overflow: hidden;
+}
+.theme-card-preview .preview-gradient {
+  width: 100%; height: 100%; border-radius: var(--radius-md);
+}
+.theme-card-preview .preview-dots {
+  position: absolute; bottom: 6px; left: 6px;
+  display: flex; gap: 4px;
+}
+.theme-card-preview .preview-dot {
+  width: 10px; height: 10px; border-radius: var(--radius-full);
+  border: 1.5px solid rgba(255,255,255,0.7);
+}
+.theme-card-name {
+  font-size: var(--font-size-sm); font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary); margin-bottom: 6px;
+}
+.theme-card-swatches {
+  display: flex; gap: 4px; margin-bottom: 8px;
+}
+.theme-swatch {
+  width: 14px; height: 14px; border-radius: var(--radius-full);
+  border: 1.5px solid rgba(0,0,0,0.08);
+}
+.theme-card-footer {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.theme-price {
+  font-size: var(--font-size-xs); font-weight: var(--font-weight-bold);
+  display: flex; align-items: center; gap: 4px; color: var(--color-text-secondary);
+}
+.theme-price i { font-size: 10px; }
+.theme-price.free { color: var(--color-accent-mint); }
+.theme-price.coins { color: var(--color-gold); }
+.theme-price.gems { color: var(--color-gem); }
+
+.theme-badge {
+  font-size: 9px; font-weight: 700; padding: 3px 10px;
+  border-radius: var(--radius-xl); letter-spacing: 0.5px;
+}
+.theme-badge.active-badge {
+  background: var(--color-primary); color: white;
+}
+.theme-badge.apply-badge {
+  background: #F0EEF8; color: var(--color-primary);
+}
+.theme-badge.locked-badge {
+  background: #F0EEF8; color: var(--color-text-muted);
+}
+.theme-badge.locked-badge i { margin-right: 3px; font-size: 8px; }
+
+/* ============================================================
+   SCREEN 2: THEME PREVIEW
+   ============================================================ */
+.preview-header {
+  padding: 0 20px 12px;
+  background: var(--color-bg);
+}
+.preview-back-btn {
+  display: flex; align-items: center; gap: 8px;
+  font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);
+  color: var(--color-primary); background: none; border: none;
+  cursor: pointer; padding: 12px 0 8px; font-family: var(--font-body);
+}
+.preview-back-btn i { font-size: 12px; }
+.preview-title {
+  font-size: var(--font-size-lg); font-weight: var(--font-weight-black);
+  color: var(--color-text-primary); margin-bottom: 4px;
+}
+.preview-subtitle {
+  font-size: var(--font-size-xs); color: var(--color-text-secondary);
+}
+
+/* Mini mockup preview */
+.mini-mockup {
+  margin: 12px 20px; background: var(--color-bg-card); border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md); overflow: hidden; border: 2px solid var(--color-border);
+}
+.mini-header {
+  padding: 16px; border-radius: 0 0 16px 16px; color: white; position: relative; overflow: hidden;
+}
+.mini-header::after {
+  content: ''; position: absolute; top: -30px; right: -20px;
+  width: 80px; height: 80px; background: rgba(255,255,255,0.06); border-radius: 50%;
+}
+.mini-greeting { font-size: var(--font-size-xs); opacity: 0.8; }
+.mini-name { font-size: var(--font-size-md); font-weight: var(--font-weight-black); }
+.mini-currency-row {
+  display: flex; gap: 8px; margin-top: 8px;
+}
+.mini-currency {
+  display: flex; align-items: center; gap: 4px;
+  background: rgba(255,255,255,0.18); padding: 4px 10px;
+  border-radius: var(--radius-lg); font-size: 10px; font-weight: 700;
+}
+.mini-body { padding: 12px; }
+.mini-section-label {
+  font-size: 10px; font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary); margin-bottom: 8px; text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.mini-subject-cards { display: flex; gap: 8px; margin-bottom: 12px; }
+.mini-subject-card {
+  flex: 1; border-radius: var(--radius-md); padding: 10px 8px;
+  text-align: center; color: white; position: relative; overflow: hidden;
+}
+.mini-subject-card .msub-icon { font-size: 20px; margin-bottom: 4px; }
+.mini-subject-card .msub-name { font-size: 9px; font-weight: 700; }
+.mini-subject-card::after {
+  content: ''; position: absolute; top: -10px; right: -10px;
+  width: 30px; height: 30px; background: rgba(255,255,255,0.1); border-radius: 50%;
+}
+.mini-challenge-card {
+  border-radius: var(--radius-md); padding: 12px;
+  display: flex; align-items: center; gap: 10px;
+  border: 1.5px solid var(--color-border);
+}
+.mini-challenge-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: white;
+}
+.mini-challenge-info { flex: 1; }
+.mini-challenge-info h4 { font-size: 10px; font-weight: 700; color: var(--color-text-primary); }
+.mini-challenge-info p { font-size: 9px; color: var(--color-text-secondary); }
+.mini-challenge-go {
+  font-size: 9px; font-weight: 700; padding: 4px 10px;
+  border-radius: var(--radius-lg); border: none; color: white; cursor: default;
+}
+
+/* Theme info below mockup */
+.preview-theme-info {
+  margin: 16px 20px; background: var(--color-bg-card); border-radius: var(--radius-xl);
+  padding: 16px; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);
+}
+.preview-theme-name {
+  font-size: var(--font-size-md); font-weight: var(--font-weight-black);
+  color: var(--color-text-primary); margin-bottom: 4px;
+}
+.preview-palette-label {
+  font-size: var(--font-size-xs); color: var(--color-text-muted);
+  font-weight: var(--font-weight-semibold); margin-bottom: 8px;
+}
+.preview-palette-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.preview-palette-chip {
+  width: 28px; height: 28px; border-radius: var(--radius-sm);
+  border: 2px solid rgba(0,0,0,0.06); transition: var(--transition-bounce);
+}
+.preview-palette-chip:hover { transform: scale(1.2); }
+
+.preview-actions {
+  padding: 16px 20px 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+/* ============================================================
+   SCREEN 3: THEME APPLIED SUCCESS
+   ============================================================ */
+.success-screen {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center; padding: 40px 30px;
+  min-height: 100%; position: relative; overflow: hidden;
+}
+.success-confetti {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.confetti-piece {
+  position: absolute; width: 10px; height: 10px; border-radius: 2px;
+  animation: confetti-fall 3s ease-in forwards;
+  opacity: 0;
+}
+@keyframes confetti-fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(800px) rotate(720deg); opacity: 0; }
+}
+
+.success-check {
+  width: 100px; height: 100px; border-radius: var(--radius-full);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; color: white; margin-bottom: 24px;
+  animation: success-pop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+@keyframes success-pop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.success-title {
+  font-size: var(--font-size-xl); font-weight: var(--font-weight-black);
+  color: var(--color-text-primary); margin-bottom: 8px;
+  animation: fadeInUp 0.5s 0.3s both;
+}
+.success-theme-name {
+  font-size: var(--font-size-md); font-weight: var(--font-weight-bold);
+  color: var(--color-primary); margin-bottom: 6px;
+  animation: fadeInUp 0.5s 0.4s both;
+}
+.success-subtitle {
+  font-size: var(--font-size-sm); color: var(--color-text-secondary);
+  margin-bottom: 24px;
+  animation: fadeInUp 0.5s 0.5s both;
+}
+.success-xp-reward {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, #E8FFF0, #D0FFE0);
+  padding: 12px 24px; border-radius: var(--radius-xl);
+  margin-bottom: 32px; animation: fadeInUp 0.5s 0.6s both;
+  border: 1px solid rgba(29,209,161,0.2);
+}
+.success-xp-reward .xp-icon {
+  width: 32px; height: 32px; background: var(--color-accent-mint);
+  border-radius: var(--radius-full); display: flex; align-items: center;
+  justify-content: center; color: white; font-size: 14px; font-weight: 800;
+}
+.success-xp-reward .xp-text {
+  font-size: var(--font-size-md); font-weight: var(--font-weight-black);
+  color: var(--color-accent-mint);
+}
+.success-xp-reward .xp-label {
+  font-size: var(--font-size-xs); color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.success-btn {
+  animation: fadeInUp 0.5s 0.7s both; width: 100%; max-width: 260px;
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Success swatches */
+.success-swatches {
+  display: flex; gap: 6px; margin-bottom: 20px;
+  animation: fadeInUp 0.5s 0.45s both;
+}
+.success-swatch {
+  width: 24px; height: 24px; border-radius: var(--radius-full);
+  border: 2px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* Design badge */
+.design-badge {
+  position: fixed; top: 20px; left: 20px; background: white;
+  padding: 12px 20px; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
+  z-index: 1000; max-width: 290px;
+}
+.design-badge h3 { font-size: 14px; font-weight: 800; color: var(--color-primary); margin-bottom: 4px; }
+.design-badge p { font-size: 11px; color: var(--color-text-secondary); line-height: 1.4; }
+
+/* Screen selector */
+.screen-selector {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  background: white; padding: 6px; border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg); z-index: 1000; display: flex; gap: 4px;
+}
+.screen-tab {
+  padding: 8px 12px; border-radius: var(--radius-lg); font-size: 10px;
+  font-weight: 700; cursor: pointer; color: var(--color-text-secondary);
+  background: transparent; border: none; transition: var(--transition-fast);
+  white-space: nowrap; font-family: var(--font-body);
+}
+.screen-tab.active { background: var(--color-primary); color: white; }
+.screen-tab:hover:not(.active) { background: #F0EEF8; }
+.tab-divider { width: 1px; height: 24px; background: var(--color-border); margin: 0 2px; align-self: center; }
+
+@media (max-width: 500px) {
+  body { padding: 0; }
+  .phone-frame { width: 100%; height: 100vh; border-radius: 0; border: none; }
+  .design-badge { display: none; }
+  .screen-selector { bottom: 0; border-radius: var(--radius-xl) var(--radius-xl) 0 0; width: 100%; justify-content: center; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="design-badge">
+  <h3>EduQuest — Theme Settings</h3>
+  <p>Customizable themes with live preview, 8 color palettes, and premium dark mode</p>
+</div>
+
+<div class="phone-frame">
+  <div class="screen-container">
+
+    <!-- =========================================
+         SCREEN 1: THEME SETTINGS HUB
+         ========================================= -->
+    <div class="screen active" id="screen-hub">
+      <div class="theme-header">
+        <div class="status-bar" style="background:transparent;">
+          <span class="time">9:41</span>
+          <div class="icons">
+            <i class="fas fa-signal" style="font-size:11px"></i>
+            <i class="fas fa-wifi" style="font-size:11px"></i>
+            <i class="fas fa-battery-full" style="font-size:11px"></i>
+          </div>
+        </div>
+        <div class="theme-title-row">
+          <h1><i class="fas fa-palette"></i> Themes</h1>
+        </div>
+        <div class="currency-bar">
+          <div class="currency-pill"><i class="fas fa-coins" style="color:#FFD700"></i> 1,250</div>
+          <div class="currency-pill"><i class="fas fa-gem" style="color:#A29BFE"></i> 42</div>
+        </div>
+      </div>
+
+      <!-- Current theme card -->
+      <div class="current-theme-card" id="currentThemeCard">
+        <div class="current-theme-icon" id="currentThemeIcon">
+          <i class="fas fa-rocket" style="color:white"></i>
+        </div>
+        <div class="current-theme-info">
+          <h3 id="currentThemeName">Cosmic Purple</h3>
+          <p>Your current look</p>
+          <div class="current-theme-swatches" id="currentThemeSwatches">
+            <div class="mini-swatch" style="background:#6C5CE7"></div>
+            <div class="mini-swatch" style="background:#A29BFE"></div>
+            <div class="mini-swatch" style="background:#FF6B6B"></div>
+            <div class="mini-swatch" style="background:#FECA57"></div>
+            <div class="mini-swatch" style="background:#F8F7FF"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h2>Choose Your Theme</h2>
+        <a href="javascript:void(0)"><i class="fas fa-wand-magic-sparkles"></i> 8 themes</a>
+      </div>
+
+      <div class="theme-grid" id="themeGrid">
+        <!-- Filled by JS -->
+      </div>
+
+      <div class="bottom-spacer"></div>
+    </div>
+
+    <!-- =========================================
+         SCREEN 2: THEME PREVIEW
+         ========================================= -->
+    <div class="screen" id="screen-preview">
+      <div class="preview-header">
+        <div class="status-bar">
+          <span class="time">9:41</span>
+          <div class="icons">
+            <i class="fas fa-signal" style="font-size:11px"></i>
+            <i class="fas fa-wifi" style="font-size:11px"></i>
+            <i class="fas fa-battery-full" style="font-size:11px"></i>
+          </div>
+        </div>
+        <button class="preview-back-btn" onclick="navigateTo('screen-hub')">
+          <i class="fas fa-chevron-left"></i> Back to Themes
+        </button>
+        <div class="preview-title" id="previewTitle">Theme Preview</div>
+        <div class="preview-subtitle">See how your app will look</div>
+      </div>
+
+      <!-- Mini mockup -->
+      <div class="mini-mockup" id="miniMockup">
+        <div class="mini-header" id="miniHeader" style="background:linear-gradient(135deg, #6C5CE7, #4834D4)">
+          <div class="mini-greeting">Good morning!</div>
+          <div class="mini-name">Alex Explorer</div>
+          <div class="mini-currency-row">
+            <div class="mini-currency"><i class="fas fa-coins" style="color:#FFD700;font-size:10px"></i> 1,250</div>
+            <div class="mini-currency"><i class="fas fa-gem" style="color:#A29BFE;font-size:10px"></i> 42</div>
+          </div>
+        </div>
+        <div class="mini-body" id="miniBody">
+          <div class="mini-section-label">My Subjects</div>
+          <div class="mini-subject-cards">
+            <div class="mini-subject-card" id="miniSubj1" style="background:linear-gradient(135deg, #6C5CE7, #4834D4)">
+              <div class="msub-icon"><i class="fas fa-book"></i></div>
+              <div class="msub-name">English</div>
+            </div>
+            <div class="mini-subject-card" id="miniSubj2" style="background:linear-gradient(135deg, #FF6B6B, #EE5A24)">
+              <div class="msub-icon"><i class="fas fa-calculator"></i></div>
+              <div class="msub-name">Math</div>
+            </div>
+          </div>
+          <div class="mini-section-label">Daily Challenge</div>
+          <div class="mini-challenge-card" id="miniChallenge">
+            <div class="mini-challenge-icon" id="miniChallengeIcon" style="background:linear-gradient(135deg, #6C5CE7, #4834D4)">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <div class="mini-challenge-info">
+              <h4>Word Wizard Challenge</h4>
+              <p>Earn 50 XP + 10 coins</p>
+            </div>
+            <div class="mini-challenge-go" id="miniChallengeBtn" style="background:linear-gradient(135deg, #6C5CE7, #4834D4)">GO</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme info -->
+      <div class="preview-theme-info">
+        <div class="preview-theme-name" id="previewThemeName">Cosmic Purple</div>
+        <div class="preview-palette-label">Color Palette</div>
+        <div class="preview-palette-row" id="previewPalette">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <div class="preview-actions">
+        <button class="btn-primary" id="applyThemeBtn" onclick="applyTheme()">
+          <i class="fas fa-check-circle"></i> Apply Theme
+        </button>
+        <button class="btn-secondary" onclick="navigateTo('screen-hub')">
+          <i class="fas fa-arrow-left"></i> Go Back
+        </button>
+      </div>
+
+      <div class="bottom-spacer"></div>
+    </div>
+
+    <!-- =========================================
+         SCREEN 3: THEME APPLIED SUCCESS
+         ========================================= -->
+    <div class="screen" id="screen-success">
+      <div class="success-screen">
+        <div class="success-confetti" id="confettiContainer"></div>
+
+        <div class="status-bar" style="position:absolute;top:0;left:0;right:0;">
+          <span class="time">9:41</span>
+          <div class="icons">
+            <i class="fas fa-signal" style="font-size:11px"></i>
+            <i class="fas fa-wifi" style="font-size:11px"></i>
+            <i class="fas fa-battery-full" style="font-size:11px"></i>
+          </div>
+        </div>
+
+        <div class="success-check" id="successCheck" style="background:linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))">
+          <i class="fas fa-check"></i>
+        </div>
+        <div class="success-title">Theme Applied!</div>
+        <div class="success-theme-name" id="successThemeName">Cosmic Purple</div>
+        <div class="success-swatches" id="successSwatches"></div>
+        <div class="success-subtitle">Your app now looks amazing!</div>
+        <div class="success-xp-reward">
+          <div class="xp-icon"><i class="fas fa-star"></i></div>
+          <div>
+            <div class="xp-text">+50 XP</div>
+            <div class="xp-label">Theme bonus</div>
+          </div>
+        </div>
+        <div class="success-btn">
+          <button class="btn-primary" onclick="finishApply()">
+            <i class="fas fa-arrow-right"></i> Continue
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /screen-container -->
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <div class="nav-item" data-screen="screen-hub">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" data-screen="screen-hub">
+      <i class="fas fa-book-open"></i>
+      <span>Learn</span>
+    </div>
+    <div class="nav-item" data-screen="screen-hub">
+      <i class="fas fa-trophy"></i>
+      <span>Quests</span>
+    </div>
+    <div class="nav-item" data-screen="screen-hub">
+      <i class="fas fa-store"></i>
+      <span>Shop</span>
+    </div>
+    <div class="nav-item active" data-screen="screen-hub">
+      <i class="fas fa-palette"></i>
+      <span>Themes</span>
+    </div>
+  </div>
+</div><!-- /phone-frame -->
+
+<!-- Screen selector -->
+<div class="screen-selector">
+  <button class="screen-tab active" onclick="navigateTo('screen-hub')">Theme Hub</button>
+  <button class="screen-tab" onclick="navigateTo('screen-preview')">Preview</button>
+  <button class="screen-tab" onclick="navigateTo('screen-success')">Applied</button>
+</div>
+
+<script>
+// ============================================================
+// THEME DATA
+// ============================================================
+const themes = [
+  {
+    id: 'cosmic-purple', name: 'Cosmic Purple', icon: 'fa-rocket', emoji: '',
+    primary: '#6C5CE7', primaryLight: '#A29BFE', primaryDark: '#4834D4',
+    secondary: '#FF6B6B', accent: '#FECA57',
+    bg: '#F8F7FF', bgCard: '#FFFFFF', border: '#E8E6F0',
+    textPrimary: '#2D3436', textSecondary: '#636E72', textMuted: '#B2BEC3',
+    price: 'FREE', priceType: 'free', locked: false, dark: false
+  },
+  {
+    id: 'ocean-explorer', name: 'Ocean Explorer', icon: 'fa-water', emoji: '',
+    primary: '#0984E3', primaryLight: '#74B9FF', primaryDark: '#0652DD',
+    secondary: '#00CEC9', accent: '#55EFC4',
+    bg: '#F0F9FF', bgCard: '#FFFFFF', border: '#D6EAF8',
+    textPrimary: '#2D3436', textSecondary: '#636E72', textMuted: '#B2BEC3',
+    price: '200', priceType: 'coins', locked: false, dark: false
+  },
+  {
+    id: 'sunset-safari', name: 'Sunset Safari', icon: 'fa-sun', emoji: '',
+    primary: '#E17055', primaryLight: '#FAB1A0', primaryDark: '#D63031',
+    secondary: '#FDCB6E', accent: '#F8B739',
+    bg: '#FFF9F0', bgCard: '#FFFFFF', border: '#FDEBD0',
+    textPrimary: '#2D3436', textSecondary: '#636E72', textMuted: '#B2BEC3',
+    price: '200', priceType: 'coins', locked: false, dark: false
+  },
+  {
+    id: 'enchanted-forest', name: 'Enchanted Forest', icon: 'fa-tree', emoji: '',
+    primary: '#00B894', primaryLight: '#55EFC4', primaryDark: '#00A381',
+    secondary: '#81ECEC', accent: '#BADC58',
+    bg: '#F0FFF4', bgCard: '#FFFFFF', border: '#D5F5E3',
+    textPrimary: '#2D3436', textSecondary: '#636E72', textMuted: '#B2BEC3',
+    price: '300', priceType: 'coins', locked: false, dark: false
+  },
+  {
+    id: 'cotton-candy', name: 'Cotton Candy', icon: 'fa-candy-cane', emoji: '',
+    primary: '#E84393', primaryLight: '#FD79A8', primaryDark: '#B83280',
+    secondary: '#A29BFE', accent: '#FDA7DF',
+    bg: '#FFF0F6', bgCard: '#FFFFFF', border: '#FADCE8',
+    textPrimary: '#2D3436', textSecondary: '#636E72', textMuted: '#B2BEC3',
+    price: '300', priceType: 'coins', locked: false, dark: false
+  },
+  {
+    id: 'arctic-frost', name: 'Arctic Frost', icon: 'fa-snowflake', emoji: '',
+    primary: '#636E72', primaryLight: '#B2BEC3', primaryDark: '#2D3436',
+    secondary: '#74B9FF', accent: '#DFE6E9',
+    bg: '#F5F6FA', bgCard: '#FFFFFF', border: '#DFE6E9',
+    textPrimary: '#2D3436', textSecondary: '#636E72', textMuted: '#B2BEC3',
+    price: '500', priceType: 'coins', locked: false, dark: false
+  },
+  {
+    id: 'golden-kingdom', name: 'Golden Kingdom', icon: 'fa-crown', emoji: '',
+    primary: '#F39C12', primaryLight: '#F9CA24', primaryDark: '#E67E22',
+    secondary: '#E74C3C', accent: '#FFC312',
+    bg: '#FFFBF0', bgCard: '#FFFFFF', border: '#FAE5B8',
+    textPrimary: '#2D3436', textSecondary: '#636E72', textMuted: '#B2BEC3',
+    price: '15', priceType: 'gems', locked: true, dark: false
+  },
+  {
+    id: 'midnight-galaxy', name: 'Midnight Galaxy', icon: 'fa-moon', emoji: '',
+    primary: '#A855F7', primaryLight: '#C084FC', primaryDark: '#7C3AED',
+    secondary: '#06B6D4', accent: '#F472B6',
+    bg: '#1A1A2E', bgCard: '#2D2B55', border: '#2D2B55',
+    textPrimary: '#E8E6F0', textSecondary: '#B2BEC3', textMuted: '#636E72',
+    price: '25', priceType: 'gems', locked: true, dark: true
+  }
+];
+
+let activeThemeId = 'cosmic-purple';
+let previewThemeId = null;
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+const screenMap = {
+  'screen-hub': 0, 'screen-preview': 1, 'screen-success': 2
+};
+
+function navigateTo(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  const tabs = document.querySelectorAll('.screen-tab');
+  const idx = screenMap[screenId];
+  tabs.forEach((t, i) => t.classList.toggle('active', i === idx));
+
+  if (screenId === 'screen-success') {
+    launchConfetti();
+  }
+}
+
+// ============================================================
+// RENDER THEME GRID
+// ============================================================
+function renderThemeGrid() {
+  const grid = document.getElementById('themeGrid');
+  grid.innerHTML = '';
+  themes.forEach(t => {
+    const isActive = t.id === activeThemeId;
+    const card = document.createElement('div');
+    card.className = 'theme-card' + (isActive ? ' active-theme' : '') + (t.locked ? ' locked' : '');
+    card.onclick = () => openPreview(t.id);
+
+    let priceHTML = '';
+    if (t.priceType === 'free') {
+      priceHTML = '<span class="theme-price free"><i class="fas fa-check-circle"></i> FREE</span>';
+    } else if (t.priceType === 'coins') {
+      priceHTML = `<span class="theme-price coins"><i class="fas fa-coins"></i> ${t.price}</span>`;
+    } else {
+      priceHTML = `<span class="theme-price gems"><i class="fas fa-gem"></i> ${t.price}</span>`;
+    }
+
+    let badgeHTML = '';
+    if (isActive) {
+      badgeHTML = '<span class="theme-badge active-badge">ACTIVE</span>';
+    } else if (t.locked) {
+      badgeHTML = '<span class="theme-badge locked-badge"><i class="fas fa-lock"></i> LOCKED</span>';
+    } else {
+      badgeHTML = '<span class="theme-badge apply-badge">APPLY</span>';
+    }
+
+    card.innerHTML = `
+      <div class="theme-card-preview">
+        <div class="preview-gradient" style="background:linear-gradient(135deg, ${t.primary}, ${t.primaryDark})"></div>
+        <div class="preview-dots">
+          <div class="preview-dot" style="background:${t.secondary}"></div>
+          <div class="preview-dot" style="background:${t.accent}"></div>
+          <div class="preview-dot" style="background:${t.primaryLight}"></div>
+        </div>
+      </div>
+      <div class="theme-card-name">${t.name}</div>
+      <div class="theme-card-swatches">
+        <div class="theme-swatch" style="background:${t.primary}"></div>
+        <div class="theme-swatch" style="background:${t.primaryLight}"></div>
+        <div class="theme-swatch" style="background:${t.secondary}"></div>
+        <div class="theme-swatch" style="background:${t.accent}"></div>
+        <div class="theme-swatch" style="background:${t.bg};border-color:${t.border}"></div>
+      </div>
+      <div class="theme-card-footer">
+        ${priceHTML}
+        ${badgeHTML}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ============================================================
+// THEME PREVIEW
+// ============================================================
+function openPreview(themeId) {
+  previewThemeId = themeId;
+  const t = themes.find(x => x.id === themeId);
+  if (!t) return;
+
+  // Update preview title
+  document.getElementById('previewTitle').textContent = t.name + ' Preview';
+  document.getElementById('previewThemeName').textContent = t.name;
+
+  // Update mini mockup colors
+  const miniHeader = document.getElementById('miniHeader');
+  miniHeader.style.background = `linear-gradient(135deg, ${t.primary}, ${t.primaryDark})`;
+
+  const miniBody = document.getElementById('miniBody');
+  miniBody.style.background = t.bgCard;
+
+  const miniMockup = document.querySelector('.mini-mockup');
+  miniMockup.style.background = t.bg;
+  miniMockup.style.borderColor = t.border;
+
+  document.getElementById('miniSubj1').style.background = `linear-gradient(135deg, ${t.primary}, ${t.primaryDark})`;
+  document.getElementById('miniSubj2').style.background = `linear-gradient(135deg, ${t.secondary}, ${t.primaryDark})`;
+  document.getElementById('miniChallengeIcon').style.background = `linear-gradient(135deg, ${t.primary}, ${t.primaryDark})`;
+  document.getElementById('miniChallengeBtn').style.background = `linear-gradient(135deg, ${t.primary}, ${t.primaryDark})`;
+
+  // Update text colors in mini mockup for dark themes
+  const miniLabels = miniBody.querySelectorAll('.mini-section-label');
+  miniLabels.forEach(l => l.style.color = t.textSecondary);
+  const miniChallenge = document.getElementById('miniChallenge');
+  miniChallenge.style.borderColor = t.border;
+  miniChallenge.style.background = t.bgCard;
+  const mch4 = miniChallenge.querySelector('h4');
+  const mcp = miniChallenge.querySelector('p');
+  if (mch4) mch4.style.color = t.textPrimary;
+  if (mcp) mcp.style.color = t.textSecondary;
+
+  // Greeting text
+  const miniGreeting = miniHeader.querySelector('.mini-greeting');
+  const miniName = miniHeader.querySelector('.mini-name');
+  if (miniGreeting) miniGreeting.style.color = 'rgba(255,255,255,0.8)';
+  if (miniName) miniName.style.color = '#fff';
+
+  // Palette chips
+  const paletteRow = document.getElementById('previewPalette');
+  const colors = [t.primary, t.primaryLight, t.primaryDark, t.secondary, t.accent, t.bg, t.bgCard];
+  paletteRow.innerHTML = colors.map(c =>
+    `<div class="preview-palette-chip" style="background:${c};border-color:${c === '#FFFFFF' || c === '#FFF' ? '#eee' : 'rgba(0,0,0,0.06)'}"></div>`
+  ).join('');
+
+  // Update apply button
+  const applyBtn = document.getElementById('applyThemeBtn');
+  if (t.id === activeThemeId) {
+    applyBtn.innerHTML = '<i class="fas fa-check-circle"></i> Already Active';
+    applyBtn.style.opacity = '0.6';
+    applyBtn.style.pointerEvents = 'none';
+  } else if (t.locked) {
+    applyBtn.innerHTML = `<i class="fas fa-lock"></i> Unlock for ${t.price} ${t.priceType === 'gems' ? 'Gems' : 'Coins'}`;
+    applyBtn.style.opacity = '1';
+    applyBtn.style.pointerEvents = 'auto';
+  } else {
+    applyBtn.innerHTML = '<i class="fas fa-check-circle"></i> Apply Theme';
+    applyBtn.style.opacity = '1';
+    applyBtn.style.pointerEvents = 'auto';
+  }
+
+  // Temporarily apply preview colors to buttons
+  applyBtn.style.background = `linear-gradient(135deg, ${t.primary}, ${t.primaryDark})`;
+
+  navigateTo('screen-preview');
+}
+
+// ============================================================
+// APPLY THEME
+// ============================================================
+function applyTheme() {
+  if (!previewThemeId) return;
+  const t = themes.find(x => x.id === previewThemeId);
+  if (!t) return;
+
+  // If locked, simulate "unlock" (just unlock it for demo)
+  if (t.locked) {
+    t.locked = false;
+  }
+
+  activeThemeId = t.id;
+
+  // Update CSS custom properties
+  const root = document.documentElement;
+  root.style.setProperty('--color-primary', t.primary);
+  root.style.setProperty('--color-primary-light', t.primaryLight);
+  root.style.setProperty('--color-primary-dark', t.primaryDark);
+  root.style.setProperty('--color-secondary', t.secondary);
+  root.style.setProperty('--color-bg', t.bg);
+  root.style.setProperty('--color-bg-card', t.bgCard);
+  root.style.setProperty('--color-border', t.border);
+  root.style.setProperty('--color-text-primary', t.textPrimary);
+  root.style.setProperty('--color-text-secondary', t.textSecondary);
+  root.style.setProperty('--color-text-muted', t.textMuted);
+
+  // Update success screen
+  document.getElementById('successThemeName').textContent = t.name;
+  document.getElementById('successCheck').style.background = `linear-gradient(135deg, ${t.primary}, ${t.primaryDark})`;
+
+  const successSwatches = document.getElementById('successSwatches');
+  successSwatches.innerHTML = [t.primary, t.primaryLight, t.secondary, t.accent, t.bg].map(c =>
+    `<div class="success-swatch" style="background:${c}"></div>`
+  ).join('');
+
+  // Update current theme card
+  document.getElementById('currentThemeName').textContent = t.name;
+  document.getElementById('currentThemeIcon').style.background = `linear-gradient(135deg, ${t.primary}, ${t.primaryLight})`;
+  document.getElementById('currentThemeIcon').innerHTML = `<i class="fas ${t.icon}" style="color:white"></i>`;
+  document.getElementById('currentThemeSwatches').innerHTML = [t.primary, t.primaryLight, t.secondary, t.accent, t.bg].map(c =>
+    `<div class="mini-swatch" style="background:${c}"></div>`
+  ).join('');
+
+  // Update header gradient
+  document.querySelector('.theme-header').style.background = `linear-gradient(135deg, ${t.primary} 0%, ${t.primaryDark} 100%)`;
+  document.querySelector('.current-theme-card').style.borderColor = t.primary;
+
+  // Re-render grid
+  renderThemeGrid();
+
+  navigateTo('screen-success');
+}
+
+function finishApply() {
+  navigateTo('screen-hub');
+}
+
+// ============================================================
+// CONFETTI
+// ============================================================
+function launchConfetti() {
+  const container = document.getElementById('confettiContainer');
+  container.innerHTML = '';
+  const colors = ['#FF6B6B', '#FECA57', '#54A0FF', '#1DD1A1', '#A29BFE', '#FF9F43', '#FF6B81', '#00D2D3'];
+
+  for (let i = 0; i < 50; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.top = '-10px';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = (6 + Math.random() * 8) + 'px';
+    piece.style.height = (6 + Math.random() * 8) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.animationDelay = (Math.random() * 1.5) + 's';
+    piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+    container.appendChild(piece);
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderThemeGrid();
+</script>
+
+</body>
+</html>
