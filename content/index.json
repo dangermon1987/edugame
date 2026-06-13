@@ -1,0 +1,19 @@
+{
+  "format": "eduquest-manifest",
+  "packages": [
+    {
+      "id": "core",
+      "name": "EduQuest Core",
+      "description": "English, Math, Science & Art for ages 5-12.",
+      "cover": "🎓",
+      "file": "core.json"
+    },
+    {
+      "id": "space",
+      "name": "Space Explorers",
+      "description": "A mini space-science course (demo of swappable packs).",
+      "cover": "🚀",
+      "file": "space.json"
+    }
+  ]
+}

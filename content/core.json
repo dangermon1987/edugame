@@ -1,0 +1,1875 @@
+{
+  "format": "eduquest-content",
+  "formatVersion": 1,
+  "meta": {
+    "id": "core",
+    "name": "EduQuest Core",
+    "description": "English, Math, Science & Art for ages 5-12.",
+    "author": "EduQuest",
+    "version": "1.0.0",
+    "locale": "en",
+    "cover": "🎓",
+    "createdAt": "2026-06-14"
+  },
+  "app": {
+    "title": "EduQuest",
+    "tagline": "A learning adventure for curious kids!",
+    "dailyChallengeLessonId": "math-l2"
+  },
+  "economy": {
+    "startingCoins": 200,
+    "startingGems": 0
+  },
+  "defaultProfile": {
+    "name": "Alex",
+    "avatar": "🦊",
+    "age": 8
+  },
+  "subjects": [
+    {
+      "id": "english",
+      "name": "English",
+      "description": "Vocabulary & Grammar",
+      "icon": "fas fa-book-open",
+      "emoji": "📚",
+      "colorClass": "english"
+    },
+    {
+      "id": "math",
+      "name": "Math",
+      "description": "Addition & Shapes",
+      "icon": "fas fa-calculator",
+      "emoji": "🔢",
+      "colorClass": "math"
+    },
+    {
+      "id": "science",
+      "name": "Science",
+      "description": "Animals & Nature",
+      "icon": "fas fa-flask",
+      "emoji": "🔬",
+      "colorClass": "science"
+    },
+    {
+      "id": "art",
+      "name": "Art",
+      "description": "Colors & Drawing",
+      "icon": "fas fa-palette",
+      "emoji": "🎨",
+      "colorClass": "art"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "english-l1",
+      "subjectId": "english",
+      "order": 1,
+      "title": "ABCs & Phonics",
+      "description": "Learn the alphabet sounds",
+      "estMinutes": 15,
+      "coinReward": 50,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "Phonics",
+          "prompt": "Which letter makes the \"mmm\" sound?",
+          "options": [
+            "M",
+            "N",
+            "B",
+            "P"
+          ],
+          "correctIndex": 0,
+          "hint": "Like in \"mom\""
+        },
+        {
+          "id": "q2",
+          "type": "Phonics",
+          "prompt": "What sound does \"S\" make?",
+          "options": [
+            "ssss",
+            "zzz",
+            "fff",
+            "kkk"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q3",
+          "type": "Vocabulary",
+          "prompt": "Which word starts with \"B\"?",
+          "options": [
+            "Ball",
+            "Cat",
+            "Dog",
+            "Fish"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q4",
+          "type": "Phonics",
+          "prompt": "Which letter comes after \"C\"?",
+          "options": [
+            "D",
+            "B",
+            "E",
+            "A"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "english-l2",
+      "subjectId": "english",
+      "order": 2,
+      "title": "First Words",
+      "description": "Common sight words & spelling",
+      "estMinutes": 20,
+      "coinReward": 75,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q5",
+          "type": "Spelling",
+          "prompt": "How do you spell the color of the sky?",
+          "options": [
+            "blue",
+            "bloo",
+            "blew",
+            "blu"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q6",
+          "type": "Vocabulary",
+          "prompt": "A baby dog is called a…",
+          "options": [
+            "puppy",
+            "kitten",
+            "cub",
+            "foal"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q7",
+          "type": "Sight Words",
+          "prompt": "Pick the correct word: \"I ___ happy.\"",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "be"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q8",
+          "type": "Vocabulary",
+          "prompt": "Which one is a fruit?",
+          "options": [
+            "apple",
+            "chair",
+            "shoe",
+            "car"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "english-l3",
+      "subjectId": "english",
+      "order": 3,
+      "title": "Sentence Building",
+      "description": "Put words together to make sentences",
+      "estMinutes": 20,
+      "coinReward": 100,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "q9",
+          "type": "Vocabulary",
+          "prompt": "Which word means \"very happy\"?",
+          "options": [
+            "Sad",
+            "Joyful",
+            "Angry",
+            "Tired"
+          ],
+          "correctIndex": 1,
+          "hint": "Choose the best answer"
+        },
+        {
+          "id": "q10",
+          "type": "Grammar",
+          "prompt": "Which sentence is correct?",
+          "options": [
+            "The cat run.",
+            "The cat runs.",
+            "The cat running.",
+            "Cat the runs."
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "q11",
+          "type": "Grammar",
+          "prompt": "Pick the question.",
+          "options": [
+            "I like cake.",
+            "Do you like cake?",
+            "Cake is good.",
+            "We ate cake."
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "q12",
+          "type": "Vocabulary",
+          "prompt": "The opposite of \"big\" is…",
+          "options": [
+            "small",
+            "tall",
+            "wide",
+            "huge"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "english-l4",
+      "subjectId": "english",
+      "order": 4,
+      "title": "Grammar Basics",
+      "description": "Nouns, verbs & adjectives",
+      "estMinutes": 20,
+      "coinReward": 100,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q13",
+          "type": "Grammar",
+          "prompt": "Which word is a noun?",
+          "options": [
+            "quickly",
+            "dog",
+            "jump",
+            "happy"
+          ],
+          "correctIndex": 1,
+          "hint": "A noun is a person, place or thing"
+        },
+        {
+          "id": "q14",
+          "type": "Grammar",
+          "prompt": "Which word is an action (verb)?",
+          "options": [
+            "table",
+            "swim",
+            "blue",
+            "soft"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "q15",
+          "type": "Grammar",
+          "prompt": "Which word describes (adjective)?",
+          "options": [
+            "run",
+            "shiny",
+            "eat",
+            "box"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "q16",
+          "type": "Grammar",
+          "prompt": "Pick the plural of \"child\".",
+          "options": [
+            "childs",
+            "children",
+            "childes",
+            "child"
+          ],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "math-l1",
+      "subjectId": "math",
+      "order": 1,
+      "title": "Counting Fun",
+      "description": "Count from 1 to 20",
+      "estMinutes": 12,
+      "coinReward": 50,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q17",
+          "type": "Counting",
+          "prompt": "What comes after 7?",
+          "options": [
+            "8",
+            "6",
+            "9",
+            "5"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q18",
+          "type": "Counting",
+          "prompt": "How many fingers on one hand?",
+          "options": [
+            "5",
+            "4",
+            "6",
+            "10"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q19",
+          "type": "Counting",
+          "prompt": "Count: 🍎🍎🍎. How many apples?",
+          "options": [
+            "3",
+            "2",
+            "4",
+            "5"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q20",
+          "type": "Counting",
+          "prompt": "What is the biggest number?",
+          "options": [
+            "12",
+            "9",
+            "7",
+            "3"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "math-l2",
+      "subjectId": "math",
+      "order": 2,
+      "title": "Addition Adventure",
+      "description": "Add numbers up to 20",
+      "estMinutes": 18,
+      "coinReward": 80,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q21",
+          "type": "Addition",
+          "prompt": "2 + 3 = ?",
+          "options": [
+            "5",
+            "4",
+            "6",
+            "7"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q22",
+          "type": "Addition",
+          "prompt": "6 + 4 = ?",
+          "options": [
+            "10",
+            "9",
+            "11",
+            "8"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q23",
+          "type": "Addition",
+          "prompt": "7 + 5 = ?",
+          "options": [
+            "12",
+            "11",
+            "13",
+            "10"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q24",
+          "type": "Addition",
+          "prompt": "9 + 9 = ?",
+          "options": [
+            "18",
+            "16",
+            "19",
+            "17"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "math-l3",
+      "subjectId": "math",
+      "order": 3,
+      "title": "Subtraction Safari",
+      "description": "Take away numbers",
+      "estMinutes": 18,
+      "coinReward": 90,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q25",
+          "type": "Subtraction",
+          "prompt": "5 - 2 = ?",
+          "options": [
+            "3",
+            "2",
+            "4",
+            "1"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q26",
+          "type": "Subtraction",
+          "prompt": "10 - 4 = ?",
+          "options": [
+            "6",
+            "5",
+            "7",
+            "8"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q27",
+          "type": "Subtraction",
+          "prompt": "8 - 8 = ?",
+          "options": [
+            "0",
+            "1",
+            "8",
+            "16"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q28",
+          "type": "Subtraction",
+          "prompt": "15 - 5 = ?",
+          "options": [
+            "10",
+            "9",
+            "11",
+            "20"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "math-l4",
+      "subjectId": "math",
+      "order": 4,
+      "title": "Shapes & Patterns",
+      "description": "Circles, squares & more",
+      "estMinutes": 15,
+      "coinReward": 100,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "q29",
+          "type": "Shapes",
+          "prompt": "How many sides does a triangle have?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "2"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q30",
+          "type": "Shapes",
+          "prompt": "Which shape is round?",
+          "options": [
+            "Circle",
+            "Square",
+            "Triangle",
+            "Rectangle"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q31",
+          "type": "Shapes",
+          "prompt": "A square has how many equal sides?",
+          "options": [
+            "4",
+            "3",
+            "2",
+            "5"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q32",
+          "type": "Patterns",
+          "prompt": "Finish: 🔴🔵🔴🔵🔴 ?",
+          "options": [
+            "🔵",
+            "🔴",
+            "🟢",
+            "🟡"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "science-l1",
+      "subjectId": "science",
+      "order": 1,
+      "title": "Amazing Animals",
+      "description": "Learn about animals",
+      "estMinutes": 15,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q33",
+          "type": "Animals",
+          "prompt": "Which animal says \"moo\"?",
+          "options": [
+            "Cow",
+            "Dog",
+            "Cat",
+            "Duck"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q34",
+          "type": "Animals",
+          "prompt": "Which animal can fly?",
+          "options": [
+            "Bird",
+            "Fish",
+            "Snake",
+            "Frog"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q35",
+          "type": "Animals",
+          "prompt": "Where do fish live?",
+          "options": [
+            "Water",
+            "Trees",
+            "Caves",
+            "Sky"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q36",
+          "type": "Animals",
+          "prompt": "A baby cat is a…",
+          "options": [
+            "kitten",
+            "puppy",
+            "calf",
+            "chick"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "science-l2",
+      "subjectId": "science",
+      "order": 2,
+      "title": "Our Planet",
+      "description": "Earth, water & sky",
+      "estMinutes": 18,
+      "coinReward": 80,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q37",
+          "type": "Nature",
+          "prompt": "What do plants need to grow?",
+          "options": [
+            "Sunlight",
+            "Candy",
+            "Plastic",
+            "Darkness"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q38",
+          "type": "Nature",
+          "prompt": "What falls from clouds when it rains?",
+          "options": [
+            "Water",
+            "Sand",
+            "Rocks",
+            "Leaves"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q39",
+          "type": "Nature",
+          "prompt": "Which is a planet?",
+          "options": [
+            "Earth",
+            "Sun",
+            "Moon",
+            "Cloud"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q40",
+          "type": "Nature",
+          "prompt": "What color is grass?",
+          "options": [
+            "Green",
+            "Blue",
+            "Red",
+            "Purple"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "science-l3",
+      "subjectId": "science",
+      "order": 3,
+      "title": "The Human Body",
+      "description": "How our body works",
+      "estMinutes": 18,
+      "coinReward": 90,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q41",
+          "type": "Body",
+          "prompt": "What do we use to see?",
+          "options": [
+            "Eyes",
+            "Ears",
+            "Nose",
+            "Hands"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q42",
+          "type": "Body",
+          "prompt": "How many fingers do you have in total?",
+          "options": [
+            "10",
+            "5",
+            "8",
+            "12"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q43",
+          "type": "Body",
+          "prompt": "What pumps blood in your body?",
+          "options": [
+            "Heart",
+            "Brain",
+            "Lungs",
+            "Stomach"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q44",
+          "type": "Body",
+          "prompt": "We hear with our…",
+          "options": [
+            "ears",
+            "eyes",
+            "teeth",
+            "feet"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "science-l4",
+      "subjectId": "science",
+      "order": 4,
+      "title": "Weather Watch",
+      "description": "Sun, rain & seasons",
+      "estMinutes": 15,
+      "coinReward": 100,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "q45",
+          "type": "Weather",
+          "prompt": "What do you need on a rainy day?",
+          "options": [
+            "Umbrella",
+            "Sunglasses",
+            "Sled",
+            "Fan"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q46",
+          "type": "Weather",
+          "prompt": "Which season is the coldest?",
+          "options": [
+            "Winter",
+            "Summer",
+            "Spring",
+            "Fall"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q47",
+          "type": "Weather",
+          "prompt": "The sun gives us…",
+          "options": [
+            "Light & heat",
+            "Rain",
+            "Snow",
+            "Wind"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q48",
+          "type": "Weather",
+          "prompt": "What shape do snowflakes have?",
+          "options": [
+            "Six points",
+            "Square",
+            "Round ball",
+            "Triangle"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "art-l1",
+      "subjectId": "art",
+      "order": 1,
+      "title": "Color Splash",
+      "description": "Primary & mixed colors",
+      "estMinutes": 12,
+      "coinReward": 50,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q49",
+          "type": "Colors",
+          "prompt": "Red + Yellow = ?",
+          "options": [
+            "Orange",
+            "Green",
+            "Purple",
+            "Brown"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q50",
+          "type": "Colors",
+          "prompt": "Blue + Yellow = ?",
+          "options": [
+            "Green",
+            "Orange",
+            "Pink",
+            "Gray"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q51",
+          "type": "Colors",
+          "prompt": "Which is a primary color?",
+          "options": [
+            "Red",
+            "Orange",
+            "Green",
+            "Purple"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q52",
+          "type": "Colors",
+          "prompt": "Red + Blue = ?",
+          "options": [
+            "Purple",
+            "Green",
+            "Yellow",
+            "Black"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "art-l2",
+      "subjectId": "art",
+      "order": 2,
+      "title": "Shapes in Art",
+      "description": "Draw with basic shapes",
+      "estMinutes": 15,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q53",
+          "type": "Drawing",
+          "prompt": "Which shape makes a good sun?",
+          "options": [
+            "Circle",
+            "Square",
+            "Triangle",
+            "Line"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q54",
+          "type": "Drawing",
+          "prompt": "A house roof is often a…",
+          "options": [
+            "Triangle",
+            "Circle",
+            "Oval",
+            "Star"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q55",
+          "type": "Drawing",
+          "prompt": "How many points does a star have?",
+          "options": [
+            "5",
+            "3",
+            "4",
+            "6"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q56",
+          "type": "Drawing",
+          "prompt": "Which tool do we paint with?",
+          "options": [
+            "Brush",
+            "Spoon",
+            "Hammer",
+            "Cup"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "art-l3",
+      "subjectId": "art",
+      "order": 3,
+      "title": "Famous Art",
+      "description": "Artists & masterpieces",
+      "estMinutes": 18,
+      "coinReward": 90,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "q57",
+          "type": "Art History",
+          "prompt": "What do artists use to make sculptures?",
+          "options": [
+            "Clay",
+            "Water",
+            "Air",
+            "Sound"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q58",
+          "type": "Art History",
+          "prompt": "A painting of a person is a…",
+          "options": [
+            "Portrait",
+            "Landscape",
+            "Pattern",
+            "Doodle"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q59",
+          "type": "Art History",
+          "prompt": "Which is a warm color?",
+          "options": [
+            "Red",
+            "Blue",
+            "Purple",
+            "Teal"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q60",
+          "type": "Art History",
+          "prompt": "A picture of nature scenery is a…",
+          "options": [
+            "Landscape",
+            "Portrait",
+            "Selfie",
+            "Logo"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "art-l4",
+      "subjectId": "art",
+      "order": 4,
+      "title": "Create & Craft",
+      "description": "Make your own art",
+      "estMinutes": 20,
+      "coinReward": 100,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "q61",
+          "type": "Craft",
+          "prompt": "What do we use to cut paper?",
+          "options": [
+            "Scissors",
+            "Spoon",
+            "Pencil",
+            "Cup"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q62",
+          "type": "Craft",
+          "prompt": "Glue is used to…",
+          "options": [
+            "Stick things",
+            "Cut things",
+            "Paint things",
+            "Erase things"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q63",
+          "type": "Craft",
+          "prompt": "Which makes pictures stick on a fridge?",
+          "options": [
+            "Magnet",
+            "Water",
+            "Air",
+            "Light"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "q64",
+          "type": "Craft",
+          "prompt": "Origami is the art of folding…",
+          "options": [
+            "Paper",
+            "Metal",
+            "Glass",
+            "Stone"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    }
+  ],
+  "decks": [
+    {
+      "id": "deck-animals",
+      "subject": "science",
+      "title": "Animal Friends",
+      "description": "Meet animals from around the world",
+      "iconEmoji": "🦁",
+      "difficulty": "Easy",
+      "cards": [
+        {
+          "id": "c1",
+          "deckId": "deck-animals",
+          "frontEmoji": "🦁",
+          "frontText": "What animal is this?",
+          "backContent": "Lion",
+          "backDetails": "Lions are big cats that live in groups called prides."
+        },
+        {
+          "id": "c2",
+          "deckId": "deck-animals",
+          "frontEmoji": "🐘",
+          "frontText": "What animal is this?",
+          "backContent": "Elephant",
+          "backDetails": "Elephants are the largest land animals and have trunks."
+        },
+        {
+          "id": "c3",
+          "deckId": "deck-animals",
+          "frontEmoji": "🐧",
+          "frontText": "What animal is this?",
+          "backContent": "Penguin",
+          "backDetails": "Penguins are birds that swim but cannot fly."
+        },
+        {
+          "id": "c4",
+          "deckId": "deck-animals",
+          "frontEmoji": "🦒",
+          "frontText": "What animal is this?",
+          "backContent": "Giraffe",
+          "backDetails": "Giraffes have very long necks to reach tall leaves."
+        },
+        {
+          "id": "c5",
+          "deckId": "deck-animals",
+          "frontEmoji": "🐢",
+          "frontText": "What animal is this?",
+          "backContent": "Turtle",
+          "backDetails": "Turtles carry their homes (shells) on their backs."
+        },
+        {
+          "id": "c6",
+          "deckId": "deck-animals",
+          "frontEmoji": "🦋",
+          "frontText": "What animal is this?",
+          "backContent": "Butterfly",
+          "backDetails": "Butterflies start life as caterpillars."
+        }
+      ]
+    },
+    {
+      "id": "deck-sight-words",
+      "subject": "english",
+      "title": "Sight Words",
+      "description": "Words you should know by sight",
+      "iconEmoji": "📖",
+      "difficulty": "Easy",
+      "cards": [
+        {
+          "id": "c7",
+          "deckId": "deck-sight-words",
+          "frontEmoji": "👀",
+          "frontText": "Read this word: \"the\"",
+          "backContent": "the",
+          "backDetails": "\"The\" is the most common word in English."
+        },
+        {
+          "id": "c8",
+          "deckId": "deck-sight-words",
+          "frontEmoji": "👀",
+          "frontText": "Read this word: \"and\"",
+          "backContent": "and",
+          "backDetails": "\"And\" joins two things together."
+        },
+        {
+          "id": "c9",
+          "deckId": "deck-sight-words",
+          "frontEmoji": "👀",
+          "frontText": "Read this word: \"you\"",
+          "backContent": "you",
+          "backDetails": "\"You\" means the person being spoken to."
+        },
+        {
+          "id": "c10",
+          "deckId": "deck-sight-words",
+          "frontEmoji": "👀",
+          "frontText": "Read this word: \"play\"",
+          "backContent": "play",
+          "backDetails": "\"Play\" is a fun action word."
+        },
+        {
+          "id": "c11",
+          "deckId": "deck-sight-words",
+          "frontEmoji": "👀",
+          "frontText": "Read this word: \"happy\"",
+          "backContent": "happy",
+          "backDetails": "\"Happy\" means feeling good and joyful."
+        },
+        {
+          "id": "c12",
+          "deckId": "deck-sight-words",
+          "frontEmoji": "👀",
+          "frontText": "Read this word: \"friend\"",
+          "backContent": "friend",
+          "backDetails": "A \"friend\" is someone you like to be with."
+        }
+      ]
+    },
+    {
+      "id": "deck-times-tables",
+      "subject": "math",
+      "title": "Times Tables (2s)",
+      "description": "Multiplication by 2",
+      "iconEmoji": "✖️",
+      "difficulty": "Medium",
+      "cards": [
+        {
+          "id": "c13",
+          "deckId": "deck-times-tables",
+          "frontEmoji": "2️⃣",
+          "frontText": "2 × 2 = ?",
+          "backContent": "4",
+          "backDetails": "Two groups of two make four."
+        },
+        {
+          "id": "c14",
+          "deckId": "deck-times-tables",
+          "frontEmoji": "2️⃣",
+          "frontText": "2 × 3 = ?",
+          "backContent": "6",
+          "backDetails": "Two groups of three make six."
+        },
+        {
+          "id": "c15",
+          "deckId": "deck-times-tables",
+          "frontEmoji": "2️⃣",
+          "frontText": "2 × 4 = ?",
+          "backContent": "8",
+          "backDetails": "Two groups of four make eight."
+        },
+        {
+          "id": "c16",
+          "deckId": "deck-times-tables",
+          "frontEmoji": "2️⃣",
+          "frontText": "2 × 5 = ?",
+          "backContent": "10",
+          "backDetails": "Two groups of five make ten."
+        },
+        {
+          "id": "c17",
+          "deckId": "deck-times-tables",
+          "frontEmoji": "2️⃣",
+          "frontText": "2 × 6 = ?",
+          "backContent": "12",
+          "backDetails": "Two groups of six make twelve."
+        },
+        {
+          "id": "c18",
+          "deckId": "deck-times-tables",
+          "frontEmoji": "2️⃣",
+          "frontText": "2 × 7 = ?",
+          "backContent": "14",
+          "backDetails": "Two groups of seven make fourteen."
+        }
+      ]
+    },
+    {
+      "id": "deck-colors",
+      "subject": "art",
+      "title": "Color Mixing",
+      "description": "How colors combine",
+      "iconEmoji": "🎨",
+      "difficulty": "Easy",
+      "cards": [
+        {
+          "id": "c19",
+          "deckId": "deck-colors",
+          "frontEmoji": "🔴",
+          "frontText": "Red + Yellow = ?",
+          "backContent": "Orange",
+          "backDetails": "Mixing red and yellow paint makes orange."
+        },
+        {
+          "id": "c20",
+          "deckId": "deck-colors",
+          "frontEmoji": "🔵",
+          "frontText": "Blue + Yellow = ?",
+          "backContent": "Green",
+          "backDetails": "Mixing blue and yellow paint makes green."
+        },
+        {
+          "id": "c21",
+          "deckId": "deck-colors",
+          "frontEmoji": "🟣",
+          "frontText": "Red + Blue = ?",
+          "backContent": "Purple",
+          "backDetails": "Mixing red and blue paint makes purple."
+        },
+        {
+          "id": "c22",
+          "deckId": "deck-colors",
+          "frontEmoji": "⚫",
+          "frontText": "All colors mixed = ?",
+          "backContent": "Brown/Black",
+          "backDetails": "Mixing many colors makes a dark muddy color."
+        },
+        {
+          "id": "c23",
+          "deckId": "deck-colors",
+          "frontEmoji": "⚪",
+          "frontText": "No color / paper = ?",
+          "backContent": "White",
+          "backDetails": "White is the blank canvas color."
+        },
+        {
+          "id": "c24",
+          "deckId": "deck-colors",
+          "frontEmoji": "🌈",
+          "frontText": "How many colors in a rainbow?",
+          "backContent": "7",
+          "backDetails": "Red, orange, yellow, green, blue, indigo, violet."
+        }
+      ]
+    }
+  ],
+  "shopItems": [
+    {
+      "id": "av-lion",
+      "category": "avatars",
+      "name": "Lion King",
+      "preview": "🦁",
+      "price": 500,
+      "currency": "coins",
+      "rarity": "new",
+      "payload": "🦁"
+    },
+    {
+      "id": "av-unicorn",
+      "category": "avatars",
+      "name": "Unicorn Magic",
+      "preview": "🦄",
+      "price": 15,
+      "currency": "gems",
+      "rarity": "rare",
+      "payload": "🦄"
+    },
+    {
+      "id": "av-dragon",
+      "category": "avatars",
+      "name": "Baby Dragon",
+      "preview": "🐉",
+      "price": 800,
+      "currency": "coins",
+      "rarity": "hot",
+      "payload": "🐉"
+    },
+    {
+      "id": "av-cat",
+      "category": "avatars",
+      "name": "Cool Cat",
+      "preview": "😺",
+      "price": 350,
+      "currency": "coins",
+      "payload": "😺"
+    },
+    {
+      "id": "av-robot",
+      "category": "avatars",
+      "name": "Robo Buddy",
+      "preview": "🤖",
+      "price": 20,
+      "currency": "gems",
+      "rarity": "rare",
+      "payload": "🤖"
+    },
+    {
+      "id": "av-wizard",
+      "category": "avatars",
+      "name": "Wizard",
+      "preview": "🧙",
+      "price": 600,
+      "currency": "coins",
+      "rarity": "new",
+      "payload": "🧙"
+    },
+    {
+      "id": "av-panda",
+      "category": "avatars",
+      "name": "Panda Pal",
+      "preview": "🐼",
+      "price": 400,
+      "currency": "coins",
+      "payload": "🐼"
+    },
+    {
+      "id": "av-owl",
+      "category": "avatars",
+      "name": "Wise Owl",
+      "preview": "🦉",
+      "price": 450,
+      "currency": "coins",
+      "payload": "🦉"
+    },
+    {
+      "id": "th-ocean",
+      "category": "themes",
+      "name": "Ocean Blue",
+      "preview": "🌊",
+      "price": 300,
+      "currency": "coins",
+      "payload": "ocean"
+    },
+    {
+      "id": "th-forest",
+      "category": "themes",
+      "name": "Forest Green",
+      "preview": "🌲",
+      "price": 300,
+      "currency": "coins",
+      "payload": "forest"
+    },
+    {
+      "id": "th-sunset",
+      "category": "themes",
+      "name": "Sunset",
+      "preview": "🌅",
+      "price": 400,
+      "currency": "coins",
+      "rarity": "hot",
+      "payload": "sunset"
+    },
+    {
+      "id": "th-candy",
+      "category": "themes",
+      "name": "Candy Pop",
+      "preview": "🍭",
+      "price": 10,
+      "currency": "gems",
+      "rarity": "rare",
+      "payload": "candy"
+    },
+    {
+      "id": "th-midnight",
+      "category": "themes",
+      "name": "Midnight",
+      "preview": "🌙",
+      "price": 18,
+      "currency": "gems",
+      "rarity": "rare",
+      "payload": "midnight"
+    },
+    {
+      "id": "pet-dog",
+      "category": "pets",
+      "name": "Puppy",
+      "preview": "🐶",
+      "price": 700,
+      "currency": "coins",
+      "rarity": "new",
+      "payload": "🐶"
+    },
+    {
+      "id": "pet-fox",
+      "category": "pets",
+      "name": "Fox Kit",
+      "preview": "🦊",
+      "price": 25,
+      "currency": "gems",
+      "rarity": "rare",
+      "payload": "🦊"
+    },
+    {
+      "id": "pet-dino",
+      "category": "pets",
+      "name": "Dino",
+      "preview": "🦕",
+      "price": 30,
+      "currency": "gems",
+      "rarity": "rare",
+      "payload": "🦕"
+    },
+    {
+      "id": "pet-bunny",
+      "category": "pets",
+      "name": "Bunny",
+      "preview": "🐰",
+      "price": 550,
+      "currency": "coins",
+      "payload": "🐰"
+    },
+    {
+      "id": "pu-freeze",
+      "category": "powerups",
+      "name": "Streak Freeze",
+      "preview": "🧊",
+      "price": 200,
+      "currency": "coins",
+      "payload": "freeze"
+    },
+    {
+      "id": "pu-hint",
+      "category": "powerups",
+      "name": "Hint Pack",
+      "preview": "💡",
+      "price": 150,
+      "currency": "coins",
+      "payload": "hint"
+    },
+    {
+      "id": "pu-double",
+      "category": "powerups",
+      "name": "Double XP",
+      "preview": "⚡",
+      "price": 12,
+      "currency": "gems",
+      "rarity": "hot",
+      "payload": "double"
+    },
+    {
+      "id": "pu-heart",
+      "category": "powerups",
+      "name": "Extra Heart",
+      "preview": "❤️",
+      "price": 250,
+      "currency": "coins",
+      "payload": "heart"
+    }
+  ],
+  "themes": [
+    {
+      "id": "",
+      "name": "EduQuest Purple",
+      "emoji": "💜",
+      "description": "The classic look",
+      "swatch": [
+        "#6C5CE7",
+        "#A29BFE",
+        "#FECA57"
+      ]
+    },
+    {
+      "id": "ocean",
+      "name": "Ocean Blue",
+      "emoji": "🌊",
+      "description": "Cool and calm",
+      "swatch": [
+        "#2e86de",
+        "#54a0ff",
+        "#1dd1a1"
+      ]
+    },
+    {
+      "id": "forest",
+      "name": "Forest Green",
+      "emoji": "🌲",
+      "description": "Fresh and natural",
+      "swatch": [
+        "#10ac84",
+        "#1dd1a1",
+        "#feca57"
+      ]
+    },
+    {
+      "id": "sunset",
+      "name": "Sunset",
+      "emoji": "🌅",
+      "description": "Warm and bright",
+      "swatch": [
+        "#ee5a24",
+        "#ff9f43",
+        "#feca57"
+      ]
+    },
+    {
+      "id": "candy",
+      "name": "Candy Pop",
+      "emoji": "🍭",
+      "description": "Sweet and fun",
+      "swatch": [
+        "#ff6b81",
+        "#ff9ff3",
+        "#feca57"
+      ]
+    },
+    {
+      "id": "midnight",
+      "name": "Midnight",
+      "emoji": "🌙",
+      "description": "Dark mode magic",
+      "swatch": [
+        "#5f27cd",
+        "#a29bfe",
+        "#feca57"
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "id": "first-win",
+      "name": "First Win",
+      "emoji": "🏆",
+      "description": "Complete your first lesson",
+      "criteria": {
+        "stat": "lessonsCompleted",
+        "gte": 1
+      }
+    },
+    {
+      "id": "streak-7",
+      "name": "7-Day Streak",
+      "emoji": "🔥",
+      "description": "Keep a 7-day streak",
+      "criteria": {
+        "stat": "streak",
+        "gte": 7
+      }
+    },
+    {
+      "id": "bookworm",
+      "name": "Bookworm",
+      "emoji": "📚",
+      "description": "Complete 10 lessons",
+      "criteria": {
+        "stat": "lessonsCompleted",
+        "gte": 10
+      }
+    },
+    {
+      "id": "speed-star",
+      "name": "Speed Star",
+      "emoji": "⚡",
+      "description": "Win a compete match",
+      "criteria": {
+        "stat": "competeWins",
+        "gte": 1
+      }
+    },
+    {
+      "id": "perfect-10",
+      "name": "Perfect 10",
+      "emoji": "💯",
+      "description": "Get a perfect lesson score",
+      "criteria": {
+        "stat": "perfectLessons",
+        "gte": 1
+      }
+    },
+    {
+      "id": "sharpshooter",
+      "name": "Sharpshooter",
+      "emoji": "🎯",
+      "description": "Reach 90% average accuracy",
+      "criteria": {
+        "stat": "avgAccuracy",
+        "gte": 0.9,
+        "minSamples": 3
+      }
+    },
+    {
+      "id": "champion",
+      "name": "Champion",
+      "emoji": "👑",
+      "description": "Win 5 compete matches",
+      "criteria": {
+        "stat": "competeWins",
+        "gte": 5
+      }
+    },
+    {
+      "id": "all-stars",
+      "name": "All Stars",
+      "emoji": "🌟",
+      "description": "Earn 3 stars on 5 lessons",
+      "criteria": {
+        "stat": "threeStarLessons",
+        "gte": 5
+      }
+    },
+    {
+      "id": "collector",
+      "name": "Collector",
+      "emoji": "🛍️",
+      "description": "Own 5 shop items",
+      "criteria": {
+        "stat": "ownedItems",
+        "gte": 5
+      }
+    },
+    {
+      "id": "rich",
+      "name": "Coin Master",
+      "emoji": "🪙",
+      "description": "Save up 1000 coins",
+      "criteria": {
+        "stat": "coins",
+        "gte": 1000
+      }
+    },
+    {
+      "id": "scholar",
+      "name": "Scholar",
+      "emoji": "🎓",
+      "description": "Reach 2000 XP",
+      "criteria": {
+        "stat": "xp",
+        "gte": 2000
+      }
+    },
+    {
+      "id": "card-master",
+      "name": "Card Master",
+      "emoji": "🃏",
+      "description": "Master 10 flashcards",
+      "criteria": {
+        "stat": "masteredCards",
+        "gte": 10
+      }
+    }
+  ],
+  "stickers": [
+    {
+      "id": "st-lion",
+      "name": "Lion King",
+      "emoji": "🦁",
+      "rarity": "shiny",
+      "collection": "Animals"
+    },
+    {
+      "id": "st-book",
+      "name": "Bookworm",
+      "emoji": "📖",
+      "rarity": "common",
+      "collection": "English"
+    },
+    {
+      "id": "st-rainbow",
+      "name": "Rainbow",
+      "emoji": "🌈",
+      "rarity": "rare",
+      "collection": "Art"
+    },
+    {
+      "id": "st-butterfly",
+      "name": "Butterfly",
+      "emoji": "🦋",
+      "rarity": "shiny",
+      "collection": "Animals"
+    },
+    {
+      "id": "st-sunflower",
+      "name": "Sunflower",
+      "emoji": "🌻",
+      "rarity": "common",
+      "collection": "Science"
+    },
+    {
+      "id": "st-castle",
+      "name": "Castle",
+      "emoji": "🏰",
+      "rarity": "epic",
+      "collection": "Adventure"
+    },
+    {
+      "id": "st-rocket",
+      "name": "Rocket",
+      "emoji": "🚀",
+      "rarity": "epic",
+      "collection": "Science"
+    },
+    {
+      "id": "st-star",
+      "name": "Gold Star",
+      "emoji": "⭐",
+      "rarity": "common",
+      "collection": "Rewards"
+    },
+    {
+      "id": "st-numbers",
+      "name": "Numbers",
+      "emoji": "🔢",
+      "rarity": "common",
+      "collection": "Math"
+    },
+    {
+      "id": "st-abacus",
+      "name": "Abacus",
+      "emoji": "🧮",
+      "rarity": "shiny",
+      "collection": "Math"
+    },
+    {
+      "id": "st-geometry",
+      "name": "Geometry",
+      "emoji": "📐",
+      "rarity": "rare",
+      "collection": "Math"
+    },
+    {
+      "id": "st-dice",
+      "name": "Lucky Dice",
+      "emoji": "🎲",
+      "rarity": "common",
+      "collection": "Math"
+    },
+    {
+      "id": "st-clock",
+      "name": "Clock",
+      "emoji": "⏰",
+      "rarity": "common",
+      "collection": "Math"
+    },
+    {
+      "id": "st-money",
+      "name": "Money",
+      "emoji": "💰",
+      "rarity": "rare",
+      "collection": "Math"
+    },
+    {
+      "id": "st-unicorn",
+      "name": "Unicorn",
+      "emoji": "🦄",
+      "rarity": "shiny",
+      "collection": "Rewards"
+    },
+    {
+      "id": "st-crown",
+      "name": "Crown",
+      "emoji": "👑",
+      "rarity": "epic",
+      "collection": "Rewards"
+    }
+  ],
+  "arcadeGames": [
+    {
+      "id": "memory",
+      "title": "Memory Match",
+      "desc": "Find matching pairs of words & pictures!",
+      "icon": "🃏",
+      "bg": "#EDE7FF",
+      "tags": [
+        [
+          "English",
+          "#E0FFF5",
+          "var(--color-accent-mint)"
+        ],
+        [
+          "2-5 min",
+          "#F0EEF8",
+          "var(--color-primary)"
+        ]
+      ],
+      "badge": "POPULAR",
+      "engine": "memory"
+    },
+    {
+      "id": "scramble",
+      "title": "Word Scramble",
+      "desc": "Unscramble the jumbled letters",
+      "icon": "🔤",
+      "bg": "#FFE8E8",
+      "tags": [
+        [
+          "English",
+          "#E0FFF5",
+          "var(--color-accent-mint)"
+        ],
+        [
+          "3 min",
+          "#F0EEF8",
+          "var(--color-primary)"
+        ]
+      ],
+      "engine": "none"
+    },
+    {
+      "id": "bubbles",
+      "title": "Math Bubbles",
+      "desc": "Pop the bubble with the correct answer",
+      "icon": "🫧",
+      "bg": "#E0F8F8",
+      "tags": [
+        [
+          "Math",
+          "#FFE8E8",
+          "var(--color-secondary)"
+        ],
+        [
+          "2 min",
+          "#F0EEF8",
+          "var(--color-primary)"
+        ]
+      ],
+      "badge": "NEW",
+      "engine": "none"
+    },
+    {
+      "id": "spelling",
+      "title": "Speed Spelling Bee",
+      "desc": "Type the word you hear as fast as you can!",
+      "icon": "🐝",
+      "bg": "#FFF2E5",
+      "tags": [
+        [
+          "English",
+          "#E0FFF5",
+          "var(--color-accent-mint)"
+        ],
+        [
+          "5 min",
+          "#F0EEF8",
+          "var(--color-primary)"
+        ]
+      ],
+      "engine": "none"
+    }
+  ],
+  "pet": {
+    "species": "🐉",
+    "name": "Sparky",
+    "evolutionStages": [
+      {
+        "emoji": "🥚",
+        "label": "Egg"
+      },
+      {
+        "emoji": "🐣",
+        "label": "Baby"
+      },
+      {
+        "emoji": "🐲",
+        "label": "Teen"
+      },
+      {
+        "emoji": "🐉",
+        "label": "Adult"
+      }
+    ]
+  }
+}
