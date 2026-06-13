@@ -2,8 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
-import { THEMES, THEME_BY_ID } from '@/content/themes'
-import { SHOP_ITEMS } from '@/content/shop'
+import { useContent } from '@/content/runtime'
 
 export function ThemeSettings() {
   const navigate = useNavigate()
@@ -11,15 +10,18 @@ export function ThemeSettings() {
   const ownedItems = useStore((s) => s.user.ownedItems)
   const setTheme = useStore((s) => s.setTheme)
   const pushToast = useStore((s) => s.pushToast)
+  const themes = useContent((c) => c.themes)
+  const themeById = useContent((c) => c.themeById)
+  const shopItems = useContent((c) => c.shopItems)
 
   // A theme is owned if it's the default ('') or its shop item has been bought.
   const ownedThemePayloads = new Set(
-    SHOP_ITEMS.filter((i) => i.category === 'themes' && ownedItems.includes(i.id)).map((i) => i.payload),
+    shopItems.filter((i) => i.category === 'themes' && ownedItems.includes(i.id)).map((i) => i.payload),
   )
-  const priceForTheme = (id: string) => SHOP_ITEMS.find((i) => i.category === 'themes' && i.payload === id)
+  const priceForTheme = (id: string) => shopItems.find((i) => i.category === 'themes' && i.payload === id)
   const isOwned = (id: string) => id === '' || ownedThemePayloads.has(id)
 
-  const activeTheme = THEME_BY_ID[current] ?? THEMES[0]
+  const activeTheme = themeById[current] ?? themes[0]
 
   function choose(id: string) {
     if (!isOwned(id)) {
@@ -60,9 +62,9 @@ export function ThemeSettings() {
         </div>
       </div>
 
-      <SectionHeader title="Choose Your Theme" action={<a>{THEMES.length} themes</a>} />
+      <SectionHeader title="Choose Your Theme" action={<a>{themes.length} themes</a>} />
       <div className="theme-grid">
-        {THEMES.map((theme) => {
+        {themes.map((theme) => {
           const owned = isOwned(theme.id)
           const active = current === theme.id
           const price = priceForTheme(theme.id)

@@ -1,16 +1,18 @@
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
-import { SUBJECTS } from '@/content/subjects'
+import { useContent } from '@/content/runtime'
 import { selectSubjectProgress } from '@/state/selectors'
-import type { SubjectId } from '@/domain/types'
 
-const POSITIONS: Record<SubjectId, { top: number; left: number; bg: string }> = {
-  english: { top: 370, left: 45, bg: 'linear-gradient(135deg,#EDE7FF,#D5CEFC)' },
-  math: { top: 260, left: 140, bg: 'linear-gradient(135deg,#FFE8E8,#FFD0D0)' },
-  science: { top: 160, left: 230, bg: 'linear-gradient(135deg,#E0F8F8,#B8F0F0)' },
-  art: { top: 90, left: 275, bg: 'linear-gradient(135deg,#FFF2E5,#FFE0C0)' },
-}
+// Island slots — subjects are placed in order, so any package works.
+const POSITIONS = [
+  { top: 370, left: 45, bg: 'linear-gradient(135deg,#EDE7FF,#D5CEFC)' },
+  { top: 260, left: 140, bg: 'linear-gradient(135deg,#FFE8E8,#FFD0D0)' },
+  { top: 160, left: 230, bg: 'linear-gradient(135deg,#E0F8F8,#B8F0F0)' },
+  { top: 90, left: 275, bg: 'linear-gradient(135deg,#FFF2E5,#FFE0C0)' },
+  { top: 440, left: 250, bg: 'linear-gradient(135deg,#E0FFF5,#C0F5E5)' },
+  { top: 340, left: 290, bg: 'linear-gradient(135deg,#FFF8E0,#FFEFC0)' },
+]
 
 const LOCKED = [
   { top: 50, left: 160, emoji: '🎵', label: 'Music Valley' },
@@ -27,8 +29,9 @@ function starString(percent: number) {
 export function AdventureMap() {
   const navigate = useNavigate()
   const user = useStore((s) => s.user)
-  const completedAreas = SUBJECTS.filter((s) => selectSubjectProgress(user, s.id).percent === 100).length
-  const currentId = SUBJECTS.find((s) => selectSubjectProgress(user, s.id).percent < 100)?.id
+  const subjects = useContent((c) => c.subjects)
+  const completedAreas = subjects.filter((s) => selectSubjectProgress(user, s.id).percent === 100).length
+  const currentId = subjects.find((s) => selectSubjectProgress(user, s.id).percent < 100)?.id
 
   return (
     <div id="screen-map">
@@ -36,7 +39,7 @@ export function AdventureMap() {
         <StatusBar />
         <div className="map-title-row">
           <h1>World Map</h1>
-          <div className="map-progress-tag">🗺️ {completedAreas}/{SUBJECTS.length} Areas</div>
+          <div className="map-progress-tag">🗺️ {completedAreas}/{subjects.length} Areas</div>
         </div>
       </div>
 
@@ -50,9 +53,9 @@ export function AdventureMap() {
         <div className="treasure-marker" style={{ top: 350, left: 140 }}>💎</div>
         <div className="treasure-marker" style={{ top: 240, left: 300 }}>🏴‍☠️</div>
 
-        {SUBJECTS.map((s) => {
+        {subjects.slice(0, POSITIONS.length).map((s, i) => {
           const p = selectSubjectProgress(user, s.id)
-          const pos = POSITIONS[s.id]
+          const pos = POSITIONS[i]
           const isCurrent = s.id === currentId
           return (
             <div className="map-island" style={{ top: pos.top, left: pos.left }} key={s.id} onClick={() => navigate(`/subject/${s.id}`)} role="button">

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
-import { SUBJECTS } from '@/content/subjects'
+import { useContent } from '@/content/runtime'
 import { selectLevel, selectSubjectProgress, greetingForHour } from '@/state/selectors'
 import { nextMilestone } from '@/domain/streak'
 import { dateKey } from '@/domain/datetime'
@@ -25,10 +25,13 @@ function currentWeek(activeDays: string[]) {
 export function Home() {
   const navigate = useNavigate()
   const user = useStore((s) => s.user)
+  const subjects = useContent((c) => c.subjects)
+  const app = useContent((c) => c.app)
+  const milestones = useContent((c) => c.economy.streakMilestones)
   const level = selectLevel(user)
   const greeting = greetingForHour(new Date().getHours())
   const week = currentWeek(user.activeDays)
-  const milestone = nextMilestone(user.streak.count)
+  const milestone = nextMilestone(user.streak.count, milestones)
 
   return (
     <div id="screen-home">
@@ -95,7 +98,7 @@ export function Home() {
 
       <SectionHeader title="My Subjects" action={<a onClick={() => navigate('/learn')}>See All</a>} />
       <div className="subject-grid">
-        {SUBJECTS.map((subject) => {
+        {subjects.map((subject) => {
           const p = selectSubjectProgress(user, subject.id)
           return (
             <div
@@ -124,7 +127,7 @@ export function Home() {
         })}
       </div>
 
-      <div className="daily-challenge" onClick={() => navigate('/quiz/math-l2')} role="button">
+      <div className="daily-challenge" onClick={() => navigate(`/quiz/${app.dailyChallengeLessonId}`)} role="button">
         <div className="daily-challenge-tag">⚡ Daily Challenge</div>
         <h3>Speed Math Challenge</h3>
         <p>Solve addition problems and earn big rewards</p>

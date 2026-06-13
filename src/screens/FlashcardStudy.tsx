@@ -3,8 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { Confetti } from '@/components/ui'
-import { DECK_BY_ID, DECKS } from '@/content/decks'
-import { SUBJECT_BY_ID } from '@/content/subjects'
+import { useContent } from '@/content/runtime'
 import { isDue } from '@/domain/sm2'
 import type { Flashcard } from '@/domain/types'
 
@@ -15,20 +14,23 @@ export function FlashcardStudy() {
   const addRewards = useStore((s) => s.addRewards)
   const cardProgress = useStore((s) => s.user.cardProgress)
   const registerStudyMinutes = useStore((s) => s.registerStudyMinutes)
+  const decks = useContent((c) => c.decks)
+  const deckById = useContent((c) => c.deckById)
+  const subjectById = useContent((c) => c.subjectById)
 
   // Build the session queue once. (cardProgress read lazily via initial state.)
   const progressAtStart = useRef(cardProgress)
   const queue: Flashcard[] = useMemo(() => {
     if (deckId === 'due') {
       const now = Date.now()
-      return DECKS.flatMap((d) => d.cards).filter((c) => isDue(progressAtStart.current[c.id], now))
+      return decks.flatMap((d) => d.cards).filter((c) => isDue(progressAtStart.current[c.id], now))
     }
-    return deckId ? (DECK_BY_ID[deckId]?.cards ?? []) : []
+    return deckId ? (deckById[deckId]?.cards ?? []) : []
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deckId])
 
-  const deck = deckId && deckId !== 'due' ? DECK_BY_ID[deckId] : undefined
-  const subjectName = deck ? SUBJECT_BY_ID[deck.subject]?.name : 'Review'
+  const deck = deckId && deckId !== 'due' ? deckById[deckId] : undefined
+  const subjectName = deck ? subjectById[deck.subject]?.name ?? 'Review' : 'Review'
 
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)

@@ -1,10 +1,8 @@
 import { create } from 'zustand'
 import type { UserState, SubjectId, QuizQuestion, CustomQuiz } from '@/domain/types'
 import { createInitialState, createResetState } from './initialState'
-import { evaluateAchievements } from '@/content/achievements'
-import { SHOP_BY_ID } from '@/content/shop'
-import { LESSON_BY_ID } from '@/content/lessons'
-import { CARD_BY_ID } from '@/content/decks'
+import { evaluateAchievements } from '@/content/evaluate'
+import { getContent } from '@/content/runtime'
 import { reviewCard, newCardProgress } from '@/domain/sm2'
 import { registerActivity } from '@/domain/streak'
 import { dateKey } from '@/domain/datetime'
@@ -112,7 +110,7 @@ export const useStore = create<StoreShape>((set, get) => {
           activeDays: next.activeDays.includes(today) ? next.activeDays : [...next.activeDays, today],
         }
       }
-      const newly = evaluateAchievements(state.user, next)
+      const newly = evaluateAchievements(next, getContent().achievements)
       if (newly.length) {
         const stamped = { ...next.achievements }
         for (const id of newly) stamped[id] = Date.now()
@@ -158,12 +156,15 @@ export const useStore = create<StoreShape>((set, get) => {
       })),
 
     completeLesson: (lessonId, { correct, total }) => {
-      const lesson = LESSON_BY_ID[lessonId]
+      const content = getContent()
+      const lesson = content.lessonById[lessonId]
+      const econ = content.economy.lesson
       const accuracy = total > 0 ? correct / total : 0
-      const stars = accuracy >= 1 ? 3 : accuracy >= 0.7 ? 2 : accuracy > 0 ? 1 : 0
+      const perfect = accuracy >= 1
+      const stars = perfect ? 3 : accuracy >= 0.7 ? 2 : accuracy > 0 ? 1 : 0
       const baseCoins = lesson?.coinReward ?? 50
-      const xpGain = correct * 10 + (accuracy >= 1 ? 50 : 0)
-      const gemGain = (lesson?.gemReward ?? 0) + (accuracy >= 1 ? 2 : 0)
+      const xpGain = correct * econ.xpPerCorrect + (perfect ? econ.perfectBonusXp : 0)
+      const gemGain = (lesson?.gemReward ?? 0) + (perfect ? econ.perfectBonusGems : 0)
       const reward: RewardBundle = { coins: baseCoins, xp: xpGain, gems: gemGain }
 
       mutate((s) => {
@@ -194,7 +195,7 @@ export const useStore = create<StoreShape>((set, get) => {
     },
 
     reviewFlashcard: (cardId, quality) => {
-      if (!CARD_BY_ID[cardId]) return
+      if (!getContent().cardById[cardId]) return
       mutate((s) => {
         const prev = s.cardProgress[cardId] ?? newCardProgress(Date.now())
         return {
@@ -205,15 +206,10 @@ export const useStore = create<StoreShape>((set, get) => {
     },
 
     finishCompeteMatch: (placement, perfect) => {
-      const reward: RewardBundle =
-        placement === 1
-          ? { xp: 200, coins: 100 }
-          : placement === 2
-            ? { xp: 100, coins: 50 }
-            : placement === 3
-              ? { xp: 50, coins: 25 }
-              : { xp: 20, coins: 10 }
-      if (perfect) reward.gems = (reward.gems ?? 0) + 5
+      const econ = getContent().economy.compete
+      const place = econ.placements[placement - 1] ?? econ.placements[econ.placements.length - 1]
+      const reward: RewardBundle = { coins: place.coins, xp: place.xp }
+      if (perfect) reward.gems = (reward.gems ?? 0) + econ.perfectGems
 
       mutate((s) => ({
         ...s,
@@ -243,7 +239,7 @@ export const useStore = create<StoreShape>((set, get) => {
       }),
 
     purchaseItem: (itemId) => {
-      const item = SHOP_BY_ID[itemId]
+      const item = getContent().shopById[itemId]
       const s = get().user
       if (!item || s.ownedItems.includes(itemId)) return false
       const balance = item.currency === 'coins' ? s.coins : s.gems

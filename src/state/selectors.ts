@@ -1,13 +1,13 @@
 import type { UserState, SubjectId } from '@/domain/types'
 import { levelForXp } from '@/domain/leveling'
-import { LESSONS_BY_SUBJECT } from '@/content/lessons'
+import { getContent } from '@/content/runtime'
 
 export function selectLevel(user: UserState) {
-  return levelForXp(user.xp)
+  return levelForXp(user.xp, getContent().economy.levels)
 }
 
 export function selectSubjectProgress(user: UserState, subjectId: SubjectId) {
-  const lessons = LESSONS_BY_SUBJECT[subjectId] ?? []
+  const lessons = getContent().lessonsBySubject[subjectId] ?? []
   const completed = lessons.filter((l) => user.lessonProgress[l.id]?.completed).length
   const total = lessons.length || 1
   return {

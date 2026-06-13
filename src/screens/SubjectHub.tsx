@@ -2,10 +2,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
-import { SUBJECT_BY_ID } from '@/content/subjects'
-import { LESSONS_BY_SUBJECT } from '@/content/lessons'
+import { useContent } from '@/content/runtime'
 import { selectSubjectProgress } from '@/state/selectors'
-import type { SubjectId } from '@/domain/types'
 
 function stars(n: number) {
   return '★★★☆☆☆'.slice(3 - n, 6 - n)
@@ -15,7 +13,9 @@ export function SubjectHub() {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
   const user = useStore((s) => s.user)
-  const subject = id ? SUBJECT_BY_ID[id] : undefined
+  const subjectById = useContent((c) => c.subjectById)
+  const lessonsBySubject = useContent((c) => c.lessonsBySubject)
+  const subject = id ? subjectById[id] : undefined
 
   if (!subject) {
     return (
@@ -26,8 +26,8 @@ export function SubjectHub() {
     )
   }
 
-  const lessons = LESSONS_BY_SUBJECT[subject.id as SubjectId]
-  const progress = selectSubjectProgress(user, subject.id as SubjectId)
+  const lessons = lessonsBySubject[subject.id] ?? []
+  const progress = selectSubjectProgress(user, subject.id)
   const firstIncompleteIdx = lessons.findIndex((l) => !user.lessonProgress[l.id]?.completed)
   const currentIdx = firstIncompleteIdx === -1 ? lessons.length : firstIncompleteIdx
   const totalMinutes = lessons.reduce((s, l) => s + l.estMinutes, 0)

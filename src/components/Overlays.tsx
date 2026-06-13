@@ -1,11 +1,12 @@
 import { useStore } from '@/state/store'
-import { ACHIEVEMENT_BY_ID } from '@/content/achievements'
+import { useContent } from '@/content/runtime'
 
 export function Overlays() {
   const toasts = useStore((s) => s.toasts)
   const sync = useStore((s) => s.sync)
   const pending = useStore((s) => s.pendingAchievements)
   const clearPending = useStore((s) => s.clearPendingAchievements)
+  const achievementById = useContent((c) => c.achievementById)
 
   return (
     <>
@@ -29,7 +30,7 @@ export function Overlays() {
             <h3>Achievement Unlocked!</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, margin: '12px 0 20px' }}>
               {pending.map((id) => {
-                const a = ACHIEVEMENT_BY_ID[id]
+                const a = achievementById[id]
                 if (!a) return null
                 return (
                   <div key={id} style={{ display: 'flex', alignItems: 'center', gap: 10, justifyContent: 'center' }}>

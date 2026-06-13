@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader, EmptyState } from '@/components/ui'
-import { SUBJECTS } from '@/content/subjects'
+import { useContent } from '@/content/runtime'
 import type { QuizQuestion, SubjectId } from '@/domain/types'
 import { uuid } from '@/lib/id'
 
@@ -15,10 +15,11 @@ export function Workshop() {
   const addCustomQuiz = useStore((s) => s.addCustomQuiz)
   const removeCustomQuiz = useStore((s) => s.removeCustomQuiz)
   const pushToast = useStore((s) => s.pushToast)
+  const subjects = useContent((c) => c.subjects)
 
   const [title, setTitle] = useState('')
   const [emoji, setEmoji] = useState('📚')
-  const [subject, setSubject] = useState<SubjectId>('english')
+  const [subject, setSubject] = useState<SubjectId>(subjects[0]?.id ?? '')
   const [prompt, setPrompt] = useState('')
   const [correct, setCorrect] = useState('')
   const [wrong, setWrong] = useState(['', '', ''])
@@ -111,7 +112,7 @@ export function Workshop() {
         <div className="builder-field">
           <div className="builder-label">Subject</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {SUBJECTS.map((s) => (
+            {subjects.map((s) => (
               <button
                 key={s.id}
                 onClick={() => setSubject(s.id)}

@@ -2,12 +2,13 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
-import { SUBJECTS } from '@/content/subjects'
+import { useContent } from '@/content/runtime'
 import { selectSubjectProgress } from '@/state/selectors'
 
 export function Learn() {
   const navigate = useNavigate()
   const user = useStore((s) => s.user)
+  const subjects = useContent((c) => c.subjects)
 
   return (
     <div id="screen-learn">
@@ -19,7 +20,7 @@ export function Learn() {
 
       <SectionHeader title="Subjects" />
       <div className="subject-grid">
-        {SUBJECTS.map((subject) => {
+        {subjects.map((subject) => {
           const p = selectSubjectProgress(user, subject.id)
           return (
             <div

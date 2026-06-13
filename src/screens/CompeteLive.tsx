@@ -3,8 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { Confetti } from '@/components/ui'
-import { LESSONS_BY_SUBJECT } from '@/content/lessons'
-import { SUBJECT_BY_ID } from '@/content/subjects'
+import { useContent } from '@/content/runtime'
 import { pickBots, botAnswer, type BotTier } from '@/domain/bots'
 import type { QuizQuestion, SubjectId } from '@/domain/types'
 
@@ -35,8 +34,10 @@ export function CompeteLive() {
   const location = useLocation()
   const state = (location.state as { tier?: BotTier | 'mixed'; subject?: SubjectId }) ?? {}
   const tier = state.tier ?? 'rookie'
-  const subjectId = state.subject ?? 'english'
-  const subject = SUBJECT_BY_ID[subjectId]
+  const subjects = useContent((c) => c.subjects)
+  const lessonsBySubject = useContent((c) => c.lessonsBySubject)
+  const subjectId = state.subject ?? subjects[0]?.id ?? ''
+  const subject = useContent((c) => c.subjectById)[subjectId] ?? { name: 'Quiz' }
 
   const user = useStore((s) => s.user)
   const finishMatch = useStore((s) => s.finishCompeteMatch)
@@ -52,7 +53,8 @@ export function CompeteLive() {
     [bots],
   )
   const questions: QuizQuestion[] = useMemo(() => {
-    const all = LESSONS_BY_SUBJECT[subjectId].flatMap((l) => l.questions)
+    const all = (lessonsBySubject[subjectId] ?? []).flatMap((l) => l.questions)
+    if (all.length === 0) return []
     const out = shuffle(all)
     while (out.length < Q_COUNT) out.push(...all)
     return out.slice(0, Q_COUNT)

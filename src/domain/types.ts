@@ -1,6 +1,9 @@
 /** Core domain types for EduQuest. Content (static) + user state (mutable). */
 
-export type SubjectId = 'english' | 'math' | 'science' | 'art'
+/** Subject ids are arbitrary strings so packages can define any subjects. */
+export type SubjectId = string
+/** Palette slot picked by a subject; each has matching design-system CSS. */
+export type SubjectColor = 'english' | 'math' | 'science' | 'art' | 'music' | 'coding'
 export type CurrencyKind = 'coins' | 'gems' | 'xp'
 export type Difficulty = 'Easy' | 'Medium' | 'Hard'
 
@@ -15,8 +18,8 @@ export interface Subject {
   /** Font Awesome icon class, e.g. "fas fa-book-open". */
   icon: string
   emoji: string
-  /** CSS class suffix matching the design system (.subject-card.english …). */
-  colorClass: SubjectId
+  /** Palette slot ("english" | "math" | ...) — drives card/progress colors. */
+  colorClass: SubjectColor
 }
 
 export interface QuizQuestion {
@@ -76,14 +79,9 @@ export interface ShopItem {
   payload?: string
 }
 
-export interface Achievement {
-  id: string
-  name: string
-  emoji: string
-  description: string
-  /** Pure predicate over user state, evaluated to award the badge. */
-  isEarned: (s: UserState) => boolean
-}
+// NOTE: Achievements are defined declaratively in the content package
+// (see AchievementDef / AchievementCriteria in src/content/schema.ts) so they
+// are serializable and AI-generatable, not as code predicates.
 
 export interface Theme {
   id: string

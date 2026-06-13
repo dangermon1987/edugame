@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
-import { ACHIEVEMENTS } from '@/content/achievements'
+import { useContent } from '@/content/runtime'
+import { isAchievementEarned } from '@/content/evaluate'
 import { selectLevel } from '@/state/selectors'
 import { dateKey } from '@/domain/datetime'
 
@@ -50,6 +51,7 @@ function MonthCalendar({ activeDays }: { activeDays: string[] }) {
 export function Profile() {
   const navigate = useNavigate()
   const user = useStore((s) => s.user)
+  const achievements = useContent((c) => c.achievements)
   const level = selectLevel(user)
 
   const board = [...PEERS, { name: `${user.profile.name} (You)`, avatar: user.profile.avatar, xp: user.xp, bg: '#FFF2E5', me: true }]
@@ -96,8 +98,8 @@ export function Profile() {
 
       <SectionHeader title="Achievements" />
       <div className="achievements-grid">
-        {ACHIEVEMENTS.map((a) => {
-          const earned = Boolean(user.achievements[a.id]) || a.isEarned(user)
+        {achievements.map((a) => {
+          const earned = Boolean(user.achievements[a.id]) || isAchievementEarned(a, user)
           return (
             <div key={a.id} className="achievement-badge" title={a.description}>
               <div className={`badge-icon ${earned ? 'earned' : 'locked'}`}>{a.emoji}</div>

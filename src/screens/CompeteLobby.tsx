@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
-import { SUBJECTS } from '@/content/subjects'
+import { useContent } from '@/content/runtime'
 import type { SubjectId } from '@/domain/types'
 import type { BotTier } from '@/domain/bots'
 
@@ -19,8 +19,9 @@ export function CompeteLobby() {
   const navigate = useNavigate()
   const compete = useStore((s) => s.user.compete)
   const multiplayer = useStore((s) => s.user.settings.parental.multiplayerEnabled)
+  const subjects = useContent((c) => c.subjects)
   const [mode, setMode] = useState<Mode['id']>('rookie')
-  const [subject, setSubject] = useState<SubjectId>('english')
+  const [subject, setSubject] = useState<SubjectId>(subjects[0]?.id ?? '')
 
   function findMatch() {
     const tier: BotTier | 'mixed' = mode === 'mixed' ? 'mixed' : mode
@@ -77,7 +78,7 @@ export function CompeteLobby() {
 
       <SectionHeader title="Pick Subject" />
       <div className="compete-subject-row">
-        {SUBJECTS.map((s) => (
+        {subjects.map((s) => (
           <div
             key={s.id}
             className={`compete-subject-chip${subject === s.id ? ' selected' : ''}`}

@@ -4,6 +4,10 @@ import './styles/legacy.css'
 import './styles/shell.css'
 import { App } from './App'
 import { flushAndPush } from './state/store'
+import { useContentStore } from './content/runtime'
+
+// Load the list of installable course packs (non-blocking).
+void useContentStore.getState().refreshManifest()
 
 // Persist + push to remote when the tab is hidden or closed.
 window.addEventListener('visibilitychange', () => {

@@ -2,16 +2,18 @@ import { useState } from 'react'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
-import { STICKERS, RARITY_LABEL, type StickerRarity } from '@/content/stickers'
+import { useContent, RARITY_LABEL } from '@/content/runtime'
+import type { StickerRarity } from '@/content/schema'
 
 export function Stickers() {
   const owned = useStore((s) => s.user.stickers)
+  const stickers = useContent((c) => c.stickers)
   const [filter, setFilter] = useState<StickerRarity | 'all'>('all')
 
   const ownedCount = owned.length
-  const shinyCount = STICKERS.filter((s) => owned.includes(s.id) && s.rarity === 'shiny').length
+  const shinyCount = stickers.filter((s) => owned.includes(s.id) && s.rarity === 'shiny').length
 
-  const collections = Array.from(new Set(STICKERS.map((s) => s.collection)))
+  const collections = Array.from(new Set(stickers.map((s) => s.collection)))
   const visible = (rarity: StickerRarity) => filter === 'all' || filter === rarity
 
   return (
@@ -22,7 +24,7 @@ export function Stickers() {
           <h1>My Stickers</h1>
         </div>
         <div className="sticker-count-row">
-          <div className="sticker-count-tag">📋 {ownedCount}/{STICKERS.length} collected</div>
+          <div className="sticker-count-tag">📋 {ownedCount}/{stickers.length} collected</div>
           <div className="sticker-count-tag">✨ {shinyCount} shiny</div>
         </div>
       </div>
@@ -42,23 +44,23 @@ export function Stickers() {
         <div className="completion-header">
           <h4>Total Collection</h4>
           <span>
-            {ownedCount}/{STICKERS.length}
+            {ownedCount}/{stickers.length}
           </span>
         </div>
         <div className="completion-bar">
-          <div className="completion-fill" style={{ width: `${Math.round((ownedCount / STICKERS.length) * 100)}%` }} />
+          <div className="completion-fill" style={{ width: `${Math.round((ownedCount / stickers.length) * 100)}%` }} />
         </div>
         <div className="completion-detail">
-          <span>{Math.round((ownedCount / STICKERS.length) * 100)}% complete</span>
+          <span>{Math.round((ownedCount / stickers.length) * 100)}% complete</span>
           <span>Earn stickers by playing!</span>
         </div>
       </div>
 
       {collections.map((col) => {
-        const items = STICKERS.filter((s) => s.collection === col && visible(s.rarity))
+        const items = stickers.filter((s) => s.collection === col && visible(s.rarity))
         if (items.length === 0) return null
-        const colOwned = STICKERS.filter((s) => s.collection === col && owned.includes(s.id)).length
-        const colTotal = STICKERS.filter((s) => s.collection === col).length
+        const colOwned = stickers.filter((s) => s.collection === col && owned.includes(s.id)).length
+        const colTotal = stickers.filter((s) => s.collection === col).length
         return (
           <div key={col}>
             <SectionHeader title={col} action={<a>{colOwned}/{colTotal}</a>} />

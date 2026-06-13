@@ -18,7 +18,8 @@ async function dismissAchievement(page: Page) {
 test('home dashboard loads with currency and level', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByRole('heading', { name: 'Alex' })).toBeVisible()
-  await expect(page.getByTestId('coins')).toContainText('2,450')
+  // Fresh player starts with the core package's starting coins (200).
+  await expect(page.getByTestId('coins')).toContainText('200')
   await expect(page.locator('.level-badge')).toBeVisible()
   await expect(page.locator('.subject-card')).toHaveCount(4)
 })
@@ -62,12 +63,23 @@ test('flashcard study session runs to results', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Great Session!' })).toBeVisible()
 })
 
-test('buying a shop item shows confirmation and unlock toast', async ({ page }) => {
+test('buying an affordable shop item shows confirmation and unlock toast', async ({ page }) => {
   await gotoHash(page, '/shop')
-  await page.locator('.shop-item', { hasText: 'Lion King' }).click()
+  // Hint Pack (150 coins) is affordable on a fresh 200-coin start.
+  await page.getByRole('button', { name: '✨ Power-ups' }).click()
+  await page.locator('.shop-item', { hasText: 'Hint Pack' }).click()
   await expect(page.locator('.modal-card')).toBeVisible()
   await page.getByRole('button', { name: 'Buy' }).click()
   await expect(page.getByTestId('toast-stack')).toContainText('Unlocked')
+})
+
+test('switching course pack loads a different course', async ({ page }) => {
+  await gotoHash(page, '/settings')
+  // The manifest lists Space Explorers; selecting it swaps all content.
+  await page.locator('.time-control-row', { hasText: 'Space Explorers' }).click()
+  await expect(page.getByTestId('toast-stack')).toContainText('Course loaded')
+  await page.getByRole('button', { name: 'Home' }).click()
+  await expect(page.locator('.subject-card', { hasText: 'Planets' })).toBeVisible()
 })
 
 test('compete match plays through to the podium', async ({ page }) => {

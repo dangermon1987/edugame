@@ -34,10 +34,10 @@ export function registerActivity(prev: StreakState, today: string): StreakResult
 export const STREAK_MILESTONES = [7, 14, 30, 60, 100]
 
 /** Next milestone strictly greater than `count`, or null past the last one. */
-export function nextMilestone(count: number): number | null {
-  return STREAK_MILESTONES.find((m) => m > count) ?? null
+export function nextMilestone(count: number, milestones: number[] = STREAK_MILESTONES): number | null {
+  return milestones.find((m) => m > count) ?? null
 }
 
-export function isMilestone(count: number): boolean {
-  return STREAK_MILESTONES.includes(count)
+export function isMilestone(count: number, milestones: number[] = STREAK_MILESTONES): boolean {
+  return milestones.includes(count)
 }

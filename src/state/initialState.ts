@@ -1,32 +1,27 @@
 import type { UserState } from '@/domain/types'
-import { dateKey } from '@/domain/datetime'
-import { ACHIEVEMENTS } from '@/content/achievements'
+import { getContent } from '@/content/runtime'
 
 /**
- * Default state for a fresh install. Seeded to look like a returning player so
- * the app matches the approved prototype on first run; `resetProgress` returns
- * to a near-empty version of this.
+ * Fresh-install state, derived from the active content package's economy, default
+ * profile, and pet. A new player starts at level 1 with the package's starting
+ * currency and no progress; achievements are earned through play.
  */
-export function createInitialState(today = dateKey()): UserState {
-  const state: UserState = {
-    profile: { name: 'Alex', avatar: '🦊', age: 8 },
-    coins: 2450,
-    gems: 38,
-    xp: 6150, // → Level 12 "Explorer"
-    streak: { count: 7, lastActiveDate: today },
-    activeDays: [today],
-    lessonProgress: {
-      'english-l1': { completed: true, stars: 3, bestAccuracy: 1 },
-      'english-l2': { completed: true, stars: 2, bestAccuracy: 0.85 },
-      'math-l1': { completed: true, stars: 3, bestAccuracy: 1 },
-      'art-l1': { completed: true, stars: 2, bestAccuracy: 0.8 },
-      'art-l2': { completed: true, stars: 1, bestAccuracy: 0.6 },
-    },
+export function createInitialState(): UserState {
+  const content = getContent()
+  const economy = content.economy
+  return {
+    profile: { ...content.defaultProfile },
+    coins: economy.startingCoins,
+    gems: economy.startingGems,
+    xp: 0,
+    streak: { count: 0, lastActiveDate: '' },
+    activeDays: [],
+    lessonProgress: {},
     cardProgress: {},
-    ownedItems: ['av-cat'],
-    equippedAvatar: '🦊',
+    ownedItems: [],
+    equippedAvatar: content.defaultProfile.avatar,
     achievements: {},
-    stickers: ['st-star', 'st-rocket'],
+    stickers: [],
     settings: {
       sound: true,
       music: false,
@@ -41,50 +36,27 @@ export function createInitialState(today = dateKey()): UserState {
       },
     },
     pet: {
-      species: '🐉',
-      name: 'Sparky',
+      species: content.pet.species,
+      name: content.pet.name,
       hunger: 70,
-      happiness: 85,
-      energy: 60,
-      xp: 120,
-      evolutionStage: 1,
+      happiness: 80,
+      energy: 70,
+      xp: 0,
+      evolutionStage: 0,
     },
     customQuizzes: {},
-    compete: { matches: 4, wins: 2, winStreak: 1 },
+    compete: { matches: 0, wins: 0, winStreak: 0 },
     stats: {
-      lessonsCompleted: 5,
-      totalStudyMinutes: 240,
-      dailyMinutes: { [today]: 35 },
-      accuracySamples: [1, 0.85, 1, 0.8, 0.6],
+      lessonsCompleted: 0,
+      totalStudyMinutes: 0,
+      dailyMinutes: {},
+      accuracySamples: [],
     },
   }
-
-  // Pre-stamp achievements the returning player already qualifies for, so the
-  // first in-app action doesn't pop a pile of "unlocked" modals at once.
-  const seededAt = Date.parse(`${today}T09:00:00`)
-  for (const a of ACHIEVEMENTS) {
-    if (a.isEarned(state)) state.achievements[a.id] = seededAt
-  }
-  return state
 }
 
-/** A near-empty state used by "reset progress". Keeps profile + settings. */
-export function createResetState(prev: UserState, today = dateKey()): UserState {
-  const fresh = createInitialState(today)
-  return {
-    ...fresh,
-    profile: prev.profile,
-    settings: prev.settings,
-    coins: 100,
-    gems: 0,
-    xp: 0,
-    streak: { count: 0, lastActiveDate: '' },
-    activeDays: [],
-    lessonProgress: {},
-    ownedItems: [],
-    stickers: [],
-    achievements: {},
-    compete: { matches: 0, wins: 0, winStreak: 0 },
-    stats: { lessonsCompleted: 0, totalStudyMinutes: 0, dailyMinutes: {}, accuracySamples: [] },
-  }
+/** Reset keeps the player's name + settings but wipes all progress. */
+export function createResetState(prev: UserState): UserState {
+  const fresh = createInitialState()
+  return { ...fresh, profile: prev.profile, settings: prev.settings }
 }

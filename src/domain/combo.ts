@@ -1,10 +1,22 @@
-/** Combo multiplier system (spec §5.5). */
+/** Combo multiplier system (spec §5.5). Config-driven. */
 
-/** Returns the reward multiplier for a run of `consecutiveCorrect` answers. */
-export function comboMultiplier(consecutiveCorrect: number): number {
-  if (consecutiveCorrect >= 12) return 5
-  if (consecutiveCorrect >= 8) return 4
-  if (consecutiveCorrect >= 5) return 3
-  if (consecutiveCorrect >= 3) return 2
-  return 1
+export interface ComboTier {
+  minStreak: number
+  multiplier: number
+}
+
+export const DEFAULT_COMBO: ComboTier[] = [
+  { minStreak: 3, multiplier: 2 },
+  { minStreak: 5, multiplier: 3 },
+  { minStreak: 8, multiplier: 4 },
+  { minStreak: 12, multiplier: 5 },
+]
+
+/** Reward multiplier for a run of `consecutiveCorrect` answers. */
+export function comboMultiplier(consecutiveCorrect: number, tiers: ComboTier[] = DEFAULT_COMBO): number {
+  let mult = 1
+  for (const tier of tiers) {
+    if (consecutiveCorrect >= tier.minStreak) mult = tier.multiplier
+  }
+  return mult
 }

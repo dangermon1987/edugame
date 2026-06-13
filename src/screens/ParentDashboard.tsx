@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
-import { SUBJECTS } from '@/content/subjects'
+import { useContent } from '@/content/runtime'
 import { selectLevel, selectSubjectProgress, selectAverageAccuracy } from '@/state/selectors'
 import { dateKey } from '@/domain/datetime'
 import type { ParentalControls } from '@/domain/types'
@@ -77,6 +77,7 @@ export function ParentDashboard() {
   const [unlocked, setUnlocked] = useState(false)
   const user = useStore((s) => s.user)
   const setParental = useStore((s) => s.setParental)
+  const subjects = useContent((c) => c.subjects)
   const level = selectLevel(user)
 
   if (!unlocked) return <PinGate onUnlock={() => setUnlocked(true)} />
@@ -146,7 +147,7 @@ export function ParentDashboard() {
 
       <SectionHeader title="Subject Performance" />
       <div className="subject-performance">
-        {SUBJECTS.map((s) => {
+        {subjects.map((s) => {
           const p = selectSubjectProgress(user, s.id)
           return (
             <div key={s.id} className="performance-bar-item">

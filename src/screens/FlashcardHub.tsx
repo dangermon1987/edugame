@@ -3,30 +3,26 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
-import { DECKS } from '@/content/decks'
-import { SUBJECTS } from '@/content/subjects'
+import { useContent } from '@/content/runtime'
 import { isDue } from '@/domain/sm2'
+import { bgFor, subjectVar } from '@/lib/subjectColor'
 import type { SubjectId } from '@/domain/types'
-
-const SUBJECT_BG: Record<SubjectId, string> = {
-  english: '#EDE7FF',
-  math: '#FFE8E8',
-  science: '#E0F8F8',
-  art: '#FFF2E5',
-}
 
 export function FlashcardHub() {
   const navigate = useNavigate()
   const cardProgress = useStore((s) => s.user.cardProgress)
   const streak = useStore((s) => s.user.streak.count)
+  const allDecks = useContent((c) => c.decks)
+  const subjects = useContent((c) => c.subjects)
+  const subjectById = useContent((c) => c.subjectById)
   const [filter, setFilter] = useState<SubjectId | 'all'>('all')
 
   const now = Date.now()
-  const allCards = DECKS.flatMap((d) => d.cards)
+  const allCards = allDecks.flatMap((d) => d.cards)
   const masteredCount = allCards.filter((c) => cardProgress[c.id]?.status === 'mastered').length
   const dueCount = allCards.filter((c) => isDue(cardProgress[c.id], now)).length
 
-  const decks = filter === 'all' ? DECKS : DECKS.filter((d) => d.subject === filter)
+  const decks = filter === 'all' ? allDecks : allDecks.filter((d) => d.subject === filter)
 
   return (
     <div id="screen-flash-hub">
@@ -61,7 +57,7 @@ export function FlashcardHub() {
         <button className={`subject-tab${filter === 'all' ? ' active' : ''}`} onClick={() => setFilter('all')}>
           All
         </button>
-        {SUBJECTS.map((s) => (
+        {subjects.map((s) => (
           <button
             key={s.id}
             className={`subject-tab${filter === s.id ? ' active' : ''}`}
@@ -78,6 +74,7 @@ export function FlashcardHub() {
           const mastered = deck.cards.filter((c) => cardProgress[c.id]?.status === 'mastered').length
           const percent = Math.round((mastered / deck.cards.length) * 100)
           const started = deck.cards.some((c) => cardProgress[c.id])
+          const color = subjectById[deck.subject]?.colorClass
           return (
             <div
               key={deck.id}
@@ -89,7 +86,7 @@ export function FlashcardHub() {
               {!started && <span className="deck-badge badge-new">NEW</span>}
               <div
                 className="deck-emoji"
-                style={{ background: SUBJECT_BG[deck.subject], color: `var(--color-${deck.subject})` }}
+                style={{ background: bgFor(color), color: subjectVar(color ?? 'english') }}
               >
                 {deck.iconEmoji}
               </div>
@@ -98,7 +95,7 @@ export function FlashcardHub() {
               <div className="deck-progress">
                 <div
                   className="deck-progress-fill"
-                  style={{ width: `${percent}%`, background: `var(--color-${deck.subject})` }}
+                  style={{ width: `${percent}%`, background: subjectVar(color ?? 'english') }}
                 />
               </div>
               <div className="deck-meta">

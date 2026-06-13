@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useStore, type RewardBundle } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { Confetti } from '@/components/ui'
-import { LESSON_BY_ID } from '@/content/lessons'
+import { useContent } from '@/content/runtime'
 import { comboMultiplier } from '@/domain/combo'
 import type { QuizQuestion } from '@/domain/types'
 
@@ -17,7 +17,8 @@ export function Quiz() {
   const completeLesson = useStore((s) => s.completeLesson)
   const registerStudyMinutes = useStore((s) => s.registerStudyMinutes)
 
-  const lesson = lessonId ? LESSON_BY_ID[lessonId] : undefined
+  const lessonById = useContent((c) => c.lessonById)
+  const lesson = lessonId ? lessonById[lessonId] : undefined
   const custom = useStore((s) => (lessonId ? s.user.customQuizzes[lessonId] : undefined))
   const questions: QuizQuestion[] = lesson?.questions ?? custom?.questions ?? []
 

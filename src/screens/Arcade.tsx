@@ -2,31 +2,16 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
-
-interface Game {
-  id: string
-  icon: string
-  bg: string
-  title: string
-  desc: string
-  tags: Array<[label: string, bg: string, color: string]>
-  badge?: 'POPULAR' | 'NEW'
-  playable: boolean
-}
-
-const GAMES: Game[] = [
-  { id: 'memory', icon: '🃏', bg: '#EDE7FF', title: 'Memory Match', desc: 'Find matching pairs of words & pictures!', tags: [['English', '#E0FFF5', 'var(--color-accent-mint)'], ['2-5 min', '#F0EEF8', 'var(--color-primary)']], badge: 'POPULAR', playable: true },
-  { id: 'scramble', icon: '🔤', bg: '#FFE8E8', title: 'Word Scramble', desc: 'Unscramble the jumbled letters', tags: [['English', '#E0FFF5', 'var(--color-accent-mint)'], ['3 min', '#F0EEF8', 'var(--color-primary)']], playable: false },
-  { id: 'bubbles', icon: '🫧', bg: '#E0F8F8', title: 'Math Bubbles', desc: 'Pop the bubble with the correct answer', tags: [['Math', '#FFE8E8', 'var(--color-secondary)'], ['2 min', '#F0EEF8', 'var(--color-primary)']], badge: 'NEW', playable: false },
-  { id: 'spelling', icon: '🐝', bg: '#FFF2E5', title: 'Speed Spelling Bee', desc: 'Type the word you hear as fast as you can!', tags: [['English', '#E0FFF5', 'var(--color-accent-mint)'], ['5 min', '#F0EEF8', 'var(--color-primary)']], playable: false },
-]
+import { useContent } from '@/content/runtime'
+import type { ArcadeGame } from '@/content/schema'
 
 export function Arcade() {
   const navigate = useNavigate()
   const pushToast = useStore((s) => s.pushToast)
+  const games = useContent((c) => c.arcadeGames)
 
-  function open(game: (typeof GAMES)[number]) {
-    if (game.playable) navigate('/memory')
+  function open(game: ArcadeGame) {
+    if (game.engine === 'memory') navigate('/memory')
     else pushToast({ message: `${game.title} is coming soon!`, emoji: '🚧', kind: 'info' })
   }
 
@@ -55,9 +40,9 @@ export function Arcade() {
         </div>
       </div>
 
-      <SectionHeader title="All Games" action={<a>{GAMES.length} games</a>} />
+      <SectionHeader title="All Games" action={<a>{games.length} games</a>} />
       <div className="game-list">
-        {GAMES.map((g) => (
+        {games.map((g) => (
           <div className="game-card" key={g.id} onClick={() => open(g)} role="button">
             {g.badge && <div className={`game-card-badge ${g.badge === 'NEW' ? 'badge-new-game' : 'badge-popular'}`}>{g.badge}</div>}
             <div className="game-card-icon" style={{ background: g.bg }}>

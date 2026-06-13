@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
 import { isDriveConfigured } from '@/lib/googleDrive'
+import { useContentStore, saveContentToDrive, loadContentFromDrive } from '@/content/runtime'
 
 function timeAgo(ts: number | null): string {
   if (!ts) return 'never'
@@ -23,9 +24,47 @@ export function Settings() {
   const disconnectDrive = useStore((s) => s.disconnectDrive)
   const syncNow = useStore((s) => s.syncNow)
   const resetProgress = useStore((s) => s.resetProgress)
+  const pushToast = useStore((s) => s.pushToast)
   const [confirmReset, setConfirmReset] = useState(false)
 
+  const manifest = useContentStore((s) => s.manifest)
+  const activeId = useContentStore((s) => s.activeId)
+  const activeName = useContentStore((s) => s.content.meta.name)
+  const switchTo = useContentStore((s) => s.switchTo)
+  const uploadPackage = useContentStore((s) => s.uploadPackage)
+  const fileRef = useRef<HTMLInputElement>(null)
+
   const driveReady = isDriveConfigured()
+
+  async function pickPack(id: string) {
+    const r = await switchTo(id)
+    if (r.ok) pushToast({ message: 'Course loaded!', emoji: '📦', kind: 'success' })
+    else pushToast({ message: r.errors[0] ?? 'Could not load course', emoji: '⚠️', kind: 'error' })
+  }
+
+  async function onUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const text = await file.text()
+    const r = uploadPackage(text)
+    if (r.ok) pushToast({ message: 'Course package imported!', emoji: '📦', kind: 'success' })
+    else pushToast({ message: r.errors[0] ?? 'Invalid package', emoji: '⚠️', kind: 'error' })
+    if (fileRef.current) fileRef.current.value = ''
+  }
+
+  async function pushToDrive() {
+    const r = await saveContentToDrive()
+    pushToast(r.ok ? { message: 'Course saved to Drive', emoji: '☁️', kind: 'success' } : { message: r.error ?? 'Failed', emoji: '⚠️', kind: 'error' })
+  }
+  async function pullFromDrive() {
+    const r = await loadContentFromDrive()
+    pushToast(r.ok ? { message: 'Course loaded from Drive', emoji: '☁️', kind: 'success' } : { message: r.error ?? 'Failed', emoji: '⚠️', kind: 'error' })
+  }
+
+  // Manifest may not include the active pack (e.g. an uploaded one) — show it too.
+  const packs = manifest.some((m) => m.id === activeId)
+    ? manifest
+    : [{ id: activeId, name: activeName, description: 'Imported course', cover: '📦', file: '' }, ...manifest]
 
   return (
     <div id="screen-settings">
@@ -76,6 +115,45 @@ export function Settings() {
         </div>
       </div>
 
+      <SectionHeader title="Course Pack" />
+      <p style={{ padding: '0 24px 8px', color: 'var(--color-text-muted)', fontSize: 12 }}>
+        A course pack supplies every subject, lesson, deck, shop item & theme. Switch packs to load a whole different course.
+      </p>
+      <div className="time-controls-card">
+        {packs.map((p) => (
+          <div
+            key={p.id}
+            className="time-control-row is-clickable"
+            onClick={() => p.id !== activeId && pickPack(p.id)}
+            role="button"
+            aria-label={`Use ${p.name}`}
+          >
+            <div className="tc-info" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{ fontSize: 26 }}>{p.cover}</span>
+              <div>
+                <h4>{p.name}</h4>
+                <p>{p.description}</p>
+              </div>
+            </div>
+            {p.id === activeId ? (
+              <span className="theme-badge" style={{ background: 'var(--color-primary)', color: '#fff' }}>
+                ACTIVE
+              </span>
+            ) : (
+              <i className="fas fa-circle-arrow-right" style={{ color: 'var(--color-primary)', fontSize: 20 }} />
+            )}
+          </div>
+        ))}
+        <div className="time-control-row is-clickable" onClick={() => fileRef.current?.click()} role="button">
+          <div className="tc-info">
+            <h4>Import Course Pack…</h4>
+            <p>Load a .json package (e.g. AI-generated)</p>
+          </div>
+          <i className="fas fa-file-arrow-up" style={{ color: 'var(--color-primary)' }} />
+        </div>
+        <input ref={fileRef} type="file" accept="application/json,.json" hidden onChange={onUpload} data-testid="pack-upload" />
+      </div>
+
       <SectionHeader title="Cloud Sync" />
       <div className="time-controls-card">
         <div className="time-control-row">
@@ -105,13 +183,29 @@ export function Settings() {
           )}
         </div>
         {driveConnected && (
-          <div className="time-control-row is-clickable" onClick={() => syncNow()} role="button">
-            <div className="tc-info">
-              <h4>Sync Now</h4>
-              <p>Force an immediate sync</p>
+          <>
+            <div className="time-control-row is-clickable" onClick={() => syncNow()} role="button">
+              <div className="tc-info">
+                <h4>Sync Now</h4>
+                <p>Force an immediate progress sync</p>
+              </div>
+              <i className="fas fa-sync" style={{ color: 'var(--color-primary)' }} />
             </div>
-            <i className="fas fa-sync" style={{ color: 'var(--color-primary)' }} />
-          </div>
+            <div className="time-control-row is-clickable" onClick={pushToDrive} role="button">
+              <div className="tc-info">
+                <h4>Save Course to Drive</h4>
+                <p>Back up the active course pack</p>
+              </div>
+              <i className="fas fa-cloud-arrow-up" style={{ color: 'var(--color-primary)' }} />
+            </div>
+            <div className="time-control-row is-clickable" onClick={pullFromDrive} role="button">
+              <div className="tc-info">
+                <h4>Load Course from Drive</h4>
+                <p>Restore a course saved to Drive</p>
+              </div>
+              <i className="fas fa-cloud-arrow-down" style={{ color: 'var(--color-primary)' }} />
+            </div>
+          </>
         )}
       </div>
       <p style={{ padding: '8px 24px', color: 'var(--color-text-muted)', fontSize: 12 }}>

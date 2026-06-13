@@ -9,6 +9,7 @@ This is a full implementation of the EduQuest spec (`EduQuest-Engineering-Handof
 ## Highlights
 
 - **20+ screens**: Home, Subject Hub, Quiz, Reward Shop, Profile/Achievements, Parent Dashboard (PIN-gated), Flashcards (hub / study / results), Compete (lobby / matchmaking / live / podium), Study Pet, Adventure Map, Arcade, a playable Memory Match game, Sticker collection, Quiz Workshop, and Theme settings.
+- **Data-driven courses**: all content (subjects, lessons, decks, shop, themes, achievements, stickers, games, branding, economy) comes from a swappable **Content Package** (one JSON file). Different package = different course, no code changes. Packages are AI-generatable, uploadable, and loadable from a static folder or Google Drive. See **[CONTENT_FORMAT.md](CONTENT_FORMAT.md)**.
 - **Local-first storage** in the browser (a NoSQL-style document snapshot in `localStorage`), with **Google Drive sync every 5 minutes** for long-term, cross-device persistence.
 - **Swappable persistence** — one interface (`SnapshotPersistence`) is all you implement to move to a real server/database. A `RestApiPersistence` reference implementation is included.
 - **Pure, tested game logic**: XP/leveling, streaks, combo multipliers, SM-2 spaced repetition, and AI compete bots.
@@ -40,14 +41,30 @@ npm run test:e2e     # end-to-end tests (Playwright) — builds + previews autom
 ```
 src/
   domain/      Pure game logic (no React): leveling, streak, combo, sm2, bots, types
-  content/     Static seed content: subjects, lessons+questions, decks+cards, shop, themes, achievements, stickers
+  content/     Content Package system: schema (format + validate + normalize),
+               core.package.json (canonical course), runtime (active package store +
+               loader + Drive), evaluate (declarative achievements)
   storage/     Swappable persistence layer + 5-minute SyncEngine
   state/       Zustand store wiring domain + content + storage; derived selectors
-  lib/         Google Drive (GIS + Drive API) client, id helpers
+  lib/         Google Drive (GIS + Drive API) client, id + color helpers
   components/  AppShell (device frame), BottomNav, StatusBar, Overlays, shared UI
-  screens/     One file per screen, JSX mirroring the approved prototypes
+  screens/     One file per screen; content comes from the active package via useContent()
   styles/      legacy.css (ported design system) + shell.css (React/a11y/theming overrides)
+public/content/ index.json (pack manifest) + core.json + space.json (a 2nd demo course)
 ```
+
+### Content packages (courses)
+
+All course content is a single JSON document validated against
+[`src/content/schema.ts`](src/content/schema.ts). The app resolves the active
+package as: cached pick in `localStorage` → built-in core. Users can also load a
+pack from the static `/content` folder, **upload** a `.json` file, or save/load it
+to Google Drive — all from **Settings → Course Pack**. Two courses ship as a demo
+of swappability: *EduQuest Core* and *Space Explorers*. Authoring guide (and the
+format for AI generation): **[CONTENT_FORMAT.md](CONTENT_FORMAT.md)**.
+
+`npm run dev`/`build` run a prebuild step that mirrors `core.package.json` into
+`public/content/core.json` so the static-folder path serves the same data.
 
 ### Data flow & persistence
 

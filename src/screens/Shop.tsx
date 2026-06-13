@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
-import { SHOP_ITEMS } from '@/content/shop'
+import { useContent } from '@/content/runtime'
 import type { ShopCategory, ShopItem } from '@/domain/types'
 import { dateKey } from '@/domain/datetime'
 
@@ -30,15 +30,14 @@ export function Shop() {
   const purchase = useStore((s) => s.purchaseItem)
   const addRewards = useStore((s) => s.addRewards)
   const pushToast = useStore((s) => s.pushToast)
+  const shopItems = useContent((c) => c.shopItems)
+  const spinPrizes = useContent((c) => c.economy.dailySpinPrizes)
 
-  const items = SHOP_ITEMS.filter((i) => i.category === tab)
+  const items = shopItems.filter((i) => i.category === tab)
 
   function doSpin() {
     if (spunToday) return
-    const prizes = [
-      { coins: 50 }, { coins: 100 }, { coins: 200 }, { gems: 2 }, { gems: 5 }, { coins: 150 },
-    ]
-    const prize = prizes[Math.floor(Math.random() * prizes.length)]
+    const prize = spinPrizes[Math.floor(Math.random() * spinPrizes.length)]
     addRewards(prize)
     const label = prize.coins ? `🪙 ${prize.coins} coins` : `💎 ${prize.gems} gems`
     pushToast({ message: `Lucky Spin: ${label}!`, emoji: '🎡', kind: 'success' })
