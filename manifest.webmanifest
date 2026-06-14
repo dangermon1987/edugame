@@ -3,7 +3,8 @@
   "short_name": "EduQuest",
   "description": "A gamified learning adventure for kids ages 5-12.",
   "start_url": ".",
-  "display": "standalone",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
   "background_color": "#F8F7FF",
   "theme_color": "#6C5CE7",
   "icons": [
