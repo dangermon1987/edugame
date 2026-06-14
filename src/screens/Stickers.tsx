@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useContent, RARITY_LABEL } from '@/content/runtime'
 import { useT } from '@/i18n'
@@ -21,7 +20,6 @@ export function Stickers() {
   return (
     <div id="screen-stickers">
       <div className="sticker-header">
-        <StatusBar />
         <div className="sticker-title-row">
           <h1>{t.stickers.title}</h1>
         </div>

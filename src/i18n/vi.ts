@@ -142,6 +142,8 @@ export const vi: Strings = {
     languageDesc: 'Theo gói khóa học đang chọn',
     theme: 'Chủ đề',
     themeDesc: 'Đổi màu sắc & giao diện',
+    fullscreen: 'Toàn màn hình',
+    fullscreenDesc: 'Ẩn thanh trình duyệt, phủ kín màn hình',
     coursePack: 'Gói khóa học',
     coursePackDesc:
       'Mỗi gói cung cấp toàn bộ môn học, bài học, thẻ, vật phẩm & giao diện. Đổi gói để nạp một khóa học khác.',

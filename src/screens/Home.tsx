@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { useT } from '@/i18n'
@@ -39,7 +38,6 @@ export function Home() {
   return (
     <div id="screen-home">
       <div className="home-header">
-        <StatusBar />
         <div className="home-greeting">
           <div className="greeting-left">
             <h2>{greeting} 👋</h2>

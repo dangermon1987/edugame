@@ -146,6 +146,8 @@ export const en = {
     languageDesc: 'Set by the active course pack',
     theme: 'Theme',
     themeDesc: 'Change colors & look',
+    fullscreen: 'Fullscreen',
+    fullscreenDesc: 'Hide browser bars & fill the screen',
     coursePack: 'Course Pack',
     coursePackDesc:
       'A course pack supplies every subject, lesson, deck, shop item & theme. Switch packs to load a whole different course.',

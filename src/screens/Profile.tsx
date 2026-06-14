@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { isAchievementEarned } from '@/content/evaluate'
@@ -62,7 +61,6 @@ export function Profile() {
 
   return (
     <div id="screen-profile">
-      <StatusBar dark />
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 16px', gap: 8 }}>
         <button className="parent-settings-btn" onClick={() => navigate('/settings')} aria-label="Settings">

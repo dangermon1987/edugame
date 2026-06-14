@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { isDue } from '@/domain/sm2'
@@ -29,7 +28,6 @@ export function FlashcardHub() {
   return (
     <div id="screen-flash-hub">
       <div className="flash-hub-header">
-        <StatusBar />
         <div className="flash-hub-title-row">
           <h1>{t.flashcards.title}</h1>
         </div>

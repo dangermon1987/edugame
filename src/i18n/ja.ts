@@ -142,6 +142,8 @@ export const ja: Strings = {
     languageDesc: '選択中のコースパックで決まります',
     theme: 'テーマ',
     themeDesc: '色や見た目を変更',
+    fullscreen: 'フルスクリーン',
+    fullscreenDesc: 'ブラウザのバーを隠して全画面表示',
     coursePack: 'コースパック',
     coursePackDesc:
       'コースパックは教科・レッスン・カード・アイテム・テーマを全て提供します。切り替えると別のコースを読み込めます。',

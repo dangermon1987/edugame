@@ -11,32 +11,42 @@
      tablet  (768–1023) centred app card + bottom tabs, on a soft backdrop
      desktop (≥1024)    persistent side-nav rail + app card (no bottom tabs)
    ==================================================================== */
+/* Lock the document to the viewport: the app never scrolls at the page level —
+   only the inner .screen scrolls. This pins the top status bar and the bottom
+   tab bar to the device edges and kills the rubber-band overscroll that let the
+   bottom bar be dragged up and the top bar scroll away. */
 html,
 body {
-  height: 100%;
+  height: 100dvh;
 }
 body {
   margin: 0;
   display: block;
   padding: 0;
   background: #f1edff;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 #root {
-  min-height: 100dvh;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 /* Full-viewport backdrop holding the app card (+ side nav on desktop). */
 .app-stage {
   width: 100%;
-  min-height: 100dvh;
+  height: 100dvh;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #f1edff;
+  overflow: hidden;
 }
 
-/* App card. Base (mobile-first) = edge-to-edge full screen. */
+/* App card. Base (mobile-first) = edge-to-edge full screen.
+   position:relative anchors the absolutely-positioned bottom tab bar to the
+   frame (not the document) so it stays pinned to the frame's bottom edge. */
 .phone-frame {
   width: 100%;
   height: 100dvh;
@@ -44,6 +54,8 @@ body {
   border-radius: 0;
   border: none;
   flex: none;
+  position: relative;
+  overflow: hidden;
 }
 
 /* ---- Side navigation rail (tablet & up) ---- */
@@ -139,6 +151,12 @@ body {
   transform: none;
   opacity: 1;
   animation: screen-enter 0.28s ease both;
+  /* The single scroll container. Keep its scroll from chaining to the page so
+     the pinned top/bottom bars never move. */
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 @keyframes screen-enter {
@@ -466,31 +484,41 @@ body {
   }
 }
 
-/* ---- Safe-area insets for notched phones (full-screen mode only) ---- */
+/* The fake iOS status bar was removed; these full-bleed gradient headers used
+   it for their top spacing, so give it back here — and make it safe-area aware
+   so the header still bleeds under the notch in standalone/PWA mode. */
+.home-header,
+.shop-header,
+.compete-header,
+.flash-hub-header,
+.parent-header,
+.pet-header,
+.arcade-header,
+.map-header,
+.sticker-header,
+.workshop-header,
+.theme-header,
+.quiz-header,
+.live-header,
+.study-header,
+.memory-header {
+  padding-top: max(16px, env(safe-area-inset-top));
+}
+
+/* Plain (non-gradient) screen headers also lose the status-bar spacer; nudge
+   their content clear of the top edge / notch. */
+#screen-settings > div:first-child,
+#screen-learn > div:first-child,
+#screen-profile > div:first-child,
+#screen-subject > div:first-child,
+#screen-play > div:first-child {
+  padding-top: max(10px, env(safe-area-inset-top));
+}
+
+/* ---- Safe-area inset for the bottom tab bar on notched phones ---- */
 @media (max-width: 599px) {
-  .status-bar {
-    padding-top: max(8px, env(safe-area-inset-top));
-  }
   .bottom-nav {
     padding-bottom: max(24px, env(safe-area-inset-bottom));
-  }
-  /* Home/Shop/etc. gradient headers reach under the status bar nicely. */
-  .home-header,
-  .shop-header,
-  .compete-header,
-  .flash-hub-header,
-  .parent-header,
-  .pet-header,
-  .arcade-header,
-  .map-header,
-  .sticker-header,
-  .workshop-header,
-  .theme-header,
-  .quiz-header,
-  .live-header,
-  .study-header,
-  .memory-header {
-    padding-top: env(safe-area-inset-top);
   }
 }
 

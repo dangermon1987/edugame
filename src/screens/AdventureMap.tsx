@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { useContent } from '@/content/runtime'
 import { selectSubjectProgress } from '@/state/selectors'
 import { useT } from '@/i18n'
@@ -38,7 +37,6 @@ export function AdventureMap() {
   return (
     <div id="screen-map">
       <div className="map-header">
-        <StatusBar />
         <div className="map-title-row">
           <h1>{t.map.title}</h1>
           <div className="map-progress-tag">🗺️ {t.map.areas(completedAreas, subjects.length)}</div>

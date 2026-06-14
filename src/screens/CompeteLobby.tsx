@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { useT } from '@/i18n'
@@ -32,7 +31,6 @@ export function CompeteLobby() {
   return (
     <div id="screen-compete-lobby">
       <div className="compete-header">
-        <StatusBar />
         <div className="compete-title-row">
           <h1>{t.compete.title}</h1>
         </div>

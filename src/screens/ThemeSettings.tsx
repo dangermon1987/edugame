@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { useT } from '@/i18n'
@@ -38,7 +37,6 @@ export function ThemeSettings() {
   return (
     <div id="screen-themes">
       <div className="theme-header">
-        <StatusBar />
         <div style={{ padding: '0 4px' }}>
           <BackButton to="/settings" />
         </div>

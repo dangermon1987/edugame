@@ -1,5 +1,4 @@
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useT } from '@/i18n'
 
@@ -42,7 +41,6 @@ export function Pet() {
   return (
     <div id="screen-pet">
       <div className="pet-header">
-        <StatusBar />
         <div className="pet-title-row">
           <h1>{t.pet.title}</h1>
         </div>

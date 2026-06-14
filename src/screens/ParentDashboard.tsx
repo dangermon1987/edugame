@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { selectLevel, selectSubjectProgress, selectAverageAccuracy, localizedBandTitle } from '@/state/selectors'
@@ -102,7 +101,6 @@ export function ParentDashboard() {
   return (
     <div id="screen-parent">
       <div className="parent-header">
-        <StatusBar />
         <div className="parent-title-row">
           <h1>{t.parent.dashboard}</h1>
           <BackButton to="/profile" label="" />

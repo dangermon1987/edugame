@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { Confetti } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { pickBots, botAnswer, type BotTier } from '@/domain/bots'
@@ -174,7 +173,6 @@ export function CompeteLive() {
   if (phase === 'matchmaking') {
     return (
       <div className="matchmaking-screen" id="screen-matchmaking">
-        <StatusBar />
         <div className="matchmaking-content">
           <div className="matchmaking-title">{t.compete.finding}</div>
           <div className="matchmaking-sub">
@@ -214,7 +212,6 @@ export function CompeteLive() {
       placement === 1 ? { coins: 100, xp: 200 } : placement === 2 ? { coins: 50, xp: 100 } : placement === 3 ? { coins: 25, xp: 50 } : { coins: 10, xp: 20 }
     return (
       <div className="podium-screen" id="screen-compete-results">
-        <StatusBar />
         <Confetti />
         <div className="podium-header">
           <h1>{t.compete.matchComplete}</h1>
@@ -304,7 +301,6 @@ export function CompeteLive() {
   return (
     <div className="live-screen" id="screen-compete-live">
       <div className="live-header">
-        <StatusBar />
         <div className="live-top-bar">
           <span className="live-q-num">
             Q {qIndex + 1}/{questions.length}

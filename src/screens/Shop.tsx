@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { useContent } from '@/content/runtime'
 import type { ShopCategory, ShopItem } from '@/domain/types'
 import { dateKey } from '@/domain/datetime'
@@ -56,7 +55,6 @@ export function Shop() {
   return (
     <div id="screen-shop">
       <div className="shop-header">
-        <StatusBar />
         <div className="shop-title-row">
           <h1>{t.shop.title}</h1>
         </div>

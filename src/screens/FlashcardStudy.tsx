@@ -1,7 +1,6 @@
 import { useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { Confetti } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { isDue } from '@/domain/sm2'
@@ -100,7 +99,6 @@ export function FlashcardStudy() {
     const gems = gotIt === total ? 5 : 0
     return (
       <div className="results-screen" id="screen-flash-results">
-        <StatusBar dark />
         <Confetti />
         <div className="results-celebration">
           <div className="results-emoji">🎉</div>
@@ -173,7 +171,6 @@ export function FlashcardStudy() {
   return (
     <div className="study-screen" id="screen-flash-study">
       <div className="study-header">
-        <StatusBar />
         <div className="study-top-bar">
           <button className="study-close" onClick={() => navigate('/flashcards')} aria-label="Close">
             <i className="fas fa-times" />

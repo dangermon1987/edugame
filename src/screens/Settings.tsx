@@ -1,7 +1,6 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
 import { isDriveConfigured } from '@/lib/googleDrive'
 import { useContentStore, saveContentToDrive, loadContentFromDrive } from '@/content/runtime'
@@ -31,6 +30,29 @@ export function Settings() {
   const resetProgress = useStore((s) => s.resetProgress)
   const pushToast = useStore((s) => s.pushToast)
   const [confirmReset, setConfirmReset] = useState(false)
+
+  // Fullscreen toggle. The Fullscreen API works on desktop & Android; iOS
+  // Safari doesn't support it for non-video elements, so we hide the row there
+  // (the Add-to-Home-Screen route is fullscreen on iOS instead).
+  const fullscreenSupported =
+    typeof document !== 'undefined' &&
+    typeof document.documentElement.requestFullscreen === 'function'
+  const [isFullscreen, setIsFullscreen] = useState(
+    typeof document !== 'undefined' && !!document.fullscreenElement,
+  )
+  useEffect(() => {
+    const onChange = () => setIsFullscreen(!!document.fullscreenElement)
+    document.addEventListener('fullscreenchange', onChange)
+    return () => document.removeEventListener('fullscreenchange', onChange)
+  }, [])
+  async function toggleFullscreen() {
+    try {
+      if (document.fullscreenElement) await document.exitFullscreen()
+      else await document.documentElement.requestFullscreen()
+    } catch {
+      /* user denied or unavailable — leave state as-is */
+    }
+  }
 
   const manifest = useContentStore((s) => s.manifest)
   const activeId = useContentStore((s) => s.activeId)
@@ -73,7 +95,6 @@ export function Settings() {
 
   return (
     <div id="screen-settings">
-      <StatusBar dark />
       <div style={{ padding: '8px 16px 0' }}>
         <BackButton to="/profile" />
         <h1 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 900, marginTop: 8 }}>{t.settings.title} ⚙️</h1>
@@ -118,6 +139,21 @@ export function Settings() {
           </div>
           <i className="fas fa-chevron-right" style={{ color: 'var(--color-text-muted)' }} />
         </div>
+        {fullscreenSupported && (
+          <div className="time-control-row">
+            <div className="tc-info">
+              <h4>{t.settings.fullscreen}</h4>
+              <p>{t.settings.fullscreenDesc}</p>
+            </div>
+            <div
+              className={`toggle-switch${isFullscreen ? ' on' : ''}`}
+              onClick={toggleFullscreen}
+              role="switch"
+              aria-checked={isFullscreen}
+              aria-label={t.settings.fullscreen}
+            />
+          </div>
+        )}
       </div>
 
       <SectionHeader title={t.settings.coursePack} />

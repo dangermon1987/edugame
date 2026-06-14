@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { useT } from '@/i18n'
@@ -14,7 +13,6 @@ export function Learn() {
 
   return (
     <div id="screen-learn">
-      <StatusBar dark />
       <div style={{ padding: '8px 20px 0' }}>
         <h1 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 900 }}>{t.learn.title} 📖</h1>
         <p style={{ color: 'var(--color-text-secondary)' }}>{t.learn.subtitle}</p>

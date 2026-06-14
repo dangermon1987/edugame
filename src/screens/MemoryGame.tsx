@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { Confetti } from '@/components/ui'
 import { useT } from '@/i18n'
 
@@ -98,7 +97,6 @@ export function MemoryGame() {
   return (
     <div className="memory-game-screen" id="screen-memory">
       <div className="memory-header">
-        <StatusBar />
         <div className="memory-top-bar">
           <button className="memory-close" onClick={() => navigate('/arcade')} aria-label="Close">
             <i className="fas fa-times" />

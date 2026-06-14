@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { selectSubjectProgress } from '@/state/selectors'
@@ -36,7 +35,6 @@ export function SubjectHub() {
 
   return (
     <div id="screen-subject">
-      <StatusBar dark />
       <div className="subject-hub-header">
         <BackButton to="/" />
         <div className="subject-hub-hero">

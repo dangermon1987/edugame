@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader, EmptyState } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { useT } from '@/i18n'
@@ -73,7 +72,6 @@ export function Workshop() {
   return (
     <div id="screen-workshop">
       <div className="workshop-header">
-        <StatusBar />
         <div className="workshop-title-row">
           <h1>{t.workshop.title}</h1>
         </div>

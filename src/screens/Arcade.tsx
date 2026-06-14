@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { useT } from '@/i18n'
@@ -20,7 +19,6 @@ export function Arcade() {
   return (
     <div id="screen-arcade">
       <div className="arcade-header">
-        <StatusBar />
         <div className="arcade-title-row">
           <h1>{t.arcade.title}</h1>
         </div>

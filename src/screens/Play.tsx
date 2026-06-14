@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useT } from '@/i18n'
 
@@ -20,7 +19,6 @@ export function Play() {
   const ACTIVITIES = META.map((m, i) => ({ ...m, title: t.play.tiles[i][0], desc: t.play.tiles[i][1] }))
   return (
     <div id="screen-play">
-      <StatusBar dark />
       <div style={{ padding: '8px 20px 0' }}>
         <h1 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 900 }}>{t.play.title} 🎮</h1>
         <p style={{ color: 'var(--color-text-secondary)' }}>{t.play.subtitle}</p>

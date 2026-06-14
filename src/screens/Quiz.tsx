@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useStore, type RewardBundle } from '@/state/store'
-import { StatusBar } from '@/components/StatusBar'
 import { Confetti } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { comboMultiplier } from '@/domain/combo'
@@ -104,7 +103,6 @@ export function Quiz() {
   return (
     <div className="quiz-screen" id="screen-quiz">
       <div className="quiz-header">
-        <StatusBar />
         <div className="quiz-top-bar">
           <button className="quiz-close" onClick={() => navigate(backTo)} aria-label="Close quiz">
             <i className="fas fa-times" />

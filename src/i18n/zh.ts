@@ -142,6 +142,8 @@ export const zh: Strings = {
     languageDesc: '由当前课程包决定',
     theme: '主题',
     themeDesc: '更改颜色与外观',
+    fullscreen: '全屏',
+    fullscreenDesc: '隐藏浏览器栏并填满屏幕',
     coursePack: '课程包',
     coursePackDesc: '每个课程包提供全部科目、课程、卡片、道具与主题。切换课程包即可加载完全不同的课程。',
     importPack: '导入课程包…',
