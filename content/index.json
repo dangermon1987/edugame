@@ -35,6 +35,13 @@
       "description": "A mini space-science course (demo of swappable packs).",
       "cover": "🚀",
       "file": "space.json"
+    },
+    {
+      "id": "grade-vi",
+      "name": "Vui Học Lớp 4",
+      "description": "Toán, Tiếng Việt, Khoa học & Tiếng Anh (lớp 4).",
+      "cover": "📘",
+      "file": "grade-vi.json"
     }
   ]
 }
