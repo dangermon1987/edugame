@@ -47,11 +47,22 @@ describe('content schema validation', () => {
     expect(r.errors).toEqual([])
   })
 
-  it('accepts the static Space Explorers package', () => {
-    const text = readFileSync(resolve(__dirname, '../../public/content/space.json'), 'utf8')
-    const r = validateContentPackage(JSON.parse(text))
-    expect(r.ok).toBe(true)
-    expect(r.errors).toEqual([])
+  it('accepts every package listed in the static manifest', () => {
+    const dir = resolve(__dirname, '../../public/content')
+    const manifest = JSON.parse(readFileSync(resolve(dir, 'index.json'), 'utf8')) as {
+      packages: Array<{ id: string; file: string }>
+    }
+    expect(manifest.packages.length).toBeGreaterThan(0)
+    for (const entry of manifest.packages) {
+      const pkg = JSON.parse(readFileSync(resolve(dir, entry.file), 'utf8'))
+      const r = validateContentPackage(pkg)
+      // Surface which package failed, if any.
+      expect({ id: entry.id, ok: r.ok, errors: r.errors }).toEqual({ id: entry.id, ok: true, errors: [] })
+      // Normalizing must not throw and must index correctly.
+      const c = normalizeContentPackage(pkg)
+      expect(c.subjects.length).toBeGreaterThan(0)
+      expect(c.lessons.length).toBeGreaterThan(0)
+    }
   })
 
   it('rejects a package with the wrong format tag', () => {
@@ -91,14 +102,16 @@ describe('content normalization', () => {
     expect(c.economy.startingCoins).toBe(DEFAULT_ECONOMY.startingCoins)
     expect(c.economy.levels.maxLevel).toBe(DEFAULT_ECONOMY.levels.maxLevel)
     expect(c.app.dailyChallengeLessonId).toBe('l') // defaults to first lesson
+    expect(c.app.dailyChallenge.title).toBe('L') // derived from the lesson, not hardcoded
     expect(c.themes.length).toBeGreaterThan(0) // default theme injected
     expect(c.arcadeGames.length).toBeGreaterThan(0)
   })
 
   it('builds index maps and lessonsBySubject', () => {
     const c = normalizeContentPackage(core)
-    expect(c.subjectById['english']).toBeTruthy()
-    expect(c.lessonsBySubject['english'].length).toBeGreaterThan(0)
+    const firstSubject = c.subjects[0].id
+    expect(c.subjectById[firstSubject]).toBeTruthy()
+    expect(c.lessonsBySubject[firstSubject].length).toBeGreaterThan(0)
     expect(c.cardById[c.allCards[0].id]).toBe(c.allCards[0])
   })
 })
@@ -106,24 +119,29 @@ describe('content normalization', () => {
 describe('achievement evaluator', () => {
   const defs = normalizeContentPackage(core).achievements
 
-  it('awards first-win after one lesson', () => {
+  it('awards the "1 lesson" achievement after one lesson', () => {
+    const first = defs.find((d) => d.criteria.stat === 'lessonsCompleted' && d.criteria.gte <= 1)!
+    expect(first).toBeTruthy()
     const u = emptyUser({ stats: { lessonsCompleted: 1, totalStudyMinutes: 0, dailyMinutes: {}, accuracySamples: [] } })
-    const first = defs.find((d) => d.id === 'first-win')!
     expect(isAchievementEarned(first, u)).toBe(true)
   })
 
   it('respects minSamples for avgAccuracy', () => {
-    const sharp = defs.find((d) => d.id === 'sharpshooter')!
-    const fewSamples = emptyUser({ stats: { lessonsCompleted: 0, totalStudyMinutes: 0, dailyMinutes: {}, accuracySamples: [1, 1] } })
+    const sharp = defs.find((d) => d.criteria.stat === 'avgAccuracy' && d.criteria.minSamples)!
+    expect(sharp).toBeTruthy()
+    const need = sharp.criteria.minSamples!
+    const fewSamples = emptyUser({ stats: { lessonsCompleted: 0, totalStudyMinutes: 0, dailyMinutes: {}, accuracySamples: Array(need - 1).fill(1) } })
     expect(isAchievementEarned(sharp, fewSamples)).toBe(false)
-    const enough = emptyUser({ stats: { lessonsCompleted: 0, totalStudyMinutes: 0, dailyMinutes: {}, accuracySamples: [1, 1, 1] } })
+    const enough = emptyUser({ stats: { lessonsCompleted: 0, totalStudyMinutes: 0, dailyMinutes: {}, accuracySamples: Array(need).fill(1) } })
     expect(isAchievementEarned(sharp, enough)).toBe(true)
   })
 
   it('only reports newly-earned achievements', () => {
-    const fresh = emptyUser({ coins: 2000 })
-    expect(evaluateAchievements(fresh, defs)).toContain('rich')
-    const already = emptyUser({ coins: 2000, achievements: { rich: 1 } })
-    expect(evaluateAchievements(already, defs)).not.toContain('rich')
+    const rich = defs.find((d) => d.criteria.stat === 'coins')!
+    expect(rich).toBeTruthy()
+    const fresh = emptyUser({ coins: rich.criteria.gte })
+    expect(evaluateAchievements(fresh, defs)).toContain(rich.id)
+    const already = emptyUser({ coins: rich.criteria.gte, achievements: { [rich.id]: 1 } })
+    expect(evaluateAchievements(already, defs)).not.toContain(rich.id)
   })
 })

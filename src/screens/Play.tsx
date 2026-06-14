@@ -1,29 +1,32 @@
 import { useNavigate } from 'react-router-dom'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
+import { useT } from '@/i18n'
 
-const ACTIVITIES = [
-  { emoji: '🏆', title: 'Compete', desc: 'Live quiz battles', to: '/compete', color: 'var(--color-primary)' },
-  { emoji: '🗂️', title: 'Flashcards', desc: 'Quick review', to: '/flashcards', color: 'var(--color-accent-green)' },
-  { emoji: '🧠', title: 'Memory Match', desc: 'Find the pairs', to: '/memory', color: 'var(--color-accent-pink)' },
-  { emoji: '🐉', title: 'My Pet', desc: 'Feed & play', to: '/pet', color: 'var(--color-accent-orange)' },
-  { emoji: '🗺️', title: 'Adventure Map', desc: 'Explore islands', to: '/map', color: 'var(--color-accent-blue)' },
-  { emoji: '🎨', title: 'Themes', desc: 'Customize your app', to: '/themes', color: 'var(--color-accent-mint)' },
-  { emoji: '✨', title: 'Stickers', desc: 'Your collection', to: '/stickers', color: 'var(--color-accent-yellow)' },
-  { emoji: '🛠️', title: 'Workshop', desc: 'Make your own quiz', to: '/workshop', color: 'var(--color-secondary)' },
+const META = [
+  { emoji: '🏆', to: '/compete', color: 'var(--color-primary)' },
+  { emoji: '🗂️', to: '/flashcards', color: 'var(--color-accent-green)' },
+  { emoji: '🧠', to: '/memory', color: 'var(--color-accent-pink)' },
+  { emoji: '🐉', to: '/pet', color: 'var(--color-accent-orange)' },
+  { emoji: '🗺️', to: '/map', color: 'var(--color-accent-blue)' },
+  { emoji: '🎨', to: '/themes', color: 'var(--color-accent-mint)' },
+  { emoji: '✨', to: '/stickers', color: 'var(--color-accent-yellow)' },
+  { emoji: '🛠️', to: '/workshop', color: 'var(--color-secondary)' },
 ]
 
 export function Play() {
   const navigate = useNavigate()
+  const t = useT()
+  const ACTIVITIES = META.map((m, i) => ({ ...m, title: t.play.tiles[i][0], desc: t.play.tiles[i][1] }))
   return (
     <div id="screen-play">
       <StatusBar dark />
       <div style={{ padding: '8px 20px 0' }}>
-        <h1 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 900 }}>Play 🎮</h1>
-        <p style={{ color: 'var(--color-text-secondary)' }}>Games, pets & creative fun</p>
+        <h1 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 900 }}>{t.play.title} 🎮</h1>
+        <p style={{ color: 'var(--color-text-secondary)' }}>{t.play.subtitle}</p>
       </div>
 
-      <SectionHeader title="Activities" />
+      <SectionHeader title={t.play.activities} />
       <div
         style={{
           display: 'grid',

@@ -3,480 +3,446 @@
   "formatVersion": 1,
   "meta": {
     "id": "core",
-    "name": "EduQuest Core",
-    "description": "English, Math, Science & Art for ages 5-12.",
+    "name": "Học Vui Lớp 4",
+    "description": "Toán, Tiếng Việt, Khoa học, Lịch sử & Địa lí, Tiếng Anh và Đạo đức cho học sinh lớp 4.",
     "author": "EduQuest",
     "version": "1.0.0",
-    "locale": "en",
-    "cover": "🎓",
+    "locale": "vi",
+    "cover": "🇻🇳",
     "createdAt": "2026-06-14"
   },
   "app": {
-    "title": "EduQuest",
-    "tagline": "A learning adventure for curious kids!",
-    "dailyChallengeLessonId": "math-l2"
+    "title": "Học Vui Lớp 4",
+    "tagline": "Cùng bé học giỏi mỗi ngày!",
+    "dailyChallengeLessonId": "toan-l3"
   },
   "economy": {
     "startingCoins": 200,
     "startingGems": 0
   },
   "defaultProfile": {
-    "name": "Alex",
-    "avatar": "🦊",
-    "age": 8
+    "name": "Bé Ngoan",
+    "avatar": "🧒",
+    "age": 9
   },
   "subjects": [
     {
-      "id": "english",
-      "name": "English",
-      "description": "Vocabulary & Grammar",
-      "icon": "fas fa-book-open",
-      "emoji": "📚",
-      "colorClass": "english"
-    },
-    {
-      "id": "math",
-      "name": "Math",
-      "description": "Addition & Shapes",
+      "id": "toan",
+      "name": "Toán",
+      "description": "Số, phép tính & hình học",
       "icon": "fas fa-calculator",
       "emoji": "🔢",
       "colorClass": "math"
     },
     {
-      "id": "science",
-      "name": "Science",
-      "description": "Animals & Nature",
+      "id": "tiengviet",
+      "name": "Tiếng Việt",
+      "description": "Từ ngữ & câu",
+      "icon": "fas fa-book-open",
+      "emoji": "📖",
+      "colorClass": "english"
+    },
+    {
+      "id": "khoahoc",
+      "name": "Khoa học",
+      "description": "Nước, không khí & sự sống",
       "icon": "fas fa-flask",
       "emoji": "🔬",
       "colorClass": "science"
     },
     {
-      "id": "art",
-      "name": "Art",
-      "description": "Colors & Drawing",
-      "icon": "fas fa-palette",
-      "emoji": "🎨",
+      "id": "lsdl",
+      "name": "Lịch sử & Địa lí",
+      "description": "Lịch sử & đất nước",
+      "icon": "fas fa-landmark",
+      "emoji": "🏯",
       "colorClass": "art"
+    },
+    {
+      "id": "tienganh",
+      "name": "Tiếng Anh",
+      "description": "Từ vựng & giao tiếp",
+      "icon": "fas fa-language",
+      "emoji": "🔤",
+      "colorClass": "coding"
+    },
+    {
+      "id": "daoduc",
+      "name": "Đạo đức",
+      "description": "Bài học làm người",
+      "icon": "fas fa-heart",
+      "emoji": "💝",
+      "colorClass": "music"
     }
   ],
   "lessons": [
     {
-      "id": "english-l1",
-      "subjectId": "english",
+      "id": "toan-l1",
+      "subjectId": "toan",
+      "title": "Số đến lớp triệu",
+      "description": "Đọc và viết số lớn",
       "order": 1,
-      "title": "ABCs & Phonics",
-      "description": "Learn the alphabet sounds",
-      "estMinutes": 15,
-      "coinReward": 50,
+      "estMinutes": 12,
+      "coinReward": 60,
       "gemReward": 0,
       "questions": [
         {
-          "id": "q1",
-          "type": "Phonics",
-          "prompt": "Which letter makes the \"mmm\" sound?",
+          "id": "t1",
+          "type": "Số học",
+          "prompt": "Số một triệu có bao nhiêu chữ số 0?",
           "options": [
-            "M",
-            "N",
-            "B",
-            "P"
+            "6",
+            "5",
+            "7",
+            "4"
           ],
           "correctIndex": 0,
-          "hint": "Like in \"mom\""
+          "hint": "1 000 000"
         },
         {
-          "id": "q2",
-          "type": "Phonics",
-          "prompt": "What sound does \"S\" make?",
+          "id": "t2",
+          "type": "Số học",
+          "prompt": "Số liền sau của 999 999 là số nào?",
           "options": [
-            "ssss",
-            "zzz",
-            "fff",
-            "kkk"
+            "999 998",
+            "1 000 000",
+            "100 000",
+            "99 999"
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         },
         {
-          "id": "q3",
-          "type": "Vocabulary",
-          "prompt": "Which word starts with \"B\"?",
+          "id": "t3",
+          "type": "Số học",
+          "prompt": "Trong số 3 256 471, chữ số 2 thuộc hàng nào?",
           "options": [
-            "Ball",
-            "Cat",
-            "Dog",
-            "Fish"
+            "Hàng chục nghìn",
+            "Hàng nghìn",
+            "Hàng trăm nghìn",
+            "Hàng triệu"
           ],
-          "correctIndex": 0
+          "correctIndex": 2
         },
         {
-          "id": "q4",
-          "type": "Phonics",
-          "prompt": "Which letter comes after \"C\"?",
+          "id": "t4",
+          "type": "Số học",
+          "prompt": "Số gồm 5 trăm nghìn và 2 nghìn được viết là?",
           "options": [
-            "D",
-            "B",
-            "E",
-            "A"
+            "520 000",
+            "52 000",
+            "500 200",
+            "502 000"
           ],
-          "correctIndex": 0
+          "correctIndex": 3
         }
       ]
     },
     {
-      "id": "english-l2",
-      "subjectId": "english",
+      "id": "toan-l2",
+      "subjectId": "toan",
+      "title": "Phép cộng và phép trừ",
+      "description": "Cộng, trừ số có nhiều chữ số",
       "order": 2,
-      "title": "First Words",
-      "description": "Common sight words & spelling",
-      "estMinutes": 20,
-      "coinReward": 75,
-      "gemReward": 0,
-      "questions": [
-        {
-          "id": "q5",
-          "type": "Spelling",
-          "prompt": "How do you spell the color of the sky?",
-          "options": [
-            "blue",
-            "bloo",
-            "blew",
-            "blu"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q6",
-          "type": "Vocabulary",
-          "prompt": "A baby dog is called a…",
-          "options": [
-            "puppy",
-            "kitten",
-            "cub",
-            "foal"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q7",
-          "type": "Sight Words",
-          "prompt": "Pick the correct word: \"I ___ happy.\"",
-          "options": [
-            "am",
-            "is",
-            "are",
-            "be"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q8",
-          "type": "Vocabulary",
-          "prompt": "Which one is a fruit?",
-          "options": [
-            "apple",
-            "chair",
-            "shoe",
-            "car"
-          ],
-          "correctIndex": 0
-        }
-      ]
-    },
-    {
-      "id": "english-l3",
-      "subjectId": "english",
-      "order": 3,
-      "title": "Sentence Building",
-      "description": "Put words together to make sentences",
-      "estMinutes": 20,
-      "coinReward": 100,
-      "gemReward": 3,
-      "questions": [
-        {
-          "id": "q9",
-          "type": "Vocabulary",
-          "prompt": "Which word means \"very happy\"?",
-          "options": [
-            "Sad",
-            "Joyful",
-            "Angry",
-            "Tired"
-          ],
-          "correctIndex": 1,
-          "hint": "Choose the best answer"
-        },
-        {
-          "id": "q10",
-          "type": "Grammar",
-          "prompt": "Which sentence is correct?",
-          "options": [
-            "The cat run.",
-            "The cat runs.",
-            "The cat running.",
-            "Cat the runs."
-          ],
-          "correctIndex": 1
-        },
-        {
-          "id": "q11",
-          "type": "Grammar",
-          "prompt": "Pick the question.",
-          "options": [
-            "I like cake.",
-            "Do you like cake?",
-            "Cake is good.",
-            "We ate cake."
-          ],
-          "correctIndex": 1
-        },
-        {
-          "id": "q12",
-          "type": "Vocabulary",
-          "prompt": "The opposite of \"big\" is…",
-          "options": [
-            "small",
-            "tall",
-            "wide",
-            "huge"
-          ],
-          "correctIndex": 0
-        }
-      ]
-    },
-    {
-      "id": "english-l4",
-      "subjectId": "english",
-      "order": 4,
-      "title": "Grammar Basics",
-      "description": "Nouns, verbs & adjectives",
-      "estMinutes": 20,
-      "coinReward": 100,
-      "gemReward": 0,
-      "questions": [
-        {
-          "id": "q13",
-          "type": "Grammar",
-          "prompt": "Which word is a noun?",
-          "options": [
-            "quickly",
-            "dog",
-            "jump",
-            "happy"
-          ],
-          "correctIndex": 1,
-          "hint": "A noun is a person, place or thing"
-        },
-        {
-          "id": "q14",
-          "type": "Grammar",
-          "prompt": "Which word is an action (verb)?",
-          "options": [
-            "table",
-            "swim",
-            "blue",
-            "soft"
-          ],
-          "correctIndex": 1
-        },
-        {
-          "id": "q15",
-          "type": "Grammar",
-          "prompt": "Which word describes (adjective)?",
-          "options": [
-            "run",
-            "shiny",
-            "eat",
-            "box"
-          ],
-          "correctIndex": 1
-        },
-        {
-          "id": "q16",
-          "type": "Grammar",
-          "prompt": "Pick the plural of \"child\".",
-          "options": [
-            "childs",
-            "children",
-            "childes",
-            "child"
-          ],
-          "correctIndex": 1
-        }
-      ]
-    },
-    {
-      "id": "math-l1",
-      "subjectId": "math",
-      "order": 1,
-      "title": "Counting Fun",
-      "description": "Count from 1 to 20",
       "estMinutes": 12,
-      "coinReward": 50,
+      "coinReward": 70,
       "gemReward": 0,
       "questions": [
         {
-          "id": "q17",
-          "type": "Counting",
-          "prompt": "What comes after 7?",
+          "id": "t5",
+          "type": "Cộng trừ",
+          "prompt": "45 678 + 23 322 = ?",
           "options": [
-            "8",
-            "6",
-            "9",
-            "5"
+            "69 000",
+            "68 000",
+            "69 900",
+            "70 000"
           ],
           "correctIndex": 0
         },
         {
-          "id": "q18",
-          "type": "Counting",
-          "prompt": "How many fingers on one hand?",
+          "id": "t6",
+          "type": "Cộng trừ",
+          "prompt": "100 000 − 1 = ?",
           "options": [
-            "5",
-            "4",
-            "6",
-            "10"
+            "10 000",
+            "99 999",
+            "99 990",
+            "100 001"
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         },
         {
-          "id": "q19",
-          "type": "Counting",
-          "prompt": "Count: 🍎🍎🍎. How many apples?",
+          "id": "t7",
+          "type": "Tìm x",
+          "prompt": "Tìm x, biết x + 250 = 700.",
           "options": [
-            "3",
-            "2",
-            "4",
-            "5"
+            "x = 950",
+            "x = 350",
+            "x = 450",
+            "x = 500"
           ],
-          "correctIndex": 0
+          "correctIndex": 2
         },
         {
-          "id": "q20",
-          "type": "Counting",
-          "prompt": "What is the biggest number?",
+          "id": "t8",
+          "type": "Cộng trừ",
+          "prompt": "Tổng của 12 000 và 8 000 là?",
           "options": [
-            "12",
-            "9",
-            "7",
-            "3"
+            "19 000",
+            "2 000",
+            "21 000",
+            "20 000"
           ],
-          "correctIndex": 0
+          "correctIndex": 3
         }
       ]
     },
     {
-      "id": "math-l2",
-      "subjectId": "math",
-      "order": 2,
-      "title": "Addition Adventure",
-      "description": "Add numbers up to 20",
-      "estMinutes": 18,
+      "id": "toan-l3",
+      "subjectId": "toan",
+      "title": "Phép nhân và phép chia",
+      "description": "Nhân, chia trong bảng",
+      "order": 3,
+      "estMinutes": 14,
       "coinReward": 80,
       "gemReward": 0,
       "questions": [
         {
-          "id": "q21",
-          "type": "Addition",
-          "prompt": "2 + 3 = ?",
+          "id": "t9",
+          "type": "Nhân chia",
+          "prompt": "8 × 9 = ?",
           "options": [
-            "5",
-            "4",
+            "72",
+            "63",
+            "81",
+            "64"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "t10",
+          "type": "Nhân chia",
+          "prompt": "56 : 7 = ?",
+          "options": [
             "6",
+            "8",
+            "9",
             "7"
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         },
         {
-          "id": "q22",
-          "type": "Addition",
-          "prompt": "6 + 4 = ?",
+          "id": "t11",
+          "type": "Nhân chia",
+          "prompt": "123 × 10 = ?",
+          "options": [
+            "123",
+            "12 300",
+            "1 230",
+            "1 023"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "t12",
+          "type": "Đố vui",
+          "prompt": "Một tá bằng bao nhiêu cái?",
           "options": [
             "10",
-            "9",
-            "11",
-            "8"
+            "20",
+            "6",
+            "12"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "toan-l4",
+      "subjectId": "toan",
+      "title": "Phân số",
+      "description": "Làm quen với phân số",
+      "order": 4,
+      "estMinutes": 14,
+      "coinReward": 80,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "t13",
+          "type": "Phân số",
+          "prompt": "Phân số 3/4 đọc là gì?",
+          "options": [
+            "Ba phần tư",
+            "Bốn phần ba",
+            "Ba nhân tư",
+            "Ba trừ tư"
           ],
           "correctIndex": 0
         },
         {
-          "id": "q23",
-          "type": "Addition",
-          "prompt": "7 + 5 = ?",
+          "id": "t14",
+          "type": "Phân số",
+          "prompt": "Phân số nào bằng 1/2?",
           "options": [
-            "12",
-            "11",
-            "13",
-            "10"
+            "1/3",
+            "2/4",
+            "2/3",
+            "3/4"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "t15",
+          "type": "Phân số",
+          "prompt": "Trong phân số 5/8, số 8 được gọi là gì?",
+          "options": [
+            "Tử số",
+            "Thương số",
+            "Mẫu số",
+            "Hiệu số"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "t16",
+          "type": "Phân số",
+          "prompt": "1/4 + 1/4 = ?",
+          "options": [
+            "2/8",
+            "1/8",
+            "1/16",
+            "2/4"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "toan-l5",
+      "subjectId": "toan",
+      "title": "Hình học và đo lường",
+      "description": "Góc, hình & đơn vị đo",
+      "order": 5,
+      "estMinutes": 14,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "t17",
+          "type": "Hình học",
+          "prompt": "Góc vuông có số đo bằng bao nhiêu độ?",
+          "options": [
+            "90 độ",
+            "45 độ",
+            "180 độ",
+            "60 độ"
           ],
           "correctIndex": 0
         },
         {
-          "id": "q24",
-          "type": "Addition",
-          "prompt": "9 + 9 = ?",
+          "id": "t18",
+          "type": "Hình học",
+          "prompt": "Góc lớn hơn góc vuông và nhỏ hơn góc bẹt gọi là góc gì?",
           "options": [
-            "18",
-            "16",
-            "19",
-            "17"
+            "Góc nhọn",
+            "Góc tù",
+            "Góc bẹt",
+            "Góc vuông"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "t19",
+          "type": "Hình học",
+          "prompt": "Hình có bốn cạnh bằng nhau và bốn góc vuông là hình gì?",
+          "options": [
+            "Hình chữ nhật",
+            "Hình thoi",
+            "Hình vuông",
+            "Hình tròn"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "t20",
+          "type": "Đo lường",
+          "prompt": "1 tấn bằng bao nhiêu ki-lô-gam?",
+          "options": [
+            "100 kg",
+            "10 kg",
+            "10 000 kg",
+            "1 000 kg"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "t21",
+          "type": "Đo lường",
+          "prompt": "1 yến bằng bao nhiêu ki-lô-gam?",
+          "options": [
+            "10 kg",
+            "100 kg",
+            "1 kg",
+            "1 000 kg"
           ],
           "correctIndex": 0
         }
       ]
     },
     {
-      "id": "math-l3",
-      "subjectId": "math",
-      "order": 3,
-      "title": "Subtraction Safari",
-      "description": "Take away numbers",
-      "estMinutes": 18,
+      "id": "toan-l6",
+      "subjectId": "toan",
+      "title": "Trung bình cộng",
+      "description": "Tìm số trung bình cộng",
+      "order": 6,
+      "estMinutes": 12,
       "coinReward": 90,
       "gemReward": 0,
       "questions": [
         {
-          "id": "q25",
-          "type": "Subtraction",
-          "prompt": "5 - 2 = ?",
-          "options": [
-            "3",
-            "2",
-            "4",
-            "1"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q26",
-          "type": "Subtraction",
-          "prompt": "10 - 4 = ?",
-          "options": [
-            "6",
-            "5",
-            "7",
-            "8"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q27",
-          "type": "Subtraction",
-          "prompt": "8 - 8 = ?",
-          "options": [
-            "0",
-            "1",
-            "8",
-            "16"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q28",
-          "type": "Subtraction",
-          "prompt": "15 - 5 = ?",
+          "id": "t22",
+          "type": "Trung bình",
+          "prompt": "Trung bình cộng của 4 và 6 là?",
           "options": [
             "10",
-            "9",
-            "11",
+            "5",
+            "2",
+            "8"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "t23",
+          "type": "Trung bình",
+          "prompt": "Trung bình cộng của 2, 4 và 6 là?",
+          "options": [
+            "6",
+            "3",
+            "4",
+            "12"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "t24",
+          "type": "Trung bình",
+          "prompt": "Lan có 10 cái kẹo, Hà có 6 cái. Trung bình mỗi bạn có mấy cái?",
+          "options": [
+            "16",
+            "4",
+            "6",
+            "8"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "t25",
+          "type": "Trung bình",
+          "prompt": "Trung bình cộng của 0 và 10 là?",
+          "options": [
+            "5",
+            "10",
+            "0",
             "20"
           ],
           "correctIndex": 0
@@ -484,805 +450,1538 @@
       ]
     },
     {
-      "id": "math-l4",
-      "subjectId": "math",
-      "order": 4,
-      "title": "Shapes & Patterns",
-      "description": "Circles, squares & more",
-      "estMinutes": 15,
-      "coinReward": 100,
-      "gemReward": 3,
-      "questions": [
-        {
-          "id": "q29",
-          "type": "Shapes",
-          "prompt": "How many sides does a triangle have?",
-          "options": [
-            "3",
-            "4",
-            "5",
-            "2"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q30",
-          "type": "Shapes",
-          "prompt": "Which shape is round?",
-          "options": [
-            "Circle",
-            "Square",
-            "Triangle",
-            "Rectangle"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q31",
-          "type": "Shapes",
-          "prompt": "A square has how many equal sides?",
-          "options": [
-            "4",
-            "3",
-            "2",
-            "5"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q32",
-          "type": "Patterns",
-          "prompt": "Finish: 🔴🔵🔴🔵🔴 ?",
-          "options": [
-            "🔵",
-            "🔴",
-            "🟢",
-            "🟡"
-          ],
-          "correctIndex": 0
-        }
-      ]
-    },
-    {
-      "id": "science-l1",
-      "subjectId": "science",
+      "id": "tv-l1",
+      "subjectId": "tiengviet",
+      "title": "Danh từ, động từ, tính từ",
+      "description": "Nhận biết từ loại",
       "order": 1,
-      "title": "Amazing Animals",
-      "description": "Learn about animals",
-      "estMinutes": 15,
+      "estMinutes": 12,
       "coinReward": 60,
       "gemReward": 0,
       "questions": [
         {
-          "id": "q33",
-          "type": "Animals",
-          "prompt": "Which animal says \"moo\"?",
+          "id": "v1",
+          "type": "Từ loại",
+          "prompt": "Từ học sinh thuộc từ loại nào?",
           "options": [
-            "Cow",
-            "Dog",
-            "Cat",
-            "Duck"
+            "Động từ",
+            "Danh từ",
+            "Tính từ",
+            "Quan hệ từ"
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         },
         {
-          "id": "q34",
-          "type": "Animals",
-          "prompt": "Which animal can fly?",
+          "id": "v2",
+          "type": "Từ loại",
+          "prompt": "Từ chạy thuộc từ loại nào?",
           "options": [
-            "Bird",
-            "Fish",
-            "Snake",
-            "Frog"
+            "Danh từ",
+            "Tính từ",
+            "Động từ",
+            "Số từ"
           ],
-          "correctIndex": 0
+          "correctIndex": 2
         },
         {
-          "id": "q35",
-          "type": "Animals",
-          "prompt": "Where do fish live?",
+          "id": "v3",
+          "type": "Từ loại",
+          "prompt": "Từ xanh tươi thuộc từ loại nào?",
           "options": [
-            "Water",
-            "Trees",
-            "Caves",
-            "Sky"
+            "Danh từ",
+            "Động từ",
+            "Đại từ",
+            "Tính từ"
           ],
-          "correctIndex": 0
+          "correctIndex": 3
         },
         {
-          "id": "q36",
-          "type": "Animals",
-          "prompt": "A baby cat is a…",
+          "id": "v4",
+          "type": "Từ loại",
+          "prompt": "Từ nào dưới đây là danh từ chỉ người?",
           "options": [
-            "kitten",
-            "puppy",
-            "calf",
-            "chick"
+            "Bác sĩ",
+            "Đi",
+            "Đẹp",
+            "Nhanh"
           ],
           "correctIndex": 0
         }
       ]
     },
     {
-      "id": "science-l2",
-      "subjectId": "science",
+      "id": "tv-l2",
+      "subjectId": "tiengviet",
+      "title": "Các kiểu câu",
+      "description": "Câu kể, hỏi, cảm, khiến",
       "order": 2,
-      "title": "Our Planet",
-      "description": "Earth, water & sky",
-      "estMinutes": 18,
-      "coinReward": 80,
-      "gemReward": 0,
-      "questions": [
-        {
-          "id": "q37",
-          "type": "Nature",
-          "prompt": "What do plants need to grow?",
-          "options": [
-            "Sunlight",
-            "Candy",
-            "Plastic",
-            "Darkness"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q38",
-          "type": "Nature",
-          "prompt": "What falls from clouds when it rains?",
-          "options": [
-            "Water",
-            "Sand",
-            "Rocks",
-            "Leaves"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q39",
-          "type": "Nature",
-          "prompt": "Which is a planet?",
-          "options": [
-            "Earth",
-            "Sun",
-            "Moon",
-            "Cloud"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q40",
-          "type": "Nature",
-          "prompt": "What color is grass?",
-          "options": [
-            "Green",
-            "Blue",
-            "Red",
-            "Purple"
-          ],
-          "correctIndex": 0
-        }
-      ]
-    },
-    {
-      "id": "science-l3",
-      "subjectId": "science",
-      "order": 3,
-      "title": "The Human Body",
-      "description": "How our body works",
-      "estMinutes": 18,
-      "coinReward": 90,
-      "gemReward": 0,
-      "questions": [
-        {
-          "id": "q41",
-          "type": "Body",
-          "prompt": "What do we use to see?",
-          "options": [
-            "Eyes",
-            "Ears",
-            "Nose",
-            "Hands"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q42",
-          "type": "Body",
-          "prompt": "How many fingers do you have in total?",
-          "options": [
-            "10",
-            "5",
-            "8",
-            "12"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q43",
-          "type": "Body",
-          "prompt": "What pumps blood in your body?",
-          "options": [
-            "Heart",
-            "Brain",
-            "Lungs",
-            "Stomach"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q44",
-          "type": "Body",
-          "prompt": "We hear with our…",
-          "options": [
-            "ears",
-            "eyes",
-            "teeth",
-            "feet"
-          ],
-          "correctIndex": 0
-        }
-      ]
-    },
-    {
-      "id": "science-l4",
-      "subjectId": "science",
-      "order": 4,
-      "title": "Weather Watch",
-      "description": "Sun, rain & seasons",
-      "estMinutes": 15,
-      "coinReward": 100,
-      "gemReward": 3,
-      "questions": [
-        {
-          "id": "q45",
-          "type": "Weather",
-          "prompt": "What do you need on a rainy day?",
-          "options": [
-            "Umbrella",
-            "Sunglasses",
-            "Sled",
-            "Fan"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q46",
-          "type": "Weather",
-          "prompt": "Which season is the coldest?",
-          "options": [
-            "Winter",
-            "Summer",
-            "Spring",
-            "Fall"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q47",
-          "type": "Weather",
-          "prompt": "The sun gives us…",
-          "options": [
-            "Light & heat",
-            "Rain",
-            "Snow",
-            "Wind"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q48",
-          "type": "Weather",
-          "prompt": "What shape do snowflakes have?",
-          "options": [
-            "Six points",
-            "Square",
-            "Round ball",
-            "Triangle"
-          ],
-          "correctIndex": 0
-        }
-      ]
-    },
-    {
-      "id": "art-l1",
-      "subjectId": "art",
-      "order": 1,
-      "title": "Color Splash",
-      "description": "Primary & mixed colors",
       "estMinutes": 12,
-      "coinReward": 50,
-      "gemReward": 0,
-      "questions": [
-        {
-          "id": "q49",
-          "type": "Colors",
-          "prompt": "Red + Yellow = ?",
-          "options": [
-            "Orange",
-            "Green",
-            "Purple",
-            "Brown"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q50",
-          "type": "Colors",
-          "prompt": "Blue + Yellow = ?",
-          "options": [
-            "Green",
-            "Orange",
-            "Pink",
-            "Gray"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q51",
-          "type": "Colors",
-          "prompt": "Which is a primary color?",
-          "options": [
-            "Red",
-            "Orange",
-            "Green",
-            "Purple"
-          ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q52",
-          "type": "Colors",
-          "prompt": "Red + Blue = ?",
-          "options": [
-            "Purple",
-            "Green",
-            "Yellow",
-            "Black"
-          ],
-          "correctIndex": 0
-        }
-      ]
-    },
-    {
-      "id": "art-l2",
-      "subjectId": "art",
-      "order": 2,
-      "title": "Shapes in Art",
-      "description": "Draw with basic shapes",
-      "estMinutes": 15,
       "coinReward": 70,
       "gemReward": 0,
       "questions": [
         {
-          "id": "q53",
-          "type": "Drawing",
-          "prompt": "Which shape makes a good sun?",
+          "id": "v5",
+          "type": "Kiểu câu",
+          "prompt": "Câu Bạn có khỏe không? thuộc kiểu câu gì?",
           "options": [
-            "Circle",
-            "Square",
-            "Triangle",
-            "Line"
+            "Câu kể",
+            "Câu hỏi",
+            "Câu cảm",
+            "Câu khiến"
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         },
         {
-          "id": "q54",
-          "type": "Drawing",
-          "prompt": "A house roof is often a…",
+          "id": "v6",
+          "type": "Kiểu câu",
+          "prompt": "Câu dùng để bộc lộ cảm xúc là kiểu câu gì?",
           "options": [
-            "Triangle",
-            "Circle",
-            "Oval",
-            "Star"
+            "Câu kể",
+            "Câu hỏi",
+            "Câu cảm",
+            "Câu khiến"
           ],
-          "correctIndex": 0
+          "correctIndex": 2
         },
         {
-          "id": "q55",
-          "type": "Drawing",
-          "prompt": "How many points does a star have?",
+          "id": "v7",
+          "type": "Kiểu câu",
+          "prompt": "Câu Hãy giữ gìn trật tự! thuộc kiểu câu gì?",
           "options": [
-            "5",
-            "3",
-            "4",
-            "6"
+            "Câu kể",
+            "Câu hỏi",
+            "Câu cảm",
+            "Câu khiến"
           ],
-          "correctIndex": 0
+          "correctIndex": 3
         },
         {
-          "id": "q56",
-          "type": "Drawing",
-          "prompt": "Which tool do we paint with?",
+          "id": "v8",
+          "type": "Dấu câu",
+          "prompt": "Cuối câu hỏi thường dùng dấu gì?",
           "options": [
-            "Brush",
-            "Spoon",
-            "Hammer",
-            "Cup"
+            "Dấu chấm hỏi",
+            "Dấu chấm",
+            "Dấu phẩy",
+            "Dấu hai chấm"
           ],
           "correctIndex": 0
         }
       ]
     },
     {
-      "id": "art-l3",
-      "subjectId": "art",
+      "id": "tv-l3",
+      "subjectId": "tiengviet",
+      "title": "Từ ghép và từ láy",
+      "description": "Phân biệt từ ghép, từ láy",
       "order": 3,
-      "title": "Famous Art",
-      "description": "Artists & masterpieces",
-      "estMinutes": 18,
-      "coinReward": 90,
+      "estMinutes": 12,
+      "coinReward": 70,
       "gemReward": 0,
       "questions": [
         {
-          "id": "q57",
-          "type": "Art History",
-          "prompt": "What do artists use to make sculptures?",
+          "id": "v9",
+          "type": "Cấu tạo từ",
+          "prompt": "Từ lung linh là từ gì?",
           "options": [
-            "Clay",
-            "Water",
-            "Air",
-            "Sound"
+            "Từ ghép",
+            "Từ láy",
+            "Từ đơn",
+            "Từ trái nghĩa"
           ],
-          "correctIndex": 0
+          "correctIndex": 1
         },
         {
-          "id": "q58",
-          "type": "Art History",
-          "prompt": "A painting of a person is a…",
+          "id": "v10",
+          "type": "Cấu tạo từ",
+          "prompt": "Từ bàn ghế là từ gì?",
           "options": [
-            "Portrait",
-            "Landscape",
-            "Pattern",
-            "Doodle"
+            "Từ láy",
+            "Từ đơn",
+            "Từ ghép",
+            "Từ đồng nghĩa"
           ],
-          "correctIndex": 0
+          "correctIndex": 2
         },
         {
-          "id": "q59",
-          "type": "Art History",
-          "prompt": "Which is a warm color?",
+          "id": "v11",
+          "type": "Cấu tạo từ",
+          "prompt": "Từ nào dưới đây là từ láy?",
           "options": [
-            "Red",
-            "Blue",
-            "Purple",
-            "Teal"
+            "Sách vở",
+            "Nhà cửa",
+            "Cây cối",
+            "Xanh xao"
           ],
-          "correctIndex": 0
+          "correctIndex": 3
         },
         {
-          "id": "q60",
-          "type": "Art History",
-          "prompt": "A picture of nature scenery is a…",
+          "id": "v12",
+          "type": "Cấu tạo từ",
+          "prompt": "Từ nào dưới đây là từ ghép?",
           "options": [
-            "Landscape",
-            "Portrait",
-            "Selfie",
-            "Logo"
+            "Quần áo",
+            "Long lanh",
+            "Lấp lánh",
+            "Rì rào"
           ],
           "correctIndex": 0
         }
       ]
     },
     {
-      "id": "art-l4",
-      "subjectId": "art",
+      "id": "tv-l4",
+      "subjectId": "tiengviet",
+      "title": "Chính tả và dấu câu",
+      "description": "Viết đúng & dùng dấu",
       "order": 4,
-      "title": "Create & Craft",
-      "description": "Make your own art",
-      "estMinutes": 20,
-      "coinReward": 100,
+      "estMinutes": 12,
+      "coinReward": 80,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "v13",
+          "type": "Chính tả",
+          "prompt": "Từ nào viết đúng chính tả?",
+          "options": [
+            "Con châu",
+            "Con trâu",
+            "Con tru",
+            "Con chu"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "v14",
+          "type": "Chính tả",
+          "prompt": "Điền l hoặc n cho đúng: ...àng xóm.",
+          "options": [
+            "làng xóm",
+            "nàng xóm"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "v15",
+          "type": "Dấu câu",
+          "prompt": "Cuối câu kể thường dùng dấu gì?",
+          "options": [
+            "Dấu phẩy",
+            "Dấu chấm hỏi",
+            "Dấu chấm than",
+            "Dấu chấm"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "v16",
+          "type": "Dấu câu",
+          "prompt": "Dấu phẩy trong câu dùng để làm gì?",
+          "options": [
+            "Ngăn cách các bộ phận trong câu",
+            "Kết thúc câu",
+            "Hỏi điều chưa biết",
+            "Bộc lộ cảm xúc"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "tv-l5",
+      "subjectId": "tiengviet",
+      "title": "Chủ ngữ, vị ngữ, trạng ngữ",
+      "description": "Các bộ phận của câu",
+      "order": 5,
+      "estMinutes": 12,
+      "coinReward": 90,
       "gemReward": 3,
       "questions": [
         {
-          "id": "q61",
-          "type": "Craft",
-          "prompt": "What do we use to cut paper?",
+          "id": "v17",
+          "type": "Thành phần câu",
+          "prompt": "Trong câu Hôm nay, em đi học, bộ phận Hôm nay là gì?",
           "options": [
-            "Scissors",
-            "Spoon",
-            "Pencil",
-            "Cup"
+            "Chủ ngữ",
+            "Trạng ngữ",
+            "Vị ngữ",
+            "Bổ ngữ"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "v18",
+          "type": "Thành phần câu",
+          "prompt": "Trong câu Em học bài, chủ ngữ là từ nào?",
+          "options": [
+            "học",
+            "bài",
+            "Em",
+            "học bài"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "v19",
+          "type": "Thành phần câu",
+          "prompt": "Bộ phận trả lời cho câu hỏi Ai? (cái gì? con gì?) là gì?",
+          "options": [
+            "Vị ngữ",
+            "Trạng ngữ",
+            "Định ngữ",
+            "Chủ ngữ"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "v20",
+          "type": "Thành phần câu",
+          "prompt": "Trạng ngữ chỉ thời gian trả lời cho câu hỏi nào?",
+          "options": [
+            "Khi nào?",
+            "Ở đâu?",
+            "Vì sao?",
+            "Như thế nào?"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "kh-l1",
+      "subjectId": "khoahoc",
+      "title": "Nước quanh ta",
+      "description": "Tính chất của nước",
+      "order": 1,
+      "estMinutes": 12,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "k1",
+          "type": "Vật chất",
+          "prompt": "Nước có thể tồn tại ở mấy thể?",
+          "options": [
+            "2 thể",
+            "3 thể",
+            "4 thể",
+            "1 thể"
+          ],
+          "correctIndex": 1,
+          "hint": "Rắn, lỏng và khí"
+        },
+        {
+          "id": "k2",
+          "type": "Vật chất",
+          "prompt": "Nước đóng băng (hóa rắn) ở nhiệt độ nào?",
+          "options": [
+            "100°C",
+            "50°C",
+            "0°C",
+            "10°C"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "k3",
+          "type": "Vật chất",
+          "prompt": "Nước sôi ở nhiệt độ nào?",
+          "options": [
+            "50°C",
+            "0°C",
+            "200°C",
+            "100°C"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "k4",
+          "type": "Vật chất",
+          "prompt": "Hiện tượng nước biến thành hơi gọi là gì?",
+          "options": [
+            "Bay hơi",
+            "Đông đặc",
+            "Ngưng tụ",
+            "Nóng chảy"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "kh-l2",
+      "subjectId": "khoahoc",
+      "title": "Không khí",
+      "description": "Thành phần & vai trò",
+      "order": 2,
+      "estMinutes": 12,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "k5",
+          "type": "Không khí",
+          "prompt": "Khí cần cho sự sống và sự cháy là khí gì?",
+          "options": [
+            "Khí ni-tơ",
+            "Khí ô-xy",
+            "Khí các-bô-níc",
+            "Khói"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "k6",
+          "type": "Không khí",
+          "prompt": "Thành phần chiếm nhiều nhất trong không khí là gì?",
+          "options": [
+            "Khí ô-xy",
+            "Hơi nước",
+            "Khí ni-tơ",
+            "Bụi"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "k7",
+          "type": "Không khí",
+          "prompt": "Không khí có ở đâu?",
+          "options": [
+            "Chỉ ở ngoài trời",
+            "Chỉ trong phòng",
+            "Không có ở đâu",
+            "Ở khắp mọi nơi"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "k8",
+          "type": "Không khí",
+          "prompt": "Khi quang hợp, cây xanh thải ra khí gì?",
+          "options": [
+            "Khí ô-xy",
+            "Khí các-bô-níc",
+            "Khí ni-tơ",
+            "Khói"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "kh-l3",
+      "subjectId": "khoahoc",
+      "title": "Dinh dưỡng và sức khỏe",
+      "description": "Ăn uống khoa học",
+      "order": 3,
+      "estMinutes": 12,
+      "coinReward": 80,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "k9",
+          "type": "Dinh dưỡng",
+          "prompt": "Chất giúp cơ thể lớn lên, có nhiều trong thịt, cá, trứng là chất gì?",
+          "options": [
+            "Chất béo",
+            "Chất đạm",
+            "Chất đường bột",
+            "Vi-ta-min"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "k10",
+          "type": "Dinh dưỡng",
+          "prompt": "Rau xanh và quả chín cung cấp nhiều thứ gì cho cơ thể?",
+          "options": [
+            "Chất đạm",
+            "Chất béo",
+            "Vi-ta-min và chất khoáng",
+            "Đường"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "k11",
+          "type": "Dinh dưỡng",
+          "prompt": "Cơm, bánh mì, khoai cung cấp chủ yếu chất gì?",
+          "options": [
+            "Chất đạm",
+            "Vi-ta-min",
+            "Nước",
+            "Chất đường bột"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "k12",
+          "type": "Sức khỏe",
+          "prompt": "Để cơ thể khỏe mạnh, mỗi ngày em nên làm gì?",
+          "options": [
+            "Ăn đủ chất và tập thể dục",
+            "Chỉ ăn kẹo",
+            "Thức thật khuya",
+            "Lười vận động"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "kh-l4",
+      "subjectId": "khoahoc",
+      "title": "Âm thanh và ánh sáng",
+      "description": "Hiện tượng quanh ta",
+      "order": 4,
+      "estMinutes": 12,
+      "coinReward": 80,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "k13",
+          "type": "Âm thanh",
+          "prompt": "Âm thanh được phát ra khi nào?",
+          "options": [
+            "Khi vật đứng yên",
+            "Khi vật rung động (dao động)",
+            "Khi trời tối",
+            "Khi vật lạnh đi"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "k14",
+          "type": "Ánh sáng",
+          "prompt": "Vật nào dưới đây tự phát ra ánh sáng?",
+          "options": [
+            "Mặt Trăng",
+            "Cái gương",
+            "Mặt Trời",
+            "Quyển vở"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "k15",
+          "type": "Ánh sáng",
+          "prompt": "Ta nhìn thấy một vật khi nào?",
+          "options": [
+            "Khi trời tối",
+            "Khi nhắm mắt",
+            "Khi vật ở rất xa",
+            "Có ánh sáng từ vật truyền tới mắt"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "k16",
+          "type": "Ánh sáng",
+          "prompt": "Bóng tối của một vật xuất hiện ở đâu?",
+          "options": [
+            "Phía sau vật cản sáng",
+            "Trước nguồn sáng",
+            "Trên Mặt Trời",
+            "Ở mọi nơi"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "kh-l5",
+      "subjectId": "khoahoc",
+      "title": "Thực vật và động vật",
+      "description": "Sự sống cần gì",
+      "order": 5,
+      "estMinutes": 12,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "k17",
+          "type": "Sinh học",
+          "prompt": "Cây xanh cần gì để sống và phát triển?",
+          "options": [
+            "Chỉ cần nước",
+            "Nước, ánh sáng, không khí, chất khoáng",
+            "Chỉ cần đất",
+            "Bóng tối"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "k18",
+          "type": "Sinh học",
+          "prompt": "Quá trình cây xanh dùng ánh sáng để tạo ra thức ăn gọi là gì?",
+          "options": [
+            "Hô hấp",
+            "Thoát hơi nước",
+            "Quang hợp",
+            "Nảy mầm"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "k19",
+          "type": "Sinh học",
+          "prompt": "Động vật cần gì để sống?",
+          "options": [
+            "Chỉ cần ánh sáng",
+            "Chỉ cần nước",
+            "Không cần gì cả",
+            "Thức ăn, nước và không khí"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "k20",
+          "type": "Sinh học",
+          "prompt": "Bộ phận nào của cây làm nhiệm vụ quang hợp chính?",
+          "options": [
+            "Lá",
+            "Rễ",
+            "Thân",
+            "Hoa"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "ls-l1",
+      "subjectId": "lsdl",
+      "title": "Buổi đầu dựng nước",
+      "description": "Văn Lang - Âu Lạc",
+      "order": 1,
+      "estMinutes": 12,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "h1",
+          "type": "Lịch sử",
+          "prompt": "Nhà nước đầu tiên của nước ta có tên là gì?",
+          "options": [
+            "Âu Lạc",
+            "Văn Lang",
+            "Đại Việt",
+            "Đại Cồ Việt"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "h2",
+          "type": "Lịch sử",
+          "prompt": "Các vua của nước Văn Lang được gọi là gì?",
+          "options": [
+            "An Dương Vương",
+            "Vua Lý",
+            "Hùng Vương",
+            "Vua Trần"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "h3",
+          "type": "Lịch sử",
+          "prompt": "Nước Âu Lạc do ai đứng đầu?",
+          "options": [
+            "Hùng Vương",
+            "Ngô Quyền",
+            "Đinh Bộ Lĩnh",
+            "An Dương Vương"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "h4",
+          "type": "Lịch sử",
+          "prompt": "Thành Cổ Loa được xây dựng dưới thời ai?",
+          "options": [
+            "An Dương Vương",
+            "Hùng Vương",
+            "Lý Thái Tổ",
+            "Trần Hưng Đạo"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "ls-l2",
+      "subjectId": "lsdl",
+      "title": "Đấu tranh giành độc lập",
+      "description": "Hai Bà Trưng, Ngô Quyền",
+      "order": 2,
+      "estMinutes": 12,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "h5",
+          "type": "Lịch sử",
+          "prompt": "Năm 938, Ngô Quyền đánh tan quân Nam Hán trên con sông nào?",
+          "options": [
+            "Sông Hồng",
+            "Sông Bạch Đằng",
+            "Sông Mã",
+            "Sông Cầu"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "h6",
+          "type": "Lịch sử",
+          "prompt": "Hai Bà Trưng phất cờ khởi nghĩa chống lại quân xâm lược nào?",
+          "options": [
+            "Quân Đường",
+            "Quân Tống",
+            "Quân Hán",
+            "Quân Minh"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "h7",
+          "type": "Lịch sử",
+          "prompt": "Ai đã dẹp loạn 12 sứ quân, thống nhất đất nước?",
+          "options": [
+            "Ngô Quyền",
+            "Lê Hoàn",
+            "Lý Công Uẩn",
+            "Đinh Bộ Lĩnh"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "h8",
+          "type": "Lịch sử",
+          "prompt": "Chiến thắng Bạch Đằng năm 938 mở ra điều gì cho nước ta?",
+          "options": [
+            "Thời kì độc lập lâu dài",
+            "Thời kì Bắc thuộc",
+            "Đất nước bị chia cắt",
+            "Bị đô hộ lần nữa"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "ls-l3",
+      "subjectId": "lsdl",
+      "title": "Thời Lý - Trần",
+      "description": "Thăng Long & chống ngoại xâm",
+      "order": 3,
+      "estMinutes": 12,
+      "coinReward": 80,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "h9",
+          "type": "Lịch sử",
+          "prompt": "Năm 1010, vua Lý Thái Tổ dời đô về đâu?",
+          "options": [
+            "Hoa Lư",
+            "Thăng Long",
+            "Cổ Loa",
+            "Phú Xuân"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "h10",
+          "type": "Lịch sử",
+          "prompt": "Nhà Trần đã ba lần đánh thắng quân xâm lược nào?",
+          "options": [
+            "Quân Tống",
+            "Quân Minh",
+            "Quân Mông - Nguyên",
+            "Quân Thanh"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "h11",
+          "type": "Lịch sử",
+          "prompt": "Vị tướng tài chỉ huy quân dân nhà Trần chống quân Mông - Nguyên là ai?",
+          "options": [
+            "Lý Thường Kiệt",
+            "Ngô Quyền",
+            "Quang Trung",
+            "Trần Hưng Đạo"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "h12",
+          "type": "Lịch sử",
+          "prompt": "Văn Miếu - Quốc Tử Giám được xây dựng dưới thời nào?",
+          "options": [
+            "Nhà Lý",
+            "Nhà Ngô",
+            "Nhà Đinh",
+            "Nhà Nguyễn"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "dl-l4",
+      "subjectId": "lsdl",
+      "title": "Địa lí: Núi và cao nguyên",
+      "description": "Bản đồ, núi, Tây Nguyên",
+      "order": 4,
+      "estMinutes": 12,
+      "coinReward": 80,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "h13",
+          "type": "Địa lí",
+          "prompt": "Bản đồ là gì?",
+          "options": [
+            "Một bức ảnh chụp bầu trời",
+            "Hình vẽ thu nhỏ một khu vực trên mặt đất",
+            "Một quyển sách dày",
+            "Một mô hình bằng đất"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "h14",
+          "type": "Địa lí",
+          "prompt": "Dãy núi cao và đồ sộ nhất nước ta là dãy nào?",
+          "options": [
+            "Trường Sơn",
+            "Ngân Sơn",
+            "Hoàng Liên Sơn",
+            "Đông Triều"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "h15",
+          "type": "Địa lí",
+          "prompt": "Đỉnh núi cao nhất Việt Nam là đỉnh nào?",
+          "options": [
+            "Núi Bà Đen",
+            "Tản Viên",
+            "Yên Tử",
+            "Phan-xi-păng"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "h16",
+          "type": "Địa lí",
+          "prompt": "Vùng Tây Nguyên nổi tiếng trồng nhiều cây công nghiệp nào?",
+          "options": [
+            "Cà phê",
+            "Lúa nước",
+            "Vải thiều",
+            "Táo"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "dl-l5",
+      "subjectId": "lsdl",
+      "title": "Địa lí: Đồng bằng & thủ đô",
+      "description": "Đồng bằng và Hà Nội",
+      "order": 5,
+      "estMinutes": 12,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "h17",
+          "type": "Địa lí",
+          "prompt": "Đồng bằng lớn nhất nước ta là đồng bằng nào?",
+          "options": [
+            "Đồng bằng Bắc Bộ",
+            "Đồng bằng Nam Bộ",
+            "Đồng bằng duyên hải miền Trung",
+            "Cao nguyên Mộc Châu"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "h18",
+          "type": "Địa lí",
+          "prompt": "Đồng bằng Bắc Bộ được bồi đắp bởi phù sa của sông nào?",
+          "options": [
+            "Sông Cửu Long",
+            "Sông Đồng Nai",
+            "Sông Hồng",
+            "Sông Sài Gòn"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "h19",
+          "type": "Địa lí",
+          "prompt": "Đồng bằng sông Cửu Long do con sông nào bồi đắp?",
+          "options": [
+            "Sông Hồng",
+            "Sông Mã",
+            "Sông Cả",
+            "Sông Mê Công"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "h20",
+          "type": "Địa lí",
+          "prompt": "Thủ đô của nước Việt Nam là thành phố nào?",
+          "options": [
+            "Hà Nội",
+            "Thành phố Hồ Chí Minh",
+            "Huế",
+            "Đà Nẵng"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "ta-l1",
+      "subjectId": "tienganh",
+      "title": "Chào hỏi - Greetings",
+      "description": "Lời chào cơ bản",
+      "order": 1,
+      "estMinutes": 10,
+      "coinReward": 50,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "e1",
+          "type": "Greetings",
+          "prompt": "Hello nghĩa là gì?",
+          "options": [
+            "Tạm biệt",
+            "Xin chào",
+            "Cảm ơn",
+            "Xin lỗi"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "e2",
+          "type": "Greetings",
+          "prompt": "Thank you nghĩa là gì?",
+          "options": [
+            "Tạm biệt",
+            "Xin chào",
+            "Cảm ơn",
+            "Làm ơn"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "e3",
+          "type": "Greetings",
+          "prompt": "Goodbye nghĩa là gì?",
+          "options": [
+            "Chúc ngủ ngon",
+            "Xin chào",
+            "Cảm ơn",
+            "Tạm biệt"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "e4",
+          "type": "Greetings",
+          "prompt": "Câu What is your name? hỏi điều gì?",
+          "options": [
+            "Bạn tên là gì?",
+            "Bạn bao nhiêu tuổi?",
+            "Bạn khỏe không?",
+            "Bạn ở đâu?"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "ta-l2",
+      "subjectId": "tienganh",
+      "title": "Số đếm & màu sắc",
+      "description": "Numbers and colors",
+      "order": 2,
+      "estMinutes": 10,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "e5",
+          "type": "Numbers",
+          "prompt": "Từ three nghĩa là số mấy?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "e6",
+          "type": "Numbers",
+          "prompt": "Số seven là số mấy?",
+          "options": [
+            "6",
+            "8",
+            "7",
+            "9"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "e7",
+          "type": "Colors",
+          "prompt": "Màu red trong tiếng Việt là màu gì?",
+          "options": [
+            "Xanh",
+            "Vàng",
+            "Đen",
+            "Đỏ"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "e8",
+          "type": "Colors",
+          "prompt": "Màu blue là màu gì?",
+          "options": [
+            "Xanh da trời",
+            "Đỏ",
+            "Vàng",
+            "Trắng"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "ta-l3",
+      "subjectId": "tienganh",
+      "title": "Gia đình & con vật",
+      "description": "Family and animals",
+      "order": 3,
+      "estMinutes": 10,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "e9",
+          "type": "Family",
+          "prompt": "Mother nghĩa là gì?",
+          "options": [
+            "Bố",
+            "Mẹ",
+            "Anh",
+            "Bà"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "e10",
+          "type": "Family",
+          "prompt": "Father nghĩa là gì?",
+          "options": [
+            "Mẹ",
+            "Em",
+            "Bố",
+            "Ông"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "e11",
+          "type": "Animals",
+          "prompt": "Cat là con gì?",
+          "options": [
+            "Con chó",
+            "Con cá",
+            "Con chim",
+            "Con mèo"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "e12",
+          "type": "Animals",
+          "prompt": "Dog là con gì?",
+          "options": [
+            "Con chó",
+            "Con mèo",
+            "Con gà",
+            "Con vịt"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "ta-l4",
+      "subjectId": "tienganh",
+      "title": "Đồ dùng & thức ăn",
+      "description": "School things and food",
+      "order": 4,
+      "estMinutes": 10,
+      "coinReward": 70,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "e13",
+          "type": "School",
+          "prompt": "Book nghĩa là gì?",
+          "options": [
+            "Cái bút",
+            "Quyển sách",
+            "Cái bàn",
+            "Cái ghế"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "e14",
+          "type": "School",
+          "prompt": "Pen nghĩa là gì?",
+          "options": [
+            "Quyển vở",
+            "Cục tẩy",
+            "Cái bút",
+            "Thước kẻ"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "e15",
+          "type": "Food",
+          "prompt": "Rice nghĩa là gì?",
+          "options": [
+            "Bánh mì",
+            "Thịt",
+            "Cá",
+            "Cơm (gạo)"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "e16",
+          "type": "Food",
+          "prompt": "Water nghĩa là gì?",
+          "options": [
+            "Nước",
+            "Sữa",
+            "Trà",
+            "Cà phê"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "dd-l1",
+      "subjectId": "daoduc",
+      "title": "Trung thực",
+      "description": "Thật thà, ngay thẳng",
+      "order": 1,
+      "estMinutes": 10,
+      "coinReward": 50,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "d1",
+          "type": "Đạo đức",
+          "prompt": "Khi nhặt được của rơi, em nên làm gì?",
+          "options": [
+            "Giữ làm của riêng",
+            "Tìm cách trả lại người đánh mất",
+            "Vứt đi",
+            "Giấu thật kĩ"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "d2",
+          "type": "Đạo đức",
+          "prompt": "Trung thực có nghĩa là gì?",
+          "options": [
+            "Hay nói dối",
+            "Lười biếng",
+            "Thật thà, ngay thẳng, không gian dối",
+            "Ích kỉ"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "d3",
+          "type": "Đạo đức",
+          "prompt": "Khi mắc lỗi, em nên làm gì?",
+          "options": [
+            "Đổ lỗi cho bạn",
+            "Giấu đi",
+            "Nói dối",
+            "Nhận lỗi và sửa lỗi"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "dd-l2",
+      "subjectId": "daoduc",
+      "title": "Biết ơn và lễ phép",
+      "description": "Kính trên nhường dưới",
+      "order": 2,
+      "estMinutes": 10,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "d4",
+          "type": "Đạo đức",
+          "prompt": "Với thầy giáo, cô giáo, em cần có thái độ thế nào?",
+          "options": [
+            "Kính trọng, lễ phép, biết ơn",
+            "Coi thường",
+            "Trêu chọc",
+            "Không chào hỏi"
           ],
           "correctIndex": 0
         },
         {
-          "id": "q62",
-          "type": "Craft",
-          "prompt": "Glue is used to…",
+          "id": "d5",
+          "type": "Đạo đức",
+          "prompt": "Ngày 20 tháng 11 hằng năm là ngày gì?",
           "options": [
-            "Stick things",
-            "Cut things",
-            "Paint things",
-            "Erase things"
+            "Ngày Quốc khánh",
+            "Ngày Nhà giáo Việt Nam",
+            "Ngày Quốc tế Thiếu nhi",
+            "Ngày Phụ nữ Việt Nam"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "d6",
+          "type": "Đạo đức",
+          "prompt": "Khi được người khác giúp đỡ, em nên nói gì?",
+          "options": [
+            "Không nói gì",
+            "Bỏ đi ngay",
+            "Cảm ơn",
+            "Cười nhạo"
+          ],
+          "correctIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "dd-l3",
+      "subjectId": "daoduc",
+      "title": "Tiết kiệm và vượt khó",
+      "description": "Chăm chỉ, kiên trì",
+      "order": 3,
+      "estMinutes": 10,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "d7",
+          "type": "Đạo đức",
+          "prompt": "Tiết kiệm có nghĩa là gì?",
+          "options": [
+            "Tiêu xài thật nhiều",
+            "Vứt bỏ đồ còn dùng được",
+            "Không bao giờ mua gì",
+            "Sử dụng hợp lí, không lãng phí"
+          ],
+          "correctIndex": 3
+        },
+        {
+          "id": "d8",
+          "type": "Đạo đức",
+          "prompt": "Để tiết kiệm điện, em nên làm gì?",
+          "options": [
+            "Tắt đèn, quạt khi không dùng",
+            "Bật đèn cả ngày",
+            "Mở tủ lạnh liên tục",
+            "Để tivi luôn bật"
           ],
           "correctIndex": 0
         },
         {
-          "id": "q63",
-          "type": "Craft",
-          "prompt": "Which makes pictures stick on a fridge?",
+          "id": "d9",
+          "type": "Đạo đức",
+          "prompt": "Khi gặp bài tập khó, em nên làm gì?",
           "options": [
-            "Magnet",
-            "Water",
-            "Air",
-            "Light"
+            "Bỏ cuộc ngay",
+            "Kiên trì suy nghĩ và cố gắng làm",
+            "Chép bài của bạn",
+            "Khóc nhè"
           ],
-          "correctIndex": 0
-        },
-        {
-          "id": "q64",
-          "type": "Craft",
-          "prompt": "Origami is the art of folding…",
-          "options": [
-            "Paper",
-            "Metal",
-            "Glass",
-            "Stone"
-          ],
-          "correctIndex": 0
+          "correctIndex": 1
         }
       ]
     }
   ],
   "decks": [
     {
-      "id": "deck-animals",
-      "subject": "science",
-      "title": "Animal Friends",
-      "description": "Meet animals from around the world",
-      "iconEmoji": "🦁",
-      "difficulty": "Easy",
-      "cards": [
-        {
-          "id": "c1",
-          "deckId": "deck-animals",
-          "frontEmoji": "🦁",
-          "frontText": "What animal is this?",
-          "backContent": "Lion",
-          "backDetails": "Lions are big cats that live in groups called prides."
-        },
-        {
-          "id": "c2",
-          "deckId": "deck-animals",
-          "frontEmoji": "🐘",
-          "frontText": "What animal is this?",
-          "backContent": "Elephant",
-          "backDetails": "Elephants are the largest land animals and have trunks."
-        },
-        {
-          "id": "c3",
-          "deckId": "deck-animals",
-          "frontEmoji": "🐧",
-          "frontText": "What animal is this?",
-          "backContent": "Penguin",
-          "backDetails": "Penguins are birds that swim but cannot fly."
-        },
-        {
-          "id": "c4",
-          "deckId": "deck-animals",
-          "frontEmoji": "🦒",
-          "frontText": "What animal is this?",
-          "backContent": "Giraffe",
-          "backDetails": "Giraffes have very long necks to reach tall leaves."
-        },
-        {
-          "id": "c5",
-          "deckId": "deck-animals",
-          "frontEmoji": "🐢",
-          "frontText": "What animal is this?",
-          "backContent": "Turtle",
-          "backDetails": "Turtles carry their homes (shells) on their backs."
-        },
-        {
-          "id": "c6",
-          "deckId": "deck-animals",
-          "frontEmoji": "🦋",
-          "frontText": "What animal is this?",
-          "backContent": "Butterfly",
-          "backDetails": "Butterflies start life as caterpillars."
-        }
-      ]
-    },
-    {
-      "id": "deck-sight-words",
-      "subject": "english",
-      "title": "Sight Words",
-      "description": "Words you should know by sight",
-      "iconEmoji": "📖",
-      "difficulty": "Easy",
-      "cards": [
-        {
-          "id": "c7",
-          "deckId": "deck-sight-words",
-          "frontEmoji": "👀",
-          "frontText": "Read this word: \"the\"",
-          "backContent": "the",
-          "backDetails": "\"The\" is the most common word in English."
-        },
-        {
-          "id": "c8",
-          "deckId": "deck-sight-words",
-          "frontEmoji": "👀",
-          "frontText": "Read this word: \"and\"",
-          "backContent": "and",
-          "backDetails": "\"And\" joins two things together."
-        },
-        {
-          "id": "c9",
-          "deckId": "deck-sight-words",
-          "frontEmoji": "👀",
-          "frontText": "Read this word: \"you\"",
-          "backContent": "you",
-          "backDetails": "\"You\" means the person being spoken to."
-        },
-        {
-          "id": "c10",
-          "deckId": "deck-sight-words",
-          "frontEmoji": "👀",
-          "frontText": "Read this word: \"play\"",
-          "backContent": "play",
-          "backDetails": "\"Play\" is a fun action word."
-        },
-        {
-          "id": "c11",
-          "deckId": "deck-sight-words",
-          "frontEmoji": "👀",
-          "frontText": "Read this word: \"happy\"",
-          "backContent": "happy",
-          "backDetails": "\"Happy\" means feeling good and joyful."
-        },
-        {
-          "id": "c12",
-          "deckId": "deck-sight-words",
-          "frontEmoji": "👀",
-          "frontText": "Read this word: \"friend\"",
-          "backContent": "friend",
-          "backDetails": "A \"friend\" is someone you like to be with."
-        }
-      ]
-    },
-    {
-      "id": "deck-times-tables",
-      "subject": "math",
-      "title": "Times Tables (2s)",
-      "description": "Multiplication by 2",
+      "id": "deck-bangnhan",
+      "subject": "toan",
+      "title": "Bảng nhân",
+      "description": "Học thuộc bảng cửu chương",
       "iconEmoji": "✖️",
       "difficulty": "Medium",
       "cards": [
         {
-          "id": "c13",
-          "deckId": "deck-times-tables",
-          "frontEmoji": "2️⃣",
-          "frontText": "2 × 2 = ?",
-          "backContent": "4",
-          "backDetails": "Two groups of two make four."
+          "id": "dn1",
+          "deckId": "deck-bangnhan",
+          "frontEmoji": "✖️",
+          "frontText": "6 × 7 = ?",
+          "backContent": "42",
+          "backDetails": "Sáu lần bảy bằng bốn mươi hai."
         },
         {
-          "id": "c14",
-          "deckId": "deck-times-tables",
-          "frontEmoji": "2️⃣",
-          "frontText": "2 × 3 = ?",
-          "backContent": "6",
-          "backDetails": "Two groups of three make six."
+          "id": "dn2",
+          "deckId": "deck-bangnhan",
+          "frontEmoji": "✖️",
+          "frontText": "7 × 8 = ?",
+          "backContent": "56",
+          "backDetails": "Bảy lần tám bằng năm mươi sáu."
         },
         {
-          "id": "c15",
-          "deckId": "deck-times-tables",
-          "frontEmoji": "2️⃣",
-          "frontText": "2 × 4 = ?",
-          "backContent": "8",
-          "backDetails": "Two groups of four make eight."
+          "id": "dn3",
+          "deckId": "deck-bangnhan",
+          "frontEmoji": "✖️",
+          "frontText": "8 × 8 = ?",
+          "backContent": "64",
+          "backDetails": "Tám lần tám bằng sáu mươi tư."
         },
         {
-          "id": "c16",
-          "deckId": "deck-times-tables",
-          "frontEmoji": "2️⃣",
-          "frontText": "2 × 5 = ?",
-          "backContent": "10",
-          "backDetails": "Two groups of five make ten."
+          "id": "dn4",
+          "deckId": "deck-bangnhan",
+          "frontEmoji": "✖️",
+          "frontText": "9 × 6 = ?",
+          "backContent": "54",
+          "backDetails": "Chín lần sáu bằng năm mươi tư."
         },
         {
-          "id": "c17",
-          "deckId": "deck-times-tables",
-          "frontEmoji": "2️⃣",
-          "frontText": "2 × 6 = ?",
-          "backContent": "12",
-          "backDetails": "Two groups of six make twelve."
+          "id": "dn5",
+          "deckId": "deck-bangnhan",
+          "frontEmoji": "✖️",
+          "frontText": "7 × 7 = ?",
+          "backContent": "49",
+          "backDetails": "Bảy lần bảy bằng bốn mươi chín."
         },
         {
-          "id": "c18",
-          "deckId": "deck-times-tables",
-          "frontEmoji": "2️⃣",
-          "frontText": "2 × 7 = ?",
-          "backContent": "14",
-          "backDetails": "Two groups of seven make fourteen."
+          "id": "dn6",
+          "deckId": "deck-bangnhan",
+          "frontEmoji": "✖️",
+          "frontText": "9 × 9 = ?",
+          "backContent": "81",
+          "backDetails": "Chín lần chín bằng tám mươi mốt."
         }
       ]
     },
     {
-      "id": "deck-colors",
-      "subject": "art",
-      "title": "Color Mixing",
-      "description": "How colors combine",
-      "iconEmoji": "🎨",
+      "id": "deck-tuvung",
+      "subject": "tienganh",
+      "title": "Từ vựng tiếng Anh",
+      "description": "Những từ thông dụng",
+      "iconEmoji": "🔤",
       "difficulty": "Easy",
       "cards": [
         {
-          "id": "c19",
-          "deckId": "deck-colors",
-          "frontEmoji": "🔴",
-          "frontText": "Red + Yellow = ?",
-          "backContent": "Orange",
-          "backDetails": "Mixing red and yellow paint makes orange."
+          "id": "de1",
+          "deckId": "deck-tuvung",
+          "frontEmoji": "🍎",
+          "frontText": "apple",
+          "backContent": "quả táo",
+          "backDetails": "I like to eat an apple. (Tôi thích ăn táo.)"
         },
         {
-          "id": "c20",
-          "deckId": "deck-colors",
-          "frontEmoji": "🔵",
-          "frontText": "Blue + Yellow = ?",
-          "backContent": "Green",
-          "backDetails": "Mixing blue and yellow paint makes green."
+          "id": "de2",
+          "deckId": "deck-tuvung",
+          "frontEmoji": "🏫",
+          "frontText": "school",
+          "backContent": "trường học",
+          "backDetails": "I go to school every day. (Tôi đi học mỗi ngày.)"
         },
         {
-          "id": "c21",
-          "deckId": "deck-colors",
-          "frontEmoji": "🟣",
-          "frontText": "Red + Blue = ?",
-          "backContent": "Purple",
-          "backDetails": "Mixing red and blue paint makes purple."
+          "id": "de3",
+          "deckId": "deck-tuvung",
+          "frontEmoji": "👩‍🏫",
+          "frontText": "teacher",
+          "backContent": "giáo viên",
+          "backDetails": "My teacher is kind. (Cô giáo của tôi rất tốt bụng.)"
         },
         {
-          "id": "c22",
-          "deckId": "deck-colors",
-          "frontEmoji": "⚫",
-          "frontText": "All colors mixed = ?",
-          "backContent": "Brown/Black",
-          "backDetails": "Mixing many colors makes a dark muddy color."
+          "id": "de4",
+          "deckId": "deck-tuvung",
+          "frontEmoji": "👫",
+          "frontText": "friend",
+          "backContent": "người bạn",
+          "backDetails": "She is my best friend. (Cô ấy là bạn thân của tôi.)"
         },
         {
-          "id": "c23",
-          "deckId": "deck-colors",
-          "frontEmoji": "⚪",
-          "frontText": "No color / paper = ?",
-          "backContent": "White",
-          "backDetails": "White is the blank canvas color."
+          "id": "de5",
+          "deckId": "deck-tuvung",
+          "frontEmoji": "😊",
+          "frontText": "happy",
+          "backContent": "vui vẻ, hạnh phúc",
+          "backDetails": "I am happy today. (Hôm nay tôi rất vui.)"
         },
         {
-          "id": "c24",
-          "deckId": "deck-colors",
-          "frontEmoji": "🌈",
-          "frontText": "How many colors in a rainbow?",
-          "backContent": "7",
-          "backDetails": "Red, orange, yellow, green, blue, indigo, violet."
+          "id": "de6",
+          "deckId": "deck-tuvung",
+          "frontEmoji": "📕",
+          "frontText": "book",
+          "backContent": "quyển sách",
+          "backDetails": "This is my book. (Đây là quyển sách của tôi.)"
+        }
+      ]
+    },
+    {
+      "id": "deck-lichsu",
+      "subject": "lsdl",
+      "title": "Mốc lịch sử",
+      "description": "Sự kiện & nhân vật",
+      "iconEmoji": "📜",
+      "difficulty": "Medium",
+      "cards": [
+        {
+          "id": "dl1",
+          "deckId": "deck-lichsu",
+          "frontEmoji": "⚔️",
+          "frontText": "Năm 938 gắn với sự kiện gì?",
+          "backContent": "Chiến thắng Bạch Đằng",
+          "backDetails": "Ngô Quyền đánh tan quân Nam Hán, kết thúc hơn 1000 năm Bắc thuộc."
+        },
+        {
+          "id": "dl2",
+          "deckId": "deck-lichsu",
+          "frontEmoji": "🏯",
+          "frontText": "Năm 1010 gắn với sự kiện gì?",
+          "backContent": "Dời đô về Thăng Long",
+          "backDetails": "Vua Lý Thái Tổ dời đô từ Hoa Lư ra Thăng Long (Hà Nội ngày nay)."
+        },
+        {
+          "id": "dl3",
+          "deckId": "deck-lichsu",
+          "frontEmoji": "👑",
+          "frontText": "Ai dẹp loạn 12 sứ quân?",
+          "backContent": "Đinh Bộ Lĩnh",
+          "backDetails": "Ông thống nhất đất nước, lập ra nước Đại Cồ Việt."
+        },
+        {
+          "id": "dl4",
+          "deckId": "deck-lichsu",
+          "frontEmoji": "🛡️",
+          "frontText": "Ai chỉ huy chống quân Mông - Nguyên?",
+          "backContent": "Trần Hưng Đạo",
+          "backDetails": "Vị tướng tài của nhà Trần, ba lần đánh thắng quân Mông - Nguyên."
+        },
+        {
+          "id": "dl5",
+          "deckId": "deck-lichsu",
+          "frontEmoji": "🚩",
+          "frontText": "Hai Bà Trưng khởi nghĩa chống quân nào?",
+          "backContent": "Quân Hán",
+          "backDetails": "Cuộc khởi nghĩa năm 40 chống ách đô hộ của nhà Hán."
+        },
+        {
+          "id": "dl6",
+          "deckId": "deck-lichsu",
+          "frontEmoji": "🏛️",
+          "frontText": "Văn Miếu - Quốc Tử Giám xây thời nào?",
+          "backContent": "Nhà Lý",
+          "backDetails": "Được coi là trường đại học đầu tiên của nước ta."
+        }
+      ]
+    },
+    {
+      "id": "deck-khoahoc",
+      "subject": "khoahoc",
+      "title": "Khoa học vui",
+      "description": "Nước & không khí",
+      "iconEmoji": "💧",
+      "difficulty": "Easy",
+      "cards": [
+        {
+          "id": "dk1",
+          "deckId": "deck-khoahoc",
+          "frontEmoji": "💧",
+          "frontText": "Nước sôi ở bao nhiêu độ?",
+          "backContent": "100°C",
+          "backDetails": "Ở 100°C nước chuyển từ thể lỏng sang thể khí (hơi nước)."
+        },
+        {
+          "id": "dk2",
+          "deckId": "deck-khoahoc",
+          "frontEmoji": "🧊",
+          "frontText": "Nước đóng băng ở bao nhiêu độ?",
+          "backContent": "0°C",
+          "backDetails": "Ở 0°C nước chuyển từ thể lỏng sang thể rắn (nước đá)."
+        },
+        {
+          "id": "dk3",
+          "deckId": "deck-khoahoc",
+          "frontEmoji": "🌬️",
+          "frontText": "Khí cần cho sự cháy?",
+          "backContent": "Khí ô-xy",
+          "backDetails": "Ô-xy cũng là khí cần cho sự sống của con người và động vật."
+        },
+        {
+          "id": "dk4",
+          "deckId": "deck-khoahoc",
+          "frontEmoji": "🌱",
+          "frontText": "Cây tạo thức ăn nhờ quá trình gì?",
+          "backContent": "Quang hợp",
+          "backDetails": "Cây dùng ánh sáng, nước và khí các-bô-níc để tạo chất dinh dưỡng."
+        },
+        {
+          "id": "dk5",
+          "deckId": "deck-khoahoc",
+          "frontEmoji": "🥩",
+          "frontText": "Chất có nhiều trong thịt, cá, trứng?",
+          "backContent": "Chất đạm",
+          "backDetails": "Chất đạm giúp cơ thể lớn lên và khỏe mạnh."
+        },
+        {
+          "id": "dk6",
+          "deckId": "deck-khoahoc",
+          "frontEmoji": "☀️",
+          "frontText": "Vật tự phát ra ánh sáng?",
+          "backContent": "Mặt Trời",
+          "backDetails": "Mặt Trăng không tự phát sáng mà phản chiếu ánh sáng Mặt Trời."
         }
       ]
     }
   ],
   "shopItems": [
     {
-      "id": "av-lion",
+      "id": "av-hocsinh",
       "category": "avatars",
-      "name": "Lion King",
-      "preview": "🦁",
-      "price": 500,
+      "name": "Học Sinh Giỏi",
+      "preview": "🧑‍🎓",
+      "price": 400,
       "currency": "coins",
       "rarity": "new",
-      "payload": "🦁"
+      "payload": "🧑‍🎓"
     },
     {
-      "id": "av-unicorn",
+      "id": "av-rong",
       "category": "avatars",
-      "name": "Unicorn Magic",
-      "preview": "🦄",
-      "price": 15,
-      "currency": "gems",
-      "rarity": "rare",
-      "payload": "🦄"
-    },
-    {
-      "id": "av-dragon",
-      "category": "avatars",
-      "name": "Baby Dragon",
+      "name": "Rồng Vàng",
       "preview": "🐉",
       "price": 800,
       "currency": "coins",
@@ -1290,74 +1989,64 @@
       "payload": "🐉"
     },
     {
-      "id": "av-cat",
+      "id": "av-ho",
       "category": "avatars",
-      "name": "Cool Cat",
-      "preview": "😺",
+      "name": "Hổ Con",
+      "preview": "🐯",
       "price": 350,
       "currency": "coins",
-      "payload": "😺"
+      "payload": "🐯"
     },
     {
-      "id": "av-robot",
+      "id": "av-meo",
       "category": "avatars",
-      "name": "Robo Buddy",
-      "preview": "🤖",
-      "price": 20,
+      "name": "Mèo Mun",
+      "preview": "🐱",
+      "price": 300,
+      "currency": "coins",
+      "payload": "🐱"
+    },
+    {
+      "id": "av-cao",
+      "category": "avatars",
+      "name": "Cáo Thông Minh",
+      "preview": "🦊",
+      "price": 18,
       "currency": "gems",
       "rarity": "rare",
-      "payload": "🤖"
+      "payload": "🦊"
     },
     {
-      "id": "av-wizard",
+      "id": "av-gaubuc",
       "category": "avatars",
-      "name": "Wizard",
-      "preview": "🧙",
-      "price": 600,
-      "currency": "coins",
-      "rarity": "new",
-      "payload": "🧙"
-    },
-    {
-      "id": "av-panda",
-      "category": "avatars",
-      "name": "Panda Pal",
+      "name": "Gấu Trúc",
       "preview": "🐼",
-      "price": 400,
+      "price": 450,
       "currency": "coins",
       "payload": "🐼"
     },
     {
-      "id": "av-owl",
-      "category": "avatars",
-      "name": "Wise Owl",
-      "preview": "🦉",
-      "price": 450,
-      "currency": "coins",
-      "payload": "🦉"
-    },
-    {
-      "id": "th-ocean",
+      "id": "th-bien",
       "category": "themes",
-      "name": "Ocean Blue",
+      "name": "Biển Xanh",
       "preview": "🌊",
       "price": 300,
       "currency": "coins",
       "payload": "ocean"
     },
     {
-      "id": "th-forest",
+      "id": "th-rung",
       "category": "themes",
-      "name": "Forest Green",
+      "name": "Rừng Xanh",
       "preview": "🌲",
       "price": 300,
       "currency": "coins",
       "payload": "forest"
     },
     {
-      "id": "th-sunset",
+      "id": "th-hoanghon",
       "category": "themes",
-      "name": "Sunset",
+      "name": "Hoàng Hôn",
       "preview": "🌅",
       "price": 400,
       "currency": "coins",
@@ -1365,9 +2054,9 @@
       "payload": "sunset"
     },
     {
-      "id": "th-candy",
+      "id": "th-keo",
       "category": "themes",
-      "name": "Candy Pop",
+      "name": "Kẹo Ngọt",
       "preview": "🍭",
       "price": 10,
       "currency": "gems",
@@ -1375,9 +2064,9 @@
       "payload": "candy"
     },
     {
-      "id": "th-midnight",
+      "id": "th-dem",
       "category": "themes",
-      "name": "Midnight",
+      "name": "Ban Đêm",
       "preview": "🌙",
       "price": 18,
       "currency": "gems",
@@ -1385,9 +2074,9 @@
       "payload": "midnight"
     },
     {
-      "id": "pet-dog",
+      "id": "pet-cho",
       "category": "pets",
-      "name": "Puppy",
+      "name": "Cún Con",
       "preview": "🐶",
       "price": 700,
       "currency": "coins",
@@ -1395,56 +2084,46 @@
       "payload": "🐶"
     },
     {
-      "id": "pet-fox",
+      "id": "pet-trau",
       "category": "pets",
-      "name": "Fox Kit",
-      "preview": "🦊",
+      "name": "Trâu Vàng",
+      "preview": "🐃",
       "price": 25,
       "currency": "gems",
       "rarity": "rare",
-      "payload": "🦊"
+      "payload": "🐃"
     },
     {
-      "id": "pet-dino",
+      "id": "pet-voi",
       "category": "pets",
-      "name": "Dino",
-      "preview": "🦕",
-      "price": 30,
-      "currency": "gems",
-      "rarity": "rare",
-      "payload": "🦕"
-    },
-    {
-      "id": "pet-bunny",
-      "category": "pets",
-      "name": "Bunny",
-      "preview": "🐰",
+      "name": "Voi Con",
+      "preview": "🐘",
       "price": 550,
       "currency": "coins",
-      "payload": "🐰"
+      "payload": "🐘"
     },
     {
-      "id": "pu-freeze",
+      "id": "pu-dongbang",
       "category": "powerups",
-      "name": "Streak Freeze",
+      "name": "Giữ Chuỗi",
       "preview": "🧊",
       "price": 200,
       "currency": "coins",
       "payload": "freeze"
     },
     {
-      "id": "pu-hint",
+      "id": "pu-goi-y",
       "category": "powerups",
-      "name": "Hint Pack",
+      "name": "Gói Gợi Ý",
       "preview": "💡",
       "price": 150,
       "currency": "coins",
       "payload": "hint"
     },
     {
-      "id": "pu-double",
+      "id": "pu-x2",
       "category": "powerups",
-      "name": "Double XP",
+      "name": "Nhân Đôi XP",
       "preview": "⚡",
       "price": 12,
       "currency": "gems",
@@ -1452,9 +2131,9 @@
       "payload": "double"
     },
     {
-      "id": "pu-heart",
+      "id": "pu-tim",
       "category": "powerups",
-      "name": "Extra Heart",
+      "name": "Thêm Tim",
       "preview": "❤️",
       "price": 250,
       "currency": "coins",
@@ -1464,9 +2143,9 @@
   "themes": [
     {
       "id": "",
-      "name": "EduQuest Purple",
+      "name": "Tím EduQuest",
       "emoji": "💜",
-      "description": "The classic look",
+      "description": "Giao diện mặc định",
       "swatch": [
         "#6C5CE7",
         "#A29BFE",
@@ -1475,9 +2154,9 @@
     },
     {
       "id": "ocean",
-      "name": "Ocean Blue",
+      "name": "Biển Xanh",
       "emoji": "🌊",
-      "description": "Cool and calm",
+      "description": "Mát mẻ, dịu nhẹ",
       "swatch": [
         "#2e86de",
         "#54a0ff",
@@ -1486,9 +2165,9 @@
     },
     {
       "id": "forest",
-      "name": "Forest Green",
+      "name": "Rừng Xanh",
       "emoji": "🌲",
-      "description": "Fresh and natural",
+      "description": "Tươi mát thiên nhiên",
       "swatch": [
         "#10ac84",
         "#1dd1a1",
@@ -1497,9 +2176,9 @@
     },
     {
       "id": "sunset",
-      "name": "Sunset",
+      "name": "Hoàng Hôn",
       "emoji": "🌅",
-      "description": "Warm and bright",
+      "description": "Ấm áp, rực rỡ",
       "swatch": [
         "#ee5a24",
         "#ff9f43",
@@ -1508,9 +2187,9 @@
     },
     {
       "id": "candy",
-      "name": "Candy Pop",
+      "name": "Kẹo Ngọt",
       "emoji": "🍭",
-      "description": "Sweet and fun",
+      "description": "Ngọt ngào, vui nhộn",
       "swatch": [
         "#ff6b81",
         "#ff9ff3",
@@ -1519,9 +2198,9 @@
     },
     {
       "id": "midnight",
-      "name": "Midnight",
+      "name": "Ban Đêm",
       "emoji": "🌙",
-      "description": "Dark mode magic",
+      "description": "Chế độ tối",
       "swatch": [
         "#5f27cd",
         "#a29bfe",
@@ -1531,60 +2210,50 @@
   ],
   "achievements": [
     {
-      "id": "first-win",
-      "name": "First Win",
+      "id": "khoi-dau",
+      "name": "Khởi Đầu",
       "emoji": "🏆",
-      "description": "Complete your first lesson",
+      "description": "Hoàn thành bài học đầu tiên",
       "criteria": {
         "stat": "lessonsCompleted",
         "gte": 1
       }
     },
     {
-      "id": "streak-7",
-      "name": "7-Day Streak",
-      "emoji": "🔥",
-      "description": "Keep a 7-day streak",
-      "criteria": {
-        "stat": "streak",
-        "gte": 7
-      }
-    },
-    {
-      "id": "bookworm",
-      "name": "Bookworm",
+      "id": "cham-chi",
+      "name": "Chăm Chỉ",
       "emoji": "📚",
-      "description": "Complete 10 lessons",
+      "description": "Hoàn thành 10 bài học",
       "criteria": {
         "stat": "lessonsCompleted",
         "gte": 10
       }
     },
     {
-      "id": "speed-star",
-      "name": "Speed Star",
-      "emoji": "⚡",
-      "description": "Win a compete match",
+      "id": "chuoi-7",
+      "name": "Chuỗi 7 Ngày",
+      "emoji": "🔥",
+      "description": "Học liên tục 7 ngày",
       "criteria": {
-        "stat": "competeWins",
-        "gte": 1
+        "stat": "streak",
+        "gte": 7
       }
     },
     {
-      "id": "perfect-10",
-      "name": "Perfect 10",
+      "id": "diem-10",
+      "name": "Điểm 10",
       "emoji": "💯",
-      "description": "Get a perfect lesson score",
+      "description": "Đạt điểm tuyệt đối một bài",
       "criteria": {
         "stat": "perfectLessons",
         "gte": 1
       }
     },
     {
-      "id": "sharpshooter",
-      "name": "Sharpshooter",
+      "id": "thien-xa",
+      "name": "Thiện Xạ",
       "emoji": "🎯",
-      "description": "Reach 90% average accuracy",
+      "description": "Độ chính xác trung bình đạt 90%",
       "criteria": {
         "stat": "avgAccuracy",
         "gte": 0.9,
@@ -1592,283 +2261,153 @@
       }
     },
     {
-      "id": "champion",
-      "name": "Champion",
+      "id": "vo-dich",
+      "name": "Nhà Vô Địch",
       "emoji": "👑",
-      "description": "Win 5 compete matches",
+      "description": "Thắng 3 trận thi đấu",
       "criteria": {
         "stat": "competeWins",
-        "gte": 5
+        "gte": 3
       }
     },
     {
-      "id": "all-stars",
-      "name": "All Stars",
-      "emoji": "🌟",
-      "description": "Earn 3 stars on 5 lessons",
-      "criteria": {
-        "stat": "threeStarLessons",
-        "gte": 5
-      }
-    },
-    {
-      "id": "collector",
-      "name": "Collector",
-      "emoji": "🛍️",
-      "description": "Own 5 shop items",
-      "criteria": {
-        "stat": "ownedItems",
-        "gte": 5
-      }
-    },
-    {
-      "id": "rich",
-      "name": "Coin Master",
+      "id": "trieu-phu",
+      "name": "Triệu Phú",
       "emoji": "🪙",
-      "description": "Save up 1000 coins",
+      "description": "Tích lũy 1000 xu",
       "criteria": {
         "stat": "coins",
         "gte": 1000
       }
     },
     {
-      "id": "scholar",
-      "name": "Scholar",
+      "id": "hoc-ba",
+      "name": "Học Bá",
       "emoji": "🎓",
-      "description": "Reach 2000 XP",
+      "description": "Đạt 2000 điểm kinh nghiệm",
       "criteria": {
         "stat": "xp",
         "gte": 2000
       }
     },
     {
-      "id": "card-master",
-      "name": "Card Master",
+      "id": "bac-thay-the",
+      "name": "Bậc Thầy Thẻ",
       "emoji": "🃏",
-      "description": "Master 10 flashcards",
+      "description": "Thuộc lòng 8 thẻ ghi nhớ",
       "criteria": {
         "stat": "masteredCards",
-        "gte": 10
+        "gte": 8
       }
     }
   ],
   "stickers": [
     {
-      "id": "st-lion",
-      "name": "Lion King",
-      "emoji": "🦁",
+      "id": "st-rong",
+      "name": "Rồng",
+      "emoji": "🐉",
       "rarity": "shiny",
-      "collection": "Animals"
+      "collection": "Linh Vật"
     },
     {
-      "id": "st-book",
-      "name": "Bookworm",
-      "emoji": "📖",
-      "rarity": "common",
-      "collection": "English"
-    },
-    {
-      "id": "st-rainbow",
-      "name": "Rainbow",
-      "emoji": "🌈",
+      "id": "st-ho",
+      "name": "Hổ",
+      "emoji": "🐯",
       "rarity": "rare",
-      "collection": "Art"
+      "collection": "Linh Vật"
     },
     {
-      "id": "st-butterfly",
-      "name": "Butterfly",
-      "emoji": "🦋",
-      "rarity": "shiny",
-      "collection": "Animals"
-    },
-    {
-      "id": "st-sunflower",
-      "name": "Sunflower",
-      "emoji": "🌻",
+      "id": "st-voi",
+      "name": "Voi",
+      "emoji": "🐘",
       "rarity": "common",
-      "collection": "Science"
+      "collection": "Linh Vật"
     },
     {
-      "id": "st-castle",
-      "name": "Castle",
-      "emoji": "🏰",
+      "id": "st-chua",
+      "name": "Ngôi Chùa",
+      "emoji": "🏯",
       "rarity": "epic",
-      "collection": "Adventure"
+      "collection": "Quê Hương"
     },
     {
-      "id": "st-rocket",
-      "name": "Rocket",
-      "emoji": "🚀",
-      "rarity": "epic",
-      "collection": "Science"
+      "id": "st-tre",
+      "name": "Lũy Tre",
+      "emoji": "🎋",
+      "rarity": "common",
+      "collection": "Quê Hương"
     },
     {
-      "id": "st-star",
-      "name": "Gold Star",
+      "id": "st-pho",
+      "name": "Bát Phở",
+      "emoji": "🍜",
+      "rarity": "rare",
+      "collection": "Quê Hương"
+    },
+    {
+      "id": "st-sao",
+      "name": "Ngôi Sao Vàng",
       "emoji": "⭐",
       "rarity": "common",
-      "collection": "Rewards"
+      "collection": "Phần Thưởng"
     },
     {
-      "id": "st-numbers",
-      "name": "Numbers",
-      "emoji": "🔢",
-      "rarity": "common",
-      "collection": "Math"
-    },
-    {
-      "id": "st-abacus",
-      "name": "Abacus",
-      "emoji": "🧮",
-      "rarity": "shiny",
-      "collection": "Math"
-    },
-    {
-      "id": "st-geometry",
-      "name": "Geometry",
-      "emoji": "📐",
-      "rarity": "rare",
-      "collection": "Math"
-    },
-    {
-      "id": "st-dice",
-      "name": "Lucky Dice",
-      "emoji": "🎲",
-      "rarity": "common",
-      "collection": "Math"
-    },
-    {
-      "id": "st-clock",
-      "name": "Clock",
-      "emoji": "⏰",
-      "rarity": "common",
-      "collection": "Math"
-    },
-    {
-      "id": "st-money",
-      "name": "Money",
-      "emoji": "💰",
-      "rarity": "rare",
-      "collection": "Math"
-    },
-    {
-      "id": "st-unicorn",
-      "name": "Unicorn",
-      "emoji": "🦄",
-      "rarity": "shiny",
-      "collection": "Rewards"
-    },
-    {
-      "id": "st-crown",
-      "name": "Crown",
-      "emoji": "👑",
+      "id": "st-hoamai",
+      "name": "Hoa Mai",
+      "emoji": "🌼",
       "rarity": "epic",
-      "collection": "Rewards"
+      "collection": "Quê Hương"
+    },
+    {
+      "id": "st-tetkimcuong",
+      "name": "Kim Cương",
+      "emoji": "💎",
+      "rarity": "shiny",
+      "collection": "Phần Thưởng"
     }
   ],
   "arcadeGames": [
     {
       "id": "memory",
-      "title": "Memory Match",
-      "desc": "Find matching pairs of words & pictures!",
+      "title": "Lật Thẻ Trí Nhớ",
+      "desc": "Tìm các cặp thẻ giống nhau!",
       "icon": "🃏",
       "bg": "#EDE7FF",
       "tags": [
         [
-          "English",
+          "Trí nhớ",
           "#E0FFF5",
           "var(--color-accent-mint)"
         ],
         [
-          "2-5 min",
+          "2-5 phút",
           "#F0EEF8",
           "var(--color-primary)"
         ]
       ],
       "badge": "POPULAR",
       "engine": "memory"
-    },
-    {
-      "id": "scramble",
-      "title": "Word Scramble",
-      "desc": "Unscramble the jumbled letters",
-      "icon": "🔤",
-      "bg": "#FFE8E8",
-      "tags": [
-        [
-          "English",
-          "#E0FFF5",
-          "var(--color-accent-mint)"
-        ],
-        [
-          "3 min",
-          "#F0EEF8",
-          "var(--color-primary)"
-        ]
-      ],
-      "engine": "none"
-    },
-    {
-      "id": "bubbles",
-      "title": "Math Bubbles",
-      "desc": "Pop the bubble with the correct answer",
-      "icon": "🫧",
-      "bg": "#E0F8F8",
-      "tags": [
-        [
-          "Math",
-          "#FFE8E8",
-          "var(--color-secondary)"
-        ],
-        [
-          "2 min",
-          "#F0EEF8",
-          "var(--color-primary)"
-        ]
-      ],
-      "badge": "NEW",
-      "engine": "none"
-    },
-    {
-      "id": "spelling",
-      "title": "Speed Spelling Bee",
-      "desc": "Type the word you hear as fast as you can!",
-      "icon": "🐝",
-      "bg": "#FFF2E5",
-      "tags": [
-        [
-          "English",
-          "#E0FFF5",
-          "var(--color-accent-mint)"
-        ],
-        [
-          "5 min",
-          "#F0EEF8",
-          "var(--color-primary)"
-        ]
-      ],
-      "engine": "none"
     }
   ],
   "pet": {
     "species": "🐉",
-    "name": "Sparky",
+    "name": "Rồng Con",
     "evolutionStages": [
       {
         "emoji": "🥚",
-        "label": "Egg"
+        "label": "Trứng"
       },
       {
         "emoji": "🐣",
-        "label": "Baby"
+        "label": "Mới Nở"
       },
       {
         "emoji": "🐲",
-        "label": "Teen"
+        "label": "Rồng Nhỏ"
       },
       {
         "emoji": "🐉",
-        "label": "Adult"
+        "label": "Rồng Lớn"
       }
     ]
   }

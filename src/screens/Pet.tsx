@@ -1,6 +1,7 @@
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
+import { useT } from '@/i18n'
 
 const EVO = [
   { emoji: '🥚', label: 'Egg' },
@@ -15,12 +16,13 @@ export function Pet() {
   const petAction = useStore((s) => s.petAction)
   const addRewards = useStore((s) => s.addRewards)
   const pushToast = useStore((s) => s.pushToast)
+  const t = useT()
 
-  const mood = pet.happiness >= 70 ? { emoji: '😄', text: `${pet.name} is Happy!` } : pet.happiness >= 40 ? { emoji: '🙂', text: `${pet.name} is okay` } : { emoji: '😢', text: `${pet.name} needs attention` }
+  const mood = pet.happiness >= 70 ? { emoji: '😄', text: t.pet.moodHappy(pet.name) } : pet.happiness >= 40 ? { emoji: '🙂', text: t.pet.moodOk(pet.name) } : { emoji: '😢', text: t.pet.moodSad(pet.name) }
 
   function spendThen(cost: number, fn: () => void, msg: string, emoji: string) {
     if (cost > 0 && coins < cost) {
-      pushToast({ message: 'Not enough coins!', emoji: '😅', kind: 'error' })
+      pushToast({ message: t.pet.notEnoughCoins, emoji: '😅', kind: 'error' })
       return
     }
     if (cost > 0) addRewards({ coins: -cost })
@@ -29,12 +31,12 @@ export function Pet() {
   }
 
   const actions = [
-    { emoji: '🍎', label: 'Feed', cost: '🪙 20', run: () => spendThen(20, () => petAction('feed'), `${pet.name} ate happily!`, '🍎') },
-    { emoji: '⚽', label: 'Play', cost: '🪙 15', run: () => spendThen(15, () => petAction('play'), `${pet.name} had fun!`, '⚽') },
-    { emoji: '👒', label: 'Dress Up', cost: '🪙 30', run: () => spendThen(30, () => petAction('play'), `${pet.name} looks stylish!`, '👒') },
-    { emoji: '🛁', label: 'Bath', cost: '🪙 10', run: () => spendThen(10, () => petAction('feed'), `${pet.name} is squeaky clean!`, '🛁') },
-    { emoji: '😴', label: 'Nap', cost: 'FREE', run: () => spendThen(0, () => petAction('rest'), `${pet.name} feels rested!`, '😴') },
-    { emoji: '📖', label: 'Study!', cost: '+50 XP', run: () => spendThen(0, () => { petAction('play'); addRewards({ xp: 50 }) }, `+50 XP with ${pet.name}!`, '📖') },
+    { emoji: '🍎', label: t.pet.actions.feed, cost: '🪙 20', run: () => spendThen(20, () => petAction('feed'), `${pet.name} ate happily!`, '🍎') },
+    { emoji: '⚽', label: t.pet.actions.play, cost: '🪙 15', run: () => spendThen(15, () => petAction('play'), `${pet.name} had fun!`, '⚽') },
+    { emoji: '👒', label: t.pet.actions.dressUp, cost: '🪙 30', run: () => spendThen(30, () => petAction('play'), `${pet.name} looks stylish!`, '👒') },
+    { emoji: '🛁', label: t.pet.actions.bath, cost: '🪙 10', run: () => spendThen(10, () => petAction('feed'), `${pet.name} is squeaky clean!`, '🛁') },
+    { emoji: '😴', label: t.pet.actions.nap, cost: 'FREE', run: () => spendThen(0, () => petAction('rest'), `${pet.name} feels rested!`, '😴') },
+    { emoji: '📖', label: t.pet.actions.study, cost: '+50 XP', run: () => spendThen(0, () => { petAction('play'); addRewards({ xp: 50 }) }, `+50 XP with ${pet.name}!`, '📖') },
   ]
 
   return (
@@ -42,7 +44,7 @@ export function Pet() {
       <div className="pet-header">
         <StatusBar />
         <div className="pet-title-row">
-          <h1>My Buddy</h1>
+          <h1>{t.pet.title}</h1>
         </div>
         <div className="pet-stage">
           <div className="pet-creature" onClick={() => petAction('play')} role="button">
@@ -50,7 +52,7 @@ export function Pet() {
           </div>
           <div className="pet-name-tag">{pet.name}</div>
           <div className="pet-level-tag">
-            Stage {pet.evolutionStage + 1} · {EVO[pet.evolutionStage]?.label} · {pet.xp}/300 XP
+            {t.pet.stage(pet.evolutionStage + 1, EVO[pet.evolutionStage]?.label ?? '')} · {pet.xp}/300 {t.common.xp}
           </div>
         </div>
       </div>
@@ -58,21 +60,21 @@ export function Pet() {
       <div className="pet-stats-row">
         <div className="pet-stat-card">
           <div className="ps-emoji">😊</div>
-          <div className="ps-label">Happiness</div>
+          <div className="ps-label">{t.pet.happiness}</div>
           <div className="pet-stat-bar">
             <div className="pet-stat-fill" style={{ width: `${pet.happiness}%`, background: 'linear-gradient(90deg,var(--color-accent-yellow),var(--color-accent-orange))' }} />
           </div>
         </div>
         <div className="pet-stat-card">
           <div className="ps-emoji">🍎</div>
-          <div className="ps-label">Hunger</div>
+          <div className="ps-label">{t.pet.hunger}</div>
           <div className="pet-stat-bar">
             <div className="pet-stat-fill" style={{ width: `${pet.hunger}%`, background: 'linear-gradient(90deg,var(--color-accent-mint),var(--color-accent-green))' }} />
           </div>
         </div>
         <div className="pet-stat-card">
           <div className="ps-emoji">⚡</div>
-          <div className="ps-label">Energy</div>
+          <div className="ps-label">{t.pet.energy}</div>
           <div className="pet-stat-bar">
             <div className="pet-stat-fill" style={{ width: `${pet.energy}%`, background: 'linear-gradient(90deg,var(--color-accent-blue),var(--color-primary))' }} />
           </div>
@@ -83,11 +85,11 @@ export function Pet() {
         <div className="pet-mood-emoji">{mood.emoji}</div>
         <div className="pet-mood-info">
           <h3>{mood.text}</h3>
-          <p>Play and study to help {pet.name} evolve!</p>
+          <p>{t.pet.moodSub(pet.name)}</p>
         </div>
       </div>
 
-      <SectionHeader title="Evolution" action={<a>4 stages</a>} />
+      <SectionHeader title={t.pet.evolution} action={<a>{EVO.length} {t.pet.stages}</a>} />
       <div className="evolution-track">
         <div className="evo-stages">
           <div className="evo-line">
@@ -104,7 +106,7 @@ export function Pet() {
         </div>
       </div>
 
-      <SectionHeader title="Activities" />
+      <SectionHeader title={t.pet.activities} />
       <div className="pet-actions">
         {actions.map((a) => (
           <div className="pet-action-btn" key={a.label} onClick={a.run} role="button">

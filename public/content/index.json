@@ -3,10 +3,31 @@
   "packages": [
     {
       "id": "core",
-      "name": "EduQuest Core",
+      "name": "Học Vui Lớp 4",
+      "description": "Toán, Tiếng Việt, Khoa học, Lịch sử & Địa lí, Tiếng Anh, Đạo đức (lớp 4).",
+      "cover": "🇻🇳",
+      "file": "core.json"
+    },
+    {
+      "id": "english",
+      "name": "EduQuest Core (English)",
       "description": "English, Math, Science & Art for ages 5-12.",
       "cover": "🎓",
-      "file": "core.json"
+      "file": "english.json"
+    },
+    {
+      "id": "grade-zh",
+      "name": "快乐学习 三年级",
+      "description": "数学、语文、科学、英语 (三年级)。",
+      "cover": "🐼",
+      "file": "grade-zh.json"
+    },
+    {
+      "id": "grade-ja",
+      "name": "たのしく学ぼう 3年生",
+      "description": "さんすう・こくご・りか・えいご (3年生)。",
+      "cover": "🗾",
+      "file": "grade-ja.json"
     },
     {
       "id": "space",
@@ -14,6 +35,13 @@
       "description": "A mini space-science course (demo of swappable packs).",
       "cover": "🚀",
       "file": "space.json"
+    },
+    {
+      "id": "grade-vi",
+      "name": "Vui Học Lớp 4",
+      "description": "Toán, Tiếng Việt, Khoa học & Tiếng Anh (lớp 4).",
+      "cover": "📘",
+      "file": "grade-vi.json"
     }
   ]
 }

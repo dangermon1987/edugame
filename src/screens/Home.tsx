@@ -3,7 +3,8 @@ import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
-import { selectLevel, selectSubjectProgress, greetingForHour } from '@/state/selectors'
+import { useT } from '@/i18n'
+import { selectLevel, selectSubjectProgress, greetingKey, localizedBandTitle } from '@/state/selectors'
 import { nextMilestone } from '@/domain/streak'
 import { dateKey } from '@/domain/datetime'
 
@@ -27,11 +28,13 @@ export function Home() {
   const user = useStore((s) => s.user)
   const subjects = useContent((c) => c.subjects)
   const app = useContent((c) => c.app)
-  const milestones = useContent((c) => c.economy.streakMilestones)
+  const economy = useContent((c) => c.economy)
+  const t = useT()
   const level = selectLevel(user)
-  const greeting = greetingForHour(new Date().getHours())
+  const greeting = t.greeting[greetingKey(new Date().getHours())]
+  const levelTitle = localizedBandTitle(level.level, economy.levels.bands, t.levelBands)
   const week = currentWeek(user.activeDays)
-  const milestone = nextMilestone(user.streak.count, milestones)
+  const milestone = nextMilestone(user.streak.count, economy.streakMilestones)
 
   return (
     <div id="screen-home">
@@ -55,7 +58,7 @@ export function Home() {
             <span className="coin-icon">💎</span> {user.gems}
           </div>
           <div className="currency-item">
-            <span className="coin-icon">🔥</span> {user.streak.count} days
+            <span className="coin-icon">🔥</span> {user.streak.count} {t.common.days}
           </div>
         </div>
 
@@ -63,10 +66,10 @@ export function Home() {
           <div className="xp-bar-top">
             <div className="xp-level">
               <div className="level-badge">{level.level}</div>
-              <span className="xp-label">{level.title}</span>
+              <span className="xp-label">{levelTitle}</span>
             </div>
             <span className="xp-amount">
-              {level.xpIntoLevel} / {level.xpForLevel === Infinity ? '∞' : level.xpForLevel} XP
+              {level.xpIntoLevel} / {level.xpForLevel === Infinity ? '∞' : level.xpForLevel} {t.common.xp}
             </span>
           </div>
           <div className="xp-track">
@@ -79,12 +82,8 @@ export function Home() {
         <div className="streak-card">
           <div className="streak-flame">🔥</div>
           <div className="streak-info">
-            <h3>{user.streak.count}-Day Streak!</h3>
-            <p>
-              {milestone
-                ? `Keep going! ${milestone - user.streak.count} more day${milestone - user.streak.count === 1 ? '' : 's'} for a bonus reward`
-                : 'You are a streak legend! 🏆'}
-            </p>
+            <h3>{t.home.streakTitle(user.streak.count)}</h3>
+            <p>{milestone ? t.home.streakNext(milestone - user.streak.count) : t.home.streakLegend}</p>
             <div className="streak-days">
               {week.map((d, i) => (
                 <div key={i} className={`streak-dot${d.today ? ' today' : d.active ? ' active' : ''}`}>
@@ -96,9 +95,9 @@ export function Home() {
         </div>
       </div>
 
-      <SectionHeader title="My Subjects" action={<a onClick={() => navigate('/learn')}>See All</a>} />
+      <SectionHeader title={t.home.mySubjects} action={<a onClick={() => navigate('/learn')}>{t.common.seeAll}</a>} />
       <div className="subject-grid">
-        {subjects.map((subject) => {
+        {subjects.slice(0, 4).map((subject) => {
           const p = selectSubjectProgress(user, subject.id)
           return (
             <div
@@ -117,9 +116,7 @@ export function Home() {
                 <div className="subject-progress-fill" style={{ width: `${p.percent}%` }} />
               </div>
               <div className="subject-progress-label">
-                <span>
-                  Lesson {p.completed}/{p.total}
-                </span>
+                <span>{t.home.lesson(p.completed, p.total)}</span>
                 <span>{p.percent}%</span>
               </div>
             </div>
@@ -128,15 +125,15 @@ export function Home() {
       </div>
 
       <div className="daily-challenge" onClick={() => navigate(`/quiz/${app.dailyChallengeLessonId}`)} role="button">
-        <div className="daily-challenge-tag">⚡ Daily Challenge</div>
-        <h3>Speed Math Challenge</h3>
-        <p>Solve addition problems and earn big rewards</p>
+        <div className="daily-challenge-tag">⚡ {t.home.dailyChallenge}</div>
+        <h3>{app.dailyChallenge.title}</h3>
+        <p>{app.dailyChallenge.description}</p>
         <div className="challenge-reward">
-          <span>🪙 +200</span>
-          <span>💎 +5</span>
-          <span>⭐ +100 XP</span>
+          <span>🪙 +{app.dailyChallenge.coins}</span>
+          {app.dailyChallenge.gems > 0 && <span>💎 +{app.dailyChallenge.gems}</span>}
+          <span>⭐ +{app.dailyChallenge.xp} {t.common.xp}</span>
         </div>
-        <button className="challenge-btn">Start Challenge</button>
+        <button className="challenge-btn">{t.home.startChallenge}</button>
       </div>
 
       <div className="bottom-spacer" />

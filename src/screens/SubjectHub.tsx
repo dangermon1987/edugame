@@ -4,12 +4,14 @@ import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { selectSubjectProgress } from '@/state/selectors'
+import { useT } from '@/i18n'
 
 function stars(n: number) {
   return '★★★☆☆☆'.slice(3 - n, 6 - n)
 }
 
 export function SubjectHub() {
+  const t = useT()
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
   const user = useStore((s) => s.user)
@@ -44,19 +46,19 @@ export function SubjectHub() {
           <p>{subject.description}</p>
           <div className="hub-stats">
             <div className="hub-stat">
-              <i className="fas fa-star" /> {progress.percent}% done
+              <i className="fas fa-star" /> {progress.percent}% {t.subjectHub.done}
             </div>
             <div className="hub-stat">
-              <i className="fas fa-trophy" /> {progress.stars} stars
+              <i className="fas fa-trophy" /> {progress.stars} {t.subjectHub.stars}
             </div>
             <div className="hub-stat">
-              <i className="fas fa-clock" /> {totalMinutes}m total
+              <i className="fas fa-clock" /> {totalMinutes}m {t.subjectHub.total}
             </div>
           </div>
         </div>
       </div>
 
-      <SectionHeader title="Learning Path" action={<a onClick={() => navigate('/map')}>Map View</a>} />
+      <SectionHeader title={t.subjectHub.learningPath} action={<a onClick={() => navigate('/map')}>{t.subjectHub.mapView}</a>} />
       <div className="lesson-path">
         <div className="path-line" />
         {lessons.map((lesson, i) => {
@@ -79,7 +81,7 @@ export function SubjectHub() {
                 <div className="lesson-meta">
                   {lp?.completed && <span className="lesson-stars">{stars(lp.stars)}</span>}
                   <span>
-                    <i className="fas fa-clock" /> {lesson.estMinutes} min
+                    <i className="fas fa-clock" /> {lesson.estMinutes} {t.common.min}
                   </span>
                   <span>
                     <i className="fas fa-coins" /> +{lesson.coinReward}
@@ -90,7 +92,7 @@ export function SubjectHub() {
                     </span>
                   )}
                 </div>
-                {status === 'current' && <button className="play-btn-mini">Continue</button>}
+                {status === 'current' && <button className="play-btn-mini">{t.subjectHub.continue}</button>}
               </div>
             </div>
           )

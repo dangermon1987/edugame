@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { Confetti } from '@/components/ui'
+import { useT } from '@/i18n'
 
 const EMOJIS = ['🦁', '🐸', '🦋', '🌈', '🚀', '🍎', '⭐', '🎈']
 
@@ -24,6 +25,7 @@ function newBoard(): Card[] {
 
 export function MemoryGame() {
   const navigate = useNavigate()
+  const t = useT()
   const addRewards = useStore((s) => s.addRewards)
   const registerStudyMinutes = useStore((s) => s.registerStudyMinutes)
 
@@ -106,7 +108,7 @@ export function MemoryGame() {
               ⭐ {score}
             </div>
             <div className="memory-stat" style={{ color: 'white' }}>
-              🔄 {moves} moves
+              🔄 {moves} {t.memory.moves}
             </div>
             <div className="memory-stat" style={{ color: 'white' }}>
               <i className="fas fa-clock" /> {mm}:{ss}
@@ -116,7 +118,7 @@ export function MemoryGame() {
       </div>
 
       <div style={{ textAlign: 'center', color: 'white', padding: '0 20px 12px', fontSize: 'var(--font-size-sm)', fontWeight: 700 }}>
-        Find all matching pairs! Tap cards to flip them.
+        {t.memory.instruction}
       </div>
 
       <div className="memory-grid" id="memoryGrid">
@@ -138,7 +140,7 @@ export function MemoryGame() {
 
       <div style={{ textAlign: 'center', padding: 20 }}>
         <button className="btn-primary" onClick={reset} style={{ width: 'auto', padding: '12px 32px' }}>
-          <i className="fas fa-redo" /> New Game
+          <i className="fas fa-redo" /> {t.memory.newGame}
         </button>
       </div>
 
@@ -147,29 +149,29 @@ export function MemoryGame() {
           <Confetti />
           <div className="score-popup show" data-testid="memory-win">
             <div className="score-emoji">🏆</div>
-            <h2>You Win!</h2>
+            <h2>{t.memory.win}</h2>
             <p>
-              Cleared in {moves} moves and {mm}:{ss}
+              {t.memory.cleared(moves, `${mm}:${ss}`)}
             </p>
             <div className="score-rewards">
               <div className="score-reward-item">
                 <div className="icon">🪙</div>
                 <div className="value">+150</div>
-                <div className="label">Coins</div>
+                <div className="label">{t.common.coins}</div>
               </div>
               <div className="score-reward-item">
                 <div className="icon">⭐</div>
                 <div className="value">+100</div>
-                <div className="label">XP</div>
+                <div className="label">{t.common.xp}</div>
               </div>
               <div className="score-reward-item">
                 <div className="icon">💎</div>
                 <div className="value">+5</div>
-                <div className="label">Gems</div>
+                <div className="label">{t.common.gems}</div>
               </div>
             </div>
             <button className="btn-primary" onClick={reset}>
-              Play Again
+              {t.memory.playAgain}
             </button>
           </div>
         </>

@@ -1,4 +1,6 @@
 import { HashRouter, Routes, Route } from 'react-router-dom'
+import { useAuth } from '@/auth/store'
+import { AuthScreen } from './screens/AuthScreen'
 import { AppShell } from './components/AppShell'
 import { Home } from './screens/Home'
 import { Learn } from './screens/Learn'
@@ -22,6 +24,12 @@ import { Settings } from './screens/Settings'
 import { ParentDashboard } from './screens/ParentDashboard'
 
 export function App() {
+  const ready = useAuth((s) => s.ready)
+  const account = useAuth((s) => s.account)
+
+  if (!ready) return null
+  if (!account) return <AuthScreen />
+
   return (
     <HashRouter>
       <Routes>

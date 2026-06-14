@@ -9,7 +9,7 @@
  */
 import type { DriveClient } from '@/storage'
 
-const SCOPE = 'https://www.googleapis.com/auth/drive.appdata'
+const SCOPE = 'openid email profile https://www.googleapis.com/auth/drive.appdata'
 const GIS_SRC = 'https://accounts.google.com/gsi/client'
 
 interface TokenResponse {
@@ -192,10 +192,34 @@ class GoogleDriveClientImpl implements DriveClient {
     })
     if (!res.ok && res.status !== 404) throw new Error(`Drive delete failed: ${res.status}`)
   }
+
+  async getProfile(): Promise<GoogleProfile> {
+    const token = await this.requestToken('consent')
+    const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+      headers: { authorization: `Bearer ${token}` },
+    })
+    if (!res.ok) throw new Error(`userinfo failed: ${res.status}`)
+    const u = (await res.json()) as { sub: string; name?: string; email?: string; picture?: string }
+    return { id: u.sub, name: u.name ?? u.email ?? 'Google user', email: u.email, picture: u.picture }
+  }
+}
+
+export interface GoogleProfile {
+  id: string
+  name: string
+  email?: string
+  picture?: string
 }
 
 export interface ConnectableDriveClient extends DriveClient {
   signIn: () => Promise<void>
+  getProfile: () => Promise<GoogleProfile>
+}
+
+/** Sign in with Google and return the user's profile (also grants Drive scope). */
+export async function signInWithGoogle(): Promise<GoogleProfile> {
+  const client = await createDriveClient()
+  return client.getProfile()
 }
 
 export async function createDriveClient(): Promise<ConnectableDriveClient> {

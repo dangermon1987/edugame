@@ -6,9 +6,11 @@ import { SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { isDue } from '@/domain/sm2'
 import { bgFor, subjectVar } from '@/lib/subjectColor'
+import { useT } from '@/i18n'
 import type { SubjectId } from '@/domain/types'
 
 export function FlashcardHub() {
+  const t = useT()
   const navigate = useNavigate()
   const cardProgress = useStore((s) => s.user.cardProgress)
   const streak = useStore((s) => s.user.streak.count)
@@ -29,12 +31,12 @@ export function FlashcardHub() {
       <div className="flash-hub-header">
         <StatusBar />
         <div className="flash-hub-title-row">
-          <h1>Flashcards</h1>
+          <h1>{t.flashcards.title}</h1>
         </div>
         <div className="flash-hub-stats">
-          <div className="flash-hub-stat">📇 {allCards.length} cards</div>
-          <div className="flash-hub-stat">🧠 {masteredCount} mastered</div>
-          <div className="flash-hub-stat">🔥 {streak} streak</div>
+          <div className="flash-hub-stat">📇 {t.flashcards.cards(allCards.length)}</div>
+          <div className="flash-hub-stat">🧠 {t.flashcards.mastered(masteredCount)}</div>
+          <div className="flash-hub-stat">🔥 {t.flashcards.streak(streak)}</div>
         </div>
       </div>
 
@@ -46,16 +48,16 @@ export function FlashcardHub() {
         >
           <div className="daily-review-icon">🧠</div>
           <div className="daily-review-info">
-            <h3>Daily Review</h3>
-            <p>{dueCount > 0 ? `${dueCount} cards due for review today` : 'All caught up! 🎉'}</p>
+            <h3>{t.flashcards.dailyReview}</h3>
+            <p>{dueCount > 0 ? t.flashcards.cardsDue(dueCount) : t.flashcards.allCaught}</p>
           </div>
-          {dueCount > 0 && <div className="daily-review-badge">{dueCount} DUE</div>}
+          {dueCount > 0 && <div className="daily-review-badge">{dueCount} {t.flashcards.due}</div>}
         </div>
       </div>
 
       <div className="subject-tabs">
         <button className={`subject-tab${filter === 'all' ? ' active' : ''}`} onClick={() => setFilter('all')}>
-          All
+          {t.flashcards.all}
         </button>
         {subjects.map((s) => (
           <button
@@ -68,7 +70,7 @@ export function FlashcardHub() {
         ))}
       </div>
 
-      <SectionHeader title="My Decks" />
+      <SectionHeader title={t.flashcards.myDecks} />
       <div className="deck-grid">
         {decks.map((deck) => {
           const mastered = deck.cards.filter((c) => cardProgress[c.id]?.status === 'mastered').length
@@ -99,7 +101,7 @@ export function FlashcardHub() {
                 />
               </div>
               <div className="deck-meta">
-                <span>{deck.cards.length} cards</span>
+                <span>{t.flashcards.cardsCount(deck.cards.length)}</span>
                 <span style={percent === 100 ? { color: 'var(--color-accent-mint)' } : undefined}>{percent}%</span>
               </div>
             </div>

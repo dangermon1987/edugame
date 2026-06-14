@@ -3,11 +3,13 @@ import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
-import { selectLevel, selectSubjectProgress, selectAverageAccuracy } from '@/state/selectors'
+import { selectLevel, selectSubjectProgress, selectAverageAccuracy, localizedBandTitle } from '@/state/selectors'
 import { dateKey } from '@/domain/datetime'
 import type { ParentalControls } from '@/domain/types'
+import { useT } from '@/i18n'
 
 function PinGate({ onUnlock }: { onUnlock: () => void }) {
+  const t = useT()
   const realPin = useStore((s) => s.user.settings.parentPin)
   const [entry, setEntry] = useState('')
   const [error, setError] = useState(false)
@@ -34,11 +36,11 @@ function PinGate({ onUnlock }: { onUnlock: () => void }) {
       <BackButton to="/profile" />
       <div style={{ textAlign: 'center', marginTop: 32 }}>
         <div style={{ fontSize: 56 }}>🔒</div>
-        <h2 style={{ margin: '12px 0 4px' }}>Parents Only</h2>
+        <h2 style={{ margin: '12px 0 4px' }}>{t.parent.parentsOnly}</h2>
         <p style={{ color: 'var(--color-text-secondary)' }}>
-          {error ? 'Wrong PIN, try again' : 'Enter your 4-digit PIN'}
+          {error ? t.parent.wrongPin : t.parent.enterPin}
         </p>
-        <p style={{ color: 'var(--color-text-muted)', fontSize: 12 }}>(demo PIN: 1234)</p>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: 12 }}>{t.parent.demoPin}</p>
         <div className="pin-display">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className={`pin-dot${i < entry.length ? ' filled' : ''}`} />
@@ -65,19 +67,21 @@ function PinGate({ onUnlock }: { onUnlock: () => void }) {
   )
 }
 
-const CONTROL_LABELS: Record<keyof ParentalControls, { title: string; desc: string }> = {
-  dailyTimeLimit: { title: 'Daily Time Limit', desc: 'Max 2 hours per day' },
-  bedtimeMode: { title: 'Bedtime Mode', desc: 'No access after 8:00 PM' },
-  progressReports: { title: 'Progress Reports', desc: 'Weekly email summary' },
-  purchaseApproval: { title: 'In-App Purchases', desc: 'Require parent approval' },
-  multiplayerEnabled: { title: 'Multiplayer', desc: 'Allow Compete vs real players' },
-}
+const CONTROL_KEYS: Array<keyof ParentalControls> = [
+  'dailyTimeLimit',
+  'bedtimeMode',
+  'progressReports',
+  'purchaseApproval',
+  'multiplayerEnabled',
+]
 
 export function ParentDashboard() {
+  const t = useT()
   const [unlocked, setUnlocked] = useState(false)
   const user = useStore((s) => s.user)
   const setParental = useStore((s) => s.setParental)
   const subjects = useContent((c) => c.subjects)
+  const economy = useContent((c) => c.economy)
   const level = selectLevel(user)
 
   if (!unlocked) return <PinGate onUnlock={() => setUnlocked(true)} />
@@ -100,15 +104,15 @@ export function ParentDashboard() {
       <div className="parent-header">
         <StatusBar />
         <div className="parent-title-row">
-          <h1>Parent Dashboard</h1>
+          <h1>{t.parent.dashboard}</h1>
           <BackButton to="/profile" label="" />
         </div>
         <div className="child-profile-card">
           <div className="child-avatar">{user.profile.avatar}</div>
           <div className="child-info">
-            <h3>{user.profile.name}'s Progress</h3>
+            <h3>{t.parent.progress(user.profile.name)}</h3>
             <p>
-              Level {level.level} {level.title} · Age {user.profile.age}
+              {t.parent.ageLine(level.level, localizedBandTitle(level.level, economy.levels.bands, t.levelBands), user.profile.age)}
             </p>
           </div>
         </div>
@@ -120,32 +124,32 @@ export function ParentDashboard() {
             <i className="fas fa-clock" />
           </div>
           <div className="stat-val">{todayMinutes}m</div>
-          <div className="stat-lbl">Today's Study Time</div>
+          <div className="stat-lbl">{t.parent.todayStudy}</div>
         </div>
         <div className="parent-stat-card">
           <div className="stat-icon" style={{ background: '#EDE7FF', color: 'var(--color-primary)' }}>
             <i className="fas fa-check-circle" />
           </div>
           <div className="stat-val">{user.stats.lessonsCompleted}</div>
-          <div className="stat-lbl">Lessons Completed</div>
+          <div className="stat-lbl">{t.parent.lessonsCompleted}</div>
         </div>
         <div className="parent-stat-card">
           <div className="stat-icon" style={{ background: '#FFF2E5', color: 'var(--color-accent-orange)' }}>
             <i className="fas fa-bullseye" />
           </div>
           <div className="stat-val">{accuracy}%</div>
-          <div className="stat-lbl">Average Accuracy</div>
+          <div className="stat-lbl">{t.parent.avgAccuracy}</div>
         </div>
         <div className="parent-stat-card">
           <div className="stat-icon" style={{ background: '#FFE8E8', color: 'var(--color-secondary)' }}>
             <i className="fas fa-fire" />
           </div>
           <div className="stat-val">{user.streak.count}</div>
-          <div className="stat-lbl">Current Streak</div>
+          <div className="stat-lbl">{t.parent.currentStreak}</div>
         </div>
       </div>
 
-      <SectionHeader title="Subject Performance" />
+      <SectionHeader title={t.parent.subjectPerformance} />
       <div className="subject-performance">
         {subjects.map((s) => {
           const p = selectSubjectProgress(user, s.id)
@@ -164,7 +168,7 @@ export function ParentDashboard() {
         })}
       </div>
 
-      <SectionHeader title="Weekly Activity" />
+      <SectionHeader title={t.parent.weeklyActivity} />
       <div className="weekly-chart-card">
         <div className="chart-bars">
           {week.map((w, i) => (
@@ -186,20 +190,20 @@ export function ParentDashboard() {
         </div>
       </div>
 
-      <SectionHeader title="Controls" />
+      <SectionHeader title={t.parent.controls} />
       <div className="time-controls-card">
-        {(Object.keys(CONTROL_LABELS) as Array<keyof ParentalControls>).map((key) => (
+        {CONTROL_KEYS.map((key) => (
           <div key={key} className="time-control-row">
             <div className="tc-info">
-              <h4>{CONTROL_LABELS[key].title}</h4>
-              <p>{CONTROL_LABELS[key].desc}</p>
+              <h4>{t.parent.ctl[key][0]}</h4>
+              <p>{t.parent.ctl[key][1]}</p>
             </div>
             <div
               className={`toggle-switch${user.settings.parental[key] ? ' on' : ''}`}
               onClick={() => setParental(key, !user.settings.parental[key])}
               role="switch"
               aria-checked={user.settings.parental[key]}
-              aria-label={CONTROL_LABELS[key].title}
+              aria-label={t.parent.ctl[key][0]}
             />
           </div>
         ))}

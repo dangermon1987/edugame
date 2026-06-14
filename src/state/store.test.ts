@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { useStore } from './store'
+import { getContent } from '@/content/runtime'
 
 function reset() {
   useStore.getState().resetProgress()
@@ -20,44 +21,49 @@ describe('store actions', () => {
   })
 
   it('completes a lesson and records progress', () => {
-    const reward = useStore.getState().completeLesson('english-l1', { correct: 4, total: 4 })
+    const lessonId = getContent().lessons[0].id
+    const reward = useStore.getState().completeLesson(lessonId, { correct: 4, total: 4 })
     const user = useStore.getState().user
-    expect(user.lessonProgress['english-l1'].completed).toBe(true)
-    expect(user.lessonProgress['english-l1'].stars).toBe(3)
+    expect(user.lessonProgress[lessonId].completed).toBe(true)
+    expect(user.lessonProgress[lessonId].stars).toBe(3)
     expect(user.stats.lessonsCompleted).toBe(1)
     expect(reward.coins).toBeGreaterThan(0)
   })
 
   it('purchases an affordable item and rejects an unaffordable one', () => {
-    useStore.getState().addRewards({ coins: 1000 })
-    const ok = useStore.getState().purchaseItem('av-cat') // 350 coins
-    expect(ok).toBe(true)
-    expect(useStore.getState().user.ownedItems).toContain('av-cat')
+    const coinItems = getContent().shopItems.filter((i) => i.currency === 'coins')
+    const cheap = [...coinItems].sort((a, b) => a.price - b.price)[0]
+    const pricey = [...coinItems].sort((a, b) => b.price - a.price)[0]
 
-    // Drain coins, then a pricey item should fail.
-    const coins = useStore.getState().user.coins
-    useStore.getState().addRewards({ coins: -coins })
-    const fail = useStore.getState().purchaseItem('av-dragon') // 800 coins
-    expect(fail).toBe(false)
+    useStore.getState().addRewards({ coins: 5000 })
+    expect(useStore.getState().purchaseItem(cheap.id)).toBe(true)
+    expect(useStore.getState().user.ownedItems).toContain(cheap.id)
+
+    // Drain coins, then the most expensive coin item should fail.
+    useStore.getState().addRewards({ coins: -useStore.getState().user.coins })
+    expect(useStore.getState().purchaseItem(pricey.id)).toBe(false)
   })
 
   it('applies a theme when a theme item is purchased', () => {
-    useStore.getState().addRewards({ coins: 1000 })
-    useStore.getState().purchaseItem('th-ocean')
-    expect(useStore.getState().user.settings.theme).toBe('ocean')
+    const themeItem = getContent().shopItems.find((i) => i.category === 'themes')!
+    useStore.getState().addRewards({ coins: 5000, gems: 100 })
+    useStore.getState().purchaseItem(themeItem.id)
+    expect(useStore.getState().user.settings.theme).toBe(themeItem.payload)
   })
 
   it('persists to localStorage', () => {
     useStore.getState().addRewards({ coins: 7 })
-    const raw = localStorage.getItem('eduquest.db')
+    const raw = localStorage.getItem('eduquest.db.guest')
     expect(raw).toBeTruthy()
     const parsed = JSON.parse(raw!)
     expect(parsed.data.coins).toBe(useStore.getState().user.coins)
   })
 
   it('awards achievements as conditions are met', () => {
-    // resetProgress clears achievements; completing a lesson earns "first-win".
-    useStore.getState().completeLesson('math-l1', { correct: 4, total: 4 })
-    expect(useStore.getState().user.achievements['first-win']).toBeTruthy()
+    // Completing one lesson should satisfy the "1 lesson" achievement in the pack.
+    const ach = getContent().achievements.find((a) => a.criteria.stat === 'lessonsCompleted' && a.criteria.gte <= 1)
+    expect(ach).toBeTruthy()
+    useStore.getState().completeLesson(getContent().lessons[0].id, { correct: 4, total: 4 })
+    expect(useStore.getState().user.achievements[ach!.id]).toBeTruthy()
   })
 })

@@ -5,6 +5,8 @@ import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
 import { isDriveConfigured } from '@/lib/googleDrive'
 import { useContentStore, saveContentToDrive, loadContentFromDrive } from '@/content/runtime'
+import { useAuth } from '@/auth/store'
+import { useT } from '@/i18n'
 
 function timeAgo(ts: number | null): string {
   if (!ts) return 'never'
@@ -16,6 +18,9 @@ function timeAgo(ts: number | null): string {
 
 export function Settings() {
   const navigate = useNavigate()
+  const t = useT()
+  const account = useAuth((s) => s.account)
+  const signOut = useAuth((s) => s.signOut)
   const settings = useStore((s) => s.user.settings)
   const setSetting = useStore((s) => s.setSetting)
   const sync = useStore((s) => s.sync)
@@ -38,8 +43,8 @@ export function Settings() {
 
   async function pickPack(id: string) {
     const r = await switchTo(id)
-    if (r.ok) pushToast({ message: 'Course loaded!', emoji: '📦', kind: 'success' })
-    else pushToast({ message: r.errors[0] ?? 'Could not load course', emoji: '⚠️', kind: 'error' })
+    if (r.ok) pushToast({ message: t.settings.courseLoaded, emoji: '📦', kind: 'success' })
+    else pushToast({ message: r.errors[0] ?? t.settings.courseLoadErr, emoji: '⚠️', kind: 'error' })
   }
 
   async function onUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -47,8 +52,8 @@ export function Settings() {
     if (!file) return
     const text = await file.text()
     const r = uploadPackage(text)
-    if (r.ok) pushToast({ message: 'Course package imported!', emoji: '📦', kind: 'success' })
-    else pushToast({ message: r.errors[0] ?? 'Invalid package', emoji: '⚠️', kind: 'error' })
+    if (r.ok) pushToast({ message: t.settings.packImported, emoji: '📦', kind: 'success' })
+    else pushToast({ message: r.errors[0] ?? t.settings.invalidPackage, emoji: '⚠️', kind: 'error' })
     if (fileRef.current) fileRef.current.value = ''
   }
 
@@ -71,53 +76,53 @@ export function Settings() {
       <StatusBar dark />
       <div style={{ padding: '8px 16px 0' }}>
         <BackButton to="/profile" />
-        <h1 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 900, marginTop: 8 }}>Settings ⚙️</h1>
+        <h1 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 900, marginTop: 8 }}>{t.settings.title} ⚙️</h1>
       </div>
 
-      <SectionHeader title="Sound" />
+      <SectionHeader title={t.settings.sound} />
       <div className="time-controls-card">
         <div className="time-control-row">
           <div className="tc-info">
-            <h4>Sound Effects</h4>
-            <p>Chimes & celebration sounds</p>
+            <h4>{t.settings.soundEffects}</h4>
+            <p>{t.settings.soundEffectsDesc}</p>
           </div>
           <div
             className={`toggle-switch${settings.sound ? ' on' : ''}`}
             onClick={() => setSetting('sound', !settings.sound)}
             role="switch"
             aria-checked={settings.sound}
-            aria-label="Sound Effects"
+            aria-label={t.settings.soundEffects}
           />
         </div>
         <div className="time-control-row">
           <div className="tc-info">
-            <h4>Background Music</h4>
-            <p>Gentle looping music</p>
+            <h4>{t.settings.bgMusic}</h4>
+            <p>{t.settings.bgMusicDesc}</p>
           </div>
           <div
             className={`toggle-switch${settings.music ? ' on' : ''}`}
             onClick={() => setSetting('music', !settings.music)}
             role="switch"
             aria-checked={settings.music}
-            aria-label="Background Music"
+            aria-label={t.settings.bgMusic}
           />
         </div>
       </div>
 
-      <SectionHeader title="Appearance" />
+      <SectionHeader title={t.settings.appearance} />
       <div className="time-controls-card">
         <div className="time-control-row is-clickable" onClick={() => navigate('/themes')} role="button">
           <div className="tc-info">
-            <h4>Theme</h4>
-            <p>Change colors & look</p>
+            <h4>{t.settings.theme}</h4>
+            <p>{t.settings.themeDesc}</p>
           </div>
           <i className="fas fa-chevron-right" style={{ color: 'var(--color-text-muted)' }} />
         </div>
       </div>
 
-      <SectionHeader title="Course Pack" />
+      <SectionHeader title={t.settings.coursePack} />
       <p style={{ padding: '0 24px 8px', color: 'var(--color-text-muted)', fontSize: 12 }}>
-        A course pack supplies every subject, lesson, deck, shop item & theme. Switch packs to load a whole different course.
+        {t.settings.coursePackDesc}
       </p>
       <div className="time-controls-card">
         {packs.map((p) => (
@@ -146,30 +151,30 @@ export function Settings() {
         ))}
         <div className="time-control-row is-clickable" onClick={() => fileRef.current?.click()} role="button">
           <div className="tc-info">
-            <h4>Import Course Pack…</h4>
-            <p>Load a .json package (e.g. AI-generated)</p>
+            <h4>{t.settings.importPack}</h4>
+            <p>{t.settings.importPackDesc}</p>
           </div>
           <i className="fas fa-file-arrow-up" style={{ color: 'var(--color-primary)' }} />
         </div>
         <input ref={fileRef} type="file" accept="application/json,.json" hidden onChange={onUpload} data-testid="pack-upload" />
       </div>
 
-      <SectionHeader title="Cloud Sync" />
+      <SectionHeader title={t.settings.cloudSync} />
       <div className="time-controls-card">
         <div className="time-control-row">
           <div className="tc-info">
-            <h4>Google Drive</h4>
+            <h4>{t.settings.googleDrive}</h4>
             <p data-testid="sync-status">
               {!driveReady
-                ? 'Not configured — set VITE_GOOGLE_CLIENT_ID'
+                ? t.settings.notConfigured
                 : driveConnected
                   ? `Connected · ${sync.status} · last sync ${timeAgo(sync.lastSyncedAt)}`
-                  : 'Save progress across devices'}
+                  : t.settings.saveAcross}
             </p>
           </div>
           {driveConnected ? (
             <button className="btn-secondary" style={{ width: 'auto', padding: '8px 14px' }} onClick={() => disconnectDrive()}>
-              Disconnect
+              {t.settings.disconnect}
             </button>
           ) : (
             <button
@@ -178,7 +183,7 @@ export function Settings() {
               disabled={!driveReady}
               onClick={() => connectDrive()}
             >
-              Connect
+              {t.settings.connect}
             </button>
           )}
         </div>
@@ -186,22 +191,22 @@ export function Settings() {
           <>
             <div className="time-control-row is-clickable" onClick={() => syncNow()} role="button">
               <div className="tc-info">
-                <h4>Sync Now</h4>
-                <p>Force an immediate progress sync</p>
+                <h4>{t.settings.syncNow}</h4>
+                <p>{t.settings.syncNowDesc}</p>
               </div>
               <i className="fas fa-sync" style={{ color: 'var(--color-primary)' }} />
             </div>
             <div className="time-control-row is-clickable" onClick={pushToDrive} role="button">
               <div className="tc-info">
-                <h4>Save Course to Drive</h4>
-                <p>Back up the active course pack</p>
+                <h4>{t.settings.saveCourse}</h4>
+                <p>{t.settings.saveCourseDesc}</p>
               </div>
               <i className="fas fa-cloud-arrow-up" style={{ color: 'var(--color-primary)' }} />
             </div>
             <div className="time-control-row is-clickable" onClick={pullFromDrive} role="button">
               <div className="tc-info">
-                <h4>Load Course from Drive</h4>
-                <p>Restore a course saved to Drive</p>
+                <h4>{t.settings.loadCourse}</h4>
+                <p>{t.settings.loadCourseDesc}</p>
               </div>
               <i className="fas fa-cloud-arrow-down" style={{ color: 'var(--color-primary)' }} />
             </div>
@@ -209,16 +214,31 @@ export function Settings() {
         )}
       </div>
       <p style={{ padding: '8px 24px', color: 'var(--color-text-muted)', fontSize: 12 }}>
-        Your progress is always saved on this device. Cloud sync mirrors it to your Google Drive every 5 minutes so you can
-        play on other devices.
+        {t.settings.syncNote}
       </p>
 
-      <SectionHeader title="Data" />
+      <SectionHeader title={t.settings.account} />
+      <div className="time-controls-card">
+        <div className="time-control-row">
+          <div className="tc-info" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span style={{ fontSize: 26 }}>{account?.avatar ?? '🙂'}</span>
+            <div>
+              <h4>{account?.displayName ?? '—'}</h4>
+              <p>{t.settings.signedInAs} {account?.username ?? '—'}</p>
+            </div>
+          </div>
+          <button className="btn-secondary" data-testid="signout" style={{ width: 'auto', padding: '8px 14px' }} onClick={() => signOut()}>
+            {t.settings.signOut}
+          </button>
+        </div>
+      </div>
+
+      <SectionHeader title={t.settings.data} />
       <div className="time-controls-card">
         <div className="time-control-row is-clickable" onClick={() => setConfirmReset(true)} role="button">
           <div className="tc-info">
-            <h4 style={{ color: 'var(--color-secondary)' }}>Reset Progress</h4>
-            <p>Start over (keeps your name & settings)</p>
+            <h4 style={{ color: 'var(--color-secondary)' }}>{t.settings.resetProgress}</h4>
+            <p>{t.settings.resetDesc}</p>
           </div>
           <i className="fas fa-trash" style={{ color: 'var(--color-secondary)' }} />
         </div>
@@ -230,11 +250,11 @@ export function Settings() {
         <div className="modal-scrim" onClick={() => setConfirmReset(false)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <div style={{ fontSize: 48 }}>⚠️</div>
-            <h3>Reset Progress?</h3>
-            <p>This will erase coins, XP, lessons and items. This can't be undone.</p>
+            <h3>{t.settings.resetTitle}</h3>
+            <p>{t.settings.resetBody}</p>
             <div className="modal-actions">
               <button className="btn-secondary" onClick={() => setConfirmReset(false)}>
-                Cancel
+                {t.common.cancel}
               </button>
               <button
                 className="btn-primary"
@@ -244,7 +264,7 @@ export function Settings() {
                   navigate('/')
                 }}
               >
-                Reset
+                {t.settings.reset}
               </button>
             </div>
           </div>

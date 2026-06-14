@@ -4,17 +4,14 @@ import { StatusBar } from '@/components/StatusBar'
 import { useContent } from '@/content/runtime'
 import type { ShopCategory, ShopItem } from '@/domain/types'
 import { dateKey } from '@/domain/datetime'
+import { useT } from '@/i18n'
 
-const TABS: { id: ShopCategory; label: string }[] = [
-  { id: 'avatars', label: '🎭 Avatars' },
-  { id: 'themes', label: '🎨 Themes' },
-  { id: 'pets', label: '🐾 Pets' },
-  { id: 'powerups', label: '✨ Power-ups' },
-]
+const TAB_IDS: ShopCategory[] = ['avatars', 'themes', 'pets', 'powerups']
 
 const SPIN_KEY = 'eduquest.lastSpin'
 
 export function Shop() {
+  const t = useT()
   const [tab, setTab] = useState<ShopCategory>('avatars')
   const [confirm, setConfirm] = useState<ShopItem | null>(null)
   const [spunToday, setSpunToday] = useState(() => {
@@ -39,8 +36,8 @@ export function Shop() {
     if (spunToday) return
     const prize = spinPrizes[Math.floor(Math.random() * spinPrizes.length)]
     addRewards(prize)
-    const label = prize.coins ? `🪙 ${prize.coins} coins` : `💎 ${prize.gems} gems`
-    pushToast({ message: `Lucky Spin: ${label}!`, emoji: '🎡', kind: 'success' })
+    const label = prize.coins ? `🪙 ${prize.coins} ${t.shop.coins}` : `💎 ${prize.gems} ${t.shop.gems}`
+    pushToast({ message: t.shop.spinPrize(label), emoji: '🎡', kind: 'success' })
     try {
       localStorage.setItem(SPIN_KEY, dateKey())
     } catch {
@@ -61,7 +58,7 @@ export function Shop() {
       <div className="shop-header">
         <StatusBar />
         <div className="shop-title-row">
-          <h1>Reward Shop</h1>
+          <h1>{t.shop.title}</h1>
         </div>
         <div className="shop-balance">
           <div className="shop-balance-item">🪙 {coins.toLocaleString()}</div>
@@ -72,16 +69,16 @@ export function Shop() {
       <div className={`spin-card${spunToday ? ' is-disabled' : ''}`} onClick={doSpin} role="button">
         <div className="spin-wheel-icon">🎡</div>
         <div className="spin-info">
-          <h3>Lucky Spin!</h3>
-          <p>{spunToday ? 'Come back tomorrow' : '1 free spin available today'}</p>
+          <h3>{t.shop.luckySpin}</h3>
+          <p>{spunToday ? t.shop.spinDone : t.shop.spinAvailable}</p>
         </div>
-        <div className="spin-btn-tag">{spunToday ? 'DONE' : 'FREE'}</div>
+        <div className="spin-btn-tag">{spunToday ? t.common.done : t.common.free}</div>
       </div>
 
       <div className="shop-tabs">
-        {TABS.map((t) => (
-          <button key={t.id} className={`shop-tab${tab === t.id ? ' active' : ''}`} onClick={() => setTab(t.id)}>
-            {t.label}
+        {TAB_IDS.map((id) => (
+          <button key={id} className={`shop-tab${tab === id ? ' active' : ''}`} onClick={() => setTab(id)}>
+            {t.shop.tabs[id]}
           </button>
         ))}
       </div>
@@ -99,10 +96,12 @@ export function Shop() {
               <div className="shop-item-preview">{item.preview}</div>
               <h4>{item.name}</h4>
               <div className="shop-item-price">
-                {item.currency === 'coins' ? '🪙' : '💎'} {isOwned ? 'Owned' : item.price}
+                {item.currency === 'coins' ? '🪙' : '💎'} {isOwned ? t.common.owned : item.price}
               </div>
               {item.rarity && item.rarity !== 'common' && (
-                <span className={`shop-item-tag tag-${item.rarity}`}>{item.rarity.toUpperCase()}</span>
+                <span className={`shop-item-tag tag-${item.rarity}`}>
+                  {t.shop.rarity[item.rarity as keyof typeof t.shop.rarity] ?? item.rarity.toUpperCase()}
+                </span>
               )}
             </div>
           )
@@ -117,14 +116,14 @@ export function Shop() {
             <div style={{ fontSize: 56 }}>{confirm.preview}</div>
             <h3>{confirm.name}</h3>
             <p>
-              Buy for {confirm.currency === 'coins' ? '🪙' : '💎'} {confirm.price}?
+              {t.shop.buyFor} {confirm.currency === 'coins' ? '🪙' : '💎'} {confirm.price}?
             </p>
             <div className="modal-actions">
               <button className="btn-secondary" onClick={() => setConfirm(null)}>
-                Cancel
+                {t.common.cancel}
               </button>
               <button className="btn-primary" onClick={confirmPurchase}>
-                Buy
+                {t.common.buy}
               </button>
             </div>
           </div>

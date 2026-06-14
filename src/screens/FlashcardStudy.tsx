@@ -5,9 +5,11 @@ import { StatusBar } from '@/components/StatusBar'
 import { Confetti } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { isDue } from '@/domain/sm2'
+import { useT } from '@/i18n'
 import type { Flashcard } from '@/domain/types'
 
 export function FlashcardStudy() {
+  const t = useT()
   const navigate = useNavigate()
   const { deckId } = useParams<{ deckId: string }>()
   const reviewFlashcard = useStore((s) => s.reviewFlashcard)
@@ -30,7 +32,7 @@ export function FlashcardStudy() {
   }, [deckId])
 
   const deck = deckId && deckId !== 'due' ? deckById[deckId] : undefined
-  const subjectName = deck ? subjectById[deck.subject]?.name ?? 'Review' : 'Review'
+  const subjectName = deck ? subjectById[deck.subject]?.name ?? t.flashcards.review : t.flashcards.review
 
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
@@ -81,10 +83,10 @@ export function FlashcardStudy() {
     return (
       <div style={{ padding: 24, textAlign: 'center' }}>
         <div style={{ fontSize: 48 }}>🎉</div>
-        <h2>Nothing to review!</h2>
-        <p style={{ color: 'var(--color-text-secondary)', margin: '8px 0 20px' }}>You're all caught up.</p>
+        <h2>{t.flashcards.nothingTitle}</h2>
+        <p style={{ color: 'var(--color-text-secondary)', margin: '8px 0 20px' }}>{t.flashcards.nothingBody}</p>
         <button className="btn-primary" onClick={() => navigate('/flashcards')}>
-          Back to Decks
+          {t.flashcards.backToDecks}
         </button>
       </div>
     )
@@ -102,8 +104,8 @@ export function FlashcardStudy() {
         <Confetti />
         <div className="results-celebration">
           <div className="results-emoji">🎉</div>
-          <h1>Great Session!</h1>
-          <p>You reviewed {total} flashcards</p>
+          <h1>{t.flashcards.greatSession}</h1>
+          <p>{t.flashcards.reviewedN(total)}</p>
         </div>
 
         <div className="results-stats-grid">
@@ -112,55 +114,55 @@ export function FlashcardStudy() {
             <div className="stat-value" style={{ color: 'var(--color-accent-mint)' }}>
               {gotIt}
             </div>
-            <div className="stat-label">Got It</div>
+            <div className="stat-label">{t.flashcards.gotItShort}</div>
           </div>
           <div className="result-stat-card">
             <div className="stat-icon">🔄</div>
             <div className="stat-value" style={{ color: 'var(--color-accent-orange)' }}>
               {learning}
             </div>
-            <div className="stat-label">Still Learning</div>
+            <div className="stat-label">{t.flashcards.stillLearning}</div>
           </div>
           <div className="result-stat-card">
             <div className="stat-icon">🎯</div>
             <div className="stat-value" style={{ color: 'var(--color-primary)' }}>
               {accuracy}%
             </div>
-            <div className="stat-label">Accuracy</div>
+            <div className="stat-label">{t.flashcards.accuracy}</div>
           </div>
           <div className="result-stat-card">
             <div className="stat-icon">⚡</div>
             <div className="stat-value" style={{ color: 'var(--color-accent-yellow)' }}>
               x{bestCombo || 1}
             </div>
-            <div className="stat-label">Best Combo</div>
+            <div className="stat-label">{t.flashcards.bestCombo}</div>
           </div>
         </div>
 
         <div className="results-rewards">
-          <h3>Rewards Earned</h3>
+          <h3>{t.flashcards.rewardsEarned}</h3>
           <div className="rewards-row">
             <div className="reward-item">
               <div className="icon">🪙</div>
               <div className="value">+{coins}</div>
-              <div className="label">Coins</div>
+              <div className="label">{t.common.coins}</div>
             </div>
             <div className="reward-item">
               <div className="icon">⭐</div>
               <div className="value">+{xp}</div>
-              <div className="label">XP</div>
+              <div className="label">{t.common.xp}</div>
             </div>
             <div className="reward-item">
               <div className="icon">💎</div>
               <div className="value">+{gems}</div>
-              <div className="label">Gems</div>
+              <div className="label">{t.common.gems}</div>
             </div>
           </div>
         </div>
 
         <div className="results-actions">
           <button className="btn-primary" onClick={() => navigate('/flashcards')}>
-            Back to Decks
+            {t.flashcards.backToDecks}
           </button>
         </div>
         <div className="bottom-spacer" />
@@ -187,10 +189,10 @@ export function FlashcardStudy() {
         </div>
         <div className="study-stats-bar">
           <div className="study-stat" style={{ color: 'var(--color-accent-mint)' }}>
-            ✅ {gotIt} Got it
+            ✅ {gotIt} {t.flashcards.gotItShort}
           </div>
           <div className="study-stat" style={{ color: 'var(--color-accent-orange)' }}>
-            🔄 {learning} Learning
+            🔄 {learning} {t.flashcards.learning}
           </div>
         </div>
       </div>
@@ -210,7 +212,7 @@ export function FlashcardStudy() {
               <div className="card-prompt-tag">{subjectName}</div>
               <div className="card-prompt">{card.frontText}</div>
               <div className="card-tap-hint">
-                <i className="fas fa-hand-pointer" /> Tap to flip
+                <i className="fas fa-hand-pointer" /> {t.flashcards.tapToFlip}
               </div>
             </div>
             <div className="flashcard-back">
@@ -222,10 +224,10 @@ export function FlashcardStudy() {
 
         <div className="swipe-actions">
           <button className="swipe-btn learning" onClick={() => act('learning')}>
-            <i className="fas fa-rotate-right" /> Still Learning
+            <i className="fas fa-rotate-right" /> {t.flashcards.stillLearning}
           </button>
           <button className="swipe-btn got-it" onClick={() => act('gotit')}>
-            <i className="fas fa-check" /> Got It!
+            <i className="fas fa-check" /> {t.flashcards.gotIt}
           </button>
         </div>
       </div>

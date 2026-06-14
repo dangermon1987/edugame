@@ -3,6 +3,7 @@ import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { useContent } from '@/content/runtime'
 import { selectSubjectProgress } from '@/state/selectors'
+import { useT } from '@/i18n'
 
 // Island slots — subjects are placed in order, so any package works.
 const POSITIONS = [
@@ -28,6 +29,7 @@ function starString(percent: number) {
 
 export function AdventureMap() {
   const navigate = useNavigate()
+  const t = useT()
   const user = useStore((s) => s.user)
   const subjects = useContent((c) => c.subjects)
   const completedAreas = subjects.filter((s) => selectSubjectProgress(user, s.id).percent === 100).length
@@ -38,8 +40,8 @@ export function AdventureMap() {
       <div className="map-header">
         <StatusBar />
         <div className="map-title-row">
-          <h1>World Map</h1>
-          <div className="map-progress-tag">🗺️ {completedAreas}/{subjects.length} Areas</div>
+          <h1>{t.map.title}</h1>
+          <div className="map-progress-tag">🗺️ {t.map.areas(completedAreas, subjects.length)}</div>
         </div>
       </div>
 
@@ -63,7 +65,7 @@ export function AdventureMap() {
                 {s.emoji}
               </div>
               <div className="island-label">{s.name}</div>
-              <div className="island-stars">{isCurrent ? 'NOW!' : starString(p.percent)}</div>
+              <div className="island-stars">{isCurrent ? t.map.now : starString(p.percent)}</div>
             </div>
           )
         })}
@@ -83,13 +85,13 @@ export function AdventureMap() {
 
       <div className="map-legend">
         <div className="legend-item">
-          <div className="legend-dot" style={{ background: 'var(--color-accent-mint)' }} /> Completed
+          <div className="legend-dot" style={{ background: 'var(--color-accent-mint)' }} /> {t.map.completed}
         </div>
         <div className="legend-item">
-          <div className="legend-dot" style={{ background: 'var(--color-accent-yellow)' }} /> Current
+          <div className="legend-dot" style={{ background: 'var(--color-accent-yellow)' }} /> {t.map.current}
         </div>
         <div className="legend-item">
-          <div className="legend-dot" style={{ background: 'var(--color-text-muted)' }} /> Locked
+          <div className="legend-dot" style={{ background: 'var(--color-text-muted)' }} /> {t.map.locked}
         </div>
       </div>
 

@@ -5,9 +5,12 @@ import './styles/shell.css'
 import { App } from './App'
 import { flushAndPush } from './state/store'
 import { useContentStore } from './content/runtime'
+import { useAuth } from './auth/store'
 
 // Load the list of installable course packs (non-blocking).
 void useContentStore.getState().refreshManifest()
+// Restore any existing session before first paint.
+useAuth.getState().bootstrap()
 
 // Persist + push to remote when the tab is hidden or closed.
 window.addEventListener('visibilitychange', () => {

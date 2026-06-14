@@ -4,24 +4,129 @@
    Loaded AFTER legacy.css so these rules win.
    ==================================================================== */
 
-/* The prototype centred a fixed device frame for demo purposes. Keep that on
-   desktop, but use dynamic viewport units so mobile browser chrome is handled. */
+/* ====================================================================
+   Responsive shell (spec §9). Screens keep their pixel-accurate phone width;
+   the navigation + framing adapt per device:
+     phone   (<768)     edge-to-edge + bottom tabs
+     tablet  (768–1023) centred app card + bottom tabs, on a soft backdrop
+     desktop (≥1024)    persistent side-nav rail + app card (no bottom tabs)
+   ==================================================================== */
 html,
 body {
   height: 100%;
 }
 body {
   margin: 0;
+  display: block;
+  padding: 0;
+  background: #f1edff;
+}
+#root {
+  min-height: 100dvh;
 }
 
+/* Full-viewport backdrop holding the app card (+ side nav on desktop). */
+.app-stage {
+  width: 100%;
+  min-height: 100dvh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1edff;
+}
+
+/* App card. Base (mobile-first) = edge-to-edge full screen. */
 .phone-frame {
-  height: 844px;
-  max-height: 100dvh;
+  width: 100%;
+  height: 100dvh;
+  max-height: none;
+  border-radius: 0;
+  border: none;
+  flex: none;
 }
 
-@media (max-width: 500px) {
+/* ---- Side navigation rail (tablet & up) ---- */
+.side-nav {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  width: 208px;
+  flex: none;
+  padding: 18px 12px;
+  align-self: center;
+  height: min(896px, calc(100dvh - 48px));
+  background: var(--color-bg-card, #fff);
+  border-radius: var(--radius-2xl, 24px);
+  box-shadow: 0 12px 40px rgba(108, 92, 231, 0.16);
+}
+.side-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px 18px;
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--color-text-primary, #2d3436);
+}
+.side-nav-logo {
+  font-size: 26px;
+}
+.side-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 16px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-lg, 16px);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-secondary, #636e72);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-align: left;
+}
+.side-nav-item i {
+  width: 22px;
+  font-size: 18px;
+  text-align: center;
+}
+.side-nav-item:hover {
+  background: var(--color-bg, #f8f7ff);
+  color: var(--color-text-primary, #2d3436);
+}
+.side-nav-item.active {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(108, 92, 231, 0.35);
+}
+
+/* ---- Tablet & up: side-nav rail + centred app card on the backdrop ----
+   The side rail comes in at the tablet boundary so there is never a lonely
+   phone-width card floating with a bottom bar. ---- */
+@media (min-width: 768px) {
+  .app-stage {
+    gap: 24px;
+    padding: 24px;
+    background: radial-gradient(1100px 700px at 70% -10%, #e6dcff 0%, #f1edff 55%, #e4f4ff 100%);
+  }
   .phone-frame {
-    height: 100dvh;
+    width: 414px;
+    height: min(896px, calc(100dvh - 48px));
+    border-radius: 40px;
+    border: 1px solid var(--color-border, #e8e6f0);
+    box-shadow: 0 24px 70px rgba(72, 52, 212, 0.22);
+  }
+  /* Show the rail; the bottom tab bar (and its spacer) give way to it. */
+  .side-nav {
+    display: flex;
+  }
+  .phone-frame .bottom-nav {
+    display: none;
+  }
+  .phone-frame .bottom-spacer {
+    height: 16px !important;
   }
 }
 
@@ -280,4 +385,251 @@ button {
   --color-text-primary: #f5f5ff;
   --color-text-secondary: #b8b8d0;
   --color-border: #3a3a5e;
+}
+
+/* ====================================================================
+   AESTHETIC LAYER — distinctive type, atmosphere, depth, fluid sizing.
+   Loaded last so it refines the ported design system.
+   ==================================================================== */
+
+/* Type system: rounded playful display + Vietnamese-native body. */
+:root {
+  --font-display: 'Baloo 2', 'Be Vietnam Pro', system-ui, sans-serif;
+  --font-body: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.phone-frame h1,
+.phone-frame h2,
+.side-nav-title,
+.question-text,
+.live-question-text,
+.score-popup h2,
+.results-celebration h1,
+.podium-header h1,
+.matchmaking-title,
+.greeting-left h1,
+.profile-name,
+.pet-name-tag {
+  font-family: var(--font-display);
+  letter-spacing: -0.005em;
+}
+/* Big numerals (XP, scores, currency) look great in the rounded display face. */
+.xp-amount,
+.level-badge,
+.stat-value,
+.live-player-score,
+.score-reward-item .value {
+  font-family: var(--font-display);
+}
+
+/* ---- Atmospheric backdrop for tablet/desktop (layered gradient mesh) ---- */
+@media (min-width: 768px) {
+  .app-stage {
+    background:
+      radial-gradient(38% 50% at 12% 18%, rgba(108, 92, 231, 0.20), transparent 70%),
+      radial-gradient(42% 52% at 88% 12%, rgba(0, 210, 211, 0.16), transparent 72%),
+      radial-gradient(48% 60% at 78% 92%, rgba(254, 202, 87, 0.18), transparent 72%),
+      radial-gradient(40% 50% at 20% 95%, rgba(255, 107, 129, 0.14), transparent 70%),
+      linear-gradient(155deg, #f4f0ff 0%, #eef5ff 55%, #eafaf6 100%);
+  }
+  /* Softer, colour-tinted elevation for the app card. */
+  .phone-frame {
+    box-shadow: 0 32px 80px -24px rgba(72, 52, 212, 0.45), 0 8px 24px -12px rgba(72, 52, 212, 0.25);
+  }
+}
+
+/* Side-nav refinement: subtle motion + clearer hierarchy. */
+.side-nav {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+.side-nav-item {
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+.side-nav-item:hover {
+  transform: translateX(2px);
+}
+
+/* ---- Fluid type for very small phones (down to 320px) ---- */
+@media (max-width: 360px) {
+  html {
+    font-size: 15px;
+  }
+  .currency-bar {
+    gap: 8px;
+  }
+  .currency-item {
+    padding: 6px 10px;
+  }
+}
+
+/* ---- Safe-area insets for notched phones (full-screen mode only) ---- */
+@media (max-width: 599px) {
+  .status-bar {
+    padding-top: max(8px, env(safe-area-inset-top));
+  }
+  .bottom-nav {
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+  /* Home/Shop/etc. gradient headers reach under the status bar nicely. */
+  .home-header,
+  .shop-header,
+  .compete-header,
+  .flash-hub-header,
+  .parent-header,
+  .pet-header,
+  .arcade-header,
+  .map-header,
+  .sticker-header,
+  .workshop-header,
+  .theme-header,
+  .quiz-header,
+  .live-header,
+  .study-header,
+  .memory-header {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Roomier device on large desktops so it doesn't feel lost in space. */
+@media (min-width: 1440px) {
+  .app-stage {
+    gap: 48px;
+  }
+  .phone-frame {
+    width: 430px;
+    height: min(920px, calc(100dvh - 64px));
+  }
+}
+
+/* Honour reduced-motion for the new transitions too (covered globally above). */
+
+/* ---- Auth screen ---- */
+.auth-screen {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 24px;
+  gap: 4px;
+}
+.auth-logo {
+  font-size: 56px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.auth-welcome {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+.auth-app {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+.auth-tagline {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+  max-width: 280px;
+}
+.auth-profiles {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.auth-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 2px solid var(--color-border);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.auth-profile.active {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-glow);
+}
+.auth-profile-av {
+  font-size: 28px;
+}
+.auth-profile-name {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+.auth-form {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.auth-form .btn-primary {
+  margin-top: 4px;
+}
+.auth-error {
+  background: #ffe8e8;
+  color: var(--color-secondary);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+.auth-toggle {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  padding: 6px;
+}
+.auth-divider {
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  color: var(--color-text-muted);
+  margin: 12px 0;
+  position: relative;
+}
+.auth-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-border);
+}
+.auth-divider span {
+  background: var(--color-bg);
+  position: relative;
+  padding: 0 12px;
+}
+.auth-google {
+  width: 100%;
+  max-width: 320px;
+}
+.auth-guest {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px;
 }

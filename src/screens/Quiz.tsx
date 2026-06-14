@@ -6,12 +6,14 @@ import { Confetti } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { comboMultiplier } from '@/domain/combo'
 import type { QuizQuestion } from '@/domain/types'
+import { useT } from '@/i18n'
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F']
 const SECONDS_PER_Q = 30
 const MAX_HEARTS = 3
 
 export function Quiz() {
+  const t = useT()
   const navigate = useNavigate()
   const { lessonId } = useParams<{ lessonId: string }>()
   const completeLesson = useStore((s) => s.completeLesson)
@@ -87,9 +89,9 @@ export function Quiz() {
   if (!q && !finished) {
     return (
       <div style={{ padding: 24 }}>
-        <p>Quiz not found.</p>
+        <p>{t.quiz.notFound}</p>
         <button className="btn-primary" onClick={() => navigate('/')}>
-          Home
+          {t.nav.home}
         </button>
       </div>
     )
@@ -127,7 +129,7 @@ export function Quiz() {
               </span>
             ))}
           </div>
-          <div className="quiz-stat combo">🔥 x{multiplier} Combo</div>
+          <div className="quiz-stat combo">🔥 x{multiplier} {t.quiz.combo}</div>
           <div className="quiz-stat timer-stat">
             <i className="fas fa-clock" /> {mm}:{ss}
           </div>
@@ -167,29 +169,27 @@ export function Quiz() {
           <Confetti />
           <div className="score-popup show" data-testid="score-popup">
             <div className="score-emoji">{correctCount === questions.length ? '🏆' : correctCount > 0 ? '🎉' : '💪'}</div>
-            <h2>{correctCount === questions.length ? 'Perfect!' : correctCount > 0 ? 'Awesome!' : 'Keep Trying!'}</h2>
-            <p>
-              You got {correctCount} of {questions.length} correct
-            </p>
+            <h2>{correctCount === questions.length ? t.quiz.perfect : correctCount > 0 ? t.quiz.awesome : t.quiz.keepTrying}</h2>
+            <p>{t.quiz.result(correctCount, questions.length)}</p>
             <div className="score-rewards">
               <div className="score-reward-item">
                 <div className="icon">🪙</div>
                 <div className="value">+{reward?.coins ?? 0}</div>
-                <div className="label">Coins</div>
+                <div className="label">{t.common.coins}</div>
               </div>
               <div className="score-reward-item">
                 <div className="icon">⭐</div>
                 <div className="value">+{reward?.xp ?? 0}</div>
-                <div className="label">XP</div>
+                <div className="label">{t.common.xp}</div>
               </div>
               <div className="score-reward-item">
                 <div className="icon">💎</div>
                 <div className="value">+{reward?.gems ?? 0}</div>
-                <div className="label">Gems</div>
+                <div className="label">{t.common.gems}</div>
               </div>
             </div>
             <button className="btn-primary" onClick={() => navigate(backTo)}>
-              Continue
+              {t.common.continue}
             </button>
           </div>
         </>

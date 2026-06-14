@@ -23,8 +23,21 @@ export function selectAverageAccuracy(user: UserState): number {
   return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0
 }
 
-export function greetingForHour(hour: number): string {
-  if (hour < 12) return 'Good Morning'
-  if (hour < 18) return 'Good Afternoon'
-  return 'Good Evening'
+export function greetingKey(hour: number): 'morning' | 'afternoon' | 'evening' {
+  if (hour < 12) return 'morning'
+  if (hour < 18) return 'afternoon'
+  return 'evening'
+}
+
+/** Localized level-band title: maps a level to a band via economy thresholds. */
+export function localizedBandTitle(
+  levelNum: number,
+  bands: Array<{ minLevel: number; title: string }>,
+  labels: string[],
+): string {
+  let idx = 0
+  bands.forEach((b, i) => {
+    if (levelNum >= b.minLevel) idx = i
+  })
+  return labels[idx] ?? bands[idx]?.title ?? ''
 }

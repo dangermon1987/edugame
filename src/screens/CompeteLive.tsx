@@ -5,6 +5,7 @@ import { StatusBar } from '@/components/StatusBar'
 import { Confetti } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { pickBots, botAnswer, type BotTier } from '@/domain/bots'
+import { useT } from '@/i18n'
 import type { QuizQuestion, SubjectId } from '@/domain/types'
 
 const LETTERS = ['A', 'B', 'C', 'D']
@@ -30,6 +31,7 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export function CompeteLive() {
+  const t = useT()
   const navigate = useNavigate()
   const location = useLocation()
   const state = (location.state as { tier?: BotTier | 'mixed'; subject?: SubjectId }) ?? {}
@@ -174,9 +176,9 @@ export function CompeteLive() {
       <div className="matchmaking-screen" id="screen-matchmaking">
         <StatusBar />
         <div className="matchmaking-content">
-          <div className="matchmaking-title">Finding Opponents...</div>
+          <div className="matchmaking-title">{t.compete.finding}</div>
           <div className="matchmaking-sub">
-            {subject.name} · {tier === 'mixed' ? 'Mixed Match' : `vs ${tier} bots`}
+            {subject.name} · {tier === 'mixed' ? t.compete.mixedMatch : t.compete.vs(tier)}
           </div>
         </div>
         <div className="players-preview">
@@ -186,14 +188,14 @@ export function CompeteLive() {
                 {p.avatar}
               </div>
               <div className="player-slot-name">{p.name}</div>
-              <span className={`player-slot-tag ${p.isYou ? 'tag-you' : 'tag-bot'}`}>{p.isYou ? 'YOU' : 'BOT'}</span>
+              <span className={`player-slot-tag ${p.isYou ? 'tag-you' : 'tag-bot'}`}>{p.isYou ? t.compete.you : t.compete.bot}</span>
             </div>
           ))}
         </div>
         <div className="matchmaking-countdown" onClick={() => setPhase('playing')} role="button">
           <div className="countdown-spinner" />
-          <div className="countdown-text">Match starting...</div>
-          <div className="countdown-sub">Tap to start now</div>
+          <div className="countdown-text">{t.compete.matchStarting}</div>
+          <div className="countdown-sub">{t.compete.tapStart}</div>
         </div>
         <div className="bottom-spacer" />
       </div>
@@ -215,9 +217,9 @@ export function CompeteLive() {
         <StatusBar />
         <Confetti />
         <div className="podium-header">
-          <h1>Match Complete!</h1>
+          <h1>{t.compete.matchComplete}</h1>
           <p>
-            {subject.name} · {tier === 'mixed' ? 'Mixed Match' : `vs ${tier} bots`}
+            {subject.name} · {tier === 'mixed' ? t.compete.mixedMatch : t.compete.vs(tier)}
           </p>
         </div>
 
@@ -242,7 +244,7 @@ export function CompeteLive() {
         <div className="podium-results-card">
           <div className="podium-your-result">
             <div className="podium-your-place">
-              You placed <strong>{placement === 1 ? '1st!' : placement === 2 ? '2nd!' : placement === 3 ? '3rd!' : '4th'}</strong>
+              {t.compete.placed(placement === 1 ? '1st!' : placement === 2 ? '2nd!' : placement === 3 ? '3rd!' : '4th')}
             </div>
           </div>
 
@@ -250,17 +252,17 @@ export function CompeteLive() {
             <div className="podium-reward">
               <div className="pr-icon">🪙</div>
               <div className="pr-val">+{reward.coins}</div>
-              <div className="pr-lbl">Coins</div>
+              <div className="pr-lbl">{t.common.coins}</div>
             </div>
             <div className="podium-reward">
               <div className="pr-icon">⭐</div>
               <div className="pr-val">+{reward.xp}</div>
-              <div className="pr-lbl">XP</div>
+              <div className="pr-lbl">{t.common.xp}</div>
             </div>
             <div className="podium-reward">
               <div className="pr-icon">💎</div>
               <div className="pr-val">+{playerCorrect === questions.length ? 5 : 0}</div>
-              <div className="pr-lbl">Gems</div>
+              <div className="pr-lbl">{t.common.gems}</div>
             </div>
           </div>
 
@@ -282,10 +284,10 @@ export function CompeteLive() {
 
           <div className="podium-actions">
             <button className="btn-compete" onClick={() => navigate('/compete')}>
-              Play Again
+              {t.compete.playAgain}
             </button>
             <button className="btn-secondary" onClick={() => navigate('/')}>
-              Back to Home
+              {t.compete.backHome}
             </button>
           </div>
         </div>

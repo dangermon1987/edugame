@@ -1,0 +1,931 @@
+{
+  "format": "eduquest-content",
+  "formatVersion": 1,
+  "meta": {
+    "id": "grade-vi",
+    "name": "Vui Học Lớp 4",
+    "description": "Toán, Tiếng Việt, Khoa học và Tiếng Anh cho học sinh lớp 4.",
+    "author": "EduQuest",
+    "version": "1.0.0",
+    "locale": "vi",
+    "cover": "📘",
+    "createdAt": "2026-06-14"
+  },
+  "app": {
+    "title": "Vui Học Lớp 4",
+    "tagline": "Mỗi ngày một chút, giỏi hơn từng ngày!",
+    "dailyChallengeLessonId": "vi-toan-1"
+  },
+  "economy": {
+    "startingCoins": 200,
+    "startingGems": 0,
+    "lesson": {
+      "xpPerCorrect": 10,
+      "perfectBonusXp": 60,
+      "perfectBonusGems": 2
+    }
+  },
+  "defaultProfile": {
+    "name": "Bé Na",
+    "avatar": "🦊",
+    "age": 9
+  },
+  "subjects": [
+    {
+      "id": "toan",
+      "name": "Toán",
+      "description": "Nhân chia, phân số, hình học",
+      "icon": "fas fa-calculator",
+      "emoji": "🔢",
+      "colorClass": "math"
+    },
+    {
+      "id": "tiengviet",
+      "name": "Tiếng Việt",
+      "description": "Từ loại, từ ngữ và câu",
+      "icon": "fas fa-book-open",
+      "emoji": "📖",
+      "colorClass": "english"
+    },
+    {
+      "id": "khoahoc",
+      "name": "Khoa học",
+      "description": "Nước, không khí và cơ thể",
+      "icon": "fas fa-flask",
+      "emoji": "🔬",
+      "colorClass": "science"
+    },
+    {
+      "id": "tienganh",
+      "name": "Tiếng Anh",
+      "description": "Từ vựng và chào hỏi",
+      "icon": "fas fa-language",
+      "emoji": "🔤",
+      "colorClass": "coding"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "vi-toan-1",
+      "subjectId": "toan",
+      "title": "Nhân và chia",
+      "description": "Bảng nhân, bảng chia và số lớn",
+      "order": 1,
+      "estMinutes": 14,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "ta1",
+          "type": "Phép nhân",
+          "prompt": "7 × 8 = ?",
+          "options": ["56", "15", "48", "54"],
+          "correctIndex": 0,
+          "hint": "Nhân chứ không phải cộng nhé."
+        },
+        {
+          "id": "ta2",
+          "type": "Phép nhân",
+          "prompt": "9 × 6 = ?",
+          "options": ["45", "54", "56", "15"],
+          "correctIndex": 1
+        },
+        {
+          "id": "ta3",
+          "type": "Phép chia",
+          "prompt": "72 ÷ 8 = ?",
+          "options": ["8", "64", "9", "80"],
+          "correctIndex": 2,
+          "hint": "8 nhân mấy thì bằng 72?"
+        },
+        {
+          "id": "ta4",
+          "type": "So sánh số",
+          "prompt": "Số nào lớn nhất?",
+          "options": ["9 999", "10 001", "9 990", "10 010"],
+          "correctIndex": 3,
+          "hint": "Hãy đếm số chữ số trước, rồi so từ trái sang."
+        }
+      ]
+    },
+    {
+      "id": "vi-toan-2",
+      "subjectId": "toan",
+      "title": "Phân số",
+      "description": "Đọc, so sánh và cộng phân số",
+      "order": 2,
+      "estMinutes": 14,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "ta5",
+          "type": "Phân số",
+          "prompt": "Phân số 1/2 đọc là gì?",
+          "options": ["Hai phần một", "Một phần hai", "Một cộng hai", "Hai phần ba"],
+          "correctIndex": 1
+        },
+        {
+          "id": "ta6",
+          "type": "Phân số",
+          "prompt": "1/4 + 1/4 = ?",
+          "options": ["1/8", "2/8", "1/2", "4/4"],
+          "correctIndex": 2,
+          "hint": "Mẫu số giữ nguyên, chỉ cộng tử số."
+        },
+        {
+          "id": "ta7",
+          "type": "Phân số",
+          "prompt": "Phân số nào lớn hơn?",
+          "options": ["1/4", "1/6", "1/8", "1/2"],
+          "correctIndex": 3,
+          "hint": "Cùng tử số 1, mẫu số càng nhỏ thì phần càng lớn."
+        },
+        {
+          "id": "ta8",
+          "type": "Phân số",
+          "prompt": "Trong phân số 3/5, tử số là số nào?",
+          "options": ["3", "5", "8", "2"],
+          "correctIndex": 0,
+          "hint": "Tử số nằm ở phía trên gạch ngang."
+        }
+      ]
+    },
+    {
+      "id": "vi-toan-3",
+      "subjectId": "toan",
+      "title": "Hình học và chu vi",
+      "description": "Cạnh, góc và chu vi hình vuông",
+      "order": 3,
+      "estMinutes": 16,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "ta9",
+          "type": "Hình học",
+          "prompt": "Hình vuông có mấy cạnh?",
+          "options": ["3 cạnh", "5 cạnh", "4 cạnh", "6 cạnh"],
+          "correctIndex": 2
+        },
+        {
+          "id": "ta10",
+          "type": "Chu vi",
+          "prompt": "Chu vi hình vuông cạnh 5 cm là?",
+          "options": ["10 cm", "25 cm", "9 cm", "20 cm"],
+          "correctIndex": 3,
+          "hint": "Chu vi = cạnh nhân 4. Đừng nhầm với diện tích."
+        },
+        {
+          "id": "ta11",
+          "type": "Hình học",
+          "prompt": "Góc vuông có số đo bao nhiêu độ?",
+          "options": ["90 độ", "45 độ", "100 độ", "180 độ"],
+          "correctIndex": 0
+        },
+        {
+          "id": "ta12",
+          "type": "Phép nhân",
+          "prompt": "8 × 9 = ?",
+          "options": ["81", "72", "64", "17"],
+          "correctIndex": 1,
+          "hint": "Nhớ lại bảng nhân 9."
+        }
+      ]
+    },
+    {
+      "id": "vi-tv-1",
+      "subjectId": "tiengviet",
+      "title": "Từ loại",
+      "description": "Danh từ, động từ, tính từ",
+      "order": 1,
+      "estMinutes": 14,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "tv1",
+          "type": "Từ loại",
+          "prompt": "Từ nào là danh từ?",
+          "options": ["chạy", "đẹp", "nhanh", "con mèo"],
+          "correctIndex": 3,
+          "hint": "Danh từ là từ chỉ người, vật, con vật."
+        },
+        {
+          "id": "tv2",
+          "type": "Từ loại",
+          "prompt": "Từ nào là động từ?",
+          "options": ["chạy", "bàn", "xanh", "cao"],
+          "correctIndex": 0,
+          "hint": "Động từ chỉ hoạt động."
+        },
+        {
+          "id": "tv3",
+          "type": "Từ loại",
+          "prompt": "Từ nào là tính từ?",
+          "options": ["sách", "đỏ", "viết", "mèo"],
+          "correctIndex": 1,
+          "hint": "Tính từ chỉ đặc điểm, màu sắc."
+        },
+        {
+          "id": "tv4",
+          "type": "Từ loại",
+          "prompt": "Từ 'học sinh' thuộc loại từ nào?",
+          "options": ["Động từ", "Tính từ", "Danh từ", "Số từ"],
+          "correctIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "vi-tv-2",
+      "subjectId": "tiengviet",
+      "title": "Trái nghĩa và đồng nghĩa",
+      "description": "Từ trái nghĩa và từ đồng nghĩa",
+      "order": 2,
+      "estMinutes": 14,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "tv5",
+          "type": "Trái nghĩa",
+          "prompt": "Từ trái nghĩa với 'cao' là?",
+          "options": ["thấp", "lớn", "dài", "rộng"],
+          "correctIndex": 0
+        },
+        {
+          "id": "tv6",
+          "type": "Trái nghĩa",
+          "prompt": "Từ trái nghĩa với 'nóng' là?",
+          "options": ["ấm", "lạnh", "sáng", "nặng"],
+          "correctIndex": 1
+        },
+        {
+          "id": "tv7",
+          "type": "Đồng nghĩa",
+          "prompt": "Từ đồng nghĩa với 'vui' là?",
+          "options": ["buồn bã", "tức giận", "sung sướng", "sợ hãi"],
+          "correctIndex": 2,
+          "hint": "Đồng nghĩa là nghĩa giống nhau."
+        },
+        {
+          "id": "tv8",
+          "type": "Đồng nghĩa",
+          "prompt": "Từ đồng nghĩa với 'to' là?",
+          "options": ["nhỏ", "bé", "ít", "lớn"],
+          "correctIndex": 3,
+          "hint": "'to' có nghĩa giống từ nào?"
+        }
+      ]
+    },
+    {
+      "id": "vi-tv-3",
+      "subjectId": "tiengviet",
+      "title": "Dấu câu và câu",
+      "description": "Dấu câu và các kiểu câu",
+      "order": 3,
+      "estMinutes": 14,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "tv9",
+          "type": "Dấu câu",
+          "prompt": "Cuối câu hỏi dùng dấu gì?",
+          "options": ["Dấu chấm (.)", "Dấu chấm hỏi (?)", "Dấu phẩy (,)", "Dấu chấm than (!)"],
+          "correctIndex": 1
+        },
+        {
+          "id": "tv10",
+          "type": "Dấu câu",
+          "prompt": "Cuối câu kể dùng dấu gì?",
+          "options": ["Dấu chấm hỏi (?)", "Dấu chấm than (!)", "Dấu chấm (.)", "Dấu phẩy (,)"],
+          "correctIndex": 2
+        },
+        {
+          "id": "tv11",
+          "type": "Kiểu câu",
+          "prompt": "Câu 'Ôi, đẹp quá!' là kiểu câu gì?",
+          "options": ["Câu hỏi", "Câu kể", "Câu khiến", "Câu cảm"],
+          "correctIndex": 3,
+          "hint": "Câu bộc lộ cảm xúc gọi là câu gì?"
+        },
+        {
+          "id": "tv12",
+          "type": "Từ loại",
+          "prompt": "Từ 'chạy' là loại từ nào?",
+          "options": ["Động từ", "Danh từ", "Tính từ", "Số từ"],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "vi-kh-1",
+      "subjectId": "khoahoc",
+      "title": "Nước",
+      "description": "Ba thể và sự biến đổi của nước",
+      "order": 1,
+      "estMinutes": 14,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "kh1",
+          "type": "Khoa học",
+          "prompt": "Nước có mấy thể?",
+          "options": ["2 thể", "4 thể", "3 thể", "1 thể"],
+          "correctIndex": 2,
+          "hint": "Rắn, lỏng và khí."
+        },
+        {
+          "id": "kh2",
+          "type": "Khoa học",
+          "prompt": "Nước đóng băng ở nhiệt độ nào?",
+          "options": ["100 độ C", "50 độ C", "10 độ C", "0 độ C"],
+          "correctIndex": 3,
+          "hint": "Đừng nhầm với nhiệt độ sôi."
+        },
+        {
+          "id": "kh3",
+          "type": "Khoa học",
+          "prompt": "Nước sôi ở nhiệt độ nào?",
+          "options": ["100 độ C", "0 độ C", "50 độ C", "200 độ C"],
+          "correctIndex": 0
+        },
+        {
+          "id": "kh4",
+          "type": "Khoa học",
+          "prompt": "Nước bốc thành hơi gọi là gì?",
+          "options": ["Đông đặc", "Bay hơi", "Ngưng tụ", "Tan chảy"],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "vi-kh-2",
+      "subjectId": "khoahoc",
+      "title": "Không khí và cây xanh",
+      "description": "Không khí cần cho sự sống",
+      "order": 2,
+      "estMinutes": 15,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "kh5",
+          "type": "Khoa học",
+          "prompt": "Con người cần khí gì để thở?",
+          "options": ["Khí các-bô-níc", "Khí ni-tơ", "Khói", "Khí ô-xi"],
+          "correctIndex": 3
+        },
+        {
+          "id": "kh6",
+          "type": "Khoa học",
+          "prompt": "Cây xanh cần gì để sống?",
+          "options": ["Ánh sáng và nước", "Bóng tối và muối", "Chỉ có đất khô", "Không khí độc"],
+          "correctIndex": 0
+        },
+        {
+          "id": "kh7",
+          "type": "Khoa học",
+          "prompt": "Cây tạo dinh dưỡng nhờ ánh sáng gọi là gì?",
+          "options": ["Hô hấp", "Quang hợp", "Bay hơi", "Tiêu hóa"],
+          "correctIndex": 1,
+          "hint": "Quá trình này xảy ra ở lá cây."
+        },
+        {
+          "id": "kh8",
+          "type": "Khoa học",
+          "prompt": "Nước đá là nước ở thể nào?",
+          "options": ["Thể lỏng", "Thể khí", "Thể rắn", "Thể hơi"],
+          "correctIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "vi-kh-3",
+      "subjectId": "khoahoc",
+      "title": "Cơ thể và dinh dưỡng",
+      "description": "Ăn uống và cơ quan trong cơ thể",
+      "order": 3,
+      "estMinutes": 14,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "kh9",
+          "type": "Khoa học",
+          "prompt": "Thức ăn nào nhiều vitamin?",
+          "options": ["Rau và quả", "Kẹo", "Nước ngọt", "Bánh ngọt"],
+          "correctIndex": 0
+        },
+        {
+          "id": "kh10",
+          "type": "Khoa học",
+          "prompt": "Để răng chắc khỏe em nên làm gì?",
+          "options": ["Ăn nhiều kẹo", "Đánh răng mỗi ngày", "Bỏ bữa sáng", "Uống nước ngọt"],
+          "correctIndex": 1
+        },
+        {
+          "id": "kh11",
+          "type": "Khoa học",
+          "prompt": "Cơ quan nào giúp em thở?",
+          "options": ["Dạ dày", "Tim", "Phổi", "Gan"],
+          "correctIndex": 2,
+          "hint": "Cơ quan này nhận khí ô-xi."
+        },
+        {
+          "id": "kh12",
+          "type": "Khoa học",
+          "prompt": "Cơ quan nào bơm máu khắp cơ thể?",
+          "options": ["Phổi", "Não", "Thận", "Tim"],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "vi-en-1",
+      "subjectId": "tienganh",
+      "title": "Từ vựng",
+      "description": "Những từ thường gặp",
+      "order": 1,
+      "estMinutes": 12,
+      "coinReward": 50,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "en1",
+          "type": "Từ vựng",
+          "prompt": "'apple' nghĩa là gì?",
+          "options": ["quả chuối", "quả táo", "cái bàn", "con mèo"],
+          "correctIndex": 1
+        },
+        {
+          "id": "en2",
+          "type": "Từ vựng",
+          "prompt": "'cat' nghĩa là gì?",
+          "options": ["con chó", "con cá", "con mèo", "con chim"],
+          "correctIndex": 2
+        },
+        {
+          "id": "en3",
+          "type": "Từ vựng",
+          "prompt": "'book' nghĩa là gì?",
+          "options": ["cái bút", "cánh cửa", "nước", "quyển sách"],
+          "correctIndex": 3
+        },
+        {
+          "id": "en4",
+          "type": "Từ vựng",
+          "prompt": "'water' nghĩa là gì?",
+          "options": ["nước", "sữa", "trà", "cơm"],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "vi-en-2",
+      "subjectId": "tienganh",
+      "title": "Số và màu sắc",
+      "description": "Numbers & colors",
+      "order": 2,
+      "estMinutes": 12,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "en5",
+          "type": "Số đếm",
+          "prompt": "'three' là số mấy?",
+          "options": ["2", "4", "3", "5"],
+          "correctIndex": 2
+        },
+        {
+          "id": "en6",
+          "type": "Số đếm",
+          "prompt": "'seven' là số mấy?",
+          "options": ["6", "8", "9", "7"],
+          "correctIndex": 3
+        },
+        {
+          "id": "en7",
+          "type": "Màu sắc",
+          "prompt": "'red' là màu gì?",
+          "options": ["màu đỏ", "màu xanh", "màu vàng", "màu đen"],
+          "correctIndex": 0
+        },
+        {
+          "id": "en8",
+          "type": "Màu sắc",
+          "prompt": "'blue' là màu gì?",
+          "options": ["màu đỏ", "màu xanh dương", "màu trắng", "màu nâu"],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "vi-en-3",
+      "subjectId": "tienganh",
+      "title": "Chào hỏi và gia đình",
+      "description": "Greetings & family",
+      "order": 3,
+      "estMinutes": 12,
+      "coinReward": 80,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "en9",
+          "type": "Chào hỏi",
+          "prompt": "'Hello' nghĩa là gì?",
+          "options": ["Tạm biệt", "Cảm ơn", "Xin lỗi", "Xin chào"],
+          "correctIndex": 3
+        },
+        {
+          "id": "en10",
+          "type": "Chào hỏi",
+          "prompt": "'Thank you' nghĩa là gì?",
+          "options": ["Cảm ơn", "Xin chào", "Tạm biệt", "Làm ơn"],
+          "correctIndex": 0
+        },
+        {
+          "id": "en11",
+          "type": "Gia đình",
+          "prompt": "'mother' nghĩa là gì?",
+          "options": ["bố", "mẹ", "anh", "bà"],
+          "correctIndex": 1
+        },
+        {
+          "id": "en12",
+          "type": "Gia đình",
+          "prompt": "'father' nghĩa là gì?",
+          "options": ["mẹ", "em", "bố", "ông"],
+          "correctIndex": 2
+        }
+      ]
+    }
+  ],
+  "decks": [
+    {
+      "id": "deck-vi-mult",
+      "subject": "toan",
+      "title": "Bảng cửu chương",
+      "description": "Ôn lại các phép nhân khó nhớ",
+      "iconEmoji": "✖️",
+      "difficulty": "Medium",
+      "cards": [
+        {
+          "id": "cvm1",
+          "deckId": "deck-vi-mult",
+          "frontEmoji": "✖️",
+          "frontText": "6 × 7 = ?",
+          "backContent": "42",
+          "backDetails": "Sáu lần bảy bằng bốn mươi hai."
+        },
+        {
+          "id": "cvm2",
+          "deckId": "deck-vi-mult",
+          "frontEmoji": "✖️",
+          "frontText": "7 × 8 = ?",
+          "backContent": "56",
+          "backDetails": "Bảy lần tám bằng năm mươi sáu."
+        },
+        {
+          "id": "cvm3",
+          "deckId": "deck-vi-mult",
+          "frontEmoji": "✖️",
+          "frontText": "8 × 9 = ?",
+          "backContent": "72",
+          "backDetails": "Tám lần chín bằng bảy mươi hai."
+        },
+        {
+          "id": "cvm4",
+          "deckId": "deck-vi-mult",
+          "frontEmoji": "✖️",
+          "frontText": "9 × 9 = ?",
+          "backContent": "81",
+          "backDetails": "Chín lần chín bằng tám mươi mốt."
+        },
+        {
+          "id": "cvm5",
+          "deckId": "deck-vi-mult",
+          "frontEmoji": "✖️",
+          "frontText": "6 × 8 = ?",
+          "backContent": "48",
+          "backDetails": "Sáu lần tám bằng bốn mươi tám."
+        },
+        {
+          "id": "cvm6",
+          "deckId": "deck-vi-mult",
+          "frontEmoji": "✖️",
+          "frontText": "7 × 9 = ?",
+          "backContent": "63",
+          "backDetails": "Bảy lần chín bằng sáu mươi ba."
+        }
+      ]
+    },
+    {
+      "id": "deck-vi-eng",
+      "subject": "tienganh",
+      "title": "Từ vựng tiếng Anh",
+      "description": "Những từ tiếng Anh quen thuộc",
+      "iconEmoji": "🔤",
+      "difficulty": "Easy",
+      "cards": [
+        {
+          "id": "cve1",
+          "deckId": "deck-vi-eng",
+          "frontEmoji": "🍎",
+          "frontText": "apple",
+          "backContent": "quả táo",
+          "backDetails": "I eat an apple. Tôi ăn một quả táo."
+        },
+        {
+          "id": "cve2",
+          "deckId": "deck-vi-eng",
+          "frontEmoji": "🐱",
+          "frontText": "cat",
+          "backContent": "con mèo",
+          "backDetails": "The cat is cute. Con mèo dễ thương."
+        },
+        {
+          "id": "cve3",
+          "deckId": "deck-vi-eng",
+          "frontEmoji": "📕",
+          "frontText": "book",
+          "backContent": "quyển sách",
+          "backDetails": "This is my book. Đây là quyển sách của tôi."
+        },
+        {
+          "id": "cve4",
+          "deckId": "deck-vi-eng",
+          "frontEmoji": "💧",
+          "frontText": "water",
+          "backContent": "nước",
+          "backDetails": "Drink water. Hãy uống nước."
+        },
+        {
+          "id": "cve5",
+          "deckId": "deck-vi-eng",
+          "frontEmoji": "🏫",
+          "frontText": "school",
+          "backContent": "trường học",
+          "backDetails": "I go to school. Tôi đi học."
+        },
+        {
+          "id": "cve6",
+          "deckId": "deck-vi-eng",
+          "frontEmoji": "😊",
+          "frontText": "happy",
+          "backContent": "vui",
+          "backDetails": "I am happy. Tôi rất vui."
+        }
+      ]
+    }
+  ],
+  "shopItems": [
+    {
+      "id": "viav-fox",
+      "category": "avatars",
+      "name": "Cáo nhỏ",
+      "preview": "🦊",
+      "price": 400,
+      "currency": "coins",
+      "rarity": "new",
+      "payload": "🦊"
+    },
+    {
+      "id": "viav-cat",
+      "category": "avatars",
+      "name": "Mèo con",
+      "preview": "🐱",
+      "price": 300,
+      "currency": "coins",
+      "payload": "🐱"
+    },
+    {
+      "id": "viav-buffalo",
+      "category": "avatars",
+      "name": "Trâu vàng",
+      "preview": "🐃",
+      "price": 350,
+      "currency": "coins",
+      "payload": "🐃"
+    },
+    {
+      "id": "viav-dragon",
+      "category": "avatars",
+      "name": "Rồng",
+      "preview": "🐉",
+      "price": 800,
+      "currency": "coins",
+      "rarity": "hot",
+      "payload": "🐉"
+    },
+    {
+      "id": "vith-ocean",
+      "category": "themes",
+      "name": "Biển xanh",
+      "preview": "🌊",
+      "price": 300,
+      "currency": "coins",
+      "payload": "ocean"
+    },
+    {
+      "id": "vith-forest",
+      "category": "themes",
+      "name": "Rừng xanh",
+      "preview": "🌲",
+      "price": 300,
+      "currency": "coins",
+      "payload": "forest"
+    },
+    {
+      "id": "vith-candy",
+      "category": "themes",
+      "name": "Hoa đào",
+      "preview": "🌸",
+      "price": 10,
+      "currency": "gems",
+      "rarity": "rare",
+      "payload": "candy"
+    },
+    {
+      "id": "vipet-dog",
+      "category": "pets",
+      "name": "Cún con",
+      "preview": "🐶",
+      "price": 600,
+      "currency": "coins",
+      "payload": "🐶"
+    },
+    {
+      "id": "vipu-x2",
+      "category": "powerups",
+      "name": "Nhân đôi điểm",
+      "preview": "⚡",
+      "price": 12,
+      "currency": "gems",
+      "rarity": "hot",
+      "payload": "double"
+    },
+    {
+      "id": "vipu-hint",
+      "category": "powerups",
+      "name": "Gói gợi ý",
+      "preview": "💡",
+      "price": 150,
+      "currency": "coins",
+      "payload": "hint"
+    }
+  ],
+  "themes": [
+    {
+      "id": "",
+      "name": "Tím",
+      "emoji": "💜",
+      "description": "Mặc định",
+      "swatch": ["#6C5CE7", "#A29BFE", "#FECA57"]
+    },
+    {
+      "id": "ocean",
+      "name": "Biển xanh",
+      "emoji": "🌊",
+      "description": "Xanh mát",
+      "swatch": ["#2e86de", "#54a0ff", "#1dd1a1"]
+    },
+    {
+      "id": "forest",
+      "name": "Rừng xanh",
+      "emoji": "🌲",
+      "description": "Xanh thiên nhiên",
+      "swatch": ["#10ac84", "#1dd1a1", "#feca57"]
+    },
+    {
+      "id": "candy",
+      "name": "Hoa đào",
+      "emoji": "🌸",
+      "description": "Hồng dịu",
+      "swatch": ["#ff6b81", "#ff9ff3", "#feca57"]
+    },
+    {
+      "id": "midnight",
+      "name": "Trời đêm",
+      "emoji": "🌙",
+      "description": "Chế độ tối",
+      "swatch": ["#5f27cd", "#a29bfe", "#feca57"]
+    }
+  ],
+  "achievements": [
+    {
+      "id": "first",
+      "name": "Bước đầu tiên",
+      "emoji": "🏆",
+      "description": "Hoàn thành bài học đầu tiên",
+      "criteria": { "stat": "lessonsCompleted", "gte": 1 }
+    },
+    {
+      "id": "ten",
+      "name": "Chăm chỉ",
+      "emoji": "📚",
+      "description": "Hoàn thành 10 bài học",
+      "criteria": { "stat": "lessonsCompleted", "gte": 10 }
+    },
+    {
+      "id": "streak7",
+      "name": "7 ngày liên tục",
+      "emoji": "🔥",
+      "description": "Học 7 ngày liên tục",
+      "criteria": { "stat": "streak", "gte": 7 }
+    },
+    {
+      "id": "perfect",
+      "name": "Điểm tuyệt đối",
+      "emoji": "💯",
+      "description": "Trả lời đúng cả bài học",
+      "criteria": { "stat": "perfectLessons", "gte": 1 }
+    },
+    {
+      "id": "rich",
+      "name": "Nhiều xu",
+      "emoji": "🪙",
+      "description": "Tích được 1000 xu",
+      "criteria": { "stat": "coins", "gte": 1000 }
+    },
+    {
+      "id": "champ",
+      "name": "Nhà vô địch",
+      "emoji": "👑",
+      "description": "Thắng 3 trận thi đấu",
+      "criteria": { "stat": "competeWins", "gte": 3 }
+    }
+  ],
+  "stickers": [
+    {
+      "id": "vist-fox",
+      "name": "Cáo nhỏ",
+      "emoji": "🦊",
+      "rarity": "shiny",
+      "collection": "Động vật"
+    },
+    {
+      "id": "vist-buffalo",
+      "name": "Trâu vàng",
+      "emoji": "🐃",
+      "rarity": "rare",
+      "collection": "Động vật"
+    },
+    {
+      "id": "vist-lotus",
+      "name": "Hoa sen",
+      "emoji": "🪷",
+      "rarity": "epic",
+      "collection": "Quê hương"
+    },
+    {
+      "id": "vist-flag",
+      "name": "Cờ Việt Nam",
+      "emoji": "🇻🇳",
+      "rarity": "rare",
+      "collection": "Quê hương"
+    },
+    {
+      "id": "vist-star",
+      "name": "Ngôi sao vàng",
+      "emoji": "⭐",
+      "rarity": "common",
+      "collection": "Phần thưởng"
+    },
+    {
+      "id": "vist-pho",
+      "name": "Phở",
+      "emoji": "🍜",
+      "rarity": "common",
+      "collection": "Món ăn"
+    }
+  ],
+  "arcadeGames": [
+    {
+      "id": "memory",
+      "title": "Lật thẻ trí nhớ",
+      "desc": "Tìm các cặp thẻ giống nhau!",
+      "icon": "🃏",
+      "bg": "#EDE7FF",
+      "tags": [
+        ["Trí nhớ", "#E0FFF5", "var(--color-accent-mint)"],
+        ["2-5 phút", "#F0EEF8", "var(--color-primary)"]
+      ],
+      "badge": "POPULAR",
+      "engine": "memory"
+    }
+  ],
+  "pet": {
+    "species": "🐉",
+    "name": "Rồng Vàng",
+    "evolutionStages": [
+      { "emoji": "🥚", "label": "Quả trứng" },
+      { "emoji": "🐣", "label": "Bé con" },
+      { "emoji": "🦎", "label": "Thiếu niên" },
+      { "emoji": "🐉", "label": "Trưởng thành" }
+    ]
+  }
+}

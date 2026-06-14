@@ -3,9 +3,11 @@ import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { BackButton, SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
+import { useT } from '@/i18n'
 
 export function ThemeSettings() {
   const navigate = useNavigate()
+  const t = useT()
   const current = useStore((s) => s.user.settings.theme)
   const ownedItems = useStore((s) => s.user.ownedItems)
   const setTheme = useStore((s) => s.setTheme)
@@ -25,12 +27,12 @@ export function ThemeSettings() {
 
   function choose(id: string) {
     if (!isOwned(id)) {
-      pushToast({ message: 'Unlock this theme in the Shop!', emoji: '🔒', kind: 'info' })
+      pushToast({ message: t.themes.unlockInShop, emoji: '🔒', kind: 'info' })
       navigate('/shop')
       return
     }
     setTheme(id)
-    pushToast({ message: 'Theme applied!', emoji: '🎨', kind: 'success' })
+    pushToast({ message: t.themes.applied, emoji: '🎨', kind: 'success' })
   }
 
   return (
@@ -42,7 +44,7 @@ export function ThemeSettings() {
         </div>
         <div className="theme-title-row">
           <h1>
-            <i className="fas fa-palette" /> Themes
+            <i className="fas fa-palette" /> {t.themes.title}
           </h1>
         </div>
       </div>
@@ -53,7 +55,7 @@ export function ThemeSettings() {
         </div>
         <div className="current-theme-info">
           <h3>{activeTheme.name}</h3>
-          <p>Your current look</p>
+          <p>{t.themes.currentLook}</p>
           <div className="current-theme-swatches">
             {activeTheme.swatch.map((c) => (
               <div key={c} className="mini-swatch" style={{ background: c }} />
@@ -62,7 +64,7 @@ export function ThemeSettings() {
         </div>
       </div>
 
-      <SectionHeader title="Choose Your Theme" action={<a>{themes.length} themes</a>} />
+      <SectionHeader title={t.themes.choose} action={<a>{t.themes.count(themes.length)}</a>} />
       <div className="theme-grid">
         {themes.map((theme) => {
           const owned = isOwned(theme.id)
@@ -97,10 +99,10 @@ export function ThemeSettings() {
               <div className="theme-card-footer">
                 {active ? (
                   <span className="theme-badge active-badge" style={{ background: 'var(--color-primary)', color: 'white' }}>
-                    ACTIVE
+                    {t.themes.active}
                   </span>
                 ) : owned ? (
-                  <span className="theme-price free">Owned</span>
+                  <span className="theme-price free">{t.themes.owned}</span>
                 ) : (
                   <span className={`theme-price ${price?.currency ?? 'coins'}`}>
                     {price?.currency === 'gems' ? '💎' : '🪙'} {price?.price ?? '—'}

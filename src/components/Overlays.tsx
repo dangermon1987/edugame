@@ -1,7 +1,9 @@
 import { useStore } from '@/state/store'
 import { useContent } from '@/content/runtime'
+import { useT } from '@/i18n'
 
 export function Overlays() {
+  const t = useT()
   const toasts = useStore((s) => s.toasts)
   const sync = useStore((s) => s.sync)
   const pending = useStore((s) => s.pendingAchievements)
@@ -27,7 +29,7 @@ export function Overlays() {
         <div className="modal-scrim" role="dialog" aria-label="Achievement unlocked">
           <div className="modal-card">
             <div style={{ fontSize: 56 }}>🏅</div>
-            <h3>Achievement Unlocked!</h3>
+            <h3>{t.achievement.unlocked}</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, margin: '12px 0 20px' }}>
               {pending.map((id) => {
                 const a = achievementById[id]
@@ -44,7 +46,7 @@ export function Overlays() {
               })}
             </div>
             <button className="btn-primary" onClick={clearPending}>
-              Awesome!
+              {t.achievement.awesome}
             </button>
           </div>
         </div>
@@ -54,12 +56,13 @@ export function Overlays() {
 }
 
 function SyncPill({ status }: { status: string }) {
+  const t = useT()
   if (status === 'idle' || status === 'disabled') return null
   const map: Record<string, { icon: string; text: string; spin?: boolean }> = {
-    syncing: { icon: 'fas fa-sync', text: 'Syncing…', spin: true },
-    synced: { icon: 'fas fa-cloud', text: 'Synced' },
-    error: { icon: 'fas fa-triangle-exclamation', text: 'Sync error' },
-    offline: { icon: 'fas fa-cloud-arrow-up', text: 'Offline' },
+    syncing: { icon: 'fas fa-sync', text: t.sync.syncing, spin: true },
+    synced: { icon: 'fas fa-cloud', text: t.sync.synced },
+    error: { icon: 'fas fa-triangle-exclamation', text: t.sync.error },
+    offline: { icon: 'fas fa-cloud-arrow-up', text: t.sync.offline },
   }
   const cfg = map[status]
   if (!cfg) return null

@@ -69,13 +69,19 @@ interface StoreShape {
 
   // lifecycle
   resetProgress: () => void
+  /** Switch the active account, loading its namespaced progress. */
+  loadAccount: (accountId: string) => void
   connectDrive: () => Promise<void>
   disconnectDrive: () => Promise<void>
   syncNow: () => Promise<void>
 }
 
 // --- persistence singletons -------------------------------------------------
-const local = new LocalStoragePersistence()
+// Progress is namespaced per account: `eduquest.db.<accountId>`. Defaults to a
+// guest namespace so the store works before/without auth.
+const DB_PREFIX = 'eduquest.db.'
+let activeAccountId = 'guest'
+let local = new LocalStoragePersistence(DB_PREFIX + activeAccountId)
 
 function buildSnapshot(user: UserState, updatedAt: number): PersistedSnapshot<UserState> {
   return { schemaVersion: SCHEMA_VERSION, updatedAt, deviceId: getDeviceId(), data: user }
@@ -316,6 +322,23 @@ export const useStore = create<StoreShape>((set, get) => {
 
     resetProgress: () =>
       mutate((s) => createResetState(s)),
+
+    loadAccount: (accountId) => {
+      if (accountId === activeAccountId) return
+      // Persist the outgoing account's latest state, then swap namespaces.
+      local.saveSync(buildSnapshot(get().user, get().updatedAt))
+      activeAccountId = accountId
+      local = new LocalStoragePersistence(DB_PREFIX + accountId)
+      const snap = local.loadSync()
+      if (snap && snap.data) {
+        set({ user: { ...createInitialState(), ...(snap.data as UserState) }, updatedAt: snap.updatedAt })
+      } else {
+        const fresh = createInitialState()
+        const now = Date.now()
+        local.saveSync(buildSnapshot(fresh, now))
+        set({ user: fresh, updatedAt: now })
+      }
+    },
 
     connectDrive: async () => {
       const { createDriveClient } = await import('@/lib/googleDrive')

@@ -3,9 +3,11 @@ import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useContent, RARITY_LABEL } from '@/content/runtime'
+import { useT } from '@/i18n'
 import type { StickerRarity } from '@/content/schema'
 
 export function Stickers() {
+  const t = useT()
   const owned = useStore((s) => s.user.stickers)
   const stickers = useContent((c) => c.stickers)
   const [filter, setFilter] = useState<StickerRarity | 'all'>('all')
@@ -21,28 +23,28 @@ export function Stickers() {
       <div className="sticker-header">
         <StatusBar />
         <div className="sticker-title-row">
-          <h1>My Stickers</h1>
+          <h1>{t.stickers.title}</h1>
         </div>
         <div className="sticker-count-row">
-          <div className="sticker-count-tag">📋 {ownedCount}/{stickers.length} collected</div>
-          <div className="sticker-count-tag">✨ {shinyCount} shiny</div>
+          <div className="sticker-count-tag">📋 {t.stickers.collected(ownedCount, stickers.length)}</div>
+          <div className="sticker-count-tag">✨ {t.stickers.shiny(shinyCount)}</div>
         </div>
       </div>
 
       <div className="rarity-tabs">
         <button className={`rarity-tab${filter === 'all' ? ' active' : ''}`} onClick={() => setFilter('all')}>
-          All
+          {t.stickers.all}
         </button>
         {(Object.keys(RARITY_LABEL) as StickerRarity[]).map((r) => (
           <button key={r} className={`rarity-tab${filter === r ? ' active' : ''}`} onClick={() => setFilter(r)}>
-            {RARITY_LABEL[r]}
+            {t.stickers.rarities[r]}
           </button>
         ))}
       </div>
 
       <div className="completion-card">
         <div className="completion-header">
-          <h4>Total Collection</h4>
+          <h4>{t.stickers.total}</h4>
           <span>
             {ownedCount}/{stickers.length}
           </span>
@@ -51,8 +53,8 @@ export function Stickers() {
           <div className="completion-fill" style={{ width: `${Math.round((ownedCount / stickers.length) * 100)}%` }} />
         </div>
         <div className="completion-detail">
-          <span>{Math.round((ownedCount / stickers.length) * 100)}% complete</span>
-          <span>Earn stickers by playing!</span>
+          <span>{t.stickers.percent(Math.round((ownedCount / stickers.length) * 100))}</span>
+          <span>{t.stickers.earnHint}</span>
         </div>
       </div>
 

@@ -59,9 +59,10 @@ All course content is a single JSON document validated against
 [`src/content/schema.ts`](src/content/schema.ts). The app resolves the active
 package as: cached pick in `localStorage` → built-in core. Users can also load a
 pack from the static `/content` folder, **upload** a `.json` file, or save/load it
-to Google Drive — all from **Settings → Course Pack**. Two courses ship as a demo
-of swappability: *EduQuest Core* and *Space Explorers*. Authoring guide (and the
-format for AI generation): **[CONTENT_FORMAT.md](CONTENT_FORMAT.md)**.
+to Google Drive — all from **Settings → Course Pack**. Three courses ship: the
+bundled default **Học Vui Lớp 4** (a full Vietnamese Grade-4 curriculum), plus
+*EduQuest Core (English)* and *Space Explorers* as switchable packs. Authoring
+guide (and the format for AI generation): **[CONTENT_FORMAT.md](CONTENT_FORMAT.md)**.
 
 `npm run dev`/`build` run a prebuild step that mirrors `core.package.json` into
 `public/content/core.json` so the static-folder path serves the same data.

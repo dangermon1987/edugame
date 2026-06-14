@@ -1,0 +1,1206 @@
+{
+  "format": "eduquest-content",
+  "formatVersion": 1,
+  "meta": {
+    "id": "grade-zh",
+    "name": "快乐学习 三年级",
+    "description": "数学、语文、科学、英语 — 适合三年级小朋友。",
+    "author": "EduQuest",
+    "version": "1.0.0",
+    "locale": "zh",
+    "cover": "🐼",
+    "createdAt": "2026-06-14"
+  },
+  "app": {
+    "title": "快乐学习",
+    "tagline": "每天进步一点点！",
+    "dailyChallengeLessonId": "math-zh-1"
+  },
+  "economy": {
+    "startingCoins": 200,
+    "startingGems": 0
+  },
+  "defaultProfile": {
+    "name": "小明",
+    "avatar": "🐼",
+    "age": 9
+  },
+  "subjects": [
+    {
+      "id": "math-zh",
+      "name": "数学",
+      "description": "乘除法与图形",
+      "icon": "fas fa-calculator",
+      "emoji": "🔢",
+      "colorClass": "math"
+    },
+    {
+      "id": "yuwen",
+      "name": "语文",
+      "description": "汉字与词语",
+      "icon": "fas fa-book-open",
+      "emoji": "📖",
+      "colorClass": "english"
+    },
+    {
+      "id": "kexue-zh",
+      "name": "科学",
+      "description": "水、空气与生命",
+      "icon": "fas fa-flask",
+      "emoji": "🔬",
+      "colorClass": "science"
+    },
+    {
+      "id": "yingyu",
+      "name": "英语",
+      "description": "单词与日常用语",
+      "icon": "fas fa-language",
+      "emoji": "🔤",
+      "colorClass": "coding"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "math-zh-1",
+      "subjectId": "math-zh",
+      "title": "乘法",
+      "description": "乘法口诀",
+      "order": 1,
+      "estMinutes": 12,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "mz1",
+          "type": "乘法",
+          "prompt": "3 × 4 = ?",
+          "options": [
+            "12",
+            "7",
+            "9",
+            "16"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "mz2",
+          "type": "乘法",
+          "prompt": "6 × 7 = ?",
+          "options": [
+            "36",
+            "42",
+            "48",
+            "13"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "mz3",
+          "type": "乘法",
+          "prompt": "8 × 8 = ?",
+          "options": [
+            "56",
+            "72",
+            "64",
+            "16"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "mz4",
+          "type": "乘法",
+          "prompt": "9 × 5 = ?",
+          "options": [
+            "40",
+            "54",
+            "14",
+            "45"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "math-zh-2",
+      "subjectId": "math-zh",
+      "title": "除法",
+      "description": "平均分",
+      "order": 2,
+      "estMinutes": 12,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "mz5",
+          "type": "除法",
+          "prompt": "12 ÷ 3 = ?",
+          "options": [
+            "4",
+            "3",
+            "6",
+            "9"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "mz6",
+          "type": "除法",
+          "prompt": "56 ÷ 7 = ?",
+          "options": [
+            "7",
+            "8",
+            "9",
+            "6"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "mz7",
+          "type": "除法",
+          "prompt": "81 ÷ 9 = ?",
+          "options": [
+            "8",
+            "7",
+            "9",
+            "18"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "mz8",
+          "type": "除法",
+          "prompt": "100 ÷ 10 = ?",
+          "options": [
+            "1",
+            "100",
+            "20",
+            "10"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "math-zh-3",
+      "subjectId": "math-zh",
+      "title": "分数与图形",
+      "description": "认识分数和图形",
+      "order": 3,
+      "estMinutes": 12,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "mz9",
+          "type": "图形",
+          "prompt": "正方形有几条边?",
+          "options": [
+            "4",
+            "3",
+            "5",
+            "6"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "mz10",
+          "type": "图形",
+          "prompt": "三角形有几条边?",
+          "options": [
+            "4",
+            "3",
+            "2",
+            "5"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "mz11",
+          "type": "分数",
+          "prompt": "分数 1/2 读作?",
+          "options": [
+            "一分之二",
+            "一加二",
+            "二分之一",
+            "一减二"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "mz12",
+          "type": "分数",
+          "prompt": "1/4 + 1/4 = ?",
+          "options": [
+            "1/8",
+            "2/8",
+            "1/16",
+            "2/4"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "yuwen-1",
+      "subjectId": "yuwen",
+      "title": "汉字",
+      "description": "部首与笔画",
+      "order": 1,
+      "estMinutes": 12,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "yw1",
+          "type": "汉字",
+          "prompt": "“妈” 字的部首是?",
+          "options": [
+            "女",
+            "马",
+            "口",
+            "木"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "yw2",
+          "type": "汉字",
+          "prompt": "“森” 字里有几个 “木”?",
+          "options": [
+            "2",
+            "3",
+            "1",
+            "4"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "yw3",
+          "type": "量词",
+          "prompt": "一( )书 应填?",
+          "options": [
+            "条",
+            "只",
+            "本",
+            "张"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "yw4",
+          "type": "汉字",
+          "prompt": "“日” 加 “月” 组成哪个字?",
+          "options": [
+            "昌",
+            "晶",
+            "朋",
+            "明"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "yuwen-2",
+      "subjectId": "yuwen",
+      "title": "词语",
+      "description": "近义词与反义词",
+      "order": 2,
+      "estMinutes": 12,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "yw5",
+          "type": "反义词",
+          "prompt": "“大” 的反义词是?",
+          "options": [
+            "小",
+            "多",
+            "高",
+            "长"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "yw6",
+          "type": "近义词",
+          "prompt": "“高兴” 的近义词是?",
+          "options": [
+            "伤心",
+            "快乐",
+            "生气",
+            "害怕"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "yw7",
+          "type": "分类",
+          "prompt": "下面哪个是水果?",
+          "options": [
+            "桌子",
+            "铅笔",
+            "苹果",
+            "汽车"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "yw8",
+          "type": "反义词",
+          "prompt": "“黑” 的反义词是?",
+          "options": [
+            "红",
+            "蓝",
+            "绿",
+            "白"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "yuwen-3",
+      "subjectId": "yuwen",
+      "title": "标点与句子",
+      "description": "标点符号",
+      "order": 3,
+      "estMinutes": 12,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "yw9",
+          "type": "标点",
+          "prompt": "疑问句的末尾用什么标点?",
+          "options": [
+            "问号 ？",
+            "句号 。",
+            "逗号 ，",
+            "感叹号 ！"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "yw10",
+          "type": "标点",
+          "prompt": "表示强烈感情的句子用什么标点?",
+          "options": [
+            "句号 。",
+            "感叹号 ！",
+            "问号 ？",
+            "逗号 ，"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "yw11",
+          "type": "句子",
+          "prompt": "“我爱读书” 这句话表达什么?",
+          "options": [
+            "提出问题",
+            "表示命令",
+            "陈述一件事",
+            "表示惊讶"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "yw12",
+          "type": "标点",
+          "prompt": "一句话说完，末尾通常用?",
+          "options": [
+            "问号 ？",
+            "感叹号 ！",
+            "冒号 ：",
+            "句号 。"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "kexue-1",
+      "subjectId": "kexue-zh",
+      "title": "水",
+      "description": "水的三态",
+      "order": 1,
+      "estMinutes": 12,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "kz1",
+          "type": "科学",
+          "prompt": "水有几种状态?",
+          "options": [
+            "3 种",
+            "2 种",
+            "4 种",
+            "1 种"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "kz2",
+          "type": "科学",
+          "prompt": "水在多少摄氏度结冰?",
+          "options": [
+            "100°C",
+            "0°C",
+            "50°C",
+            "10°C"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "kz3",
+          "type": "科学",
+          "prompt": "水在多少摄氏度沸腾?",
+          "options": [
+            "0°C",
+            "50°C",
+            "100°C",
+            "200°C"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "kz4",
+          "type": "科学",
+          "prompt": "水变成水蒸气的现象叫?",
+          "options": [
+            "凝固",
+            "凝结",
+            "融化",
+            "蒸发"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "kexue-2",
+      "subjectId": "kexue-zh",
+      "title": "空气与植物",
+      "description": "空气与生命",
+      "order": 2,
+      "estMinutes": 12,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "kz5",
+          "type": "科学",
+          "prompt": "人和动物呼吸需要哪种气体?",
+          "options": [
+            "氧气",
+            "二氧化碳",
+            "氮气",
+            "烟"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "kz6",
+          "type": "科学",
+          "prompt": "植物生长需要什么?",
+          "options": [
+            "只要水",
+            "阳光、水和空气",
+            "只要泥土",
+            "黑暗"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "kz7",
+          "type": "科学",
+          "prompt": "植物用阳光制造养分的过程叫?",
+          "options": [
+            "呼吸",
+            "蒸发",
+            "光合作用",
+            "发芽"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "kz8",
+          "type": "科学",
+          "prompt": "下面哪个会自己发光?",
+          "options": [
+            "月亮",
+            "镜子",
+            "书本",
+            "太阳"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "kexue-3",
+      "subjectId": "kexue-zh",
+      "title": "天空与天气",
+      "description": "太阳、月亮与天气",
+      "order": 3,
+      "estMinutes": 12,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "kz9",
+          "type": "科学",
+          "prompt": "太阳是一颗?",
+          "options": [
+            "恒星",
+            "行星",
+            "卫星",
+            "云"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "kz10",
+          "type": "科学",
+          "prompt": "围绕地球转的是?",
+          "options": [
+            "太阳",
+            "月亮",
+            "火星",
+            "木星"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "kz11",
+          "type": "科学",
+          "prompt": "下雨天我们需要?",
+          "options": [
+            "墨镜",
+            "扇子",
+            "雨伞",
+            "雪橇"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "kz12",
+          "type": "科学",
+          "prompt": "一年中最冷的季节通常是?",
+          "options": [
+            "夏天",
+            "春天",
+            "秋天",
+            "冬天"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "yingyu-1",
+      "subjectId": "yingyu",
+      "title": "单词",
+      "description": "常见单词",
+      "order": 1,
+      "estMinutes": 10,
+      "coinReward": 50,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "ey1",
+          "type": "单词",
+          "prompt": "“apple” 是什么意思?",
+          "options": [
+            "苹果",
+            "香蕉",
+            "桌子",
+            "猫"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "ey2",
+          "type": "单词",
+          "prompt": "“cat” 是什么意思?",
+          "options": [
+            "狗",
+            "猫",
+            "鱼",
+            "鸟"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "ey3",
+          "type": "单词",
+          "prompt": "“book” 是什么意思?",
+          "options": [
+            "笔",
+            "门",
+            "书",
+            "水"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "ey4",
+          "type": "单词",
+          "prompt": "“water” 是什么意思?",
+          "options": [
+            "牛奶",
+            "茶",
+            "饭",
+            "水"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "yingyu-2",
+      "subjectId": "yingyu",
+      "title": "数字与颜色",
+      "description": "Numbers & colors",
+      "order": 2,
+      "estMinutes": 10,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "ey5",
+          "type": "数字",
+          "prompt": "“three” 是数字几?",
+          "options": [
+            "3",
+            "2",
+            "4",
+            "5"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "ey6",
+          "type": "数字",
+          "prompt": "“seven” 是数字几?",
+          "options": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "ey7",
+          "type": "颜色",
+          "prompt": "“red” 是什么颜色?",
+          "options": [
+            "蓝色",
+            "黄色",
+            "红色",
+            "黑色"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "ey8",
+          "type": "颜色",
+          "prompt": "“blue” 是什么颜色?",
+          "options": [
+            "红色",
+            "绿色",
+            "白色",
+            "蓝色"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "yingyu-3",
+      "subjectId": "yingyu",
+      "title": "日常用语",
+      "description": "Greetings",
+      "order": 3,
+      "estMinutes": 10,
+      "coinReward": 80,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "ey9",
+          "type": "用语",
+          "prompt": "“Hello” 是什么意思?",
+          "options": [
+            "你好",
+            "再见",
+            "谢谢",
+            "对不起"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "ey10",
+          "type": "用语",
+          "prompt": "“Thank you” 是什么意思?",
+          "options": [
+            "你好",
+            "谢谢",
+            "再见",
+            "请"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "ey11",
+          "type": "用语",
+          "prompt": "“Goodbye” 是什么意思?",
+          "options": [
+            "你好",
+            "晚安",
+            "再见",
+            "谢谢"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "ey12",
+          "type": "家庭",
+          "prompt": "“mother” 是什么意思?",
+          "options": [
+            "爸爸",
+            "哥哥",
+            "奶奶",
+            "妈妈"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    }
+  ],
+  "decks": [
+    {
+      "id": "deck-zh-mult",
+      "subject": "math-zh",
+      "title": "乘法口诀",
+      "description": "背一背乘法表",
+      "iconEmoji": "✖️",
+      "difficulty": "Medium",
+      "cards": [
+        {
+          "id": "czm1",
+          "deckId": "deck-zh-mult",
+          "frontEmoji": "✖️",
+          "frontText": "6 × 8 = ?",
+          "backContent": "48",
+          "backDetails": "六八四十八。"
+        },
+        {
+          "id": "czm2",
+          "deckId": "deck-zh-mult",
+          "frontEmoji": "✖️",
+          "frontText": "7 × 9 = ?",
+          "backContent": "63",
+          "backDetails": "七九六十三。"
+        },
+        {
+          "id": "czm3",
+          "deckId": "deck-zh-mult",
+          "frontEmoji": "✖️",
+          "frontText": "9 × 9 = ?",
+          "backContent": "81",
+          "backDetails": "九九八十一。"
+        },
+        {
+          "id": "czm4",
+          "deckId": "deck-zh-mult",
+          "frontEmoji": "✖️",
+          "frontText": "8 × 7 = ?",
+          "backContent": "56",
+          "backDetails": "七八五十六。"
+        },
+        {
+          "id": "czm5",
+          "deckId": "deck-zh-mult",
+          "frontEmoji": "✖️",
+          "frontText": "6 × 6 = ?",
+          "backContent": "36",
+          "backDetails": "六六三十六。"
+        },
+        {
+          "id": "czm6",
+          "deckId": "deck-zh-mult",
+          "frontEmoji": "✖️",
+          "frontText": "5 × 9 = ?",
+          "backContent": "45",
+          "backDetails": "五九四十五。"
+        }
+      ]
+    },
+    {
+      "id": "deck-zh-words",
+      "subject": "yingyu",
+      "title": "英语单词",
+      "description": "常用英语单词",
+      "iconEmoji": "🔤",
+      "difficulty": "Easy",
+      "cards": [
+        {
+          "id": "czw1",
+          "deckId": "deck-zh-words",
+          "frontEmoji": "🍎",
+          "frontText": "apple",
+          "backContent": "苹果",
+          "backDetails": "I eat an apple. 我吃一个苹果。"
+        },
+        {
+          "id": "czw2",
+          "deckId": "deck-zh-words",
+          "frontEmoji": "🐱",
+          "frontText": "cat",
+          "backContent": "猫",
+          "backDetails": "The cat is cute. 这只猫很可爱。"
+        },
+        {
+          "id": "czw3",
+          "deckId": "deck-zh-words",
+          "frontEmoji": "🏫",
+          "frontText": "school",
+          "backContent": "学校",
+          "backDetails": "I go to school. 我去上学。"
+        },
+        {
+          "id": "czw4",
+          "deckId": "deck-zh-words",
+          "frontEmoji": "📕",
+          "frontText": "book",
+          "backContent": "书",
+          "backDetails": "This is my book. 这是我的书。"
+        },
+        {
+          "id": "czw5",
+          "deckId": "deck-zh-words",
+          "frontEmoji": "💧",
+          "frontText": "water",
+          "backContent": "水",
+          "backDetails": "Drink water. 喝水。"
+        },
+        {
+          "id": "czw6",
+          "deckId": "deck-zh-words",
+          "frontEmoji": "😊",
+          "frontText": "happy",
+          "backContent": "高兴",
+          "backDetails": "I am happy. 我很高兴。"
+        }
+      ]
+    }
+  ],
+  "shopItems": [
+    {
+      "id": "zav-panda",
+      "category": "avatars",
+      "name": "熊猫",
+      "preview": "🐼",
+      "price": 400,
+      "currency": "coins",
+      "rarity": "new",
+      "payload": "🐼"
+    },
+    {
+      "id": "zav-dragon",
+      "category": "avatars",
+      "name": "小龙",
+      "preview": "🐉",
+      "price": 800,
+      "currency": "coins",
+      "rarity": "hot",
+      "payload": "🐉"
+    },
+    {
+      "id": "zav-tiger",
+      "category": "avatars",
+      "name": "小虎",
+      "preview": "🐯",
+      "price": 350,
+      "currency": "coins",
+      "payload": "🐯"
+    },
+    {
+      "id": "zav-rabbit",
+      "category": "avatars",
+      "name": "小兔",
+      "preview": "🐰",
+      "price": 300,
+      "currency": "coins",
+      "payload": "🐰"
+    },
+    {
+      "id": "zth-ocean",
+      "category": "themes",
+      "name": "海洋蓝",
+      "preview": "🌊",
+      "price": 300,
+      "currency": "coins",
+      "payload": "ocean"
+    },
+    {
+      "id": "zth-forest",
+      "category": "themes",
+      "name": "森林绿",
+      "preview": "🌲",
+      "price": 300,
+      "currency": "coins",
+      "payload": "forest"
+    },
+    {
+      "id": "zth-candy",
+      "category": "themes",
+      "name": "糖果",
+      "preview": "🍭",
+      "price": 10,
+      "currency": "gems",
+      "rarity": "rare",
+      "payload": "candy"
+    },
+    {
+      "id": "zpet-dog",
+      "category": "pets",
+      "name": "小狗",
+      "preview": "🐶",
+      "price": 600,
+      "currency": "coins",
+      "payload": "🐶"
+    },
+    {
+      "id": "zpu-x2",
+      "category": "powerups",
+      "name": "双倍经验",
+      "preview": "⚡",
+      "price": 12,
+      "currency": "gems",
+      "rarity": "hot",
+      "payload": "double"
+    },
+    {
+      "id": "zpu-hint",
+      "category": "powerups",
+      "name": "提示包",
+      "preview": "💡",
+      "price": 150,
+      "currency": "coins",
+      "payload": "hint"
+    }
+  ],
+  "themes": [
+    {
+      "id": "",
+      "name": "紫色经典",
+      "emoji": "💜",
+      "description": "默认外观",
+      "swatch": [
+        "#6C5CE7",
+        "#A29BFE",
+        "#FECA57"
+      ]
+    },
+    {
+      "id": "ocean",
+      "name": "海洋蓝",
+      "emoji": "🌊",
+      "description": "清凉的蓝",
+      "swatch": [
+        "#2e86de",
+        "#54a0ff",
+        "#1dd1a1"
+      ]
+    },
+    {
+      "id": "forest",
+      "name": "森林绿",
+      "emoji": "🌲",
+      "description": "清新自然",
+      "swatch": [
+        "#10ac84",
+        "#1dd1a1",
+        "#feca57"
+      ]
+    },
+    {
+      "id": "candy",
+      "name": "糖果",
+      "emoji": "🍭",
+      "description": "甜美可爱",
+      "swatch": [
+        "#ff6b81",
+        "#ff9ff3",
+        "#feca57"
+      ]
+    },
+    {
+      "id": "midnight",
+      "name": "暗夜",
+      "emoji": "🌙",
+      "description": "深色模式",
+      "swatch": [
+        "#5f27cd",
+        "#a29bfe",
+        "#feca57"
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "id": "first",
+      "name": "好的开始",
+      "emoji": "🏆",
+      "description": "完成第一节课",
+      "criteria": {
+        "stat": "lessonsCompleted",
+        "gte": 1
+      }
+    },
+    {
+      "id": "ten",
+      "name": "勤奋小蜜蜂",
+      "emoji": "📚",
+      "description": "完成 10 节课",
+      "criteria": {
+        "stat": "lessonsCompleted",
+        "gte": 10
+      }
+    },
+    {
+      "id": "streak7",
+      "name": "七天连续",
+      "emoji": "🔥",
+      "description": "连续学习 7 天",
+      "criteria": {
+        "stat": "streak",
+        "gte": 7
+      }
+    },
+    {
+      "id": "perfect",
+      "name": "满分",
+      "emoji": "💯",
+      "description": "一节课全对",
+      "criteria": {
+        "stat": "perfectLessons",
+        "gte": 1
+      }
+    },
+    {
+      "id": "rich",
+      "name": "小富翁",
+      "emoji": "🪙",
+      "description": "存到 1000 金币",
+      "criteria": {
+        "stat": "coins",
+        "gte": 1000
+      }
+    },
+    {
+      "id": "champ",
+      "name": "冠军",
+      "emoji": "👑",
+      "description": "赢得 3 场比拼",
+      "criteria": {
+        "stat": "competeWins",
+        "gte": 3
+      }
+    }
+  ],
+  "stickers": [
+    {
+      "id": "zst-panda",
+      "name": "熊猫",
+      "emoji": "🐼",
+      "rarity": "shiny",
+      "collection": "动物"
+    },
+    {
+      "id": "zst-dragon",
+      "name": "龙",
+      "emoji": "🐉",
+      "rarity": "epic",
+      "collection": "动物"
+    },
+    {
+      "id": "zst-lantern",
+      "name": "灯笼",
+      "emoji": "🏮",
+      "rarity": "rare",
+      "collection": "节日"
+    },
+    {
+      "id": "zst-star",
+      "name": "金星",
+      "emoji": "⭐",
+      "rarity": "common",
+      "collection": "奖励"
+    },
+    {
+      "id": "zst-noodle",
+      "name": "面条",
+      "emoji": "🍜",
+      "rarity": "common",
+      "collection": "美食"
+    },
+    {
+      "id": "zst-gem",
+      "name": "钻石",
+      "emoji": "💎",
+      "rarity": "shiny",
+      "collection": "奖励"
+    }
+  ],
+  "arcadeGames": [
+    {
+      "id": "memory",
+      "title": "记忆配对",
+      "desc": "找出相同的卡片！",
+      "icon": "🃏",
+      "bg": "#EDE7FF",
+      "tags": [
+        [
+          "记忆",
+          "#E0FFF5",
+          "var(--color-accent-mint)"
+        ],
+        [
+          "2-5 分钟",
+          "#F0EEF8",
+          "var(--color-primary)"
+        ]
+      ],
+      "badge": "POPULAR",
+      "engine": "memory"
+    }
+  ],
+  "pet": {
+    "species": "🐼",
+    "name": "团团",
+    "evolutionStages": [
+      {
+        "emoji": "🥚",
+        "label": "蛋"
+      },
+      {
+        "emoji": "🐣",
+        "label": "幼崽"
+      },
+      {
+        "emoji": "🐼",
+        "label": "小熊猫"
+      },
+      {
+        "emoji": "🐲",
+        "label": "神兽"
+      }
+    ]
+  }
+}

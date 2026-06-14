@@ -3,22 +3,24 @@ import { useStore } from '@/state/store'
 import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
+import { useT } from '@/i18n'
 import { selectSubjectProgress } from '@/state/selectors'
 
 export function Learn() {
   const navigate = useNavigate()
   const user = useStore((s) => s.user)
   const subjects = useContent((c) => c.subjects)
+  const t = useT()
 
   return (
     <div id="screen-learn">
       <StatusBar dark />
       <div style={{ padding: '8px 20px 0' }}>
-        <h1 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 900 }}>Learn 📖</h1>
-        <p style={{ color: 'var(--color-text-secondary)' }}>Pick a subject to continue your adventure</p>
+        <h1 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 900 }}>{t.learn.title} 📖</h1>
+        <p style={{ color: 'var(--color-text-secondary)' }}>{t.learn.subtitle}</p>
       </div>
 
-      <SectionHeader title="Subjects" />
+      <SectionHeader title={t.learn.subjects} />
       <div className="subject-grid">
         {subjects.map((subject) => {
           const p = selectSubjectProgress(user, subject.id)
@@ -38,9 +40,7 @@ export function Learn() {
                 <div className="subject-progress-fill" style={{ width: `${p.percent}%` }} />
               </div>
               <div className="subject-progress-label">
-                <span>
-                  Lesson {p.completed}/{p.total}
-                </span>
+                <span>{t.home.lesson(p.completed, p.total)}</span>
                 <span>{p.percent}%</span>
               </div>
             </div>
@@ -48,11 +48,11 @@ export function Learn() {
         })}
       </div>
 
-      <SectionHeader title="More Ways to Learn" />
+      <SectionHeader title={t.home.moreWays} />
       <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <ModeRow emoji="🗂️" title="Flashcards" desc="Practice with spaced repetition" onClick={() => navigate('/flashcards')} />
-        <ModeRow emoji="🏆" title="Compete" desc="Race against friends & bots" onClick={() => navigate('/compete')} />
-        <ModeRow emoji="🎮" title="Arcade" desc="Fun learning mini-games" onClick={() => navigate('/arcade')} />
+        <ModeRow emoji="🗂️" title={t.home.flashcards} desc={t.home.flashcardsDesc} onClick={() => navigate('/flashcards')} />
+        <ModeRow emoji="🏆" title={t.home.compete} desc={t.home.competeDesc} onClick={() => navigate('/compete')} />
+        <ModeRow emoji="🎮" title={t.home.arcade} desc={t.home.arcadeDesc} onClick={() => navigate('/arcade')} />
       </div>
 
       <div className="bottom-spacer" />

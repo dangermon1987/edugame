@@ -4,8 +4,9 @@ import { StatusBar } from '@/components/StatusBar'
 import { SectionHeader } from '@/components/ui'
 import { useContent } from '@/content/runtime'
 import { isAchievementEarned } from '@/content/evaluate'
-import { selectLevel } from '@/state/selectors'
+import { selectLevel, localizedBandTitle } from '@/state/selectors'
 import { dateKey } from '@/domain/datetime'
+import { useT } from '@/i18n'
 
 const PEERS = [
   { name: 'Emma', avatar: '🐰', xp: 3200, bg: '#FFE8E8' },
@@ -50,11 +51,13 @@ function MonthCalendar({ activeDays }: { activeDays: string[] }) {
 
 export function Profile() {
   const navigate = useNavigate()
+  const t = useT()
   const user = useStore((s) => s.user)
   const achievements = useContent((c) => c.achievements)
+  const economy = useContent((c) => c.economy)
   const level = selectLevel(user)
 
-  const board = [...PEERS, { name: `${user.profile.name} (You)`, avatar: user.profile.avatar, xp: user.xp, bg: '#FFF2E5', me: true }]
+  const board = [...PEERS, { name: `${user.profile.name} (${t.profile.you})`, avatar: user.profile.avatar, xp: user.xp, bg: '#FFF2E5', me: true }]
     .sort((a, b) => b.xp - a.xp)
 
   return (
@@ -77,26 +80,26 @@ export function Profile() {
         </div>
         <div className="profile-name">{user.profile.name}</div>
         <div className="profile-title">
-          ⭐ Level {level.level} {level.title}
+          {t.profile.levelTitle(level.level, localizedBandTitle(level.level, economy.levels.bands, t.levelBands))}
         </div>
       </div>
 
       <div className="stats-row">
         <div className="stat-box">
           <div className="stat-value">{user.xp.toLocaleString()}</div>
-          <div className="stat-label">Total XP</div>
+          <div className="stat-label">{t.profile.totalXp}</div>
         </div>
         <div className="stat-box">
           <div className="stat-value">{user.streak.count} 🔥</div>
-          <div className="stat-label">Day Streak</div>
+          <div className="stat-label">{t.profile.dayStreak}</div>
         </div>
         <div className="stat-box">
           <div className="stat-value">{user.stats.lessonsCompleted}</div>
-          <div className="stat-label">Lessons</div>
+          <div className="stat-label">{t.profile.lessons}</div>
         </div>
       </div>
 
-      <SectionHeader title="Achievements" />
+      <SectionHeader title={t.profile.achievements} />
       <div className="achievements-grid">
         {achievements.map((a) => {
           const earned = Boolean(user.achievements[a.id]) || isAchievementEarned(a, user)
@@ -109,14 +112,14 @@ export function Profile() {
         })}
       </div>
 
-      <SectionHeader title="Activity Calendar" />
+      <SectionHeader title={t.profile.activityCalendar} />
       <div className="streak-calendar">
         <div className="calendar-card">
           <MonthCalendar activeDays={user.activeDays} />
         </div>
       </div>
 
-      <SectionHeader title="Leaderboard" action={<a>This Week</a>} />
+      <SectionHeader title={t.profile.leaderboard} action={<a>{t.profile.thisWeek}</a>} />
       <div className="leaderboard-section">
         <div className="leaderboard-card">
           {board.map((p, i) => (

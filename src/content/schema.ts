@@ -112,11 +112,21 @@ export interface AchievementDef {
 // ---------------------------------------------------------------------------
 // App branding + reward economy
 // ---------------------------------------------------------------------------
+export interface DailyChallenge {
+  title: string
+  description: string
+  coins: number
+  gems: number
+  xp: number
+}
+
 export interface AppConfig {
   title: string
   tagline: string
   /** Lesson id launched by the Home "Daily Challenge" banner. */
   dailyChallengeLessonId: string
+  /** Daily Challenge card copy + reward preview. Derived from the lesson if omitted. */
+  dailyChallenge: DailyChallenge
 }
 
 export interface LevelBand {
@@ -249,6 +259,7 @@ const DEFAULT_APP: AppConfig = {
   title: 'EduQuest',
   tagline: 'A learning adventure!',
   dailyChallengeLessonId: '',
+  dailyChallenge: { title: 'Daily Challenge', description: 'Complete a lesson today!', coins: 100, gems: 0, xp: 100 },
 }
 
 const DEFAULT_PROFILE: UserProfile = { name: 'Explorer', avatar: '🦊', age: 8 }
@@ -400,6 +411,19 @@ export function normalizeContentPackage(pkg: ContentPackage): LoadedContent {
 
   const app: AppConfig = { ...DEFAULT_APP, ...pkg.app }
   if (!app.dailyChallengeLessonId && lessons[0]) app.dailyChallengeLessonId = lessons[0].id
+  // Derive the Daily Challenge card from its lesson unless the package overrides it.
+  if (!pkg.app?.dailyChallenge) {
+    const dc = lessons.find((l) => l.id === app.dailyChallengeLessonId) ?? lessons[0]
+    if (dc) {
+      app.dailyChallenge = {
+        title: dc.title,
+        description: dc.description,
+        coins: dc.coinReward,
+        gems: dc.gemReward,
+        xp: Math.max(50, dc.questions.length * (DEFAULT_ECONOMY.lesson.xpPerCorrect ?? 10)),
+      }
+    }
+  }
 
   return {
     meta: pkg.meta,
