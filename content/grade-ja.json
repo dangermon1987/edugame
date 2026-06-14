@@ -1,0 +1,1206 @@
+{
+  "format": "eduquest-content",
+  "formatVersion": 1,
+  "meta": {
+    "id": "grade-ja",
+    "name": "たのしく学ぼう 3年生",
+    "description": "さんすう・こくご・りか・えいご — 小学3年生むけ。",
+    "author": "EduQuest",
+    "version": "1.0.0",
+    "locale": "ja",
+    "cover": "🗾",
+    "createdAt": "2026-06-14"
+  },
+  "app": {
+    "title": "たのしく学ぼう",
+    "tagline": "まいにち ちょっとずつ！",
+    "dailyChallengeLessonId": "math-ja-1"
+  },
+  "economy": {
+    "startingCoins": 200,
+    "startingGems": 0
+  },
+  "defaultProfile": {
+    "name": "あおい",
+    "avatar": "🦊",
+    "age": 8
+  },
+  "subjects": [
+    {
+      "id": "sansu",
+      "name": "さんすう",
+      "description": "かけ算・わり算・図形",
+      "icon": "fas fa-calculator",
+      "emoji": "🔢",
+      "colorClass": "math"
+    },
+    {
+      "id": "kokugo",
+      "name": "こくご",
+      "description": "ことばと漢字",
+      "icon": "fas fa-book-open",
+      "emoji": "📖",
+      "colorClass": "english"
+    },
+    {
+      "id": "rika",
+      "name": "りか",
+      "description": "水・空気・生きもの",
+      "icon": "fas fa-flask",
+      "emoji": "🔬",
+      "colorClass": "science"
+    },
+    {
+      "id": "eigo",
+      "name": "えいご",
+      "description": "たんごと あいさつ",
+      "icon": "fas fa-language",
+      "emoji": "🔤",
+      "colorClass": "coding"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "math-ja-1",
+      "subjectId": "sansu",
+      "title": "かけ算",
+      "description": "九九",
+      "order": 1,
+      "estMinutes": 12,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "ma1",
+          "type": "かけ算",
+          "prompt": "3 × 4 = ?",
+          "options": [
+            "12",
+            "7",
+            "9",
+            "16"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "ma2",
+          "type": "かけ算",
+          "prompt": "6 × 7 = ?",
+          "options": [
+            "36",
+            "42",
+            "48",
+            "13"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "ma3",
+          "type": "かけ算",
+          "prompt": "7 × 8 = ?",
+          "options": [
+            "49",
+            "64",
+            "56",
+            "15"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "ma4",
+          "type": "かけ算",
+          "prompt": "9 × 9 = ?",
+          "options": [
+            "72",
+            "99",
+            "18",
+            "81"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "math-ja-2",
+      "subjectId": "sansu",
+      "title": "わり算",
+      "description": "等しく分ける",
+      "order": 2,
+      "estMinutes": 12,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "ma5",
+          "type": "わり算",
+          "prompt": "12 ÷ 3 = ?",
+          "options": [
+            "4",
+            "3",
+            "6",
+            "9"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "ma6",
+          "type": "わり算",
+          "prompt": "56 ÷ 7 = ?",
+          "options": [
+            "7",
+            "8",
+            "9",
+            "6"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "ma7",
+          "type": "わり算",
+          "prompt": "81 ÷ 9 = ?",
+          "options": [
+            "8",
+            "7",
+            "9",
+            "18"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "ma8",
+          "type": "わり算",
+          "prompt": "100 ÷ 10 = ?",
+          "options": [
+            "1",
+            "100",
+            "20",
+            "10"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "math-ja-3",
+      "subjectId": "sansu",
+      "title": "図形と分数",
+      "description": "形と分数",
+      "order": 3,
+      "estMinutes": 12,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "ma9",
+          "type": "図形",
+          "prompt": "正方形の辺は何本?",
+          "options": [
+            "4本",
+            "3本",
+            "5本",
+            "6本"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "ma10",
+          "type": "図形",
+          "prompt": "三角形の辺は何本?",
+          "options": [
+            "4本",
+            "3本",
+            "2本",
+            "5本"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "ma11",
+          "type": "分数",
+          "prompt": "分数 1/2 の読み方は?",
+          "options": [
+            "いちぶんのに",
+            "いちたすに",
+            "にぶんのいち",
+            "いちひくに"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "ma12",
+          "type": "分数",
+          "prompt": "1/4 + 1/4 = ?",
+          "options": [
+            "1/8",
+            "2/8",
+            "1/16",
+            "2/4"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "kokugo-1",
+      "subjectId": "kokugo",
+      "title": "かんじ",
+      "description": "やさしい漢字",
+      "order": 1,
+      "estMinutes": 12,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "kg1",
+          "type": "漢字",
+          "prompt": "「ねこ」を漢字で書くと?",
+          "options": [
+            "猫",
+            "犬",
+            "魚",
+            "鳥"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "kg2",
+          "type": "漢字",
+          "prompt": "「やま」を漢字で書くと?",
+          "options": [
+            "川",
+            "山",
+            "木",
+            "石"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "kg3",
+          "type": "漢字",
+          "prompt": "「日」と「月」を合わせると?",
+          "options": [
+            "朝",
+            "晴",
+            "明",
+            "時"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "kg4",
+          "type": "数え方",
+          "prompt": "本を数えるときの言い方は?",
+          "options": [
+            "いっぴき",
+            "いちまい",
+            "いっこ",
+            "いっさつ"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "kokugo-2",
+      "subjectId": "kokugo",
+      "title": "ことば",
+      "description": "反対のことば",
+      "order": 2,
+      "estMinutes": 12,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "kg5",
+          "type": "反対語",
+          "prompt": "「大きい」の反対は?",
+          "options": [
+            "小さい",
+            "多い",
+            "高い",
+            "長い"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "kg6",
+          "type": "反対語",
+          "prompt": "「あつい」の反対は?",
+          "options": [
+            "あかるい",
+            "さむい",
+            "おもい",
+            "はやい"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "kg7",
+          "type": "にた言葉",
+          "prompt": "「うれしい」とにた意味の言葉は?",
+          "options": [
+            "かなしい",
+            "おこる",
+            "たのしい",
+            "こわい"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "kg8",
+          "type": "なかま",
+          "prompt": "くだものは どれ?",
+          "options": [
+            "つくえ",
+            "えんぴつ",
+            "くるま",
+            "りんご"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "kokugo-3",
+      "subjectId": "kokugo",
+      "title": "文と記号",
+      "description": "句読点",
+      "order": 3,
+      "estMinutes": 12,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "kg9",
+          "type": "記号",
+          "prompt": "質問の文の終わりに使う記号は?",
+          "options": [
+            "？",
+            "。",
+            "、",
+            "！"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "kg10",
+          "type": "記号",
+          "prompt": "ふつうの文の終わりに使う記号は?",
+          "options": [
+            "？",
+            "。",
+            "！",
+            "、"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "kg11",
+          "type": "ことば",
+          "prompt": "「ありがとう」は どんなとき言う?",
+          "options": [
+            "あやまるとき",
+            "おこるとき",
+            "お礼を言うとき",
+            "ねるとき"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "kg12",
+          "type": "ことば",
+          "prompt": "朝のあいさつは?",
+          "options": [
+            "おやすみ",
+            "こんばんは",
+            "さようなら",
+            "おはよう"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "rika-1",
+      "subjectId": "rika",
+      "title": "水",
+      "description": "水の すがた",
+      "order": 1,
+      "estMinutes": 12,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "rk1",
+          "type": "りか",
+          "prompt": "水のすがたは いくつ?",
+          "options": [
+            "3つ",
+            "2つ",
+            "4つ",
+            "1つ"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "rk2",
+          "type": "りか",
+          "prompt": "水は何度で こおる?",
+          "options": [
+            "100度",
+            "0度",
+            "50度",
+            "10度"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "rk3",
+          "type": "りか",
+          "prompt": "水は何度で わきたつ?",
+          "options": [
+            "0度",
+            "50度",
+            "100度",
+            "200度"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "rk4",
+          "type": "りか",
+          "prompt": "水が水じょう気になることを何という?",
+          "options": [
+            "こおる",
+            "ふる",
+            "とける",
+            "じょうはつ"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "rika-2",
+      "subjectId": "rika",
+      "title": "空気と植物",
+      "description": "生きものと空気",
+      "order": 2,
+      "estMinutes": 12,
+      "coinReward": 70,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "rk5",
+          "type": "りか",
+          "prompt": "人や動物が こきゅうに使う気体は?",
+          "options": [
+            "さんそ",
+            "二酸化炭素",
+            "ちっそ",
+            "けむり"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "rk6",
+          "type": "りか",
+          "prompt": "植物が育つのに必要なものは?",
+          "options": [
+            "水だけ",
+            "日光・水・空気",
+            "土だけ",
+            "くらやみ"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "rk7",
+          "type": "りか",
+          "prompt": "植物が日光で養分を作ることを何という?",
+          "options": [
+            "こきゅう",
+            "じょうはつ",
+            "光合成",
+            "発芽"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "rk8",
+          "type": "りか",
+          "prompt": "自分で光るものは どれ?",
+          "options": [
+            "月",
+            "かがみ",
+            "本",
+            "太陽"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "rika-3",
+      "subjectId": "rika",
+      "title": "空と天気",
+      "description": "太陽・月・天気",
+      "order": 3,
+      "estMinutes": 12,
+      "coinReward": 90,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "rk9",
+          "type": "りか",
+          "prompt": "太陽は?",
+          "options": [
+            "星(こうせい)",
+            "わく星",
+            "えい星",
+            "雲"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "rk10",
+          "type": "りか",
+          "prompt": "地球のまわりを回るのは?",
+          "options": [
+            "太陽",
+            "月",
+            "火星",
+            "木星"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "rk11",
+          "type": "りか",
+          "prompt": "雨の日に いるものは?",
+          "options": [
+            "サングラス",
+            "うちわ",
+            "かさ",
+            "そり"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "rk12",
+          "type": "りか",
+          "prompt": "一年で いちばん さむい きせつは?",
+          "options": [
+            "夏",
+            "春",
+            "秋",
+            "冬"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "eigo-1",
+      "subjectId": "eigo",
+      "title": "たんご",
+      "description": "よく使う単語",
+      "order": 1,
+      "estMinutes": 10,
+      "coinReward": 50,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "eg1",
+          "type": "たんご",
+          "prompt": "「apple」の意味は?",
+          "options": [
+            "りんご",
+            "バナナ",
+            "つくえ",
+            "ねこ"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "eg2",
+          "type": "たんご",
+          "prompt": "「cat」の意味は?",
+          "options": [
+            "いぬ",
+            "ねこ",
+            "さかな",
+            "とり"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "eg3",
+          "type": "たんご",
+          "prompt": "「book」の意味は?",
+          "options": [
+            "ペン",
+            "ドア",
+            "本",
+            "水"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "eg4",
+          "type": "たんご",
+          "prompt": "「water」の意味は?",
+          "options": [
+            "ぎゅうにゅう",
+            "おちゃ",
+            "ごはん",
+            "水"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "eigo-2",
+      "subjectId": "eigo",
+      "title": "数と色",
+      "description": "Numbers & colors",
+      "order": 2,
+      "estMinutes": 10,
+      "coinReward": 60,
+      "gemReward": 0,
+      "questions": [
+        {
+          "id": "eg5",
+          "type": "数",
+          "prompt": "「three」は いくつ?",
+          "options": [
+            "3",
+            "2",
+            "4",
+            "5"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "eg6",
+          "type": "数",
+          "prompt": "「seven」は いくつ?",
+          "options": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "eg7",
+          "type": "色",
+          "prompt": "「red」は なに色?",
+          "options": [
+            "青",
+            "黄",
+            "赤",
+            "黒"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "eg8",
+          "type": "色",
+          "prompt": "「blue」は なに色?",
+          "options": [
+            "赤",
+            "緑",
+            "白",
+            "青"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "eigo-3",
+      "subjectId": "eigo",
+      "title": "あいさつ",
+      "description": "Greetings",
+      "order": 3,
+      "estMinutes": 10,
+      "coinReward": 80,
+      "gemReward": 3,
+      "questions": [
+        {
+          "id": "eg9",
+          "type": "あいさつ",
+          "prompt": "「Hello」の意味は?",
+          "options": [
+            "こんにちは",
+            "さようなら",
+            "ありがとう",
+            "ごめんね"
+          ],
+          "correctIndex": 0
+        },
+        {
+          "id": "eg10",
+          "type": "あいさつ",
+          "prompt": "「Thank you」の意味は?",
+          "options": [
+            "こんにちは",
+            "ありがとう",
+            "さようなら",
+            "どうぞ"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "id": "eg11",
+          "type": "あいさつ",
+          "prompt": "「Goodbye」の意味は?",
+          "options": [
+            "こんにちは",
+            "おやすみ",
+            "さようなら",
+            "ありがとう"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "id": "eg12",
+          "type": "かぞく",
+          "prompt": "「mother」の意味は?",
+          "options": [
+            "おとうさん",
+            "おにいさん",
+            "おばあさん",
+            "おかあさん"
+          ],
+          "correctIndex": 3
+        }
+      ]
+    }
+  ],
+  "decks": [
+    {
+      "id": "deck-ja-mult",
+      "subject": "sansu",
+      "title": "九九",
+      "description": "かけ算をおぼえよう",
+      "iconEmoji": "✖️",
+      "difficulty": "Medium",
+      "cards": [
+        {
+          "id": "cjm1",
+          "deckId": "deck-ja-mult",
+          "frontEmoji": "✖️",
+          "frontText": "6 × 8 = ?",
+          "backContent": "48",
+          "backDetails": "ろくは しじゅうはち。"
+        },
+        {
+          "id": "cjm2",
+          "deckId": "deck-ja-mult",
+          "frontEmoji": "✖️",
+          "frontText": "7 × 9 = ?",
+          "backContent": "63",
+          "backDetails": "しちく ろくじゅうさん。"
+        },
+        {
+          "id": "cjm3",
+          "deckId": "deck-ja-mult",
+          "frontEmoji": "✖️",
+          "frontText": "9 × 9 = ?",
+          "backContent": "81",
+          "backDetails": "くく はちじゅういち。"
+        },
+        {
+          "id": "cjm4",
+          "deckId": "deck-ja-mult",
+          "frontEmoji": "✖️",
+          "frontText": "8 × 7 = ?",
+          "backContent": "56",
+          "backDetails": "しちは ごじゅうろく。"
+        },
+        {
+          "id": "cjm5",
+          "deckId": "deck-ja-mult",
+          "frontEmoji": "✖️",
+          "frontText": "6 × 6 = ?",
+          "backContent": "36",
+          "backDetails": "ろくろく さんじゅうろく。"
+        },
+        {
+          "id": "cjm6",
+          "deckId": "deck-ja-mult",
+          "frontEmoji": "✖️",
+          "frontText": "5 × 9 = ?",
+          "backContent": "45",
+          "backDetails": "ごっく しじゅうご。"
+        }
+      ]
+    },
+    {
+      "id": "deck-ja-words",
+      "subject": "eigo",
+      "title": "えいたんご",
+      "description": "よく使う英単語",
+      "iconEmoji": "🔤",
+      "difficulty": "Easy",
+      "cards": [
+        {
+          "id": "cjw1",
+          "deckId": "deck-ja-words",
+          "frontEmoji": "🍎",
+          "frontText": "apple",
+          "backContent": "りんご",
+          "backDetails": "I eat an apple. りんごを食べる。"
+        },
+        {
+          "id": "cjw2",
+          "deckId": "deck-ja-words",
+          "frontEmoji": "🐱",
+          "frontText": "cat",
+          "backContent": "ねこ",
+          "backDetails": "The cat is cute. ねこはかわいい。"
+        },
+        {
+          "id": "cjw3",
+          "deckId": "deck-ja-words",
+          "frontEmoji": "🏫",
+          "frontText": "school",
+          "backContent": "学校",
+          "backDetails": "I go to school. 学校へ行く。"
+        },
+        {
+          "id": "cjw4",
+          "deckId": "deck-ja-words",
+          "frontEmoji": "📕",
+          "frontText": "book",
+          "backContent": "本",
+          "backDetails": "This is my book. これは私の本。"
+        },
+        {
+          "id": "cjw5",
+          "deckId": "deck-ja-words",
+          "frontEmoji": "💧",
+          "frontText": "water",
+          "backContent": "水",
+          "backDetails": "Drink water. 水を飲む。"
+        },
+        {
+          "id": "cjw6",
+          "deckId": "deck-ja-words",
+          "frontEmoji": "😊",
+          "frontText": "happy",
+          "backContent": "うれしい",
+          "backDetails": "I am happy. うれしい。"
+        }
+      ]
+    }
+  ],
+  "shopItems": [
+    {
+      "id": "jav-fox",
+      "category": "avatars",
+      "name": "きつね",
+      "preview": "🦊",
+      "price": 400,
+      "currency": "coins",
+      "rarity": "new",
+      "payload": "🦊"
+    },
+    {
+      "id": "jav-cat",
+      "category": "avatars",
+      "name": "ねこ",
+      "preview": "🐱",
+      "price": 300,
+      "currency": "coins",
+      "payload": "🐱"
+    },
+    {
+      "id": "jav-tanuki",
+      "category": "avatars",
+      "name": "たぬき",
+      "preview": "🦝",
+      "price": 350,
+      "currency": "coins",
+      "payload": "🦝"
+    },
+    {
+      "id": "jav-dragon",
+      "category": "avatars",
+      "name": "りゅう",
+      "preview": "🐉",
+      "price": 800,
+      "currency": "coins",
+      "rarity": "hot",
+      "payload": "🐉"
+    },
+    {
+      "id": "jth-ocean",
+      "category": "themes",
+      "name": "うみブルー",
+      "preview": "🌊",
+      "price": 300,
+      "currency": "coins",
+      "payload": "ocean"
+    },
+    {
+      "id": "jth-forest",
+      "category": "themes",
+      "name": "もりグリーン",
+      "preview": "🌲",
+      "price": 300,
+      "currency": "coins",
+      "payload": "forest"
+    },
+    {
+      "id": "jth-sakura",
+      "category": "themes",
+      "name": "さくら",
+      "preview": "🌸",
+      "price": 10,
+      "currency": "gems",
+      "rarity": "rare",
+      "payload": "candy"
+    },
+    {
+      "id": "jpet-dog",
+      "category": "pets",
+      "name": "いぬ",
+      "preview": "🐶",
+      "price": 600,
+      "currency": "coins",
+      "payload": "🐶"
+    },
+    {
+      "id": "jpu-x2",
+      "category": "powerups",
+      "name": "経験値2倍",
+      "preview": "⚡",
+      "price": 12,
+      "currency": "gems",
+      "rarity": "hot",
+      "payload": "double"
+    },
+    {
+      "id": "jpu-hint",
+      "category": "powerups",
+      "name": "ヒントパック",
+      "preview": "💡",
+      "price": 150,
+      "currency": "coins",
+      "payload": "hint"
+    }
+  ],
+  "themes": [
+    {
+      "id": "",
+      "name": "むらさき",
+      "emoji": "💜",
+      "description": "デフォルト",
+      "swatch": [
+        "#6C5CE7",
+        "#A29BFE",
+        "#FECA57"
+      ]
+    },
+    {
+      "id": "ocean",
+      "name": "うみブルー",
+      "emoji": "🌊",
+      "description": "すずしい青",
+      "swatch": [
+        "#2e86de",
+        "#54a0ff",
+        "#1dd1a1"
+      ]
+    },
+    {
+      "id": "forest",
+      "name": "もりグリーン",
+      "emoji": "🌲",
+      "description": "しぜんの緑",
+      "swatch": [
+        "#10ac84",
+        "#1dd1a1",
+        "#feca57"
+      ]
+    },
+    {
+      "id": "candy",
+      "name": "さくら",
+      "emoji": "🌸",
+      "description": "やさしいピンク",
+      "swatch": [
+        "#ff6b81",
+        "#ff9ff3",
+        "#feca57"
+      ]
+    },
+    {
+      "id": "midnight",
+      "name": "よぞら",
+      "emoji": "🌙",
+      "description": "ダークモード",
+      "swatch": [
+        "#5f27cd",
+        "#a29bfe",
+        "#feca57"
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "id": "first",
+      "name": "はじめの一歩",
+      "emoji": "🏆",
+      "description": "さいしょのレッスンをクリア",
+      "criteria": {
+        "stat": "lessonsCompleted",
+        "gte": 1
+      }
+    },
+    {
+      "id": "ten",
+      "name": "がんばりや",
+      "emoji": "📚",
+      "description": "10レッスンをクリア",
+      "criteria": {
+        "stat": "lessonsCompleted",
+        "gte": 10
+      }
+    },
+    {
+      "id": "streak7",
+      "name": "7日れんぞく",
+      "emoji": "🔥",
+      "description": "7日れんぞくで学ぶ",
+      "criteria": {
+        "stat": "streak",
+        "gte": 7
+      }
+    },
+    {
+      "id": "perfect",
+      "name": "まんてん",
+      "emoji": "💯",
+      "description": "1レッスン ぜんもん正解",
+      "criteria": {
+        "stat": "perfectLessons",
+        "gte": 1
+      }
+    },
+    {
+      "id": "rich",
+      "name": "コインもち",
+      "emoji": "🪙",
+      "description": "1000コインためる",
+      "criteria": {
+        "stat": "coins",
+        "gte": 1000
+      }
+    },
+    {
+      "id": "champ",
+      "name": "チャンピオン",
+      "emoji": "👑",
+      "description": "たいせんで3勝",
+      "criteria": {
+        "stat": "competeWins",
+        "gte": 3
+      }
+    }
+  ],
+  "stickers": [
+    {
+      "id": "jst-fox",
+      "name": "きつね",
+      "emoji": "🦊",
+      "rarity": "shiny",
+      "collection": "どうぶつ"
+    },
+    {
+      "id": "jst-tanuki",
+      "name": "たぬき",
+      "emoji": "🦝",
+      "rarity": "rare",
+      "collection": "どうぶつ"
+    },
+    {
+      "id": "jst-fuji",
+      "name": "ふじ山",
+      "emoji": "🗻",
+      "rarity": "epic",
+      "collection": "ふるさと"
+    },
+    {
+      "id": "jst-sakura",
+      "name": "さくら",
+      "emoji": "🌸",
+      "rarity": "rare",
+      "collection": "ふるさと"
+    },
+    {
+      "id": "jst-star",
+      "name": "きんのほし",
+      "emoji": "⭐",
+      "rarity": "common",
+      "collection": "ごほうび"
+    },
+    {
+      "id": "jst-sushi",
+      "name": "おすし",
+      "emoji": "🍣",
+      "rarity": "common",
+      "collection": "たべもの"
+    }
+  ],
+  "arcadeGames": [
+    {
+      "id": "memory",
+      "title": "メモリーペア",
+      "desc": "同じカードを見つけよう！",
+      "icon": "🃏",
+      "bg": "#EDE7FF",
+      "tags": [
+        [
+          "きおく",
+          "#E0FFF5",
+          "var(--color-accent-mint)"
+        ],
+        [
+          "2-5分",
+          "#F0EEF8",
+          "var(--color-primary)"
+        ]
+      ],
+      "badge": "POPULAR",
+      "engine": "memory"
+    }
+  ],
+  "pet": {
+    "species": "🦊",
+    "name": "コンタ",
+    "evolutionStages": [
+      {
+        "emoji": "🥚",
+        "label": "たまご"
+      },
+      {
+        "emoji": "🐣",
+        "label": "あかちゃん"
+      },
+      {
+        "emoji": "🦊",
+        "label": "こぎつね"
+      },
+      {
+        "emoji": "🐲",
+        "label": "しんじゅう"
+      }
+    ]
+  }
+}

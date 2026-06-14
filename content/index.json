@@ -16,6 +16,20 @@
       "file": "english.json"
     },
     {
+      "id": "grade-zh",
+      "name": "快乐学习 三年级",
+      "description": "数学、语文、科学、英语 (三年级)。",
+      "cover": "🐼",
+      "file": "grade-zh.json"
+    },
+    {
+      "id": "grade-ja",
+      "name": "たのしく学ぼう 3年生",
+      "description": "さんすう・こくご・りか・えいご (3年生)。",
+      "cover": "🗾",
+      "file": "grade-ja.json"
+    },
+    {
       "id": "space",
       "name": "Space Explorers",
       "description": "A mini space-science course (demo of swappable packs).",
