@@ -48,6 +48,15 @@ Additional sources, surfaced in **Settings → Course Pack**:
 
 ---
 
+## Language (`meta.locale`) drives the whole UI
+
+The app's chrome (nav, buttons, headings, etc.) is localized and **follows the
+active course's `meta.locale`** — supported: `en`, `vi`, `zh`, `ja` (others fall
+back to English). So a `"locale": "zh"` pack makes the entire interface Chinese,
+not just its content. Author each pack's content **in its locale's language**;
+the UI will match automatically. (UI strings live in `src/i18n/`; course content
+lives in the package.)
+
 ## Top-level shape
 
 ```jsonc

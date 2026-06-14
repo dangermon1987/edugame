@@ -388,7 +388,7 @@
         {
           "id": "kh7",
           "type": "Khoa học",
-          "prompt": "Cây tạo dinh dưỡng nhờ ánh sáng gọi là gì?",
+          "prompt": "Cây tạo dinh dưỡng nhờ quá trình nào?",
           "options": ["Hô hấp", "Quang hợp", "Bay hơi", "Tiêu hóa"],
           "correctIndex": 1,
           "hint": "Quá trình này xảy ra ở lá cây."
